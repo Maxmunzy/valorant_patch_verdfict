@@ -40,7 +40,7 @@ patch-verdict/
 | 출처 | 데이터 종류 | 역할 |
 |---|---|---|
 | vstats.gg | 액트별 승률·픽률·매치 수 히스토리 | 랭크 히스토리 — E6A3부터. 지역 필터 미지원으로 전 지역 합산 |
-| maxmunzy/valorant-agent-stats | E2A1~E8A2 전 요원 픽률·승률·KD (티어별) | 초기 케이스 보완 — 체임버·제트 등 대너프 케이스 커버 |
+| maxmunzy/valorant-agent-stats Forked from ayvi-0001/valorant-agent-stats | E2A1~E8A2 전 요원 픽률·승률·KD (티어별) | 초기 케이스 보완 — 체임버·제트 등 대너프 케이스 커버 |
 | vlr.gg | 대회별 요원 픽률·승률·컴프 | **메인 판정 기준** — 패치 전후 VCT 픽률 변화 |
 | playvalorant.com/ko-kr | 공식 패치 노트 | 패치 내용 정형화 + 너프 근거 추출 |
 | blitz.gg | 다이아+ 기준 픽률·승률 | 보조 — 고티어 필터 데이터 교차 검증 |
