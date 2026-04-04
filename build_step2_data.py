@@ -138,63 +138,63 @@ AGENT_KIT = {
     "Reyna": {
         "C": {"tier":"B","type":"flash",    "ko":"눈총",              "en":"Leer"},
         "Q": {"tier":"C","type":"heal",     "ko":"포식",              "en":"Devour"},
-        "E": {"tier":"B","type":"mobility", "ko":"무시",              "en":"Dismiss"},
+        "E": {"tier":"A","type":"mobility", "ko":"무시",              "en":"Dismiss"},
         "X": {"tier":"C","type":"selfbuff", "ko":"여제",              "en":"Empress"},
     },
     "Raze": {
-        "C": {"tier":"B","type":"zone",     "ko":"폭발 봇",           "en":"Boom Bot"},
+        "C": {"tier":"A","type":"zone",     "ko":"폭발 봇",           "en":"Boom Bot"},
         "Q": {"tier":"A","type":"mobility", "ko":"폭발 팩",           "en":"Blast Pack"},
         "E": {"tier":"A","type":"zone",     "ko":"페인트 탄",         "en":"Paint Shells"},
         "X": {"tier":"B","type":"zone",     "ko":"대미 장식",         "en":"Showstopper"},
     },
     "Neon": {
         "C": {"tier":"A","type":"smoke",    "ko":"추월 차선",         "en":"Fast Lane"},
-        "Q": {"tier":"B","type":"cc",       "ko":"릴레이 볼트",       "en":"Relay Bolt"},
+        "Q": {"tier":"A","type":"cc",       "ko":"릴레이 볼트",       "en":"Relay Bolt"},
         "E": {"tier":"S","type":"mobility", "ko":"고속 기어",         "en":"High Gear"},
-        "X": {"tier":"C","type":"selfbuff", "ko":"오버드라이브",      "en":"Overdrive"},
+        "X": {"tier":"B","type":"selfbuff", "ko":"오버드라이브",      "en":"Overdrive"},
     },
     "Phoenix": {
         "C": {"tier":"B","type":"zone",     "ko":"불길",              "en":"Blaze"},
         "Q": {"tier":"B","type":"zone",     "ko":"뜨거운 손",         "en":"Hot Hands"},
         "E": {"tier":"A","type":"flash",    "ko":"커브볼",            "en":"Curveball"},
-        "X": {"tier":"C","type":"revive",   "ko":"역습",              "en":"Run it Back"},
+        "X": {"tier":"A","type":"revive",   "ko":"역습",              "en":"Run it Back"},
     },
     "Iso": {
         "C": {"tier":"B","type":"zone",     "ko":"대비책",            "en":"Contingency"},
         "Q": {"tier":"B","type":"cc",       "ko":"약화",              "en":"Undercut"},
         "E": {"tier":"B","type":"selfbuff", "ko":"구슬 보호막",       "en":"Double Tap"},
-        "X": {"tier":"C","type":"selfbuff", "ko":"청부 계약",         "en":"Kill Contract"},
+        "X": {"tier":"B","type":"selfbuff", "ko":"청부 계약",         "en":"Kill Contract"},
     },
     "Yoru": {
         "C": {"tier":"B","type":"info",     "ko":"기만",              "en":"Fakeout"},
         "Q": {"tier":"A","type":"flash",    "ko":"기습",              "en":"Blindside"},
         "E": {"tier":"A","type":"mobility", "ko":"관문 충돌",         "en":"Gatecrash"},
-        "X": {"tier":"A","type":"info",     "ko":"차원 표류",         "en":"Dimensional Drift"},
+        "X": {"tier":"S","type":"info",     "ko":"차원 표류",         "en":"Dimensional Drift"},
     },
     "Waylay": {
         "C": {"tier":"B","type":"cc",       "ko":"포화",              "en":"Barrage"},
         "Q": {"tier":"A","type":"mobility", "ko":"광속",              "en":"Lightspeed"},
         "E": {"tier":"A","type":"mobility", "ko":"굴절",              "en":"Refract"},
-        "X": {"tier":"B","type":"cc",       "ko":"초점 교차",         "en":"Focal Point"},
+        "X": {"tier":"S","type":"cc",       "ko":"초점 교차",         "en":"Focal Point"},
     },
     # ── Controllers ───────────────────────────────────────────────────────────
     "Brimstone": {
         "C": {"tier":"B","type":"selfbuff", "ko":"자극제 신호기",     "en":"Stim Beacon"},
         "Q": {"tier":"B","type":"zone",     "ko":"소이탄",            "en":"Incendiary"},
-        "E": {"tier":"S","type":"smoke",    "ko":"공중 연막",         "en":"Sky Smoke"},
+        "E": {"tier":"A","type":"smoke",    "ko":"공중 연막",         "en":"Sky Smoke"},
         "X": {"tier":"B","type":"zone",     "ko":"궤도 일격",         "en":"Orbital Strike"},
     },
     "Viper": {
         "C": {"tier":"A","type":"zone",     "ko":"뱀 이빨",           "en":"Snake Bite"},
-        "Q": {"tier":"S","type":"smoke",    "ko":"독성 연기",         "en":"Poison Cloud"},
+        "Q": {"tier":"A","type":"smoke",    "ko":"독성 연기",         "en":"Poison Cloud"},
         "E": {"tier":"S","type":"smoke",    "ko":"독성 장막",         "en":"Toxic Screen"},
         "X": {"tier":"S","type":"smoke",    "ko":"독사의 구덩이",     "en":"Viper's Pit"},
     },
     "Omen": {
         "C": {"tier":"B","type":"mobility", "ko":"어둠의 발자국",     "en":"Shrouded Step"},
-        "Q": {"tier":"A","type":"flash",    "ko":"피해망상",          "en":"Paranoia"},
+        "Q": {"tier":"S","type":"flash",    "ko":"피해망상",          "en":"Paranoia"},
         "E": {"tier":"S","type":"smoke",    "ko":"어둠의 장막",       "en":"Dark Cover"},
-        "X": {"tier":"B","type":"mobility", "ko":"그림자 습격",       "en":"From the Shadows"},
+        "X": {"tier":"C","type":"mobility", "ko":"그림자 습격",       "en":"From the Shadows"},
     },
     "Astra": {
         "C": {"tier":"A","type":"cc",       "ko":"중력의 샘",         "en":"Gravity Well"},
@@ -228,25 +228,25 @@ AGENT_KIT = {
         "X": {"tier":"B","type":"info",     "ko":"추적자",            "en":"Seekers"},
     },
     "Fade": {
-        "C": {"tier":"A","type":"info",     "ko":"추적귀",            "en":"Haunt"},
-        "Q": {"tier":"A","type":"cc",       "ko":"포박",              "en":"Seize"},
-        "E": {"tier":"B","type":"info",     "ko":"귀체",              "en":"Prowler"},
+        "C": {"tier":"B","type":"info",     "ko":"추적귀",            "en":"Haunt"},
+        "Q": {"tier":"B","type":"cc",       "ko":"포박",              "en":"Seize"},
+        "E": {"tier":"S","type":"info",     "ko":"귀체",              "en":"Prowler"},
         "X": {"tier":"S","type":"cc",       "ko":"황혼",              "en":"Nightfall"},
     },
     "Breach": {
-        "C": {"tier":"S","type":"cc",       "ko":"여진",              "en":"Aftershock"},
+        "C": {"tier":"A","type":"cc",       "ko":"여진",              "en":"Aftershock"},
         "Q": {"tier":"A","type":"flash",    "ko":"섬광 폭발",         "en":"Flashpoint"},
-        "E": {"tier":"S","type":"cc",       "ko":"균열",              "en":"Fault Line"},
+        "E": {"tier":"A","type":"cc",       "ko":"균열",              "en":"Fault Line"},
         "X": {"tier":"S","type":"cc",       "ko":"지진 강타",         "en":"Rolling Thunder"},
     },
     "KAYO": {
         "C": {"tier":"B","type":"zone",     "ko":"파편/탄",           "en":"FRAG/ment"},
         "Q": {"tier":"A","type":"flash",    "ko":"플래시/드라이브",   "en":"FLASH/drive"},
         "E": {"tier":"S","type":"info",     "ko":"제로/포인트",       "en":"ZERO/point"},
-        "X": {"tier":"S","type":"cc",       "ko":"무력화/명령",       "en":"NULL/cmd"},
+        "X": {"tier":"A","type":"cc",       "ko":"무력화/명령",       "en":"NULL/cmd"},
     },
     "Gekko": {
-        "C": {"tier":"A","type":"zone",     "ko":"폭파봇 지옥",       "en":"Mosh Pit"},
+        "C": {"tier":"B","type":"zone",     "ko":"폭파봇 지옥",       "en":"Mosh Pit"},
         "Q": {"tier":"A","type":"zone",     "ko":"지원봇",            "en":"Wingman"},
         "E": {"tier":"A","type":"flash",    "ko":"기절봇",            "en":"Dizzy"},
         "X": {"tier":"A","type":"cc",       "ko":"요동봇",            "en":"Thrash"},
@@ -262,7 +262,7 @@ AGENT_KIT = {
         "C": {"tier":"A","type":"trap",     "ko":"함정",              "en":"Trapwire"},
         "Q": {"tier":"B","type":"zone",     "ko":"사이버 감옥",       "en":"Cyber Cage"},
         "E": {"tier":"A","type":"info",     "ko":"스파이캠",          "en":"Spycam"},
-        "X": {"tier":"B","type":"info",     "ko":"신경 절도",         "en":"Neural Theft"},
+        "X": {"tier":"A","type":"info",     "ko":"신경 절도",         "en":"Neural Theft"},
     },
     "Killjoy": {
         "C": {"tier":"A","type":"zone",     "geo_ceiling":"S",        "ko":"나노스웜",          "en":"Nanoswarm"},
@@ -272,19 +272,19 @@ AGENT_KIT = {
     },
     "Sage": {
         "C": {"tier":"A","type":"zone",     "ko":"장벽 구슬",         "en":"Barrier Orb"},
-        "Q": {"tier":"A","type":"cc",       "ko":"둔화 구슬",         "en":"Slow Orb"},
+        "Q": {"tier":"B","type":"cc",       "ko":"둔화 구슬",         "en":"Slow Orb"},
         "E": {"tier":"C","type":"heal",     "ko":"회복 구슬",         "en":"Healing Orb"},
         "X": {"tier":"B","type":"revive",   "ko":"부활",              "en":"Resurrection"},
     },
     "Chamber": {
         "C": {"tier":"B","type":"trap",     "ko":"트레이드마크",      "en":"Trademark"},
         "Q": {"tier":"B","type":"zone",     "ko":"헤드헌터",          "en":"Headhunter"},
-        "E": {"tier":"A","type":"mobility", "ko":"랑데부",            "en":"Rendezvous"},
-        "X": {"tier":"B","type":"zone",     "ko":"역작",              "en":"Tour De Force"},
+        "E": {"tier":"S","type":"mobility", "ko":"랑데부",            "en":"Rendezvous"},
+        "X": {"tier":"A","type":"zone",     "ko":"역작",              "en":"Tour De Force"},
     },
     "Deadlock": {
-        "C": {"tier":"A","type":"trap",     "ko":"장벽망",            "en":"Barrier Mesh"},
-        "Q": {"tier":"B","type":"trap",     "ko":"음향 센서",         "en":"Sonic Sensor"},
+        "C": {"tier":"B","type":"trap",     "ko":"장벽망",            "en":"Barrier Mesh"},
+        "Q": {"tier":"C","type":"trap",     "ko":"음향 센서",         "en":"Sonic Sensor"},
         "E": {"tier":"A","type":"cc",       "ko":"중력그물",          "en":"GravNet"},
         "X": {"tier":"A","type":"cc",       "ko":"소멸",              "en":"Annihilation"},
     },
@@ -296,10 +296,10 @@ AGENT_KIT = {
     },
     # ── New Agents (2026) ─────────────────────────────────────────────────────
     "Veto": {
-        "C": {"tier":"B","type":"mobility", "ko":"지름길",            "en":"Shortcut"},
+        "C": {"tier":"C","type":"mobility", "ko":"지름길",            "en":"Shortcut"},
         "Q": {"tier":"B","type":"trap",     "ko":"목조르기",          "en":"Stranglehold"},
         "E": {"tier":"A","type":"trap",     "ko":"요격기",            "en":"Interceptor"},
-        "X": {"tier":"B","type":"selfbuff", "ko":"진화",              "en":"Evolution"},
+        "X": {"tier":"A","type":"selfbuff", "ko":"진화",              "en":"Evolution"},
     },
     "Miks": {
         "C": {"tier":"A","type":"cc",       "secondary_type":"heal",  "geo_ceiling":"S",
@@ -913,7 +913,7 @@ def compute_vct_profile(vct_pre_avg):
     else:         return "pro_absent"
 
 def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
-                   map_versatility_dict=None, pn_df=None):
+                   map_versatility_dict=None, pn_df=None, skill_ceiling_proxy=None):
     """
     (요원, 액트) 기준 현재 상태 피처 계산
     """
@@ -1170,10 +1170,12 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
     # rank_dominant_flag: design_rank_only 복사본. 둘 다 DROP_COLS에서 제외됨
     feat["rank_dominant_flag"] = feat["design_rank_only"]
 
-    # 실력 천장 피처: 1~10 정수 → 0.0~1.0 정규화
-    # 장인 효과가 큰 요원은 평균 랭크 통계가 실제 가치를 과소평가 → 너프 신호 완화에 사용
-    _sc_raw = design.get("skill_ceiling", 5)
-    feat["skill_ceiling_score"] = int(_sc_raw) / 10.0
+    # 실력 천장 프록시: 다이아+ 픽률 / 전체 픽률 비율 (0~1 정규화)
+    # 수동 등급 대신 데이터 기반. 다이아+에서 더 많이 픽 = 고숙련 선호 = 실력 천장 높음
+    if skill_ceiling_proxy:
+        feat["skill_ceiling_score"] = skill_ceiling_proxy.get(agent, 0.5)
+    else:
+        feat["skill_ceiling_score"] = int(design.get("skill_ceiling", 5)) / 10.0
 
     # 잠재적 대회 편향 요원: design_pro_only OR 역대 VCT 픽률 높음
     vct_peak_ = float(feat.get("vct_pr_peak_all", 0) or 0)
@@ -1298,6 +1300,20 @@ def main():
         ignore_index=True
     ).sort_values(["agent","act_idx"])
 
+    # ── 실력 천장 프록시: 다이아+ 픽률 / 전체 픽률 (E6A3~E9A3 겹치는 구간) ──
+    # 다이아+에서 더 많이 픽될수록 고숙련 선호 요원 = 실력 천장 높음
+    _mx_pr = rm[rm["act_idx"].between(13, 22)][["agent","act_idx","pick_rate_pct"]].rename(columns={"pick_rate_pct":"diamond_pr"})
+    _rv_pr = rv[rv["act_idx"].between(13, 22)][["agent","act_idx","pick_rate_pct"]].rename(columns={"pick_rate_pct":"overall_pr"})
+    _sc_merged = pd.merge(_mx_pr, _rv_pr, on=["agent","act_idx"])
+    _sc_merged["ratio"] = _sc_merged["diamond_pr"] / _sc_merged["overall_pr"].replace(0, np.nan)
+    _sc_per_agent = _sc_merged.groupby("agent")["ratio"].mean()
+    _sc_min, _sc_max = _sc_per_agent.min(), _sc_per_agent.max()
+    _sc_median_norm = float((_sc_per_agent.median() - _sc_min) / (_sc_max - _sc_min + 1e-9))
+    SKILL_CEILING_PROXY = {
+        agent: float(np.clip((ratio - _sc_min) / (_sc_max - _sc_min + 1e-9), 0, 1))
+        for agent, ratio in _sc_per_agent.items()
+    }
+
     # VCT 통합
     vct_df = vct_raw.copy()
     vct_df["act_name"]    = vct_df["event"].map(VCT_TO_ACT)
@@ -1343,7 +1359,8 @@ def main():
         patch_rows_list = patch_lookup.get((agent, next_act_idx), [])
 
         feat = build_features(agent, act_idx, rank_df, vct_df, step1, map_dep,
-                              map_versatility_dict=map_v_dict, pn_df=pn)
+                              map_versatility_dict=map_v_dict, pn_df=pn,
+                              skill_ceiling_proxy=SKILL_CEILING_PROXY)
 
         if patch_rows_list:
             patch_rows_df = pd.DataFrame(patch_rows_list)
