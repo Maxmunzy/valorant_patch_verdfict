@@ -127,7 +127,6 @@ ML 모델 출력 위에 하드 룰로 보정 (`predict_report.py`):
 |---|---|---|---|
 | 게코 | 76% | buff_followup | buff_followup |
 | 요루 | 67% | correction_nerf | correction_nerf |
-| 아이소 | 50% | nerf_rank | nerf_rank |
 | 하버 | 48% | rework | rework |
 
 ---
@@ -142,8 +141,8 @@ ML 모델 출력 위에 하드 룰로 보정 (`predict_report.py`):
 
 ### 네온 — 너프 예상
 
-- VCT 승률 66.7% (VCT 픽률 낮아도 쓰는 팀은 압도적으로 이김)
-- 도메인 룰 6 적용 → nerf 확률 상향
+- 2025 시즌부터 VCT 필수픽, 2026 킥오프·마스터즈 산티아고 픽률 20-45%
+- VCT EMEA Stage 1 2026 승률 66.7% — 픽률과 승률 모두 높아 도메인 룰 6 적용 → nerf 확률 상향
 
 ### 웨이레이 — 패치 12.06 너프
 
