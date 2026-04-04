@@ -768,30 +768,17 @@ def classify_stable_state(feat):
     """
     패치 없는 stable 케이스를 수치 기준으로 세분화
     → 모델이 "강한데 안 패치됨" / "약한데 안 패치됨" 을 노이즈로 학습하지 않도록
-
-    stable_rank_only: 솔로 캐리 설계 요원이 랭크에서 건재한 경우 (레이나, 아이소)
-      → 팀 유틸 없는 구조 → VCT 저픽은 설계 의도, 패치 신호 아님
-      → 학습 노이즈 억제용 레이블 (가중치 0.3). 모델 피처로는 사용 안 함
-      → design_rank_only 피처는 DROP_COLS에 포함 (메타 변화 대응 불가 이슈로 제거)
-      ★ 제트/레이즈처럼 너프+메타 대체로 밀린 경우는 해당 안 됨 (design_audience="both")
     """
-    rank_pr        = float(feat.get("rank_pr", 0) or 0)
-    vct_pr         = float(feat.get("vct_pr_last", 0) or 0)
-    rank_wr_vs50   = float(feat.get("rank_wr_vs50", 0) or 0)
-    vct_profile    = feat.get("vct_profile", "")
-    design_rank_only = float(feat.get("design_rank_only", 0) or 0)
+    rank_pr      = float(feat.get("rank_pr", 0) or 0)
+    vct_pr       = float(feat.get("vct_pr_last", 0) or 0)
+    rank_wr_vs50 = float(feat.get("rank_wr_vs50", 0) or 0)
+    vct_profile  = feat.get("vct_profile", "")
 
     # 강한 요원인데 아직 패치 안 됨
     if rank_pr > 12 or vct_pr > 35 or rank_wr_vs50 > 3.0:
         return "stable_strong"
 
-    # 솔로 캐리 설계 요원(레이나, 아이소)이 랭크에서 건재 → 노이즈 레이블
-    # 주의: design_rank_only는 레이블 생성에만 사용, 모델 피처(DROP_COLS)로는 제외
-    if design_rank_only and rank_pr > 2.0:
-        return "stable_rank_only"
-
-    # 약한 요원 (양쪽 다 낮음) — "both" 설계 요원의 저픽은 패치 신호
-    # stable_weak으로 분류하되 both_weak_signal 피처가 모델에 추가 정보 제공
+    # 약한 요원 (양쪽 다 낮음)
     if rank_pr < 3.0 and vct_pr < 3.0 and vct_profile not in ("pro_absent", "pro_unknown"):
         return "stable_weak"
 
