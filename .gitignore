@@ -28,5 +28,10 @@ decisions_log.txt
 feature_and_training_strategy.txt
 three_months.txt
 
+# 소스코드 (비공개)
+*.py
+*.json
+*.ipynb
+
 # 임시 파일
 *.tmp
