@@ -112,12 +112,13 @@ ML 모델 출력 위에 하드 룰로 보정 (`predict_report.py`):
 
 | 검증 방식 | Stage A | Stage B |
 |---|---|---|
-| Temporal OOF balanced accuracy | 0.4852 | 0.3610 |
-| Leave-One-Agent-Out 평균 BA | 0.534 | 0.472 |
+| Temporal OOF balanced accuracy | 0.4951 | 0.3248 |
+| Leave-One-Agent-Out 평균 BA | 0.515 | 0.471 |
 
 - LOAO >= Temporal → 특정 요원 패턴 암기 아닌 일반 패턴 학습 확인 (과적합 없음)
 - Stage B 낮은 이유: 118행 / 9클래스. `correction_buff/nerf` 각 1행으로 사실상 학습 불가
-- 12.05 VCT 데이터 추가 시 자연스럽게 개선 예정
+- 스킬 티어 재등급 반영 (연막 세분화, 페이드 귀체 S, 요루 차원표류 S 등)
+- VCT 데이터 누적 시 자연스럽게 개선 예정
 
 ---
 
@@ -125,9 +126,9 @@ ML 모델 출력 위에 하드 룰로 보정 (`predict_report.py`):
 
 | 요원 | p_patch | 예측 유형 | 최종 예측 |
 |---|---|---|---|
-| 게코 | 76% | buff_followup | buff_followup |
-| 요루 | 67% | correction_nerf | correction_nerf |
-| 하버 | 48% | rework | rework |
+| 게코 | 75% | buff_followup | buff_followup |
+| 요루 | 70% | correction_nerf | correction_nerf |
+| 하버 | 47% | rework | rework |
 
 ---
 
