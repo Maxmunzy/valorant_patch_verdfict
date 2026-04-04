@@ -16,5 +16,17 @@ __pycache__/
 build_output.txt
 train_output.txt
 
+# 데이터 파일
+*.csv
+*.ipynb
+
+# 이미지 출력물
+*.png
+
+# 로그·텍스트 산출물
+decisions_log.txt
+feature_and_training_strategy.txt
+three_months.txt
+
 # 임시 파일
 *.tmp
