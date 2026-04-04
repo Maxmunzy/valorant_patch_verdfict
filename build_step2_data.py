@@ -381,7 +381,7 @@ AGENT_DESIGN = {
         "design_audience": "both", "team_synergy": 0.3, "complexity": 0.7,
         "replaceability": 0.5,
         "role_niche": "speed_smoke_duelist",
-        "unique_value": "S급 연막 + CC + 이동기 삼박자. 자체 유틸 완결형 듀얼리스트.",
+        "unique_value": "S급 연막 + CC + 이동기 삼박자. 자체 유틸 완결형 타격대.",
         "agent_tier": "S", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 9,  # 스프린트 속도 제어·슬라이드 타이밍. 담비(농심) 같은 장인 효과 극대
     },
@@ -438,7 +438,7 @@ AGENT_DESIGN = {
         "design_audience": "both", "team_synergy": 0.7, "complexity": 0.4,
         "replaceability": 0.6,
         "role_niche": "smoke_support",
-        "unique_value": "원격 연막 3개 + 자극제 버프. 직관적 컨트롤러.",
+        "unique_value": "원격 연막 3개 + 자극제 버프. 직관적 전략가.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 3,  # 연막 배치 직관적. 장인 이점 없음
     },
@@ -585,7 +585,7 @@ AGENT_DESIGN = {
         "design_audience": "both", "team_synergy": 0.7, "complexity": 0.6,
         "replaceability": 0.5,
         "role_niche": "support_initiator",
-        "unique_value": "음파 CC + 팀 버프 + 음파 연막. 지원형 개시자.",
+        "unique_value": "음파 CC + 팀 버프 + 음파 연막. 지원형 척후대.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "high",
         "skill_ceiling": 6,  # 음파 스위치 타이밍 + CC 연계. 장인 이점 중간
     },
@@ -676,7 +676,7 @@ AGENT_RELATIONS = {
             {
                 "agent": "Viper",
                 "type": "competes",
-                "reason": "연막 컨트롤러 슬롯에서 바이퍼의 독 압박+맵 구역 봉쇄가 하버보다 우위",
+                "reason": "연막 전략가 슬롯에서 바이퍼의 독 압박+맵 구역 봉쇄가 하버보다 우위",
             },
             {
                 "agent": "Omen",
@@ -701,7 +701,7 @@ AGENT_RELATIONS = {
         "structural_weakness": "너프 이후 생존력 저하 → 저격 특화 가치만 남음.",
     },
     "Neon": {
-        "dominance_note": "S급 연막 + CC + 이동기 = 듀얼리스트 최고 킷 가치(3.25). 랭크/대회 모두 고픽 → 너프 압박.",
+        "dominance_note": "S급 연막 + CC + 이동기 = 타격대 최고 킷 가치(3.25). 랭크/대회 모두 고픽 → 너프 압박.",
     },
     "Breach": {
         "dominance_note": "S급 CC 3개 보유. 팀 조율 시 최강 개전 요원. 프로 메타 핵심.",
@@ -718,17 +718,17 @@ AGENT_RELATIONS = {
             {
                 "agent": "Sova",
                 "type": "competes",
-                "reason": "정보 획득 측면에서 소바와 개시자 슬롯 경쟁",
+                "reason": "정보 획득 측면에서 소바와 척후대 슬롯 경쟁",
             },
         ],
     },
     "Miks": {
-        "meta_impact": "음파 연막 + CC + 팀 버프 복합 킷. 개시자+컨트롤러 혼합 역할. 신규 요원으로 메타 데이터 부족.",
+        "meta_impact": "음파 연막 + CC + 팀 버프 복합 킷. 척후대+전략가 혼합 역할. 신규 요원으로 메타 데이터 부족.",
         "suppressed_by": [
             {
                 "agent": "Breach",
                 "type": "competes",
-                "reason": "CC 개시자 슬롯에서 브리치의 S급 CC 3개와 경쟁",
+                "reason": "CC 척후대 슬롯에서 브리치의 S급 CC 3개와 경쟁",
             },
         ],
     },
