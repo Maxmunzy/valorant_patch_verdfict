@@ -39,27 +39,23 @@
 
 > "이 요원이 이번 액트에 패치를 받을까?"
 
-- **입력**: 57개 피처 (랭크/VCT 픽률·승률 추세, 패치 이력, 요원 설계 특성, 킷 정보)
+- **입력**: 58개 피처 (랭크/VCT 픽률·승률 추세, 패치 이력, 요원 설계 특성, 킷 정보)
 - **출력**: `stable` / `patched` 확률
 - **임계값**: 0.35 (패치 누락보다 과감지를 허용)
 
-### Stage B — 패치 유형 분류 (9분류)
+### Stage B — 패치 유형 분류 (5분류)
 
 > "어떤 종류의 패치인가?"
 
-- **입력**: Stage A와 동일한 57개 피처 (patched 케이스만)
-- **출력**: 아래 9개 클래스
+- **입력**: Stage B 전용 50개 피처 (patched 케이스만, 타이밍 노이즈 피처 제거)
+- **출력**: 아래 5개 클래스
 
 | 클래스 | 설명 |
 |---|---|
-| `nerf_rank` | 랭크 지표 기반 너프 |
-| `nerf_pro` | VCT 프로씬 지배 기반 너프 |
+| `nerf_rank` | 랭크/VCT 지표 기반 너프 (correction_nerf, nerf_pro 포함) |
 | `nerf_followup` | 이전 너프 효과 미달, 추가 너프 |
-| `buff_rank` | 랭크 지표 기반 버프 |
-| `buff_pro` | VCT 저픽 기반 버프 |
+| `buff_rank` | 랭크/VCT 지표 기반 버프 (correction_buff, buff_pro 포함) |
 | `buff_followup` | 이전 버프 효과 미달, 추가 버프 |
-| `correction_nerf` | 과버프 수정 너프 |
-| `correction_buff` | 과너프 수정 버프 |
 | `rework` | 수치 조정으로 해결 불가, 구조 변경 |
 
 ---
@@ -112,12 +108,12 @@ ML 모델 출력 위에 하드 룰로 보정 (`predict_report.py`):
 
 | 검증 방식 | Stage A | Stage B |
 |---|---|---|
-| Temporal OOF balanced accuracy | 0.4951 | 0.3248 |
-| Leave-One-Agent-Out 평균 BA | 0.515 | 0.471 |
+| Temporal OOF balanced accuracy | 0.5188 | 0.5169 |
+| Leave-One-Agent-Out 평균 BA | 0.517 | 0.529 |
 
 - LOAO >= Temporal → 특정 요원 패턴 암기 아닌 일반 패턴 학습 확인 (과적합 없음)
-- Stage B 낮은 이유: 118행 / 9클래스. `correction_buff/nerf` 각 1행으로 사실상 학습 불가
-- 스킬 티어 재등급 반영 (연막 세분화, 페이드 귀체 S, 요루 차원표류 S 등)
+- Stage A/B 피처셋 분리: Stage B에서 패치 타이밍 신호(acts_since_patch, map_hhi 등 8개) 제거
+- Stage B 클래스 9개 → 5개 병합: `correction_*` → `*_followup`, `*_pro` → `*_rank` (샘플 부족 해소)
 - VCT 데이터 누적 시 자연스럽게 개선 예정
 
 ---

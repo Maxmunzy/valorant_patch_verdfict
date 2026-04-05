@@ -2,8 +2,8 @@
 
 > 기준일: 2026-04-04
 > 학습 데이터: `step2_training_data.csv` (669행 / 27 요원 / E10A1 ~ V26A2)
-> 모델: XGBoost 2-Stage (Stage A: stable vs patched / Stage B: 패치 유형 9분류)
-> 피처 수: **57개**
+> 모델: XGBoost 2-Stage (Stage A: stable vs patched / Stage B: 패치 유형 5분류)
+> 피처 수: Stage A **58개** / Stage B **50개** (스테이지별 분리)
 
 ---
 
@@ -11,8 +11,8 @@
 
 | Stage | 목적 | 입력 | 출력 |
 |-------|------|------|------|
-| A | 이번 액트에 패치가 올까? | 57 피처 | stable / patched 확률 |
-| B | 어떤 종류의 패치일까? | 57 피처 (patched 케이스만) | nerf_rank / buff_rank / nerf_followup / buff_followup / nerf_pro / buff_pro / correction_nerf / correction_buff / rework |
+| A | 이번 액트에 패치가 올까? | 58 피처 | stable / patched 확률 |
+| B | 어떤 종류의 패치일까? | 50 피처 (patched 케이스만, 타이밍 노이즈 제거) | nerf_rank / buff_rank / nerf_followup / buff_followup / rework |
 
 Stage A 임계값: **0.35** (기본 0.5보다 낮게 — 패치 누락보다 과감지가 낫다는 설계 선택)
 
@@ -21,7 +21,7 @@ Stage A 임계값: **0.35** (기본 0.5보다 낮게 — 패치 누락보다 과
 ## 피처 목록 (SHAP 평균 중요도 내림차순)
 
 > `Stage A`: stable vs patched 이진분류 SHAP
-> `Stage B`: 패치 유형 9분류 SHAP
+> `Stage B`: 패치 유형 5분류 SHAP
 > 평균 = (A + B) / 2
 
 ### 1. 패치 이력 피처
@@ -172,12 +172,13 @@ ML 모델 출력 위에 하드 룰로 보정:
 
 | 검증 방식 | Stage A | Stage B |
 |-----------|---------|---------|
-| Temporal OOF balanced accuracy | **0.4951** | **0.3248** |
-| Leave-One-Agent-Out 평균 BA | **0.515** | **0.471** |
+| Temporal OOF balanced accuracy | **0.5188** | **0.5169** |
+| Leave-One-Agent-Out 평균 BA | **0.517** | **0.529** |
 
 - LOAO ≥ Temporal → 특정 요원 패턴 암기 아닌 일반 패턴 학습 확인
-- Stage B 수치가 낮은 이유: 118행 / 9클래스. `correction_buff/nerf` 각 1행으로 사실상 학습 불가
-- 12.05 VCT 검증 데이터 추가 시 자연스럽게 개선 예정
+- Stage B: 클래스 9개 → 5개 병합(`correction_*`→`*_followup`, `*_pro`→`*_rank`) 후 OOF 0.30→0.52로 대폭 개선
+- Stage A/B 피처셋 분리: Stage B에서 타이밍 노이즈 8개 제거 후 LOAO +0.034 개선
+- VCT 데이터 누적 시 자연스럽게 개선 예정
 
 ---
 
