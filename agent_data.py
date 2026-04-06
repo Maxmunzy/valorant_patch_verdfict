@@ -130,6 +130,7 @@ AGENT_ROLE: dict[str, str] = {
     "Astra":     "Controller",
     "Clove":     "Controller",
     "Harbor":    "Controller",
+    "Miks":      "Controller",
     # 개시자 (Initiator)
     "Sova":      "Initiator",
     "Skye":      "Initiator",
@@ -146,7 +147,6 @@ AGENT_ROLE: dict[str, str] = {
     "Deadlock":  "Sentinel",
     "Vyse":      "Sentinel",
     "Veto":      "Sentinel",
-    "Miks":      "Sentinel",
 }
 
 # ─── 스킬 등급 계층 ───────────────────────────────────────────────────────────

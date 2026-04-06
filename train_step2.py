@@ -153,7 +153,10 @@ DROP_COLS_B = [
     "patch_streak_n",         # 연속 패치 횟수 → 패치 여부(Stage A) 신호
     "patch_streak_direction", # 방향 스트릭 → CAT 피처지만 유형 예측엔 노이즈
     "both_weak_signal",       # 버프 후보 이진 플래그 → Stage A 전용
-    "skill_ceiling_score",    # 패치 가능성 신호 → Stage A 전용
+    "skill_ceiling_score",       # 패치 가능성 신호 → Stage A 전용
+    "skill_ceiling_x_vct_pr",   # skill_ceiling 파생 교차 피처 → Stage A 전용
+    "skill_ceiling_x_vct_wr",
+    "skill_ceiling_x_rank_wr",
     "kit_x_rank_pr",          # 킷 × 픽률 교차 → 패치 여부 신호, 유형 불필요
     "map_hhi",                # 맵 편중도 → 패치 타이밍 신호, 유형과 무관
 ]

@@ -519,4 +519,11 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         for ut in _UTIL_RATIO_TYPES:
             feat[f"util_{ut}_rank_pr_ratio"] = np.nan
 
+    # ── 장인 × 다중 신호 교차 피처 (Stage A 전용) ───────────────────────────
+    # skill_ceiling_score가 Stage A 전용이므로 파생 교차 피처도 DROP_COLS_B에 추가
+    sc = float(feat.get("skill_ceiling_score", 0.5) or 0.5)
+    feat["skill_ceiling_x_vct_pr"]  = sc * float(feat.get("vct_pr_last",  0.0)  or 0.0)
+    feat["skill_ceiling_x_vct_wr"]  = sc * (float(feat.get("vct_wr_last", 50.0) or 50.0) - 50.0)
+    feat["skill_ceiling_x_rank_wr"] = sc * float(feat.get("rank_wr_vs50", 0.0)  or 0.0)
+
     return feat
