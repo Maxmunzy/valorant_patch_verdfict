@@ -39,7 +39,7 @@
 
 > "이 요원이 이번 액트에 패치를 받을까?"
 
-- **입력**: 58개 피처 (랭크/VCT 픽률·승률 추세, 패치 이력, 요원 설계 특성, 킷 정보)
+- **입력**: 72개 피처 (랭크/VCT 픽률·승률 추세, 패치 이력, 요원 설계 특성, 역할군·유틸 상대 픽률)
 - **출력**: `stable` / `patched` 확률
 - **임계값**: 0.35 (패치 누락보다 과감지를 허용)
 
@@ -47,14 +47,14 @@
 
 > "어떤 종류의 패치인가?"
 
-- **입력**: Stage B 전용 50개 피처 (patched 케이스만, 타이밍 노이즈 피처 제거)
+- **입력**: Stage B 전용 피처 (patched 케이스만, 타이밍 노이즈 피처 제거)
 - **출력**: 아래 5개 클래스
 
 | 클래스 | 설명 |
 |---|---|
-| `nerf_rank` | 랭크/VCT 지표 기반 너프 (correction_nerf, nerf_pro 포함) |
+| `nerf_rank` | 랭크/VCT 지표 기반 너프 |
 | `nerf_followup` | 이전 너프 효과 미달, 추가 너프 |
-| `buff_rank` | 랭크/VCT 지표 기반 버프 (correction_buff, buff_pro 포함) |
+| `buff_rank` | 랭크/VCT 지표 기반 버프 |
 | `buff_followup` | 이전 버프 효과 미달, 추가 버프 |
 | `rework` | 수치 조정으로 해결 불가, 구조 변경 |
 
@@ -65,7 +65,7 @@
 1. **시계열 정보 우선**: 단발 수치보다 slope, avg3, vs_peak 등 추세 피처가 더 중요
 2. **정적 플래그 단독 사용 금지**: `has_smoke=1` 같은 요원별 상수는 시간 변동이 없어 SHAP=0. `kit_x_rank_pr`처럼 픽률 흐름과 교차해야 신호가 됨
 3. **요원 정체성 직접 인코딩 금지**: 요원 ID 대신 역할 특성(team_synergy, replaceability 등)으로 일반화
-4. **고정 분류 지양**: "이 요원은 랭크 전용" 같은 고정 분류를 모델 피처로 쓰면 메타 변화에 대응 불가 → DROP. 레이블 생성에만 활용
+4. **고정 분류 지양**: "이 요원은 랭크 전용" 같은 고정 분류는 메타 변화에 대응 불가 → DROP. 레이블 생성에만 활용
 5. **시계열 누출 방지**: Walk-forward temporal split, KFold shuffle 사용 안 함
 
 ---
@@ -74,16 +74,16 @@
 
 | 피처 | 설명 |
 |---|---|
+| `vct_pr_last` | 최근 VCT 픽률. 대회 메타 반영 핵심 신호 |
+| `vct_data_lag` | VCT 데이터 지연 액트 수. 데이터 신선도 보정 |
+| `map_hhi` | 맵 편중도. 높을수록 특정 맵 전문가 → 픽률 왜곡 가능 |
 | `acts_since_patch` | 마지막 패치 후 경과 액트. 오래될수록 패치 압박 누적 |
-| `strength_vs_direction` | 현재 강도 vs 마지막 패치 방향 일치도. 너프했는데 여전히 강하면 추가 너프 신호 |
-| `rank_pr_avg3` | 최근 3액트 평균 랭크 픽률. 단발보다 노이즈 적음 |
-| `rank_pr_slope` | 랭크 픽률 추세 (기울기) |
-| `kit_x_rank_pr` | 킷 등급 × 랭크 픽률. 고가치 킷 요원이 많이 픽될수록 너프 압박 |
-| `rank_wr` | 현재 랭크 승률 |
-| `vct_pre_n` | 최근 VCT 이벤트 참여 수. 대회 노출도 |
-| `map_hhi` | 맵 편중도. 높을수록 특정 맵 전문가 → 픽률 하락이 맵풀 탓일 수 있음 |
-| `vct_wr_last` | 최근 VCT 승률. 낮은 픽률이어도 이기는 팀은 이김 (네온 케이스) |
 | `pro_rank_ratio` | VCT 픽률 / 랭크 픽률. 프로 편향 요원 판별 |
+| `strength_vs_direction` | 현재 강도 vs 마지막 패치 방향 일치도 |
+| `kit_x_rank_pr` | 킷 등급 × 랭크 픽률 교차 피처 |
+| `util_cc_rank_pr_ratio` | CC 보유 요원 내 랭크 픽률 상대 비율 (역할 경쟁 포착) |
+| `role_rank_pr_ratio` | 같은 역할군 내 랭크 픽률 상대 비율 |
+| `n_rank_acts` | 유효 랭크 데이터 액트 수 (신규 요원 신뢰도 보정) |
 
 자세한 피처 설명: [`feature_and_training_strategy.md`](feature_and_training_strategy.md)
 
@@ -91,11 +91,12 @@
 
 ## 도메인 규칙 레이어
 
-ML 모델 출력 위에 하드 룰로 보정 (`predict_report.py`):
+ML 모델 출력 위에 하드 룰로 보정:
 
 | 규칙 | 조건 | 효과 |
 |---|---|---|
-| 0 | 이번 액트 이미 패치됨 | 같은 방향 추가 패치 확률 억제 |
+| -1 | 패치 이력 없음 + 랭크 데이터 8액트 미만 | p_patch × (n_rank_acts / 16) 억제 — 신규 요원 오분류 방지 |
+| 0 | 이번 액트 최근 패치 | 같은 방향 추가 패치 확률 억제 |
 | 1 | 버프 후 MISS인데 nerf 예측 | buff 방향으로 재가중 |
 | 2 | 너프 후 MISS인데 buff 예측 | nerf 방향으로 재가중 |
 | 4 | 양쪽 도메인 모두 저픽 + 버프 방향 | p_patch 상향 |
@@ -104,47 +105,43 @@ ML 모델 출력 위에 하드 룰로 보정 (`predict_report.py`):
 
 ---
 
-## 검증 결과 (2026-04-05 기준)
+## 검증 결과 (2026-04-06 기준)
 
 | 검증 방식 | Stage A | Stage B |
 |---|---|---|
-| Temporal OOF balanced accuracy | 0.5188 | 0.5169 |
-| Leave-One-Agent-Out 평균 BA | 0.517 | 0.529 |
+| Temporal OOF balanced accuracy | 0.5705 | 0.5258 |
+| Leave-One-Agent-Out 평균 BA | 0.656 | 0.483 |
 
-- LOAO >= Temporal → 특정 요원 패턴 암기 아닌 일반 패턴 학습 확인 (과적합 없음)
-- Stage A/B 피처셋 분리: Stage B에서 패치 타이밍 신호(acts_since_patch, map_hhi 등 8개) 제거
-- Stage B 클래스 9개 → 5개 병합: `correction_*` → `*_followup`, `*_pro` → `*_rank` (샘플 부족 해소)
+- 학습 데이터: 688행 / 29요원 (stable_strong/weak 제외 후 538행 사용)
+- stable_strong/weak 제외 효과: Stage A +0.08, Stage B +0.01
+- LOAO Stage A 평균 0.656 — 신규 요원(Veto, Miks) 데이터 부족으로 일부 편차 있음
 - VCT 데이터 누적 시 자연스럽게 개선 예정
 
 ---
 
-## 현재 예측 결과 (V26A2 기준)
+## 현재 예측 결과 (V26A2 기준, 주요 케이스)
 
 | 요원 | p_patch | 예측 유형 | 최종 예측 |
 |---|---|---|---|
-| 게코 | 75% | buff_followup | buff_followup |
-| 요루 | 70% | correction_nerf | correction_nerf |
-| 하버 | 47% | rework | rework |
+| 오멘 (V25A6) | 93.9% | nerf_rank | nerf_rank |
+| 클로브 | 85.8% | nerf_rank | nerf_rank |
+| 바이퍼 | 62.3% | nerf_followup | nerf_followup |
+| 스카이 | 71.9% | nerf_followup | nerf_followup |
+| 레이즈 | 24.5% | buff_rank | stable |
 
 ---
 
 ## 주요 케이스
 
-### 요루 — 패치 12.05 너프
+### 네온 — 너프 예상 (V26A1 이후 억제 중)
 
-- **트리거**: role_invasion + pro_dominance
-- 관문 지속시간 30초 → 15초, 기습 충전 2개 → 1개
-- 너프 후 랭크 픽률 급락 → correction_nerf 예측 (과너프 가능성)
+- 2025~2026 시즌 VCT 필수픽, 마스터즈 산티아고까지 픽률 30%+
+- acts_since=1 + VCT 극단 수치(>50%)로 경계 상태 유지
 
-### 네온 — 너프 예상
+### 비토 / 믹스 — 신규 요원 처리
 
-- 2025 시즌부터 VCT 필수픽, 2026 킥오프·마스터즈 산티아고 픽률 20-45%
-- VCT EMEA Stage 1 2026 승률 66.7% — 픽률과 승률 모두 높아 도메인 룰 6 적용 → nerf 확률 상향
-
-### 웨이레이 — 패치 12.06 너프
-
-- **트리거**: role_invasion (감시자·척후대 역할까지 안전하게 수행)
-- change_type: mechanic (즉시 사용 → 장착으로 메커니즘 변경)
+- 비토: 랭크 데이터 15액트, 패치 이력 없음 → p_patch 31.9% → stable
+- 믹스: 랭크 데이터 4액트, VCT 2픽(CN) → 도메인 규칙 -1 적용, p_patch 12.1% → stable
 
 ---
 
@@ -174,9 +171,6 @@ python train_step2.py --fast
 
 # HPO 강제 재실행 + 파라미터 갱신
 python train_step2.py --hpo
-
-# 예측 리포트 출력
-python predict_report.py
 ```
 
 ---
@@ -188,10 +182,10 @@ python predict_report.py
 | 데이터 수집 | Python (Playwright, BeautifulSoup) |
 | 패치 노트 정형화 | Claude API |
 | 데이터 전처리 | pandas, numpy |
-| 머신러닝 | XGBoost, scikit-learn (LogisticRegression) |
+| 머신러닝 | XGBoost, scikit-learn (LogisticRegression, SimpleImputer) |
 | HPO | Optuna (TPE Sampler) |
 | 피처 중요도 | SHAP |
-| 시각화 | matplotlib |
+| 프론트엔드 | Next.js, Tailwind CSS |
 
 ---
 

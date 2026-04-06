@@ -18,9 +18,9 @@ ALL_ACTS = [
     "E7A1","E7A2","E7A3",
     "E8A1","E8A2","E8A3",
     "E9A1","E9A2","E9A3",
-    "E10A1","E10A2","E10A3",
-    "E11A1","E11A2","E11A3",
-    "E12A1","V26A2",
+    "V25A1","V25A2","V25A3",
+    "V25A4","V25A5","V25A6",
+    "V26A1","V26A2",
 ]
 ACT_IDX = {a: i for i, a in enumerate(ALL_ACTS)}
 IDX_ACT = {i: a for a, i in ACT_IDX.items()}
@@ -51,15 +51,15 @@ PATCH_TO_ACT = {
     "8.02":"E9A1","8.03":"E9A1","8.04":"E9A1","8.05":"E9A1",
     "8.07":"E9A2","8.08":"E9A2","8.09":"E9A2","8.10":"E9A2",
     "8.11":"E9A3",
-    "9.03":"E10A1","9.04":"E10A1","9.05":"E10A1","9.07":"E10A1",
-    "9.08":"E10A2","9.09":"E10A2","9.10":"E10A2",
-    "9.11":"E10A3",
-    "10.01":"E11A1","10.02":"E11A1","10.03":"E11A1","10.04":"E11A1",
-    "10.05":"E11A1","10.06":"E11A1",
-    "10.08":"E11A2","10.09":"E11A2","10.10":"E11A2","10.11":"E11A2",
-    "11.01":"E11A3","11.02":"E11A3","11.04":"E11A3","11.05":"E11A3",
-    "11.06":"E12A1","11.07":"E12A1","11.08":"E12A1","11.09":"E12A1",
-    "11.10":"E12A1","11.11":"E12A1",
+    "9.03":"V25A1","9.04":"V25A1","9.05":"V25A1","9.07":"V25A1",
+    "9.08":"V25A2","9.09":"V25A2","9.10":"V25A2",
+    "9.11":"V25A3",
+    "10.01":"V25A4","10.02":"V25A4","10.03":"V25A4","10.04":"V25A4",
+    "10.05":"V25A4","10.06":"V25A4",
+    "10.08":"V25A5","10.09":"V25A5","10.10":"V25A5","10.11":"V25A5",
+    "11.01":"V25A6","11.02":"V25A6","11.04":"V25A6","11.05":"V25A6",
+    "11.06":"V26A1","11.07":"V26A1","11.08":"V26A1","11.09":"V26A1",
+    "11.10":"V26A1","11.11":"V26A1",
     "12.01":"V26A2","12.02":"V26A2","12.03":"V26A2","12.04":"V26A2",
     "12.05":"V26A2","12.06":"V26A2",
 }
@@ -72,24 +72,27 @@ VCT_TO_ACT = {
     "VCT Americas League 2023":"E7A2","VCT EMEA League 2023":"E7A2",
     "VCT Pacific League 2023":"E7A2","Masters Tokyo 2023":"E7A3",
     "Champions 2023":"E9A2",
-    "VCT Americas Kickoff 2024":"E9A3","VCT EMEA Kickoff 2024":"E9A3",
-    "VCT Pacific Kickoff 2024":"E9A3","VCT CN Kickoff 2024":"E9A3",
-    "VCT Americas Stage 1 2024":"E10A1","VCT EMEA Stage 1 2024":"E10A1",
-    "VCT Pacific Stage 1 2024":"E10A1","VCT CN Stage 1 2024":"E10A1",
-    "Masters Madrid 2024":"E10A2",
-    "VCT Americas Stage 2 2024":"E10A3","VCT EMEA Stage 2 2024":"E10A3",
-    "VCT Pacific Stage 2 2024":"E10A3","VCT CN Stage 2 2024":"E10A3",
-    "Masters Shanghai 2024":"E11A1","Champions 2024":"E11A2",
-    "VCT Americas Kickoff 2025":"E11A3","VCT EMEA Kickoff 2025":"E11A3",
-    "VCT Pacific Kickoff 2025":"E11A3","VCT CN Kickoff 2025":"E11A3",
-    "VCT Americas Stage 1 2025":"E11A3","VCT EMEA Stage 1 2025":"E11A3",
-    "VCT Pacific Stage 1 2025":"E11A3","VCT CN Stage 1 2025":"E11A3",
-    "Masters Bangkok 2025":"E12A1",
-    "VCT Americas Stage 2 2025":"E12A1","VCT EMEA Stage 2 2025":"E12A1",
-    "VCT Pacific Stage 2 2025":"E12A1","VCT CN Stage 2 2025":"E12A1",
-    "Champions 2025":"E12A1","Masters Santiago 2026":"E12A1",
+    "VCT Americas Kickoff 2024":"E8A1","VCT EMEA Kickoff 2024":"E8A1",
+    "VCT Pacific Kickoff 2024":"E8A1","VCT CN Kickoff 2024":"E8A1",
+    "VCT Americas Stage 1 2024":"E8A2","VCT EMEA Stage 1 2024":"E8A2",
+    "VCT Pacific Stage 1 2024":"E8A2","VCT CN Stage 1 2024":"E8A2",
+    "Masters Madrid 2024":"E8A3",
+    "VCT Americas Stage 2 2024":"E9A1","VCT EMEA Stage 2 2024":"E9A1",
+    "VCT Pacific Stage 2 2024":"E9A1","VCT CN Stage 2 2024":"E9A1",
+    "Masters Shanghai 2024":"E9A2","Champions 2024":"E9A3",
+    "VCT Americas Kickoff 2025":"V25A1","VCT EMEA Kickoff 2025":"V25A1",
+    "VCT Pacific Kickoff 2025":"V25A1","VCT CN Kickoff 2025":"V25A1",
+    "VCT Americas Stage 1 2025":"V25A2","VCT EMEA Stage 1 2025":"V25A2",
+    "VCT Pacific Stage 1 2025":"V25A2","VCT CN Stage 1 2025":"V25A2",
+    "Masters Bangkok 2025":"V25A3",
+    "VCT Americas Stage 2 2025":"V25A4","VCT EMEA Stage 2 2025":"V25A4",
+    "VCT Pacific Stage 2 2025":"V25A4","VCT CN Stage 2 2025":"V25A4",
+    "Champions 2025":"V25A5",
+    "VCT Americas Kickoff 2026":"V26A1","VCT Pacific Kickoff 2026":"V26A1",
+    "VCT EMEA Kickoff 2026":"V26A1","VCT CN Kickoff 2026":"V26A1",
+    "Masters Santiago 2026":"V26A1",
     "VCT EMEA Stage 1 2026":"V26A2","VCT Pacific Stage 1 2026":"V26A2",
-    "VCT Americas Stage 1 2026":"V26A2",
+    "VCT Americas Stage 1 2026":"V26A2","VCT CN Stage 1 2026":"V26A2",
 }
 VCT_EVENT_ORDER = {v: i for i, v in enumerate(VCT_TO_ACT.keys())}
 
@@ -107,6 +110,44 @@ AGENT_NAME_MAP = {
 
 def normalize_agent(name: str) -> str:
     return AGENT_NAME_MAP.get(name, name)
+
+# ─── 역할군 매핑 ──────────────────────────────────────────────────────────────
+
+AGENT_ROLE: dict[str, str] = {
+    # 타격대 (Duelist)
+    "Jett":      "Duelist",
+    "Reyna":     "Duelist",
+    "Raze":      "Duelist",
+    "Neon":      "Duelist",
+    "Phoenix":   "Duelist",
+    "Iso":       "Duelist",
+    "Yoru":      "Duelist",
+    "Waylay":    "Duelist",
+    # 전술가 (Controller)
+    "Brimstone": "Controller",
+    "Viper":     "Controller",
+    "Omen":      "Controller",
+    "Astra":     "Controller",
+    "Clove":     "Controller",
+    "Harbor":    "Controller",
+    # 개시자 (Initiator)
+    "Sova":      "Initiator",
+    "Skye":      "Initiator",
+    "Fade":      "Initiator",
+    "Breach":    "Initiator",
+    "KAYO":      "Initiator",
+    "Gekko":     "Initiator",
+    "Tejo":      "Initiator",
+    # 감시자 (Sentinel)
+    "Cypher":    "Sentinel",
+    "Killjoy":   "Sentinel",
+    "Sage":      "Sentinel",
+    "Chamber":   "Sentinel",
+    "Deadlock":  "Sentinel",
+    "Vyse":      "Sentinel",
+    "Veto":      "Sentinel",
+    "Miks":      "Sentinel",
+}
 
 # ─── 스킬 등급 계층 ───────────────────────────────────────────────────────────
 # S급(4): 연막(smoke), 광역CC/진탕 → 메타 핵심 유틸
@@ -128,7 +169,7 @@ AGENT_KIT = {
         "X": {"tier":"B","type":"selfbuff", "ko":"칼날 폭풍",         "en":"Blade Storm"},
     },
     "Reyna": {
-        "C": {"tier":"B","type":"flash",    "ko":"눈총",              "en":"Leer"},
+        "C": {"tier":"B","type":"blind",    "ko":"눈총",              "en":"Leer"},
         "Q": {"tier":"C","type":"heal",     "ko":"포식",              "en":"Devour"},
         "E": {"tier":"A","type":"mobility", "ko":"무시",              "en":"Dismiss"},
         "X": {"tier":"C","type":"selfbuff", "ko":"여제",              "en":"Empress"},
@@ -184,7 +225,7 @@ AGENT_KIT = {
     },
     "Omen": {
         "C": {"tier":"B","type":"mobility", "ko":"어둠의 발자국",     "en":"Shrouded Step"},
-        "Q": {"tier":"S","type":"flash",    "ko":"피해망상",          "en":"Paranoia"},
+        "Q": {"tier":"S","type":"blind",    "ko":"피해망상",          "en":"Paranoia"},
         "E": {"tier":"S","type":"smoke",    "ko":"어둠의 장막",       "en":"Dark Cover"},
         "X": {"tier":"C","type":"mobility", "ko":"그림자 습격",       "en":"From the Shadows"},
     },
@@ -312,7 +353,7 @@ def compute_kit_score(agent: str) -> float:
 
 
 def get_kit_flags(agent: str) -> dict:
-    """has_smoke / has_cc / has_info / has_mobility / has_heal / has_revive 불리언"""
+    """has_smoke / has_cc / has_info / has_mobility / has_heal / has_revive / has_flash / has_blind 불리언"""
     kit = AGENT_KIT.get(agent, _DEFAULT_KIT)
     types = set()
     for v in kit.values():
@@ -327,6 +368,8 @@ def get_kit_flags(agent: str) -> dict:
         "has_mobility":     "mobility" in types,
         "has_heal":         "heal"     in types,
         "has_revive":       "revive"   in types,
+        "has_flash":        "flash"    in types,
+        "has_blind":        "blind"    in types,
         "high_value_smoke": "smoke"    in s_types,
         "high_value_cc":    "cc"       in s_types,
     }

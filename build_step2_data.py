@@ -20,7 +20,7 @@ from agent_data import (
     normalize_agent,
 )
 from label_builder import build_patch_label, classify_stable_state
-from feature_builder import build_features, precompute_map_versatility
+from feature_builder import build_features, precompute_map_versatility, precompute_role_util_avgs
 
 
 def main():
@@ -74,6 +74,8 @@ def main():
         for agent, ratio in _sc_per.items()
     }
 
+    role_util_dict = precompute_role_util_avgs(rank_df)
+
     # ── VCT 데이터 통합 ───────────────────────────────────────────────────────
     vct_df = vct_raw.copy()
     vct_df["act_name"]    = vct_df["event"].map(VCT_TO_ACT)
@@ -117,6 +119,7 @@ def main():
             agent, act_idx, rank_df, vct_df, step1, map_dep,
             map_versatility_dict=map_v_dict, pn_df=pn,
             skill_ceiling_proxy=SKILL_CEILING_PROXY,
+            role_util_dict=role_util_dict,
         )
 
         if patch_rows_list:

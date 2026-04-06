@@ -16,6 +16,7 @@ import os
 warnings.filterwarnings("ignore")
 
 from sklearn.preprocessing import OrdinalEncoder, LabelEncoder, StandardScaler
+from sklearn.impute import SimpleImputer
 from sklearn.metrics import (classification_report, confusion_matrix,
                              balanced_accuracy_score)
 from sklearn.utils.class_weight import compute_class_weight
@@ -116,6 +117,7 @@ CAT_COLS = [
 
 DROP_COLS = [
     "agent", "act", "act_idx", "label",
+    "vct_last_event_name",   # 표시용 문자열, 모델 피처 아님
     "label_direction", "label_skill", "label_trigger", "label_context",
     "label_has_rework", "label_group",
     "rank_vct_gap",      # NaN 30%
@@ -135,6 +137,7 @@ DROP_COLS = [
     "versatile_nerf_signal",                    # map_hhi × rank_pr 교차 — XGBoost가 원본 두 피처로 이미 학습, 중복
     "rank_low_unexpected",                      # rank_pr 실수값으로 흡수됨, SHAP 0.008로 기여 없음
     "map_versatility",                          # 맵 다양성 수치 분산 부족
+    "vct_pr_post", "vct_wr_post",               # 표시용 누적 집계, 모델 피처 아님
     # 이진 임계값 교차 피처: 요원별 상수 → 시간 변동성 없음
     "heal_low_rank", "revive_low_rank",
     "cc_low_rank", "info_low_vct",
@@ -323,6 +326,7 @@ def train_eval_lr(X, y, labels, stage_name, act_idx_arr, noise_w=None):
         scores = []
         for tr, val in splits:
             pipe = SkPipeline([
+                ("imputer", SimpleImputer(strategy="median")),
                 ("scaler", StandardScaler()),
                 ("lr", LogisticRegression(C=C, class_weight="balanced",
                                           max_iter=2000, solver="saga",
@@ -338,6 +342,7 @@ def train_eval_lr(X, y, labels, stage_name, act_idx_arr, noise_w=None):
     # best C로 OOF 재평가
     for tr, val in splits:
         pipe = SkPipeline([
+            ("imputer", SimpleImputer(strategy="median")),
             ("scaler", StandardScaler()),
             ("lr", LogisticRegression(C=best_C, class_weight="balanced",
                                       max_iter=2000, solver="saga",
@@ -359,6 +364,7 @@ def train_eval_lr(X, y, labels, stage_name, act_idx_arr, noise_w=None):
 
     # 전체 데이터로 최종 모델
     final = SkPipeline([
+        ("imputer", SimpleImputer(strategy="median")),
         ("scaler", StandardScaler()),
         ("lr", LogisticRegression(C=best_C, class_weight="balanced",
                                   max_iter=2000, solver="saga",
@@ -488,7 +494,14 @@ def main():
     raw_csv = pd.read_csv("step2_training_data.csv")
     df, feat_cols_a = prepare(raw_csv)
     _, feat_cols_b  = prepare(raw_csv, drop_extra=DROP_COLS_B)
-    print(f"전체: {len(df)}행 / Stage A 피처: {len(feat_cols_a)}개 / Stage B 피처: {len(feat_cols_b)}개")
+
+    # B안: stable_strong / stable_weak 학습 제외
+    # "패치 기록 없음 + 수치 극단" 케이스는 노이즈 (같은 feature에 다른 레이블 유발)
+    noise_labels = {"stable_strong", "stable_weak"}
+    n_before = len(df)
+    df = df[~df["label_collapsed"].isin(noise_labels)].reset_index(drop=True)
+    print(f"전체: {n_before}행 → stable_strong/weak 제외 후 {len(df)}행")
+    print(f"Stage A 피처: {len(feat_cols_a)}개 / Stage B 피처: {len(feat_cols_b)}개")
     print("\n[collapsed 레이블 분포]")
     print(df["label_collapsed"].value_counts().to_string())
 
@@ -502,16 +515,27 @@ def main():
     print("Stage A: stable vs patched")
     print("-"*50)
 
-    stable_types = ["stable","stable_strong","stable_weak","stable_rank_only"]
+    stable_types = ["stable", "stable_rank_only"]
     ya = (~df["label_collapsed"].isin(stable_types)).astype(int).values
-    noise_w = df["label_collapsed"].apply(stable_weight).values
+
+    # 데이터 부족 요원 가중치 할인: n_rank_acts < 8이면 비례적으로 줄임
+    # acts_since=99 (패치 이력 없음) + 데이터 적음 → 모델 학습에 혼란 유발
+    if "n_rank_acts" in df.columns:
+        _n_acts = df["n_rank_acts"].fillna(99).values.astype(float)
+        _no_patch = (df["acts_since_patch"].fillna(99).values.astype(float) >= 99)
+        data_quality_w = np.where(
+            _no_patch & (_n_acts < 8),
+            np.clip(_n_acts / 8.0, 0.2, 1.0),
+            1.0
+        )
+    else:
+        data_quality_w = None
+    noise_w = data_quality_w  # element-wise multiplier on class weights
 
     n_stable   = (ya == 0).sum()
     n_patched  = (ya == 1).sum()
-    n_strong   = (df["label_collapsed"] == "stable_strong").sum()
-    n_weak     = (df["label_collapsed"] == "stable_weak").sum()
     n_rankonly = (df["label_collapsed"] == "stable_rank_only").sum()
-    print(f"  stable: {n_stable - n_strong - n_weak - n_rankonly}  stable_strong: {n_strong}  stable_weak: {n_weak}  stable_rank_only: {n_rankonly}  patched: {n_patched}")
+    print(f"  stable: {n_stable - n_rankonly}  stable_rank_only: {n_rankonly}  patched: {n_patched}")
 
     # HPO: --fast면 저장된 파라미터 사용, 없으면 새로 실행
     saved_params = {}

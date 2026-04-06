@@ -1,9 +1,9 @@
 # 발로란트 패치 예측 모델 — 피처 설명서
 
-> 기준일: 2026-04-04
-> 학습 데이터: `step2_training_data.csv` (669행 / 27 요원 / E10A1 ~ V26A2)
+> 기준일: 2026-04-06
+> 학습 데이터: `step2_training_data.csv` (688행 / 29 요원 / E10A1 ~ V26A2, stable_strong/weak 제외 후 538행 사용)
 > 모델: XGBoost 2-Stage (Stage A: stable vs patched / Stage B: 패치 유형 5분류)
-> 피처 수: Stage A **58개** / Stage B **50개** (스테이지별 분리)
+> 피처 수: Stage A **72개** / Stage B **62개** (스테이지별 분리)
 
 ---
 
@@ -11,8 +11,8 @@
 
 | Stage | 목적 | 입력 | 출력 |
 |-------|------|------|------|
-| A | 이번 액트에 패치가 올까? | 58 피처 | stable / patched 확률 |
-| B | 어떤 종류의 패치일까? | 50 피처 (patched 케이스만, 타이밍 노이즈 제거) | nerf_rank / buff_rank / nerf_followup / buff_followup / rework |
+| A | 이번 액트에 패치가 올까? | 72 피처 | stable / patched 확률 |
+| B | 어떤 종류의 패치일까? | 62 피처 (patched 케이스만, 타이밍 노이즈 제거) | nerf_rank / buff_rank / nerf_followup / buff_followup / rework |
 
 Stage A 임계값: **0.35** (기본 0.5보다 낮게 — 패치 누락보다 과감지가 낫다는 설계 선택)
 
@@ -89,6 +89,7 @@ Stage A 임계값: **0.35** (기본 0.5보다 낮게 — 패치 누락보다 과
 | `agent_complexity` | 0.0843 | 0.0258 | 0.0550 | 요원 운용 복잡도 0~1. 복잡할수록 평균 랭크 통계가 실력을 과소평가 |
 | `skill_ceiling_score` | 0.0472 | 0.0251 | 0.0362 | **데이터 기반**: 다이아+ 픽률 / 전체 픽률 비율 (E6A3-E9A3 구간, 0-1 정규화). 고랭크일수록 선호 = 실력 천장 높음. Iso 1.0 / Neon 0.39 / Sova 0.10 |
 | `pro_dominant_flag` | 0.0409 | 0.0258 | 0.0334 | VCT 편향 요원 플래그. VCT 픽률 높고 랭크 낮은 요원 |
+| `n_rank_acts` | — | — | — | 유효 랭크 데이터 액트 수. 신규 요원 신뢰도 보정 (Miks=4, Veto=15 등). 학습 가중치·도메인 규칙 -1에서 활용 |
 
 ### 7. 킷(스킬 구성) 피처
 
@@ -106,12 +107,34 @@ Stage A 임계값: **0.35** (기본 0.5보다 낮게 — 패치 누락보다 과
 | `has_mobility` | 0.0180 | 0.0014 | 0.0097 | 이동기 보유 (0/1) |
 | `has_heal` | 0.0120 | 0.0000 | 0.0060 | 힐 보유 (0/1) |
 | `has_revive` | 0.0111 | 0.0000 | 0.0056 | 부활 보유 (0/1) |
+| `has_flash` | — | — | — | 진짜 플래시 보유 (0/1). 브리치·KAYO·스카이·게코·피닉스 등 |
+| `has_blind` | — | — | — | 근시 효과(nearsight) 보유 (0/1). 오멘 피해망상·레이나 Leer — 플래시와 구분 |
 | `high_value_smoke` | 0.0478 | 0.0117 | 0.0298 | S급 연막 보유 (바이퍼, 오멘, 아스트라 등) |
 | `high_value_cc` | 0.0638 | 0.0239 | 0.0438 | S급 CC 보유 |
 | `mobility_rank_dom` | 0.0353 | 0.0200 | 0.0276 | **교차 피처**: has_mobility × (rank_pr / 5). 이동기 요원이 랭크 고픽일 때 너프 압박 |
 | `geo_synergy` | 0.0993 | 0.0074 | 0.0534 | 맵 지오메트리 시너지 (high=2 / medium=1 / low=0). 특정 각도·위치에서 스킬 가치 증폭 |
 
-### 8. 맵 관련 피처
+### 8. 역할군·유틸 상대 픽률 피처 (신규)
+
+> 역할군 내/유틸 타입별 픽률 상대 비율. "같은 역할군에서 이 요원이 얼마나 선택받는가"를 포착.
+> 단독 픽률 수치보다 역할 경쟁 구도를 반영.
+
+| 피처 | 설명 |
+|------|------|
+| `role_rank_pr_ratio` | 동일 역할군 내 랭크 픽률 상대 비율 (agent_pr / mean_pr_same_role). 역할 경쟁 포착 |
+| `util_smoke_rank_pr_ratio` | 연막 보유 요원 내 랭크 픽률 상대 비율. 연막 미보유 요원은 NaN → SimpleImputer(median)로 처리 |
+| `util_cc_rank_pr_ratio` | CC 보유 요원 내 랭크 픽률 상대 비율 |
+| `util_info_rank_pr_ratio` | 정보 스킬 보유 요원 내 랭크 픽률 상대 비율 |
+| `util_mobility_rank_pr_ratio` | 이동기 보유 요원 내 랭크 픽률 상대 비율 |
+| `util_heal_rank_pr_ratio` | 힐 보유 요원 내 랭크 픽률 상대 비율 |
+| `util_revive_rank_pr_ratio` | 부활 보유 요원 내 랭크 픽률 상대 비율 |
+| `util_flash_rank_pr_ratio` | 진짜 플래시 보유 요원 내 랭크 픽률 상대 비율 |
+| `util_blind_rank_pr_ratio` | 근시(blind) 보유 요원 내 랭크 픽률 상대 비율 |
+
+- 계산 단위: 액트별 (act_idx). `precompute_role_util_avgs(rank_df)` 로 사전 계산 후 `build_features()` 에 주입
+- LR 파이프라인에 `SimpleImputer(strategy="median")` 추가 — NaN 처리 필수
+
+### 9. 맵 관련 피처
 
 | 피처 | Stage A | Stage B | 평균 | 설명 |
 |------|---------|---------|------|------|
@@ -119,7 +142,7 @@ Stage A 임계값: **0.35** (기본 0.5보다 낮게 — 패치 누락보다 과
 | `map_explains_vct_drop` | 0.0694 | 0.0121 | 0.0408 | 맵풀 변경이 VCT 픽률 하락을 설명하는 정도. 높으면 밸런스 문제가 아닌 맵 문제 |
 | `top_map_in_rotation` | 0.0176 | 0.0080 | 0.0128 | 주력 맵이 현재 대회 맵풀에 포함 여부 (0/1) |
 
-### 9. 버프·너프 혼동 방지 피처
+### 10. 버프·너프 혼동 방지 피처
 
 | 피처 | Stage A | Stage B | 평균 | 설명 |
 |------|---------|---------|------|------|
@@ -146,18 +169,19 @@ Stage A 임계값: **0.35** (기본 0.5보다 낮게 — 패치 누락보다 과
 | `rank_vct_gap` | NaN 30% 이상 |
 | `map_dep_score`, `effective_map_dep` | 이중 인코딩 문제 |
 | `last_combined` | 방향 정보 없는 DUAL_MISS 플래그. dir_verdict_code + miss 플래그로 대체 |
-| `rank_low_unexpected` | SHAP 0.008 수준. 설계 의도 대비 픽률 낮은 플래그인데 `vct_low_unexpected`와 사실상 같은 역할. 중복 |
-| `versatile_nerf_signal` | `(1-map_hhi) × rank_pr` 교차 피처. map_hhi + rank_pr 두 피처를 모델이 이미 학습하므로 정보 추가 없음. XGBoost 트리가 원본 두 피처의 상호작용을 자동으로 포착 |
-| `last_trigger_type` | 전체 패치 중 599/669 = 90%가 `rank` 트리거 → 분산 없음. 현 데이터에서 SHAP 0. pro_dominance/role_invasion 케이스 누적 시 재도입 예정 |
+| `rank_low_unexpected` | SHAP 0.008 수준. `vct_low_unexpected`와 사실상 같은 역할. 중복 |
+| `versatile_nerf_signal` | `(1-map_hhi) × rank_pr` 교차 피처. XGBoost가 두 원본 피처 상호작용을 자동 포착하므로 정보 추가 없음 |
+| `last_trigger_type` | 전체 패치 중 90%가 `rank` 트리거 → 분산 없음. pro_dominance/role_invasion 케이스 누적 시 재도입 예정 |
 
 ---
 
-## 도메인 규칙 레이어 (predict_report.py)
+## 도메인 규칙 레이어 (predict_service.py)
 
 ML 모델 출력 위에 하드 룰로 보정:
 
 | 규칙 | 조건 | 효과 |
 |------|------|------|
+| **규칙 -1** | `acts_since_patch ≥ 99` (패치 이력 없음) AND `n_rank_acts < 8` | p_patch × max(0.2, n_rank_acts / 16.0) — 신규 요원 오분류 방지. Miks: 4액트 → × 0.25 |
 | 규칙 0 | acts_since_patch = 0 (이번 액트 패치) | 같은 방향 추가 패치 확률 × 0.2, p_patch × 0.4 |
 | 규칙 1 | buff_miss + nerf 확률 > buff 확률 | buff 방향으로 재가중 (buff × 2.2, nerf × 0.45) |
 | 규칙 2 | nerf_miss + buff 확률 > nerf 확률 | nerf 방향으로 재가중 |
@@ -168,23 +192,49 @@ ML 모델 출력 위에 하드 룰로 보정:
 
 ---
 
+## 학습 전략
+
+### Walk-forward Temporal Split
+- 시계열 누출 방지: KFold shuffle 사용 안 함
+- OOF 예측을 시간 순서대로 생성 (미래 데이터 학습 후 과거 예측 방지)
+
+### 데이터 품질 가중치 (sparse agent discount)
+- 조건: `acts_since_patch ≥ 99` AND `n_rank_acts < 8` (패치 이력 없는 신규 요원)
+- 가중치: `clip(n_rank_acts / 8.0, 0.2, 1.0)`
+- 목적: Veto(15액트, 정상 가중치), Miks(4액트, 0.5 가중치) — 희소 데이터 요원이 기존 요원 학습을 방해하지 않도록
+
+### stable_strong / stable_weak 제거
+- 제거 효과: Stage A +0.08, Stage B +0.01
+- 이유: 명백히 안 건드릴 요원(극단적 안정)은 모델 학습에 노이즈. 예측 대상은 "애매한 경계 케이스"
+
+### LR 파이프라인 구성
+```
+SkPipeline([
+    ("imputer", SimpleImputer(strategy="median")),  # util_*_ratio NaN 처리
+    ("scaler", StandardScaler()),
+    ("lr", LogisticRegression(...)),
+])
+```
+
+---
+
 ## 검증 결과 요약
 
 | 검증 방식 | Stage A | Stage B |
 |-----------|---------|---------|
-| Temporal OOF balanced accuracy | **0.5188** | **0.5169** |
-| Leave-One-Agent-Out 평균 BA | **0.517** | **0.529** |
+| Temporal OOF balanced accuracy | **0.5705** | **0.5258** |
+| Leave-One-Agent-Out 평균 BA | **0.656** | **0.483** |
 
-- LOAO ≥ Temporal → 특정 요원 패턴 암기 아닌 일반 패턴 학습 확인
-- Stage B: 클래스 9개 → 5개 병합(`correction_*`→`*_followup`, `*_pro`→`*_rank`) 후 OOF 0.30→0.52로 대폭 개선
-- Stage A/B 피처셋 분리: Stage B에서 타이밍 노이즈 8개 제거 후 LOAO +0.034 개선
+- LOAO Stage A 0.656 — 신규 요원(Veto, Miks) 데이터 부족으로 일부 편차 있음
+- Veto LOAO=0.067 (패치 이력 없어 학습 불가) → 전체 평균 견인
 - VCT 데이터 누적 시 자연스럽게 개선 예정
 
 ---
 
 ## 피처 설계 원칙
 
-1. **정적 플래그 단독 사용 금지**: `has_smoke=1` 자체는 시간 변동이 없어 SHAP=0. 반드시 픽률·승률 흐름과 교차해야 신호가 됨 → `kit_x_rank_pr`, `mobility_rank_dom` 설계 근거
-2. **요원 정체성 인코딩 지양**: 요원 ID를 직접 넣는 대신 역할 특성(team_synergy, replaceability 등)으로 일반화
+1. **정적 플래그 단독 사용 금지**: `has_smoke=1` 자체는 시간 변동이 없어 SHAP=0. 반드시 픽률·승률 흐름과 교차해야 신호가 됨 → `kit_x_rank_pr`, `mobility_rank_dom`, `role_rank_pr_ratio` 설계 근거
+2. **요원 정체성 인코딩 지양**: 요원 ID를 직접 넣는 대신 역할 특성(team_synergy, replaceability, role_rank_pr_ratio 등)으로 일반화
 3. **시계열 누출 방지**: Walk-forward temporal split 사용, KFold shuffle 사용 안 함
 4. **도메인 룰은 보정 레이어**: ML이 방향 혼동할 때만 개입. 고정 분류(design_rank_only 등)는 메타 변화 대응 불가로 제거
+5. **신규 요원 처리**: n_rank_acts 피처 + 학습 가중치 할인 + 도메인 규칙 -1 억제를 통해 희소 데이터 요원의 오분류·학습 오염 방지
