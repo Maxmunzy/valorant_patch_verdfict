@@ -106,7 +106,9 @@ def main():
         patch_lookup.setdefault(key, []).append(row)
 
     # ── 레이블 & 피처 조립 ───────────────────────────────────────────────────
-    rows = []
+    rows      = []
+    feat_cache = {}   # (agent, act_idx) → feat  (horizon=2,3 재사용)
+
     for _, aa in agent_acts.iterrows():
         agent   = aa["agent"]
         act     = aa["act_name"]
@@ -121,10 +123,14 @@ def main():
             skill_ceiling_proxy=SKILL_CEILING_PROXY,
             role_util_dict=role_util_dict,
         )
+        feat_cache[(agent, act_idx)] = feat
 
         if patch_rows_list:
             patch_rows_df = pd.DataFrame(patch_rows_list)
             label, meta   = build_patch_label(agent, next_act_idx, patch_rows_df, step1, feat)
+            # nerf/buff 없는 패치(버그픽스 등) → 수치 기반 재판정
+            if label == "stable":
+                label = classify_stable_state(feat)
         else:
             label = classify_stable_state(feat)
             meta  = {
@@ -135,12 +141,37 @@ def main():
                 "label_has_rework": 0,
             }
 
-        feat.update({"agent": agent, "act": act, "act_idx": act_idx, "label": label})
+        feat.update({"agent": agent, "act": act, "act_idx": act_idx,
+                     "label": label, "horizon": 1})
         feat.update(meta)
         rows.append(feat)
 
+    # ── horizon=2,3: 실제 nerf/buff 패치만 추가 (Stage B 데이터 확장) ────────
+    h23_count = 0
+    for (agent, act_idx), feat in feat_cache.items():
+        act = feat["act"]
+        for h in (2, 3):
+            target_act_idx  = act_idx + h
+            patch_rows_list = patch_lookup.get((agent, target_act_idx), [])
+            if not patch_rows_list:
+                continue
+            patch_rows_df = pd.DataFrame(patch_rows_list)
+            # 실제 nerf/buff 있는 경우만
+            nb = patch_rows_df[patch_rows_df["direction"].isin(["nerf", "buff"])]
+            if nb.empty:
+                continue
+            label, meta = build_patch_label(agent, target_act_idx, patch_rows_df, step1, feat)
+            if label in ("stable", "rework", "correction_nerf", "correction_buff"):
+                continue
+            row = dict(feat)
+            row.update({"agent": agent, "act": act, "act_idx": act_idx,
+                        "label": label, "horizon": h})
+            row.update(meta)
+            rows.append(row)
+            h23_count += 1
+
     df = pd.DataFrame(rows)
-    print(f"\n  생성: {len(df)}행 / {df.shape[1]}컬럼")
+    print(f"\n  생성: {len(df)}행 / {df.shape[1]}컬럼  (horizon=2,3 추가: {h23_count}행)")
 
     # ── 레이블 분포 ───────────────────────────────────────────────────────────
     print("\n[레이블 분포]")

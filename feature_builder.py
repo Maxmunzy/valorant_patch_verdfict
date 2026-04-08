@@ -16,6 +16,38 @@ from agent_data import (
 )
 from label_builder import dominant_trigger
 
+# 요원별 역대 평균 픽률 (training_data.csv rank_pr_t-1 기준)
+# 팬덤/인기도 베이스라인: 이 이상으로 픽되면 성능 외 팬덤이 픽률을 지탱한다는 신호
+AGENT_PR_BASELINE: dict[str, float] = {
+    "Astra":     2.49,
+    "Breach":    2.05,
+    "Brimstone": 2.42,
+    "Chamber":   9.51,
+    "Clove":    11.82,
+    "Cypher":    5.36,
+    "Deadlock":  1.82,
+    "Fade":      5.46,
+    "Gekko":     3.05,
+    "Harbor":    0.43,
+    "Iso":       1.81,
+    "Jett":     13.93,
+    "Kay/O":     4.10,
+    "Killjoy":   3.76,
+    "Neon":      1.92,
+    "Omen":      6.96,
+    "Phoenix":   1.83,
+    "Raze":      7.27,
+    "Reyna":     9.36,
+    "Sage":      6.35,
+    "Skye":      4.57,
+    "Sova":      6.39,
+    "Tejo":      1.89,
+    "Viper":     3.59,
+    "Vyse":      2.25,
+    "Waylay":    2.00,   # 신규 요원, 베이스라인 미확정 → 평균값 사용
+    "Yoru":      1.89,
+}
+
 # 상대 픽률 비교에 사용할 유틸 타입 목록 (랭크 전용 피처)
 _UTIL_RATIO_TYPES = ["smoke", "cc", "info", "mobility", "heal", "revive", "flash", "blind"]
 
@@ -73,6 +105,11 @@ def precompute_role_util_avgs(rank_df: "pd.DataFrame") -> dict:
                     util_prs.setdefault(ut, []).append(pr)
         util_avg: dict[str, float] = {ut: float(np.mean(ps)) for ut, ps in util_prs.items()}
 
+        # 메타 전체 평균/표준편차 (agent identity 없이 "이 요원이 얼마나 튀냐" 포착)
+        all_prs   = list(pr_map.values())
+        meta_mean = float(np.mean(all_prs)) if all_prs else 5.0
+        meta_std  = float(np.std(all_prs))  if len(all_prs) > 1 else 1.0
+
         for ag, pr in pr_map.items():
             role = AGENT_ROLE.get(ag)
             entry: dict[str, float] = {}
@@ -82,6 +119,10 @@ def precompute_role_util_avgs(rank_df: "pd.DataFrame") -> dict:
                 entry["role_rank_pr_ratio"] = pr / role_avg[role]
             else:
                 entry["role_rank_pr_ratio"] = 1.0
+
+            # 메타 전체 대비 픽률: rank_pr / 전체평균 (비율), (rank_pr - 평균) / std (z점수)
+            entry["rank_pr_rel_meta"] = pr / meta_mean if meta_mean > 0 else 1.0
+            entry["rank_pr_zscore"]   = (pr - meta_mean) / max(meta_std, 0.5)
 
             # 유틸 타입별 상대 픽률
             ag_types = agent_util_types.get(ag, set())
@@ -175,6 +216,12 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         # rank_pr_avg3: 최근 3액트 (단기 추세 포착용, rank_pr와 구분)
         feat["rank_pr_avg3"] = float(all_hist.tail(3)["pick_rate_pct"].mean())
         feat["rank_pr_peak"] = float(all_hist["pick_rate_pct"].max())
+        # rank_pr_delta: 최근 2액트 간 픽률 변화 (단기 방향성)
+        if len(all_hist) >= 2:
+            _pr2 = all_hist.tail(2)["pick_rate_pct"].values
+            feat["rank_pr_delta"] = float(_pr2[-1] - _pr2[-2])
+        else:
+            feat["rank_pr_delta"] = 0.0
 
     # ── VCT 피처 ───────────────────────────────────────────────────────────────
     # [모델 피처] vct_pr_last / vct_wr_last = 가장 최근 액트 기준 (신호 강도 유지)
@@ -274,8 +321,10 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
     if len(recent_vct) >= 2:
         vpr = recent_vct["pick_rate_pct"].values
         feat["vct_pr_slope"] = float(np.polyfit(np.arange(len(vpr)), vpr, 1)[0])
+        feat["vct_pr_delta"]  = float(vpr[-1] - vpr[-2])
     else:
         feat["vct_pr_slope"] = 0.0
+        feat["vct_pr_delta"]  = 0.0
 
     if "rank_pr" in feat and feat.get("vct_pr_avg", 0) > 0:
         feat["rank_vct_gap"] = feat["rank_pr"] - feat["vct_pr_avg"]
@@ -292,22 +341,40 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
     feat["n_nerf_patches"]  = int((hist["direction"] == "nerf").sum())
     feat["n_buff_patches"]  = int((hist["direction"] == "buff").sum())
 
-    if not hist.empty:
-        feat["acts_since_patch"] = act_idx - int(hist["patch_act_idx"].max())
-    elif pn_df is not None:
-        pn_agent = pn_df[(pn_df["agent"] == agent) & (pn_df["act_idx"] <= act_idx)]
-        feat["acts_since_patch"] = (act_idx - int(pn_agent["act_idx"].max())) if not pn_agent.empty else 99
+    # patch_notes에서 최신 buff/nerf 액트 조회 (training_data보다 최신 패치 반영)
+    pn_last_act_idx = -1
+    pn_last_bn = None
+    if pn_df is not None:
+        pn_agent_bn = pn_df[
+            (pn_df["agent"] == agent) &
+            (pn_df["act_idx"] <= act_idx) &
+            (pn_df["direction"].isin(["buff", "nerf"]))
+        ].sort_values("act_idx")
+        if not pn_agent_bn.empty:
+            pn_last_act_idx = int(pn_agent_bn["act_idx"].max())
+            pn_last_bn = pn_agent_bn[pn_agent_bn["act_idx"] == pn_last_act_idx]
+
+    # training_data 마지막 패치 액트
+    hist_last_act_idx = int(hist["patch_act_idx"].max()) if not hist.empty else -1
+
+    # 더 최신 소스를 우선 사용
+    use_pn_as_last = pn_last_act_idx > hist_last_act_idx
+
+    if hist_last_act_idx >= 0 or pn_last_act_idx >= 0:
+        effective_last_act = max(hist_last_act_idx, pn_last_act_idx)
+        feat["acts_since_patch"] = act_idx - effective_last_act
     else:
         feat["acts_since_patch"] = 99
 
-    if not hist.empty:
+    if not hist.empty and not use_pn_as_last:
+        # training_data가 더 최신이거나 동일: 기존 로직
         last = hist.iloc[-1]
         feat["last_direction"]    = last.get("direction", "none")
         feat["last_combined"]     = last.get("combined_verdict", "UNKNOWN")
         feat["last_rank_verdict"] = last.get("rank_verdict", "NO_DATA")
         feat["last_vct_verdict"]  = last.get("vct_verdict", "NO_DATA")
         feat["last_max_skill_w"]  = float(last.get("max_skill_weight", 2.0) or 2.0)
-        last_act_idx = int(hist["patch_act_idx"].max())
+        last_act_idx = hist_last_act_idx
         if pn_df is not None:
             pn_last = pn_df[
                 (pn_df["agent"] == agent) &
@@ -317,6 +384,24 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
             feat["last_trigger_type"] = dominant_trigger(pn_last)
         else:
             feat["last_trigger_type"] = "rank"
+        _last_pr_pre  = last.get("rank_pr_t-1",  None)
+        _last_wr_pre  = last.get("rank_wr_t-1",  None)
+        _last_wr_post = last.get("rank_wr_t+1",  None)
+        feat["last_pr_pre"]  = float(_last_pr_pre)  if _last_pr_pre  is not None and not pd.isna(_last_pr_pre)  else np.nan
+        feat["last_wr_pre"]  = float(_last_wr_pre)  if _last_wr_pre  is not None and not pd.isna(_last_wr_pre)  else np.nan
+        feat["last_wr_post"] = float(_last_wr_post) if _last_wr_post is not None and not pd.isna(_last_wr_post) else np.nan
+    elif pn_last_bn is not None:
+        # patch_notes가 더 최신: direction/trigger는 pn에서, 나머지는 기본값
+        dirs = pn_last_bn["direction"].value_counts()
+        feat["last_direction"]    = dirs.index[0] if not dirs.empty else "none"
+        feat["last_combined"]     = "UNKNOWN"   # pn에서는 verdict 없음
+        feat["last_rank_verdict"] = "NO_DATA"
+        feat["last_vct_verdict"]  = "NO_DATA"
+        feat["last_max_skill_w"]  = 2.0
+        feat["last_trigger_type"] = dominant_trigger(pn_last_bn)
+        feat["last_pr_pre"]  = np.nan
+        feat["last_wr_pre"]  = np.nan
+        feat["last_wr_post"] = np.nan
     else:
         feat["last_direction"]    = "none"
         feat["last_combined"]     = "UNKNOWN"
@@ -324,6 +409,9 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         feat["last_vct_verdict"]  = "NO_DATA"
         feat["last_max_skill_w"]  = 2.0
         feat["last_trigger_type"] = "rank"
+        feat["last_pr_pre"]  = np.nan
+        feat["last_wr_pre"]  = np.nan
+        feat["last_wr_post"] = np.nan
 
     # 최근 4액트 내 DUAL_MISS 누적 (rework 신호)
     recent4 = hist[hist["patch_act_idx"] >= act_idx - 4]
@@ -377,6 +465,12 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
     rank_pr_      = float(feat.get("rank_pr", 0) or 0)
     feat["pro_rank_ratio"] = vct_pr_last_ / max(rank_pr_, 0.5)
 
+    # rank_pr_rel_meta를 threshold 기반 피처에 미리 추출 (role_util_dict보다 앞서 사용)
+    _rel_meta_ = 1.0
+    if role_util_dict is not None:
+        _ru_early = role_util_dict.get((act_idx, agent), {})
+        _rel_meta_ = float(_ru_early.get("rank_pr_rel_meta", 1.0))
+
     # ── 요원 설계 의도 피처 ────────────────────────────────────────────────────
     design   = AGENT_DESIGN.get(agent, _DEFAULT_DESIGN)
     audience = design["design_audience"]
@@ -386,7 +480,7 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
     feat["design_rank_only"]     = 1.0 if audience == "rank" else 0.0
     feat["design_pro_only"]      = 1.0 if audience == "pro"  else 0.0
 
-    rank_low = rank_pr_ < 3.0
+    rank_low = _rel_meta_ < 0.7
     vct_low  = vct_pr_last_ < 5.0
     is_both  = (audience == "both")
     is_rank  = (audience == "rank")
@@ -409,7 +503,7 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
     feat["has_blind"]        = float(flags["has_blind"])
     feat["high_value_smoke"] = float(flags["high_value_smoke"])
     feat["high_value_cc"]    = float(flags["high_value_cc"])
-    feat["kit_pr_gap"]       = feat["kit_score"] - (rank_pr_ / 5.0)
+    feat["kit_pr_gap"]       = feat["kit_score"] - min(_rel_meta_, 3.0)
     feat["replaceable_low_pr"] = float(design.get("replaceability", 0.5) > 0.6 and rank_low)
     low_value_kit = feat["kit_score"] < 2.3
     feat["low_kit_weak_signal"] = float(low_value_kit and rank_low and vct_low)
@@ -429,12 +523,12 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
 
     # ── 킷 × 픽률 교차 피처 ────────────────────────────────────────────────────
     feat["smoke_vct_dom"]      = float(flags["high_value_smoke"]) * min(vct_pr_last_ / 10.0, 3.0)
-    feat["mobility_rank_dom"]  = float(flags["has_mobility"])     * min(rank_pr_      / 5.0,  3.0)
-    feat["kit_x_rank_pr"]      = round(feat["kit_score"] * min(rank_pr_ / 5.0, 3.0), 3)
-    feat["heal_low_rank"]      = float(flags["has_heal"]     and rank_pr_ < 3.0)
-    feat["revive_low_rank"]    = float(flags["has_revive"]   and rank_pr_ < 3.0)
+    feat["mobility_rank_dom"]  = float(flags["has_mobility"])     * min(_rel_meta_, 3.0)
+    feat["kit_x_rank_pr"]      = round(feat["kit_score"] * min(_rel_meta_, 3.0), 3)
+    feat["heal_low_rank"]      = float(flags["has_heal"]     and _rel_meta_ < 0.7)
+    feat["revive_low_rank"]    = float(flags["has_revive"]   and _rel_meta_ < 0.7)
     feat["info_low_vct"]       = float(flags["has_info"]     and vct_pr_last_ < 5.0 and vct_pr_last_ > 0)
-    feat["cc_low_rank"]        = float(flags["has_cc"]       and rank_pr_ < 2.0)
+    feat["cc_low_rank"]        = float(flags["has_cc"]       and _rel_meta_ < 0.5)
     feat["smoke_low_vct"]      = float(flags["has_smoke"]    and vct_pr_last_ < 3.0)
     feat["rank_dominant_flag"] = feat["design_rank_only"]
 
@@ -446,7 +540,7 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
 
     vct_peak_ = float(feat.get("vct_pr_peak_all", 0) or 0)
     feat["pro_dominant_flag"] = 1.0 if (
-        is_pro or (vct_pr_last_ > 5.0 or vct_peak_ > 20.0) and rank_pr_ < 3.0
+        is_pro or (vct_pr_last_ > 5.0 or vct_peak_ > 20.0) and _rel_meta_ < 0.7
     ) else 0.0
 
     # ── 맵 다양성 피처 ─────────────────────────────────────────────────────────
@@ -458,7 +552,7 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         feat["map_specialist"]    = float(mv.get("map_specialist", 0.0))
         feat["specialist_low_pr"] = float(mv.get("map_specialist", 0.0) == 1.0 and rank_low)
         feat["versatile_nerf_signal"] = round(
-            (1.0 - float(mv.get("map_hhi", 0.3))) * min(rank_pr_ / 5.0, 3.0), 3
+            (1.0 - float(mv.get("map_hhi", 0.3))) * min(_rel_meta_, 3.0), 3
         )
     else:
         feat["map_versatility"]       = 5.0
@@ -498,6 +592,22 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         dir_verdict_code = 0.0
     feat["dir_verdict_code"] = dir_verdict_code
 
+    # ── 현재 승률 × 마지막 패치 방향 복합 신호 ────────────────────────────────
+    # 패치 후 WR 변화는 액트별 노이즈(±0.2%)로 의미 없음.
+    # 대신 "현재 WR 상태" × "마지막 패치 방향" 조합으로 패치 효과를 평가.
+    _cur_wr_vs50 = float(feat.get("rank_wr_vs50", 0) or 0)
+    _WR_WEAK   = -2.0   # 현재 WR 48% 이하 = 약함
+    _WR_STRONG =  2.0   # 현재 WR 52% 이상 = 강함
+
+    # 버프 MISS + 현재 WR도 여전히 약함 → 버프가 픽률도 승률도 못 살린 진짜 실패
+    feat["buff_miss_wr_weak"]   = 1.0 if (d == "buff" and c in miss_types and _cur_wr_vs50 < _WR_WEAK) else 0.0
+    # 너프 MISS + 현재 WR도 여전히 강함 → 너프가 픽률도 승률도 못 잡은 이중 실패
+    feat["nerf_miss_wr_strong"] = 1.0 if (d == "nerf" and c in miss_types and _cur_wr_vs50 > _WR_STRONG) else 0.0
+    # 너프 HIT (PR 반응) + 현재 WR은 여전히 강함 → 조정 너프 가능성 신호
+    feat["nerf_hit_wr_strong"]  = 1.0 if (d == "nerf" and c not in miss_types and _cur_wr_vs50 > _WR_STRONG) else 0.0
+    # 버프 HIT (PR 반응) + 현재 WR은 여전히 약함 → 추가 버프 가능성 신호
+    feat["buff_hit_wr_weak"]    = 1.0 if (d == "buff" and c not in miss_types and _cur_wr_vs50 < _WR_WEAK) else 0.0
+
     wr_vs50 = float(feat.get("rank_wr_vs50", 0) or 0)
     if d == "buff":
         feat["strength_vs_direction"] = wr_vs50
@@ -510,20 +620,55 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
     if role_util_dict is not None:
         ru = role_util_dict.get((act_idx, agent), {})
         feat["role_rank_pr_ratio"] = float(ru.get("role_rank_pr_ratio", 1.0))
+        feat["rank_pr_rel_meta"]   = float(ru.get("rank_pr_rel_meta", 1.0))
+        feat["rank_pr_zscore"]     = float(ru.get("rank_pr_zscore", 0.0))
         for ut in _UTIL_RATIO_TYPES:
             key = f"util_{ut}_rank_pr_ratio"
             val = ru.get(key, np.nan)
             feat[key] = float(val) if val is not None else np.nan
     else:
         feat["role_rank_pr_ratio"] = 1.0
+        feat["rank_pr_rel_meta"]   = 1.0
+        feat["rank_pr_zscore"]     = 0.0
         for ut in _UTIL_RATIO_TYPES:
             feat[f"util_{ut}_rank_pr_ratio"] = np.nan
 
-    # ── 장인 × 다중 신호 교차 피처 (Stage A 전용) ───────────────────────────
-    # skill_ceiling_score가 Stage A 전용이므로 파생 교차 피처도 DROP_COLS_B에 추가
-    sc = float(feat.get("skill_ceiling_score", 0.5) or 0.5)
-    feat["skill_ceiling_x_vct_pr"]  = sc * float(feat.get("vct_pr_last",  0.0)  or 0.0)
-    feat["skill_ceiling_x_vct_wr"]  = sc * (float(feat.get("vct_wr_last", 50.0) or 50.0) - 50.0)
-    feat["skill_ceiling_x_rank_wr"] = sc * float(feat.get("rank_wr_vs50", 0.0)  or 0.0)
+    # ── 장인 × VCT 픽률 교차 피처 (Stage A 전용) ────────────────────────────
+    # 스킬 실링 높은 요원이 대회에서도 많이 픽되면 Riot 너프 반응 포착
+    feat["skill_ceiling_x_vct_pr"] = (
+        float(feat.get("skill_ceiling_score", 0.5) or 0.5)
+        * float(feat.get("vct_pr_last", 0.0) or 0.0)
+    )
+
+    # ── 인기도 프록시 피처 ────────────────────────────────────────────────────
+    # 팬덤/장인 보정: 승률이 낮아도 픽률이 유지되면 성능 외 팬덤이 픽률을 지탱한다는 신호
+    _baseline       = AGENT_PR_BASELINE.get(agent, 5.0)
+    _wr_vs50_pop    = float(feat.get("rank_wr_vs50", 0) or 0)
+    feat["agent_pr_baseline"] = _baseline
+    # 현재 PR vs 역대 평균: 음수면 팬덤도 이탈 중, 양수면 베이스라인 유지 or 강함
+    feat["pr_vs_baseline"]    = rank_pr - _baseline
+    # 팬덤 프리미엄: PR이 베이스라인 대비 얼마나 높은가 - WR 약세가 얼마나 반영됐는가
+    # (baseline 대비 PR 초과 비율) - (WR 약세를 2로 나눈 값)
+    # 양수 크면 → "지면서도 픽됨" = 팬덤 보정
+    _pr_excess_ratio = (rank_pr - _baseline) / max(_baseline, 0.5)
+    feat["pr_wr_gap"]         = _pr_excess_ratio - _wr_vs50_pop / 2.0
+
+    # ── Pre-patch anchor 파생 피처 ───────────────────────────────────────────
+    # 마지막 패치가 픽률에 미친 실질 효과: (현재PR - 패치전PR) / 패치전PR
+    _last_pr_pre_val = float(feat.get("last_pr_pre", 0) or 0)
+    if _last_pr_pre_val > 0.3:
+        feat["pr_effect_ratio"] = (rank_pr - _last_pr_pre_val) / _last_pr_pre_val
+    else:
+        feat["pr_effect_ratio"] = 0.0
+
+    # 과너프 플래그: 너프 방향 + 현재 PR이 패치 전 대비 40% 이상 하락
+    feat["overshoot_flag"] = 1.0 if (
+        d == "nerf" and feat["pr_effect_ratio"] < -0.40
+    ) else 0.0
+
+    # 보정 버프 위험: 과너프 + WR도 약함 → correction_buff 가능성 높음
+    feat["correction_risk_flag"] = 1.0 if (
+        feat["overshoot_flag"] == 1.0 and _wr_vs50_pop < -2.0
+    ) else 0.0
 
     return feat

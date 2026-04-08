@@ -15,6 +15,8 @@ import json
 import os
 warnings.filterwarnings("ignore")
 
+SEED = 42  # --seed 인자로 덮어씀 (main() 진입 후)
+
 from sklearn.preprocessing import OrdinalEncoder, LabelEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import (classification_report, confusion_matrix,
@@ -116,7 +118,7 @@ CAT_COLS = [
 ]
 
 DROP_COLS = [
-    "agent", "act", "act_idx", "label",
+    "agent", "act", "act_idx", "label", "horizon",
     "vct_last_event_name",   # 표시용 문자열, 모델 피처 아님
     "label_direction", "label_skill", "label_trigger", "label_context",
     "label_has_rework", "label_group",
@@ -138,13 +140,25 @@ DROP_COLS = [
     "rank_low_unexpected",                      # rank_pr 실수값으로 흡수됨, SHAP 0.008로 기여 없음
     "map_versatility",                          # 맵 다양성 수치 분산 부족
     "vct_pr_post", "vct_wr_post",               # 표시용 누적 집계, 모델 피처 아님
+    "rank_pr_t+1", "rank_wr_t+1",              # 패치 후 데이터 → 학습 시점에는 미래 데이터 누수
+    "agent_pr_baseline",                        # 요원별 상수 → 모델에 고정값, 기여 없음 (도메인룰 전용)
+    "pr_vs_baseline",                           # = rank_pr - 수동설정 baseline → 우리 사전지식이 학습에 이중 반영, 도메인룰 전용
+    "pr_wr_gap",                                # pr_vs_baseline 기반 파생 → 동일 문제, 도메인룰 전용
+    "rank_pr_rel_meta",                         # SHAP=0, rank_pr과 정보 중복, 타 seed에서 Stage B 성능 저하
+    "rank_pr_zscore",                           # SHAP=0, rank_pr과 정보 중복, 타 seed에서 Stage B 성능 저하
+
     # 이진 임계값 교차 피처: 요원별 상수 → 시간 변동성 없음
     "heal_low_rank", "revive_low_rank",
     "cc_low_rank", "info_low_vct",
     "smoke_vct_dom", "smoke_low_vct",
     # design 분류 플래그: 모델 기여 0, 도메인 룰도 함께 완화
     "design_rank_only", "design_pro_only",
+
+    # ── 기타 SHAP=0 (양 Stage 공통 확인된 것만) ─────────────────────────────
+    "util_blind_rank_pr_ratio",  # 결측 91% → 사실상 무의미
 ]
+
+DROP_COLS_A = []  # Stage A 전용 추가 제거 (현재 없음 — 피처 제거 실험 결과 원본 대비 성능 저하 확인)
 
 # Stage B 추가 제거 피처 (패치 유형 분류에 노이즈)
 DROP_COLS_B = [
@@ -152,11 +166,9 @@ DROP_COLS_B = [
     "acts_since_patch",       # 패치 압박 누적 타이밍 신호 → 유형과 무관
     "patch_streak_n",         # 연속 패치 횟수 → 패치 여부(Stage A) 신호
     "patch_streak_direction", # 방향 스트릭 → CAT 피처지만 유형 예측엔 노이즈
-    "both_weak_signal",       # 버프 후보 이진 플래그 → Stage A 전용
+    "both_weak_signal",       # 버프 후보 이진 플래그 → Stage A 전용 (B에서 LOAO-CV 저하 확인)
     "skill_ceiling_score",       # 패치 가능성 신호 → Stage A 전용
     "skill_ceiling_x_vct_pr",   # skill_ceiling 파생 교차 피처 → Stage A 전용
-    "skill_ceiling_x_vct_wr",
-    "skill_ceiling_x_rank_wr",
     "kit_x_rank_pr",          # 킷 × 픽률 교차 → 패치 여부 신호, 유형 불필요
     "map_hhi",                # 맵 편중도 → 패치 타이밍 신호, 유형과 무관
 ]
@@ -197,7 +209,7 @@ def run_hpo(X, y, act_idx_arr, n_trials=60, noise_w=None):
             objective        = "binary:logistic" if n_cls == 2 else "multi:softmax",
             num_class        = n_cls if n_cls > 2 else None,
             eval_metric      = "logloss" if n_cls == 2 else "mlogloss",
-            random_state     = 42, verbosity = 0,
+            random_state     = SEED, verbosity = 0,
         )
         if params["num_class"] is None:
             del params["num_class"]
@@ -233,7 +245,7 @@ def run_hpo(X, y, act_idx_arr, n_trials=60, noise_w=None):
         return np.mean(scores) if scores else 0.0
 
     study = optuna.create_study(direction="maximize",
-                                sampler=optuna.samplers.TPESampler(seed=42))
+                                sampler=optuna.samplers.TPESampler(seed=SEED))
     study.optimize(objective, n_trials=n_trials, show_progress_bar=False)
     return study.best_params, study.best_value
 
@@ -245,7 +257,7 @@ def train_eval(X, y, labels, best_params, stage_name, act_idx_arr, noise_w=None)
         objective    = "binary:logistic" if n_cls == 2 else "multi:softmax",
         num_class    = n_cls if n_cls > 2 else None,
         eval_metric  = "logloss" if n_cls == 2 else "mlogloss",
-        random_state = 42, verbosity = 0,
+        random_state = SEED, verbosity = 0,
     )
     if params["num_class"] is None:
         del params["num_class"]
@@ -333,7 +345,7 @@ def train_eval_lr(X, y, labels, stage_name, act_idx_arr, noise_w=None):
                 ("scaler", StandardScaler()),
                 ("lr", LogisticRegression(C=C, class_weight="balanced",
                                           max_iter=2000, solver="saga",
-                                          random_state=42)),
+                                          random_state=SEED)),
             ])
             pipe.fit(X[tr], y[tr], lr__sample_weight=sw[tr])
             preds = pipe.predict(X[val])
@@ -349,7 +361,7 @@ def train_eval_lr(X, y, labels, stage_name, act_idx_arr, noise_w=None):
             ("scaler", StandardScaler()),
             ("lr", LogisticRegression(C=best_C, class_weight="balanced",
                                       max_iter=2000, solver="saga",
-                                      random_state=42)),
+                                      random_state=SEED)),
         ])
         pipe.fit(X[tr], y[tr], lr__sample_weight=sw[tr])
         for vi, pred in zip(val, pipe.predict(X[val])):
@@ -371,7 +383,7 @@ def train_eval_lr(X, y, labels, stage_name, act_idx_arr, noise_w=None):
         ("scaler", StandardScaler()),
         ("lr", LogisticRegression(C=best_C, class_weight="balanced",
                                   max_iter=2000, solver="saga",
-                                  random_state=42)),
+                                  random_state=SEED)),
     ])
     final.fit(X, y, lr__sample_weight=sw)
     return final, oof, ba
@@ -425,7 +437,7 @@ def loao_cv(df, feat_cols, stable_types, stage="A"):
             subsample=0.8, colsample_bytree=0.8,
             objective="binary:logistic" if n_cls == 2 else "multi:softmax",
             eval_metric="logloss" if n_cls == 2 else "mlogloss",
-            random_state=42, verbosity=0,
+            random_state=SEED, verbosity=0,
         )
         if n_cls > 2:
             params["num_class"] = n_cls
@@ -480,12 +492,17 @@ def shap_top(model, X, feat_cols, title, n=15, save_path=None):
 PARAMS_FILE = "best_params.json"
 
 def main():
+    global SEED
     parser = argparse.ArgumentParser()
     parser.add_argument("--fast", action="store_true",
                         help="HPO 없이 저장된 파라미터로 CV만 실행 (피처 실험용)")
     parser.add_argument("--hpo", action="store_true",
                         help="강제로 HPO 재실행 후 파라미터 저장")
+    parser.add_argument("--seed", type=int, default=42,
+                        help="글로벌 랜덤 시드 (기본 42)")
     args = parser.parse_args()
+    SEED = args.seed
+    np.random.seed(SEED)
 
     print("=" * 65)
     if args.fast:
@@ -495,11 +512,23 @@ def main():
     print("=" * 65 + "\n")
 
     raw_csv = pd.read_csv("step2_training_data.csv")
-    df, feat_cols_a = prepare(raw_csv)
-    _, feat_cols_b  = prepare(raw_csv, drop_extra=DROP_COLS_B)
+
+    # 현재 진행 중인 최신 액트는 학습 제외: 미래 레이블 미확정 → 모두 stable로 찍혀 노이즈
+    EXCLUDE_TRAIN_ACTS = {"V26A2"}
+    train_raw = raw_csv[~raw_csv["act"].isin(EXCLUDE_TRAIN_ACTS)].copy()
+    n_excl = len(raw_csv) - len(train_raw)
+    if n_excl > 0:
+        print(f"  [{'+'.join(EXCLUDE_TRAIN_ACTS)} 제외] {n_excl}행 학습 제외 (현재 액트, 레이블 미확정)")
+
+    # Stage A: horizon=1만 (단기 판정 유지, horizon=2,3 혼재 시 레이블 노이즈)
+    train_a = train_raw[train_raw.get("horizon", pd.Series(1, index=train_raw.index)) == 1] \
+        if "horizon" in train_raw.columns else train_raw
+    print(f"  Stage A 학습 행: {len(train_a)} (horizon=1만)")
+
+    df, feat_cols_a = prepare(train_a, drop_extra=DROP_COLS_A)
+    _, feat_cols_b  = prepare(train_raw, drop_extra=DROP_COLS_B)
 
     # B안: stable_strong / stable_weak 학습 제외
-    # "패치 기록 없음 + 수치 극단" 케이스는 노이즈 (같은 feature에 다른 레이블 유발)
     noise_labels = {"stable_strong", "stable_weak"}
     n_before = len(df)
     df = df[~df["label_collapsed"].isin(noise_labels)].reset_index(drop=True)
@@ -581,14 +610,21 @@ def main():
     print("Stage B: patched 유형 분류")
     print("-"*50)
 
-    patched_df   = df[~df["label_collapsed"].isin(stable_types)].copy()
+    # Stage B: horizon=1,2,3 모두 활용 (nerf/buff 방향 데이터 최대화)
+    raw_b        = raw_csv[~raw_csv["act"].isin(EXCLUDE_TRAIN_ACTS)].copy()
+    df_b_full, _ = prepare(raw_b, drop_extra=DROP_COLS_B)
+    df_b_full    = df_b_full[~df_b_full["label_collapsed"].isin(noise_labels)].reset_index(drop=True)
+    patched_df   = df_b_full[~df_b_full["label_collapsed"].isin(stable_types)].copy()
+
     X_b          = patched_df[feat_cols_b].values.astype(np.float32)
     act_idx_b    = patched_df["act_idx"].values
     label_b_cats = sorted(patched_df["label_collapsed"].unique())
     label_b_enc  = {l: i for i, l in enumerate(label_b_cats)}
     yb           = patched_df["label_collapsed"].map(label_b_enc).values
 
-    print(f"  케이스: {len(patched_df)}  /  클래스: {len(label_b_cats)}")
+    h1 = (df_b_full["horizon"] == 1).sum() if "horizon" in df_b_full.columns else len(df_b_full)
+    h23 = len(df_b_full) - h1
+    print(f"  케이스: {len(patched_df)} (horizon=1: {h1}행 중 patched + horizon=2,3: {h23}행)  /  클래스: {len(label_b_cats)}")
     print(f"  클래스: {label_b_cats}")
 
     small = [l for l in label_b_cats if (patched_df["label_collapsed"] == l).sum() < 4]
@@ -633,7 +669,10 @@ def main():
     print("현재 시점 예측 (최신 액트 기준)")
     print("-"*50)
 
-    latest = df.loc[df.groupby("agent")["act_idx"].idxmax()].copy()
+    # 예측 미리보기: 제외된 최신 액트 포함한 전체 데이터 사용
+    df_all, _ = prepare(raw_csv, drop_extra=DROP_COLS_A)
+    df_all    = df_all[~df_all["label_collapsed"].isin(noise_labels)].reset_index(drop=True)
+    latest = df_all.loc[df_all.groupby("agent")["act_idx"].idxmax()].copy()
     X_now_a = latest[feat_cols_a].values.astype(np.float32)
     X_now_b = latest[feat_cols_b].values.astype(np.float32)
 

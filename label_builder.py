@@ -47,14 +47,45 @@ def dominant_trigger(patch_rows):
 
 def classify_stable_state(feat):
     """
-    패치 없는 stable 케이스를 수치 기준으로 세분화
-    → 모델이 "강한데 안 패치됨" / "약한데 안 패치됨"을 노이즈로 학습하지 않도록
+    패치 없는 행에 대한 레이블 결정.
+
+    핵심 원칙: 매 액트마다 현재 수치만으로 재판정.
+    acts_since / last_direction 같은 이력 조건 없음.
+    액트 = ~2개월 단위이므로 매 액트 독립 판정이 가장 단순하고 정확함.
+
+      nerf_followup  ← 랭크 or VCT 수치가 너프 기준 초과 상태인데 패치 없음
+      buff_followup  ← 랭크 수치가 버프 기준 미달 상태인데 패치 없음
+      stable_*       ← 수치가 임계치 안에 있어서 조정 불필요
     """
-    rank_pr      = float(feat.get("rank_pr", 0) or 0)
-    vct_pr       = float(feat.get("vct_pr_last", 0) or 0)
+    rank_pr      = float(feat.get("rank_pr", 0) or 0)      # slots 단위 (×5 = %)
+    vct_pr       = float(feat.get("vct_pr_last", 0) or 0)  # % 단위
     rank_wr_vs50 = float(feat.get("rank_wr_vs50", 0) or 0)
     vct_profile  = feat.get("vct_profile", "")
+    map_hhi      = float(feat.get("map_hhi", 0.3) or 0.3)
 
+    rank_pr_pct = rank_pr * 5  # % 단위로 변환
+
+    # ── 1) 너프 기준 ──────────────────────────────────────────────────────────
+    # 신호 A — 랭크 지배: 픽률 높고 AND 승률 평균 이상
+    nerf_rank = rank_pr_pct >= 20.0 and rank_wr_vs50 >= 0.0
+    # 신호 B — 승률 극단: 픽률 무관하게 승률이 비정상적으로 높음
+    nerf_wr   = rank_wr_vs50 >= 2.5
+    # 신호 C — VCT 지배 + 맵 비종속: pro_dom 패턴 (맵 로테 영향 없는 요원)
+    nerf_vct  = vct_pr >= 40.0 and map_hhi <= 0.15 and rank_wr_vs50 >= -1.0
+    if nerf_rank or nerf_wr or nerf_vct:
+        return "nerf_followup"
+
+    # ── 2) 버프 기준 ──────────────────────────────────────────────────────────
+    # 신호 A — 랭크 부진: 픽률 낮고 AND 승률도 낮음
+    buff_rank = rank_pr_pct <= 12.0 and rank_wr_vs50 <= -1.5
+    # 신호 B — 승률 극단: 픽률 무관하게 승률이 비정상적으로 낮음
+    buff_wr   = rank_wr_vs50 <= -4.0
+    # 신호 C — 존재감 없음: 픽률이 사실상 0에 가까움
+    buff_pr   = rank_pr_pct <= 5.0
+    if buff_rank or buff_wr or buff_pr:
+        return "buff_followup"
+
+    # ── 3) stable 세분화 ──────────────────────────────────────────────────────
     if rank_pr > 12 or vct_pr > 35 or rank_wr_vs50 > 3.0:
         return "stable_strong"
 

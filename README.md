@@ -23,13 +23,14 @@
 
 | 출처 | 데이터 종류 | 구간 |
 |---|---|---|
-| vstats.gg | 액트별 픽률·승률·매치 수 (전 지역 합산) | E6A3~ |
-| maxmunzy/valorant-agent-stats | 다이아+ 픽률·승률·KD (티어별) | E2A1~E8A2 |
+| vstats.gg | 액트별 픽률·승률·매치 수 (다이아+, 전 지역 합산) | E6A3~ |
+| maxmunzy/valorant-agent-stats | 다이아+ 픽률·승률·KD | E2A1~E9A3 |
 | vlr.gg | VCT 대회별 픽률·승률 | E6A3~ |
 | playvalorant.com | 공식 패치 노트 | E2A1~ |
 
-- **티어 기준**: 다이아몬드+ (그 이하는 메타 이해도보다 선호도 픽이 많아 노이즈 큼)
+- **티어 기준**: 다이아몬드+ (그 이하는 메타 이해도보다 선호도 픽이 많아 노이즈 큼). vstats.gg와 maxmunzy 둘 다 동일 기준
 - **서버**: 전 지역 합산 (발로란트는 전 서버 동시 패치, 요원 풀이 작아 지역 편차 제한적)
+- **데이터 병합**: vstats.gg 우선, 빈 구간(E2A1~E6A2)은 maxmunzy 보완
 
 ---
 
@@ -39,9 +40,10 @@
 
 > "이 요원이 이번 액트에 패치를 받을까?"
 
-- **입력**: 72개 피처 (랭크/VCT 픽률·승률 추세, 패치 이력, 요원 설계 특성, 역할군·유틸 상대 픽률)
+- **입력**: 피처 (랭크/VCT 픽률·승률 추세, 패치 이력, 요원 설계 특성, 역할군·유틸 상대 픽률, 맵 다양성)
 - **출력**: `stable` / `patched` 확률
-- **임계값**: 0.35 (패치 누락보다 과감지를 허용)
+- **임계값**: 0.28
+- **학습 데이터**: horizon=1 행만 (단기 판정 일관성 유지)
 
 ### Stage B — 패치 유형 분류 (5분류)
 
@@ -49,6 +51,7 @@
 
 - **입력**: Stage B 전용 피처 (patched 케이스만, 타이밍 노이즈 피처 제거)
 - **출력**: 아래 5개 클래스
+- **학습 데이터**: horizon=1,2,3 전부 (방향 데이터 최대화)
 
 | 클래스 | 설명 |
 |---|---|
@@ -60,107 +63,99 @@
 
 ---
 
-## 피처 설계 원칙
+## 레이블 생성 전략 (`classify_stable_state`)
 
-1. **시계열 정보 우선**: 단발 수치보다 slope, avg3, vs_peak 등 추세 피처가 더 중요
-2. **정적 플래그 단독 사용 금지**: `has_smoke=1` 같은 요원별 상수는 시간 변동이 없어 SHAP=0. `kit_x_rank_pr`처럼 픽률 흐름과 교차해야 신호가 됨
-3. **요원 정체성 직접 인코딩 금지**: 요원 ID 대신 역할 특성(team_synergy, replaceability 등)으로 일반화
-4. **고정 분류 지양**: "이 요원은 랭크 전용" 같은 고정 분류는 메타 변화에 대응 불가 → DROP. 레이블 생성에만 활용
-5. **시계열 누출 방지**: Walk-forward temporal split, KFold shuffle 사용 안 함
+> 매 액트마다 현재 수치만으로 독립 판정. acts_since/last_direction 같은 이력 조건 없음.
+> 액트 = 약 2개월 단위이므로 매 액트 독립 재판정이 적합.
+
+### nerf_followup 조건 (OR)
+
+| 신호 | 조건 | 설명 |
+|---|---|---|
+| 랭크 지배 | `rank_pr_pct >= 20% AND rank_wr_vs50 >= 0%` | 픽률 높고 승률 평균 이상 |
+| 승률 극단 | `rank_wr_vs50 >= 2.5%` | 픽률 무관 비정상 고승률 |
+| VCT 지배 + 맵 비종속 | `vct_pr >= 40% AND map_hhi <= 0.15 AND rank_wr_vs50 >= -1%` | pro_dom 패턴 포착 (체임버·스카이·바이퍼형) |
+
+`map_hhi <= 0.15` 조건: 맵 로테이션과 무관하게 모든 맵에서 고르게 나오는 요원만 적용.
+맵 특화 요원(바이퍼 현재 map_hhi=0.46)은 VCT 픽률이 높아도 맵 로테 효과로 처리.
+
+### buff_followup 조건 (OR)
+
+| 신호 | 조건 | 설명 |
+|---|---|---|
+| 랭크 부진 | `rank_pr_pct <= 12% AND rank_wr_vs50 <= -1.5%` | 픽률·승률 동시 낮음 |
+| 승률 극단 | `rank_wr_vs50 <= -4%` | 픽률 무관 비정상 저승률 |
+| 존재감 없음 | `rank_pr_pct <= 5%` | 사실상 픽 없음 |
+
+### 버그픽스 패치 처리
+
+nerf/buff 없는 패치(버그픽스, 수치 오기정 등)는 `stable` 고정이 아닌 **수치 기반 재판정**.
+패치 전후 수치가 같으면 레이블도 같아 모델 학습 노이즈 없음.
 
 ---
 
-## 주요 피처 (SHAP 평균 중요도 상위)
+## 멀티 호라이즌 (Stage B 데이터 확장)
 
-| 피처 | 설명 |
-|---|---|
-| `vct_pr_last` | 최근 VCT 픽률. 대회 메타 반영 핵심 신호 |
-| `vct_data_lag` | VCT 데이터 지연 액트 수. 데이터 신선도 보정 |
-| `map_hhi` | 맵 편중도. 높을수록 특정 맵 전문가 → 픽률 왜곡 가능 |
-| `acts_since_patch` | 마지막 패치 후 경과 액트. 오래될수록 패치 압박 누적 |
-| `pro_rank_ratio` | VCT 픽률 / 랭크 픽률. 프로 편향 요원 판별 |
-| `strength_vs_direction` | 현재 강도 vs 마지막 패치 방향 일치도 |
-| `kit_x_rank_pr` | 킷 등급 × 랭크 픽률 교차 피처 |
-| `util_cc_rank_pr_ratio` | CC 보유 요원 내 랭크 픽률 상대 비율 (역할 경쟁 포착) |
-| `role_rank_pr_ratio` | 같은 역할군 내 랭크 픽률 상대 비율 |
-| `n_rank_acts` | 유효 랭크 데이터 액트 수 (신규 요원 신뢰도 보정) |
+| horizon | 사용 Stage | 설명 |
+|---|---|---|
+| 1 | A + B | 현재 액트 → 다음 1액트 후 패치 (기본) |
+| 2 | B만 | 현재 액트 피처 → 2액트 후 실제 패치 방향 |
+| 3 | B만 | 현재 액트 피처 → 3액트 후 실제 패치 방향 |
 
-자세한 피처 설명: [`feature_and_training_strategy.md`](feature_and_training_strategy.md)
+- Stage A는 horizon=1만 사용 (단기 판정 일관성 유지)
+- Stage B는 전체 horizon 활용 → 655행 (이전 403행 대비 +63%)
+- 지연 패치 케이스(라이엇이 2~3액트 후에 조정) 학습 가능
 
 ---
 
 ## 도메인 규칙 레이어
 
-ML 모델 출력 위에 하드 룰로 보정:
+모델 출력 후 최소한의 하드 룰만 적용:
 
 | 규칙 | 조건 | 효과 |
 |---|---|---|
-| -1 | 패치 이력 없음 + 랭크 데이터 8액트 미만 | p_patch × (n_rank_acts / 16) 억제 — 신규 요원 오분류 방지 |
-| 0 | 이번 액트 최근 패치 | 같은 방향 추가 패치 확률 억제 |
-| 1 | 버프 후 MISS인데 nerf 예측 | buff 방향으로 재가중 |
-| 2 | 너프 후 MISS인데 buff 예측 | nerf 방향으로 재가중 |
-| 4 | 양쪽 도메인 모두 저픽 + 버프 방향 | p_patch 상향 |
-| 5 | 실력 천장 높음 + VCT 픽률 6%+ | p_nerf × 1.25 |
-| 6 | VCT 승률 65%+ + VCT 픽률 5%+ | p_nerf × 2.5 |
+| acts_since=0 억제 | 이번 액트에 방금 패치됨 | p_patch × 0.15 |
+
+이전에 있던 신규 요원 억제, 저픽 연속 억제, 스킬 천장 보정, VCT 승률 보정 등 모두 제거.
+SHAP=0 규칙은 모델이 해당 신호를 피처에서 이미 학습하므로 불필요.
 
 ---
 
-## 검증 결과 (2026-04-06 기준)
+## 검증 결과 (2026-04-08 기준)
 
 | 검증 방식 | Stage A | Stage B |
 |---|---|---|
-| Temporal OOF balanced accuracy | 0.5705 | 0.5258 |
-| Leave-One-Agent-Out 평균 BA | 0.656 | 0.483 |
+| Temporal OOF balanced accuracy | **0.8577** | **0.5468** |
+| Leave-One-Agent-Out 평균 BA | **0.836** | **0.436** |
 
-- 학습 데이터: 688행 / 29요원 (stable_strong/weak 제외 후 538행 사용)
-- stable_strong/weak 제외 효과: Stage A +0.08, Stage B +0.01
-- LOAO Stage A 평균 0.656 — 신규 요원(Veto, Miks) 데이터 부족으로 일부 편차 있음
-- VCT 데이터 누적 시 자연스럽게 개선 예정
+- Stage A 학습: 596행 (horizon=1) / Stage B 학습: 655행 (horizon=1,2,3)
+- 전체 데이터: 939행 / 29요원 / E2A1 ~ V26A2
+- stable:patched 비율 55:45 (이전 73:27 대비 균형 개선)
+
+### BA 분해 (Stage A)
+| 그룹 | 행 수 | BA |
+|---|---|---|
+| 수치기반 레이블 (classify_stable_state) | 470 | 0.905 |
+| 실제 라이엇 패치 | 149 | **0.852** |
 
 ---
 
 ## 현재 예측 결과 (V26A2 기준, 주요 케이스)
 
-| 요원 | p_patch | 예측 유형 | 최종 예측 |
-|---|---|---|---|
-| 오멘 (V25A6) | 93.9% | nerf_rank | nerf_rank |
-| 클로브 | 85.8% | nerf_rank | nerf_rank |
-| 바이퍼 | 62.3% | nerf_followup | nerf_followup |
-| 스카이 | 71.9% | nerf_followup | nerf_followup |
-| 레이즈 | 24.5% | buff_rank | stable |
-
----
-
-## 주요 케이스
-
-### 네온 — 너프 예상 (V26A1 이후 억제 중)
-
-- 2025~2026 시즌 VCT 필수픽, 마스터즈 산티아고까지 픽률 30%+
-- acts_since=1 + VCT 극단 수치(>50%)로 경계 상태 유지
-
-### 비토 / 믹스 — 신규 요원 처리
-
-- 비토: 랭크 데이터 15액트, 패치 이력 없음 → p_patch 31.9% → stable
-- 믹스: 랭크 데이터 4액트, VCT 2픽(CN) → 도메인 규칙 -1 적용, p_patch 12.1% → stable
-
----
-
-## 너프 트리거 유형
-
-| 유형 | 설명 |
-|---|---|
-| `rank_stat` | 랭크 픽률·승률 초과 |
-| `pro_dominance` | VCT 필수픽화 |
-| `role_invasion` | 타 포지션 입지 잠식 |
-| `map_anchor` | 특정 맵 고착 |
-| `skill_ceiling` | 고숙련 천장 과도 |
+| 요원 | 예측 | 근거 |
+|---|---|---|
+| 네온 | nerf_followup | VCT 77%, map_hhi 0.006 (맵 비종속 pro_dom) |
+| 소바 | nerf_followup | 랭크 픽률 32.4%, 승률 +0.45% |
+| 스카이 | nerf_followup | VCT 39.5%, map_hhi 0.053 (최근 버프 후 상승 중) |
+| 페이드 | nerf_followup | 랭크 픽률 25.6%, VCT 29.8% |
+| 요루 | buff_followup | 랭크 픽률 3.3% |
 
 ---
 
 ## 실행 방법
 
 ```bash
-# 데이터 빌드
+# 데이터 빌드 (horizon=1,2,3 포함)
 python build_step2_data.py
 
 # 모델 학습 (full HPO)
@@ -185,6 +180,7 @@ python train_step2.py --hpo
 | 머신러닝 | XGBoost, scikit-learn (LogisticRegression, SimpleImputer) |
 | HPO | Optuna (TPE Sampler) |
 | 피처 중요도 | SHAP |
+| AI 분석 텍스트 | Claude Haiku (claude-haiku-4-5-20251001) |
 | 프론트엔드 | Next.js, Tailwind CSS |
 
 ---
