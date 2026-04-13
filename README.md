@@ -1,5 +1,7 @@
 # Valorant Patch Verdict
 
+[한국어 README](README_KR.md)
+
 ## Overview
 
 > **Predict who gets patched next, and simulate how any patch changes the meta.**
