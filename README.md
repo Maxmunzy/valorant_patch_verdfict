@@ -230,6 +230,9 @@ python main.py
 - `agent_skills.json`: 29 agents, 851 stats (initial values per skill)
 - `patch_history.json`: all stat changes since E2A1, current values computed
 
+### Ongoing — Patch Prediction Accuracy
+The core of this project. Stage A (patch or not) BA is 0.66, Stage B (direction) BA is 0.78. Stage A has the most room for improvement. Accuracy naturally improves as more acts of data accumulate, but active feature experiments and labeling refinements continue.
+
 ### Phase 2 — Patch Impact Model (Next)
 - Regression model: given a patch (skill, change type, magnitude), predict pick/win rate delta
 - 136 real patch cases as training data
