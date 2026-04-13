@@ -1,0 +1,575 @@
+{
+  "agent": "Tejo",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 16,
+    "balance_patches": 5,
+    "numeric_changes": 7,
+    "all_changes": 12
+  },
+  "current_stats": {
+    "C": {
+      "name": "Stealth Drone",
+      "creds": 400,
+      "charges": 1,
+      "function": "[[Intel#Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy length": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Deploy time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Vision radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Vision cone angle": {
+          "value": 60.0,
+          "unit": "°",
+          "raw": "60°<br>(either side of the direction Stealth Drone is looking in)"
+        },
+        "Detection radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Re-stealth timer": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        },
+        "Windup time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Detonation radius": {
+          "value": 16.0,
+          "unit": "meters",
+          "raw": "16 meters"
+        },
+        "Pulse velocity": {
+          "value": 16.0,
+          "unit": "meters over 0.7 seconds",
+          "raw": "16 meters over 0.7 seconds"
+        },
+        "Suppress duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Special Delivery",
+      "creds": 200,
+      "charges": 1,
+      "function": "[[Crowd Control#Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Max projectile duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "Radii": {
+          "value": 1.25,
+          "unit": "meters",
+          "raw": "1.25 meters (Inner)<br>5.25 meters (Outer)"
+        },
+        "Windup time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Damage<br>": {
+          "value": 20.0,
+          "unit": "-35",
+          "raw": "20-35"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Guided Salvo",
+      "creds": 150,
+      "charges": 2,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max deploy distance": {
+          "value": 45.0,
+          "unit": "meters",
+          "raw": "45 meters"
+        },
+        "Unequip time": {
+          "value": 0.92,
+          "unit": "seconds",
+          "raw": "0.92 seconds"
+        },
+        "Flight altitude": {
+          "value": 2.0,
+          "unit": "meters",
+          "raw": "2 meters"
+        },
+        "Radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Inner: 2.5 meters<br>Outer: 4.5 meters"
+        },
+        "Windup time": {
+          "value": 1.25,
+          "unit": "seconds",
+          "raw": "1.25 seconds"
+        },
+        "Damage": {
+          "value": null,
+          "unit": "",
+          "raw": "Inner radius: 65 per tick<br>Outer radius: 50 per tick<br>Total 195/150 damage<br>x0.5 multiplier to objects"
+        },
+        "Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 0.8 secondsTotal 3 ticks",
+          "raw": "1 every 0.8 seconds<br>Total 3 ticks"
+        }
+      }
+    },
+    "X": {
+      "name": "Armageddon",
+      "creds": null,
+      "charges": null,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max deploy distance": {
+          "value": 52.5,
+          "unit": "meters",
+          "raw": "52.5 meters"
+        },
+        "rowspan=3|Windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 3.08 seconds</u>"
+        },
+        "0.33-second activation delay": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "2.75-second windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Area size": {
+          "value": 12.0,
+          "unit": "-meter width2-meter length per segment16 segments, 32-meter total length",
+          "raw": "12-meter width<br>2-meter length per segment<br>16 segments, 32-meter total length"
+        },
+        "Damage": {
+          "value": 60.0,
+          "unit": "per tick",
+          "raw": "60 per tick"
+        },
+        "rowspan=2|Detonation Ticks/Tick Rate per segment": {
+          "value": 1.0,
+          "unit": "every 0.25 seconds",
+          "raw": "1 every 0.25 seconds"
+        },
+        "Total 4 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>In-game"
+        },
+        "Delay between successive segment detonations": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.05",
+      "raw": "Hotfix] Guided Salvo Fixed an exploit that allowed him to send 3 missiles instead of the standard 2. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Special Delivery Concuss duration decreased from 4 seconds >>> 2.5 seconds Added damage on the explosion: Maximum damage of 35 at center, with minimum damage of 20 Stealth Drone Reveal type has been changed from Snapshot reveal to being fully Revealed Pulse radius decreased from 30m >>> 16m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Special Delivery Concuss duration decreased from",
+          "stat": "duration",
+          "before": 4.0,
+          "before_unit": "seconds",
+          "after": 2.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "changed from Snapshot reveal to being fully Revealed Pulse radius decreased from",
+          "stat": "range",
+          "before": 30.0,
+          "before_unit": "m",
+          "after": 16.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Special Delivery Concuss duration decreased from",
+          "stat": "duration",
+          "before": 4.0,
+          "before_unit": "seconds",
+          "after": 2.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "changed from Snapshot reveal to being fully Revealed Pulse radius decreased from",
+          "stat": "range",
+          "before": 30.0,
+          "before_unit": "m",
+          "after": 16.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added damage on the explosion: Maximum damage of 35 at center, with minimum damage of 20 Stealth Dro",
+          "stat": "effect",
+          "description": "Added damage on the explosion: Maximum damage of 35 at center, with minimum damage of 20 Stealth Dro",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.11",
+      "raw": "Stealth Drone Fixed a bug where it could push players and give them a speed boost Undocumented Team Deathmatch only: Armageddon Cost increased 80 >>> 90 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": " them a speed boost Undocumented Team Deathmatch only: Armageddon Cost increased",
+          "stat": "cost",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 90.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": " them a speed boost Undocumented Team Deathmatch only: Armageddon Cost increased",
+          "stat": "cost",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 90.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.04",
+      "raw": "Fixed a bug where the wrong voiceline played during round-start when Phoenix & Tejo are both present. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.11",
+      "raw": "Guided Salvo and Armageddon Removed area names due to it being too large on ability maps and overlapping due to decreased cast range v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Removed area names due to it being too large on ability maps and overlapping due to decreased cast r",
+          "stat": "effect",
+          "description": "Removed area names due to it being too large on ability maps and overlapping due to decreased cast r",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.10",
+      "raw": "Stealth Drone Fixed an issue where Astra’s concuss always affected the drone as long as the drone had line of sight to the concuss Guided Salvo Fixed an issue where the rockets could get hindered by Waylay’s Saturate and Convergent Paths Armageddon (changed in v10.09) Swiftplay only: Starting points 2 >>> 3 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": " Convergent Paths Armageddon (changed in v10.09) Swiftplay only: Starting points",
+          "stat": "ult_cost",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": " Convergent Paths Armageddon (changed in v10.09) Swiftplay only: Starting points",
+          "stat": "ult_cost",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.09",
+      "raw": "Guided Salvo Cost: 150. Now has 2 charges. Grants a free charge on round start. Each individual rocket used will consume 1 charge. The cooldown has been removed. Map Targeting Range decreased from 55m to 45m. Stealth Drone Cost: 300 >>> 400 Special Delivery Cost: 300 >>> 200 Armageddon Ult points increased from 8 to 9 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": " been removed. Map Targeting Range decreased from 55m to 45m. Stealth Drone Cost",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Special Delivery Cost",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": " been removed. Map Targeting Range decreased from 55m to 45m. Stealth Drone Cost",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Special Delivery Cost",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Now has 2 charges",
+          "stat": "effect",
+          "description": "Now has 2 charges",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Grants a free charge on round start",
+          "stat": "effect",
+          "description": "Grants a free charge on round start",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.08",
+      "raw": "Stealth Drone Fixed an issue where players could boost on Tejo’s Stealth Drone. Fixed an issue where Stealth Drone could not be tagged by Cypher’s camera. Armageddon Fixed an issue where Armageddon VFX may remain after being used. Fixed an issue where there was no danger indicator for players running through Armeggadon from the back side. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "Armageddon Fixed an issue where Armageddon’s floor indicator persisted across rounds. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.06",
+      "raw": "Stealth Drone Fixed a bug where Stealth Drone was not unstealthing upon jumping up prior to its scan. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.05",
+      "raw": "Armageddon Fixed a bug where Armageddon’s danger indicator did not always apply on variable elevations v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.04",
+      "raw": "Guided Salvo Max damage decreased from 70 >>> 65 Minimum damage remains unchanged Now does 50% damage to non-player objects. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Guided Salvo Max damage decreased from",
+          "stat": "damage",
+          "before": 70.0,
+          "before_unit": "",
+          "after": 65.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Guided Salvo Max damage decreased from",
+          "stat": "damage",
+          "before": 70.0,
+          "before_unit": "",
+          "after": 65.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.02",
+      "raw": "Armageddon Fixed an issue where players could rarely survive running straight through the full duration of Armageddon v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.01",
+      "raw": "Stealth Drone Fixed an issue where Stealth Drone affected by Nearsight could see Enemy Players’ model outline at certain distances. Fixed an issue where Stealth Drone is slowed outside the AOE of Sage’s Slow Orb. Guided Salvo Fixed an issue where Guided Salvo projectile would get stuck inside the wall when cast towards a path blocked by Sage’s Barrier Orb. Fixed an issue where Guided Salvo missile visuals are set to draw as a Cylinder instead of Sphere, showing an incorrect damage zone. Fixed an issue where Guided Salvo loses functionality and appears as stuck if he cast it while being outside of the map. Fixed an issue where Guided Salvo damages players on elevation without showing a warning indicator. Armageddon Fixed an issue where players who exited then re-entered Tejo’s Armageddon bl",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.00",
+      "raw": "Added PC-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added PC-only[] v",
+          "stat": "effect",
+          "description": "Added PC-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.02",
+      "raw": "Stealth Drone Fixed a bug where it could ride on various projectiles. Armageddon Fixed a bug for Coaches and Observers where its targeting cursor could go outside of the ability map UI. Fixed a bug for Coaches and Observers where Agents with an ability map UI would repeatedly play their equip animation when switching to their POV. Guided Salvo Fixed a bug for Coaches and Observers where Agents with an ability map UI would repeatedly play their equip animation when switching to their POV. Spotify Playlist[] Trivia[] Development[] Relations[]",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

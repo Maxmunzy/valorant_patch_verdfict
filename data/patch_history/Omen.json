@@ -1,0 +1,964 @@
+{
+  "agent": "Omen",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 39,
+    "balance_patches": 20,
+    "numeric_changes": 15,
+    "all_changes": 31
+  },
+  "current_stats": {
+    "C": {
+      "name": "Shrouded Step",
+      "creds": 100,
+      "charges": 2,
+      "function": "[[Mobility#Teleport",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max cast distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "rowspan=\"3\"|Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total duration: 1.2 seconds</u>"
+        },
+        "0.7-second windup": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|4.04}}"
+        },
+        "0.5-second arrival at target location": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Arrival audio cue radius": {
+          "value": 12.5,
+          "unit": "meters",
+          "raw": "12.5 meters"
+        }
+      }
+    },
+    "Q": {
+      "name": "Paranoia",
+      "creds": 250,
+      "charges": 1,
+      "function": "[[Blind#Nearsight",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "rowspan=\"2\"|Area size": {
+          "value": 25.0,
+          "unit": "meter travel length",
+          "raw": "25 meter travel length"
+        },
+        "4.3 meter radius": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Orb velocity": {
+          "value": 20.0,
+          "unit": "meters per second",
+          "raw": "20 meters per second"
+        },
+        "Nearsight duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Nearsighted vision radius": {
+          "value": 7.5,
+          "unit": "meters",
+          "raw": "7.5 meters"
+        }
+      }
+    },
+    "E": {
+      "name": "Dark Cover",
+      "creds": 150,
+      "charges": 2,
+      "function": "",
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max deploy distance": {
+          "value": 80.0,
+          "unit": "meters",
+          "raw": "80 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Orb velocity": {
+          "value": 64.0,
+          "unit": "meters per second",
+          "raw": "64 meters per second"
+        },
+        "Deploy time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 4.1,
+          "unit": "meters",
+          "raw": "4.1 meters"
+        },
+        "rowspan=2|Duration": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Expiration warning at 13.5 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|7.08}}"
+        }
+      }
+    },
+    "X": {
+      "name": "From the Shadows",
+      "creds": null,
+      "charges": null,
+      "function": "",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total duration: 4 seconds</u><br>1.5-second windup<br>2.5-second arrival at target location"
+        },
+        "Audio cue radius": {
+          "value": 22.5,
+          "unit": "meters",
+          "raw": "22.5 meters"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "11.10",
+      "raw": "Dark Cover Spectators can now see Omen’s perspective in Dark Cover when he is placing his smokes. Fixed its minimap to match the darkness of other dome smokes. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "can now see Omen’s perspective in Dark Cover when he is placing his smokes",
+          "stat": "effect",
+          "description": "can now see Omen’s perspective in Dark Cover when he is placing his smokes",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.09",
+      "raw": "Paranoia The minimap icon has been made smaller so the overlay does not cover the minimap. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Dark Cover Cooldown increased from 30s >>> 40s Paranoia Projectile speed increased from 16 meters per second >>> 20 meters per second Travel distance reduced from 32.5m >>> 25m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Dark Cover Cooldown increased from",
+          "stat": "cooldown",
+          "before": 30.0,
+          "before_unit": "s",
+          "after": 40.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "meters per second Travel distance reduced from",
+          "stat": "range",
+          "before": 32.5,
+          "before_unit": "m",
+          "after": 25.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Dark Cover Cooldown increased from",
+          "stat": "cooldown",
+          "before": 30.0,
+          "before_unit": "s",
+          "after": 40.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "meters per second Travel distance reduced from",
+          "stat": "range",
+          "before": 32.5,
+          "before_unit": "m",
+          "after": 25.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.00",
+      "raw": "Dark Cover Given no other dome smoke controllers reveal their own location on smoking, removed this opponent counterplay specific to Omen. No longer plays audio in third person within 12.5 meters for opponents. This audio will still play for Allies. Fixed an issue where targeting views could be inconsistently applied during Dark Cover if Shrouded Step was spammed during Dark Cover’s ability equip flow. [https://x.com/VALORANT/status/1930058658001371145 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "removed this opponent counterplay specific to Omen",
+          "stat": "effect",
+          "description": "removed this opponent counterplay specific to Omen",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "No longer plays audio in third person within 12",
+          "stat": "effect",
+          "description": "No longer plays audio in third person within 12",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.10",
+      "raw": "Hotfix] Dark Cover Fixed a bug allowing Omen to unintentionally see enemies as they appear on your teammates' view using Dark Cover. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.10",
+      "raw": "Dark Cover Reverted a bugfix that was released in , which should fix the issue where dead allies spectating Omen could see through nearsights (most notably Viper’s ult) if Omen is using Dark Cover Reintroduced (and still investigating) the issue where Omen could not see properly when casting Dark Cover if he was overlapping another dense smoke (smokes that obscure vision inside, e.g. Jett Cloudburst, Brimstone Sky Smoke, etc.). v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "Dark Cover Fixed an issue where Omen could not see properly when casting Dark Cover if he was overlapping another dense smoke (smokes that obscure vision inside, e.g. Jett Cloudburst, Brimstone Sky Smoke, etc.). v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.10",
+      "raw": "Dark Cover Will now always fall to level geometry where players can stand Visual cues have been added to the inside of the smoke before it expires. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Will now always fall to level geometry where players can stand Visual cues have been added to the in",
+          "stat": "effect",
+          "description": "Will now always fall to level geometry where players can stand Visual cues have been added to the in",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.03",
+      "raw": "From the Shadows Can now ping and see additional icons on maps used for ability targeting v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Can now ping and see additional icons on maps used for ability targeting v",
+          "stat": "effect",
+          "description": "Can now ping and see additional icons on maps used for ability targeting v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "8.07",
+      "raw": "From the Shadows Now able to pick up the Spike and interact with other useables like doors while in the Shade form of From the Shadows without having to cancel the ability. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.08",
+      "raw": "Dark Cover Smokes play an audio and visual cue 1.5 seconds before they are about to fade. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.05",
+      "raw": "Dark Cover Fixed a bug where other Agents were not animating when they moved through Omen’s Dark Cover ability. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.04",
+      "raw": "Paranoia Movement velocity no longer imparted when casting Base speed decreased from 20 >>> 16 meters per second This is an undocumented change v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "noia Movement velocity no longer imparted when casting Base speed decreased from",
+          "stat": "speed",
+          "before": 20.0,
+          "before_unit": "",
+          "after": 16.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "noia Movement velocity no longer imparted when casting Base speed decreased from",
+          "stat": "speed",
+          "before": 20.0,
+          "before_unit": "",
+          "after": 16.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "no longer imparted when casting Base speed decreased from 20 >>> 16 meters per second This is an und",
+          "stat": "effect",
+          "description": "no longer imparted when casting Base speed decreased from 20 >>> 16 meters per second This is an und",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.02",
+      "raw": "From the Shadows and Shrouded Step Fixed a bug where Omen’s From the Shadows and Shrouded Step abilities were not properly canceled if he was hit by ’s ZERO/point or ’s Annihilation during the windup before teleporting. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.0",
+      "raw": "From the Shadows Suppression now properly interrupts the ability if hit in Shade form v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "now properly interrupts the ability if hit in Shade form v",
+          "stat": "effect",
+          "description": "now properly interrupts the ability if hit in Shade form v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "6.11",
+      "raw": "From the Shadows The timing of Omen’s From the Shadows voiceover line will come in quicker to increase your discernibility. Shrouded Step Fixed Omen Shrouded Step to not be interrupted if you’re Suppressed before teleporting. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.10",
+      "raw": "From the Shadows Removed the mouse cursor that was displayed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "Removed the mouse cursor that was displayed v",
+          "stat": "effect",
+          "description": "Removed the mouse cursor that was displayed v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.08",
+      "raw": "From the Shadows Updated targeting visuals to help players with precision placement on the map. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.0",
+      "raw": "Dark Cover Now falls to the height of nearby ground if placed inside walls v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.12",
+      "raw": "Paranoia Cost decreased 300 >>> 250 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Paranoia Cost decreased",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Paranoia Cost decreased",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size Updated 3P model to increase detail and fidelity v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Dark Cover Cooldown decreased 40s >>> 30s Projectile Speed increased 2800 >>> 6400 Cost increased 100 >>> 150 Shrouded Step Cost decreased 150 >>> 100 Pre teleport delay decreased 1s >>> 0.7s Improved the system used to place Shrouded Step at targeted ground locations Paranoia Added forward spawn offset, so players adjacent to Omen are not hit v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Dark Cover Cooldown decreased",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 30.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Projectile Speed increased",
+          "stat": "speed",
+          "before": 2800.0,
+          "before_unit": "",
+          "after": 6400.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Shrouded Step Cost decreased",
+          "stat": "cost",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Pre teleport delay decreased",
+          "stat": "delay",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 0.7,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Dark Cover Cooldown decreased",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 30.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Projectile Speed increased",
+          "stat": "speed",
+          "before": 2800.0,
+          "before_unit": "",
+          "after": 6400.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Shrouded Step Cost decreased",
+          "stat": "cost",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Pre teleport delay decreased",
+          "stat": "delay",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 0.7,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Added forward spawn offset, so players adjacent to Omen are not hit v",
+          "stat": "effect",
+          "description": "Added forward spawn offset, so players adjacent to Omen are not hit v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "3.05",
+      "raw": "Dark Cover Will no longer equip weapons slower than intended after casting Dark Cover From the Shadows Fixed a bug where Omen could become stuck in other objects if they were blocking From the Shadows' return location v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Will no longer equip weapons slower than intended after casting Dark Cover From the Shadows Fixed a ",
+          "stat": "effect",
+          "description": "Will no longer equip weapons slower than intended after casting Dark Cover From the Shadows Fixed a ",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.04",
+      "raw": "Dark Cover Fixed an issue where Dark Cover could travel in unintended ways that caused it to settle slightly off from where it was aimed v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.0",
+      "raw": "Shrouded Step Cost increased 100 >>> 150 Paranoia Cost decreased 400 >>> 300 Dark Cover Granted signature charges reduced 2 >>> 1 Omen now must buy his second smoke for 100 Cooldown time increased 35 >>> 40 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Shrouded Step Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Paranoia Cost decreased",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Dark Cover Granted signature charges reduced",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Omen now must buy his second smoke for 100 Cooldown time increased",
+          "stat": "duration",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Shrouded Step Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Paranoia Cost decreased",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Dark Cover Granted signature charges reduced",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Omen now must buy his second smoke for 100 Cooldown time increased",
+          "stat": "duration",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "2.09",
+      "raw": "From the Shadows Omen can no longer drop the Spike or weapons while casting From the Shadows v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "can no longer drop the Spike or weapons while casting From the Shadows v",
+          "stat": "effect",
+          "description": "can no longer drop the Spike or weapons while casting From the Shadows v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.04",
+      "raw": "Shrouded Step Fixed issues where teleporting into narrow areas created by Sage's wall pushed Omen into a wall v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.02",
+      "raw": "Shrouded Step Fixed issue with targeting that caused Shrouded Step to get stuck on corners at a much greater distance From the Shadows Fixed issue where Omen could swap equipables right after selecting a map location for From the Shadows v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.01",
+      "raw": "Shrouded Step Fixed issue where Omen’s reforming VFX didn’t line up with where he actually appeared Fixed Omen being able to trigger the defuse sound while teleporting From the Shadows Fixed issue where Omen could have his gun equipped while forming v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.0",
+      "raw": "Fixed an issue where Omen could plant the Spike while elevated on a Sage wall Shrouded Step Fixed an issue where Omen could sometimes teleport past the buy phase barriers Paranoia Cost increased 200 >>> 400 credits Dark Cover Projectile speed decreased 4000 >>> 2800 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "men could sometimes teleport past the buy phase barriers Paranoia Cost increased",
+          "stat": "duration",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "credits",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Dark Cover Projectile speed decreased",
+          "stat": "speed",
+          "before": 4000.0,
+          "before_unit": "",
+          "after": 2800.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "men could sometimes teleport past the buy phase barriers Paranoia Cost increased",
+          "stat": "duration",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "credits",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Dark Cover Projectile speed decreased",
+          "stat": "speed",
+          "before": 4000.0,
+          "before_unit": "",
+          "after": 2800.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.14",
+      "raw": "Shrouded Step Fixed an issue where Omen could teleport past the Buy phase barrier v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.09",
+      "raw": "Paranoia Updated projectile VFX to better represent hitbox, especially when it is traveling towards enemies' POV v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.0",
+      "raw": "Shrouded Step Can now see teleport location on the map and receives an in-world indicator of target location when vision of the point is obstructed Paranoia Now equipped instead of quickcast Hit detection improved, especially at close range Dark Cover Omen now enters a “phaser” world where he can see through walls to place his smokes Pressing RELOAD toggles between phased and normal targeting Omen can now increase smoke distance with PRIMARY FIRE, decrease it with SECONDARY FIRE, and throw smoke with the ABILITY KEY From the Shadows Omen can now cancel his teleport while in Shade form by pressing the ABILITY KEY again Omen still loses all of his ult points if he cancels v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Can now see teleport location on the map and receives an in-world indicator of target location when ",
+          "stat": "effect",
+          "description": "Can now see teleport location on the map and receives an in-world indicator of target location when ",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "can now increase smoke distance with PRIMARY FIRE, decrease it with SECONDARY FIRE, and throw smoke ",
+          "stat": "effect",
+          "description": "can now increase smoke distance with PRIMARY FIRE, decrease it with SECONDARY FIRE, and throw smoke ",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "can now cancel his teleport while in Shade form by pressing the ABILITY KEY again Omen still loses a",
+          "stat": "effect",
+          "description": "can now cancel his teleport while in Shade form by pressing the ABILITY KEY again Omen still loses a",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "0.50",
+      "raw": "Dark Cover Duration increased 12 >> 15 seconds Projectile speed increased to 4000 Cooldown increased 30 >> 35 seconds v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "0.49",
+      "raw": "Updated visuals From the Shadows Omen now immediately become vulnerable and no longer appears dark after leaving shadow form Attenuation radius of arrival sound reduced to 2250 PC-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "no longer appears dark after leaving shadow form Attenuation radius of arrival sound reduced to 2250",
+          "stat": "effect",
+          "description": "no longer appears dark after leaving shadow form Attenuation radius of arrival sound reduced to 2250",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "12.02",
+      "raw": "From the Shadows Fixed a bug for Coaches and Observers where equipping it would cause the ability map UI to linger into the next round. Fixed a bug for Coaches and Observers where Agents with an ability map UI would repeatedly play their equip animation when switching to their POV. Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "Dark Cover Fixed an issue where Omen’s Dark Cover targeting sensitivity could get stuck at a lower value until his next smoke cast if he died while attempting to cast Dark Cover. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.06",
+      "raw": "From the Shadows Added Agent-specific cursor curve settings for map ability controls. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Added Agent-specific cursor curve settings for map ability controls",
+          "stat": "effect",
+          "description": "Added Agent-specific cursor curve settings for map ability controls",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.05",
+      "raw": "Dark Cover Fixed an issue where Dark Cover would move slower than intended. From the Shadows Fixed an issue where From the Shadows was not cancellable with certain bindings.",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

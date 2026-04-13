@@ -1,0 +1,654 @@
+{
+  "agent": "Phoenix",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 24,
+    "balance_patches": 11,
+    "numeric_changes": 9,
+    "all_changes": 20
+  },
+  "current_stats": {
+    "C": {
+      "name": "Blaze",
+      "creds": 150,
+      "charges": 1,
+      "function": "[[Vision Blocker#Wall",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deploy time": {
+          "value": 0.125,
+          "unit": "-0.75 seconds",
+          "raw": "0.125-0.75 seconds<br><small>(Depending on distance)</small>"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Length": {
+          "value": 1.0,
+          "unit": "–21 meters",
+          "raw": "1–21 meters"
+        },
+        "rowspan=\"2\"|Damage": {
+          "value": 1.0,
+          "unit": "per tickTotal 225-240",
+          "raw": "1 per tick<br>Total 225-240"
+        },
+        "x0.5 multiplier to objects": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files ({{patchv|5.12}})"
+        },
+        "Ticks/Tick Rate": {
+          "value": 30.0,
+          "unit": "per second",
+          "raw": "30 per second<br>(1 every 0.033 seconds)<br>Total 225-240 ticks"
+        },
+        "Duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Hot Hands",
+      "creds": 200,
+      "charges": 1,
+      "function": "[[Deterrent#Molotov",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Maximum air time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Damage": {
+          "value": 1.0,
+          "unit": "per tickTotal 195-240x0.5 multiplier to objects",
+          "raw": "1 per tick<br>Total 195-240<br>x0.5 multiplier to objects"
+        },
+        "Ticks/Tick Rate": {
+          "value": 60.0,
+          "unit": "per second",
+          "raw": "60 per second<br>(1 every 0.0167 seconds)<br>Total 195-240 ticks"
+        },
+        "rowspan=\"3\"|Duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "0.75-second spread time": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "3.25 seconds at full size": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        }
+      }
+    },
+    "E": {
+      "name": "Curveball",
+      "creds": 250,
+      "charges": 2,
+      "function": "[[Blind#Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.48,
+          "unit": "seconds",
+          "raw": "0.48 seconds"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max blind duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Run it Back",
+      "creds": null,
+      "charges": null,
+      "function": "[[Sustain#Revive",
+      "stats": {
+        "Duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds<br>(Includes 1-second activation animation)"
+        },
+        "Revive duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 2.4 seconds</u><br>1-second dissipate<br>1.4-second respawn"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.01",
+      "raw": "Run it Back Fixed a bug where Phoenix would remain nearsighted from certain abilities after respawning from Run it Back. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Hot Hands Fixed an issue where throw animations would break if aiming straight down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.11",
+      "raw": "Hot Hands Fixed a bug where it would show inaccurate healing done in the combat report v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.04",
+      "raw": "Fixed a bug where the wrong voiceline played during round-start when Phoenix & Tejo are both present. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.02",
+      "raw": "Blaze Fixed a bug that caused Phoenix’s Blaze minimap indicator to persist on the minimap for a couple seconds after the utility expired. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Curveball Windup increased 0.5s >>> 0.6s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Curveball Windup increased",
+          "stat": "other",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Curveball Windup increased",
+          "stat": "other",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.00",
+      "raw": "Blaze Fixed an issue where Blaze referenced a Harbor projectile asset for a few frames Fixed an issue where Blaze’s visual effects could be slightly offset v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.10",
+      "raw": "Heating Up Phoenix now applies a Heal over time to himself whenever he touches his flames which persists even if he leaves the fire. Curveball Changed to the signature ability slot Grants a free charge on round start 2 kill reset to generate an additional charge Hot Hands Changed to a non-signature ability Cost 200 credits Blaze Initial projectile goes through walls Undocumented Blaze Will now damage Lotus wall Will now properly damage Ascent doors and Haven panels Hot Hands Now damages map objects v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "now applies a Heal over time to himself whenever he touches his flames which persists even if he lea",
+          "stat": "effect",
+          "description": "now applies a Heal over time to himself whenever he touches his flames which persists even if he lea",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Grants a free charge on round start 2 kill reset to generate an additional charge Hot Hands Changed ",
+          "stat": "effect",
+          "description": "Grants a free charge on round start 2 kill reset to generate an additional charge Hot Hands Changed ",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Will now properly damage Ascent doors and Haven panels Hot Hands Now damages map objects v",
+          "stat": "effect",
+          "description": "Will now properly damage Ascent doors and Haven panels Hot Hands Now damages map objects v",
+          "direction": "buff"
+        },
+        {
+          "change_type": "rework",
+          "ability_slot": "Q",
+          "context_label": "Changed to the signature ability slot Grants a free charge on round start 2 kill reset to generate a",
+          "stat": "mechanic",
+          "description": "Changed to the signature ability slot Grants a free charge on round start 2 kill reset to generate a",
+          "direction": "change"
+        },
+        {
+          "change_type": "rework",
+          "ability_slot": "Q",
+          "context_label": "Changed to a non-signature ability Cost 200 credits Blaze Initial projectile goes through walls Undo",
+          "stat": "mechanic",
+          "description": "Changed to a non-signature ability Cost 200 credits Blaze Initial projectile goes through walls Undo",
+          "direction": "change"
+        }
+      ]
+    },
+    {
+      "patch": "6.0",
+      "raw": "Blaze and Hot Hands now properly deal damage to Rendezvous and Trademark Blaze Now properly deals damage to Cove, Leer, Recon Bolt, and ZERO/point v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "now properly deal damage to Rendezvous and Trademark Blaze Now properly deals damage to Cove, Leer, ",
+          "stat": "effect",
+          "description": "now properly deal damage to Rendezvous and Trademark Blaze Now properly deals damage to Cove, Leer, ",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.12",
+      "raw": "Blaze Cost decreased 200 >>> 150 Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% This is an undocumented change (see Health#Abilities) Hot Hands Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% The correct functionality is undocumented, instead officially being documented as affecting any non-player object (see Health#Abilities) Run it Back Fixed an issue where Phoenix could not be decayed by Viper for a short period after dying during ult while decayed v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Blaze Cost decreased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Blaze Cost decreased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% ",
+          "stat": "effect",
+          "description": "Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% ",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% ",
+          "stat": "effect",
+          "description": "Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% ",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.07",
+      "raw": "Run it Back Fixed a bug where Phoenix would not automatically re-equip a weapon on respawn v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.01",
+      "raw": "Curveball Flash Max duration increased 1.1s >>> 1.5s Flash Windup decreased .7s >>> .5s Blaze Phoenix will now equip his weapon earlier if he stops bending his wall Run it Back Phoenix will now spawn at the marker with the amount of shields he had when the ability was cast v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Curveball Flash Max duration increased",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Flash Windup decreased",
+          "stat": "other",
+          "before": 0.7,
+          "before_unit": "s",
+          "after": 0.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Curveball Flash Max duration increased",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Flash Windup decreased",
+          "stat": "other",
+          "before": 0.7,
+          "before_unit": "s",
+          "after": 0.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.0",
+      "raw": "Curveball Cost increased 200 >>> 250 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Curveball Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Curveball Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.03",
+      "raw": "Hot Hands The audio of the lingering fire zone will be easier to hear when other actions and sounds occur nearby v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.01",
+      "raw": "Run it Back Fixed a bug where Phoenix’s starting location would briefly be displayed on the minimap after being killed in Run it Back v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.06",
+      "raw": "Curveball The audio and visuals for Curveball should better indicate when to turn away, and when it's safe to look again v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.05",
+      "raw": "Blaze Fixed nearsight not applying properly when going through Blaze Run it Back Fixed a bug where Phoenix could in rare cases begin to auto-defuse the Spike if he was defusing the Spike when Run it Back ended v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.04",
+      "raw": "Run it Back Fixed a bug where Phoenix could plant the Spike off the bomb site if he finished planting after Run it Back ended This was a hotfix and was only listed in the Patch",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.05",
+      "raw": "notes v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.0",
+      "raw": "Heating Up Passive effect changed from Heal 3 HP every 0.25 seconds whilst in contact with fire >>> Heal for 50 HP total over the full duration of the ability whilst in contact with fire Blaze now heals 1 HP every 0.16 seconds Hot Hands now heals 1 HP every 0.08 seconds Blaze Duration increased 6 >>> 8 seconds Damage changed 15 every 0.25s >>> 1 every 0.033 seconds Closed exploit where Nvidia Inspector could be used to see through Blaze Curveball Max flash duration increased 0.8 >>> 1.1 seconds Run it Back Automatically reloads all weapons on respawn v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "seconds Hot Hands now heals 1 HP every 0.08 seconds Blaze Duration increased",
+          "stat": "duration",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage changed 15 every",
+          "stat": "damage",
+          "before": 0.25,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "pector could be used to see through Blaze Curveball Max flash duration increased",
+          "stat": "duration",
+          "before": 0.8,
+          "before_unit": "",
+          "after": 1.1,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "seconds Hot Hands now heals 1 HP every 0.08 seconds Blaze Duration increased",
+          "stat": "duration",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage changed 15 every",
+          "stat": "damage",
+          "before": 0.25,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "pector could be used to see through Blaze Curveball Max flash duration increased",
+          "stat": "duration",
+          "before": 0.8,
+          "before_unit": "",
+          "after": 1.1,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "non_numeric",
+          "ability_slot": null,
+          "context_label": "Heating Up Passive effect changed from Heal 3 HP every 0.25",
+          "stat": "mechanic",
+          "before": "seconds whilst in contact with fire",
+          "after": "Heal for 50 HP total over the full durati",
+          "direction": "change"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "now heals 1 HP every 0",
+          "stat": "effect",
+          "description": "now heals 1 HP every 0",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "now heals 1 HP every 0",
+          "stat": "effect",
+          "description": "now heals 1 HP every 0",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "0.50",
+      "raw": "Curveball Cost increased 100 >>> 200 credits Hot Hands Height required to jump out of Hot Hands increased 80 >> 120 Damage tick speed increased (total damage per second unchanged) v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Curveball Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Curveball Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "0.49",
+      "raw": "Run it Back Fixed a bug where Phoenix would get teleported back to an ascender (rope ladder) after respawning, in cases where Phoenix died while Run It Back was active and he was attached to an ascender Fixed a bug where, for a brief time after Run it Back ended, Phoenix could be damaged in the place where he fizzled Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.02",
+      "raw": "Blaze Can be set to Togglable in the Agent Profile Settings, allowing you to press and let go of the input to steer the ability freely while it’s active",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

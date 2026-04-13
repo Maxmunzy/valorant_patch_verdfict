@@ -1,0 +1,1116 @@
+{
+  "agent": "Raze",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 36,
+    "balance_patches": 24,
+    "numeric_changes": 22,
+    "all_changes": 38
+  },
+  "current_stats": {
+    "C": {
+      "name": "Boom Bot",
+      "creds": 300,
+      "charges": 1,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Deploy time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Unequip time": {
+          "value": 0.0,
+          "unit": "seconds",
+          "raw": "0 seconds"
+        },
+        "Duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds<br><small>(Includes Deploy time)</small>"
+        },
+        "Max detection cone distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Proximity to target needed to explode": {
+          "value": 2.5,
+          "unit": "meters",
+          "raw": "2.5 meters"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Radii": {
+          "value": 2.0,
+          "unit": "meters",
+          "raw": "2 meters (Inner)<br>6 meters (Outer)"
+        },
+        "Damage": {
+          "value": 30.0,
+          "unit": "-80150 in x2.5 multiplier to objects",
+          "raw": "30-80<br>150 in [[Escalation]]<br>x2.5 multiplier to objects<br><small>(Minimum Outer radius damage to Inner radius damage)</small>"
+        }
+      }
+    },
+    "Q": {
+      "name": "Blast Pack",
+      "creds": 200,
+      "charges": 2,
+      "function": "[[Mobility#Dash",
+      "stats": {
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Radii": {
+          "value": 2.0,
+          "unit": "meters",
+          "raw": "2 meters (Inner)<br>5 meters (Outer)"
+        },
+        "Time needed to arm": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "rowspan=3|Damage": {
+          "value": null,
+          "unit": "",
+          "raw": "No damage before arming"
+        },
+        "20-50 after arming<br><small>(Minimum Outer radius damage to Inner radius damage)</small>": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>[[Range#Target_Practice|Range's training bot]] & {{patchv|1.05}}"
+        },
+        "x2.25 multiplier to objects": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}<sup/>{{#tag:ref|Calculated based on current in-game damage to map objects|group=\"s\"}}"
+        }
+      }
+    },
+    "E": {
+      "name": "Paint Shells",
+      "creds": null,
+      "charges": 1,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup times": {
+          "value": 2.25,
+          "unit": "seconds",
+          "raw": "2.25 seconds (Initial grenade)<br>0.667 seconds (Sub-munitions)"
+        },
+        "rowspan=2|Radii": {
+          "value": 2.5,
+          "unit": "meters",
+          "raw": "2.5 meters (Inner)"
+        },
+        "5.5 meters (Outer; Initial grenade)<br>5.25 meters (Outer; Sub-munitions)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|7.09}}"
+        },
+        "Damage": {
+          "value": 1.0,
+          "unit": "-55",
+          "raw": "1-55<br><small>(Minimum Outer radius damage to Inner radius damage)</small>"
+        }
+      }
+    },
+    "X": {
+      "name": "Showstopper",
+      "creds": null,
+      "charges": null,
+      "function": "[[Empowerment#Weapon Equip",
+      "stats": {
+        "Equip time": {
+          "value": 1.4,
+          "unit": "seconds",
+          "raw": "1.4 seconds"
+        },
+        "Reequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds<br>(including Equip time)"
+        },
+        "Radii": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters (Inner)<br>7 meters (Outer)"
+        },
+        "Damage": {
+          "value": 30.0,
+          "unit": "-150",
+          "raw": "30-150<br><small>(Minimum Outer radius damage to Inner radius damage)</small><br>x10 multiplier to objects"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.02",
+      "raw": "Boom Bot Can now be concussed. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Can now be concussed",
+          "stat": "effect",
+          "description": "Can now be concussed",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.08",
+      "raw": "Blast Pack Can now be affected by Slows while midair with Blast Pack. If Slowed, the force from Blast Pack will be reduced, similar to how slows affect other Dashes v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Can now be affected by Slows while midair with Blast Pack",
+          "stat": "effect",
+          "description": "Can now be affected by Slows while midair with Blast Pack",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.07",
+      "raw": "Fixed her hair so it wouldn’t flicker during certain movements in Agent select. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Paint Shells Fixed an issue where the VFX would persist across rounds v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.10",
+      "raw": "Blast Pack & Showstopper Explosion VFX has been updated to more accurately indicate hitboxes Visual effects will exist in world for a shorter period of time for more gameplay clarity v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.06",
+      "raw": "Blast Pack Fixed an issue where Blast Pack could knock back Skye’s Trailblazer and Tejo’s Stealth Drone through walls. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.05",
+      "raw": "Blast Pack Fixed a bug where Blast Pack’s explosion was slightly smaller at the tip of the explosion since the explosion changes that went live in v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.00",
+      "raw": "Gameplay logic around ability effects themed as explosions has been updated. Explosions should behave more consistently in how they deal damage. Undocumented Blast Pack Damage multiplier to objects decreased x",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.5",
+      "raw": ">>> x",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.25",
+      "raw": "v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.11",
+      "raw": "Blast Pack Raze’s satchels no longer explode for damage/knockback upon opponent destruction. Raze’s horizontal velocity when satcheling has been slowed. Satchel explosion audio has been updated to be audible farther away to ensure enemies can hear the first satchel when a Raze double satchels. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "no longer explode for damage/knockback upon opponent destruction",
+          "stat": "effect",
+          "description": "no longer explode for damage/knockback upon opponent destruction",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "8.01",
+      "raw": "Blast Pack Audio for traveling through air is now louder for enemies while traveling towards them v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.09",
+      "raw": "Paint Shells Primary grenade explosion radius 6m >>> 5.5m. Secondary grenades explosion radius 6m >>> 5.25m. Primary grenade explosion minimum damage 15 >>> 1. Secondary grenades explosion minimum damage 15 >>> 1. Damage multiplier to enemy utility 250% >>> 100%. Blast Pack Satchel doesn’t deal damage until fully armed. Satchel arm time increased 0.5 seconds >>> 1.5. Updated SFX for beep after arm time. This is an undocumented change v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Paint Shells Primary grenade explosion radius",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 5.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Secondary grenades explosion radius",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 5.25,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Primary grenade explosion minimum damage",
+          "stat": "damage",
+          "before": 15.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Secondary grenades explosion minimum damage",
+          "stat": "damage",
+          "before": 15.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage multiplier to enemy utility",
+          "stat": "multiplier",
+          "before": 250.0,
+          "before_unit": "%",
+          "after": 100.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "t deal damage until fully armed. Satchel arm time increased",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "seconds",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Paint Shells Primary grenade explosion radius",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 5.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Secondary grenades explosion radius",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 5.25,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Primary grenade explosion minimum damage",
+          "stat": "damage",
+          "before": 15.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Secondary grenades explosion minimum damage",
+          "stat": "damage",
+          "before": 15.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage multiplier to enemy utility",
+          "stat": "multiplier",
+          "before": 250.0,
+          "before_unit": "%",
+          "after": 100.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "t deal damage until fully armed. Satchel arm time increased",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "seconds",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "7.02",
+      "raw": "Showstopper Fixed issues where Showstopper projectile would not explode when hitting players trapped by ’s Annihilation. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.0",
+      "raw": "Will no longer destroy Killjoy's Alarmbot from a farther distance than intended. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "Will no longer destroy Killjoy's Alarmbot from a farther distance than intended",
+          "stat": "effect",
+          "description": "Will no longer destroy Killjoy's Alarmbot from a farther distance than intended",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.03",
+      "raw": "Duration decreased 10s >>> 5s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration decreased",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 5.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration decreased",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 5.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.02",
+      "raw": "Pathfinding has been improved on Raze’s Boom Bot (C) when chasing an enemy. It can now more consistently jump up small heights and will do so with smoother movement Fixed a bug with Boom Bot (C) getting stuck in a wall and rapidly shaking while making a loud noise. It will now bounce off the wall per usual v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "can now more consistently jump up small heights and will do so with smoother movement Fixed a bug wi",
+          "stat": "effect",
+          "description": "can now more consistently jump up small heights and will do so with smoother movement Fixed a bug wi",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "6.0",
+      "raw": "Blast Pack Now properly takes damage from enemy abilities v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now properly takes damage from enemy abilities v",
+          "stat": "effect",
+          "description": "Now properly takes damage from enemy abilities v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.12",
+      "raw": "Boom Bot Health decreased 100 HP >>> 60 HP Damage modifier to non-players increased 100% >>> 250% Now immune to all allied damage No longer explodes on contact with Gatecrash beacons Blast Pack Health increased 1 HP >>> 20 HP Now deals damage to Fade's Prowler Now immune to all allied damage Damage modifier to non-players decreased 1200% >>> 250% Paint Shells Now deals damage to Fade's Prowler Damage modifier to non-players increased 100% >>> 250% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Boom Bot Health decreased",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "hp",
+          "after": 60.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage modifier to non-players increased",
+          "stat": "damage",
+          "before": 100.0,
+          "before_unit": "%",
+          "after": 250.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "No longer explodes on contact with Gatecrash beacons Blast Pack Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Prowler Now immune to all allied damage Damage modifier to non-players decreased",
+          "stat": "damage",
+          "before": 1200.0,
+          "before_unit": "%",
+          "after": 250.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s Prowler Damage modifier to non-players increased",
+          "stat": "damage",
+          "before": 100.0,
+          "before_unit": "%",
+          "after": 250.0,
+          "after_unit": "%",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Boom Bot Health decreased",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "hp",
+          "after": 60.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage modifier to non-players increased",
+          "stat": "damage",
+          "before": 100.0,
+          "before_unit": "%",
+          "after": 250.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "No longer explodes on contact with Gatecrash beacons Blast Pack Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Prowler Now immune to all allied damage Damage modifier to non-players decreased",
+          "stat": "damage",
+          "before": 1200.0,
+          "before_unit": "%",
+          "after": 250.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s Prowler Damage modifier to non-players increased",
+          "stat": "damage",
+          "before": 100.0,
+          "before_unit": "%",
+          "after": 250.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Now immune to all allied damage No longer explodes on contact with Gatecrash beacons Blast Pack Heal",
+          "stat": "effect",
+          "description": "Now immune to all allied damage No longer explodes on contact with Gatecrash beacons Blast Pack Heal",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now immune to all allied damage Damage modifier to non-players decreased 1200% >>> 250% Paint Shells",
+          "stat": "effect",
+          "description": "Now immune to all allied damage Damage modifier to non-players decreased 1200% >>> 250% Paint Shells",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "No longer explodes on contact with Gatecrash beacons Blast Pack Health increased 1 HP >>> 20 HP Now ",
+          "stat": "effect",
+          "description": "No longer explodes on contact with Gatecrash beacons Blast Pack Health increased 1 HP >>> 20 HP Now ",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.08",
+      "raw": "Showstopper Ammo count added to HUD v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "added to HUD v",
+          "stat": "effect",
+          "description": "added to HUD v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.07",
+      "raw": "Showstopper Can now be input-queued to equip after the current action [https://twitter.com/PlayVALORANT/status/1507155651209822225 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Can now be input-queued to equip after the current action [https://twitter",
+          "stat": "effect",
+          "description": "Can now be input-queued to equip after the current action [https://twitter",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.05",
+      "raw": "Hotfix] Blast Pack Fixed bugs impacting Blast Pack's input queuing and re-equip speeds Undocumented Showstopper Re-equip time removed, hence the re-equip time is exactly the same as the initial equip time. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "removed, hence the re-equip time is exactly the same as the initial equip time",
+          "stat": "effect",
+          "description": "removed, hence the re-equip time is exactly the same as the initial equip time",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.05",
+      "raw": "Boom Bot Damage reduced 50-125 >>> 30-80 Cost reduced 400 >>> 300 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost reduced",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost reduced",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "3.02",
+      "raw": "Boom Bot Can no longer be placed through some walls v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "Can no longer be placed through some walls v",
+          "stat": "effect",
+          "description": "Can no longer be placed through some walls v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.0",
+      "raw": "Updated Raze's model Boom Bot Cost increased 200 >>> 400 Showstopper Ultimate points required increased 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s model Boom Bot Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Showstopper Ultimate points required increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s model Boom Bot Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Showstopper Ultimate points required increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.07",
+      "raw": "Blast Pack Audio cues added to indicate when she's boosted in the air from Blast Pack Showstopper Explosion and Showstopper launching VFX updated so they are less obscuring and clear out of the play space faster v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "added to indicate when she's boosted in the air from Blast Pack Showstopper Explosion and Showstoppe",
+          "stat": "effect",
+          "description": "added to indicate when she's boosted in the air from Blast Pack Showstopper Explosion and Showstoppe",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "2.06",
+      "raw": "Boom Bot Fixed Boom Bot blowing up when it hit the Spike if Raze was on defender side v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.01",
+      "raw": "Boom Bot Fixed issue where Boom Bot could be placed through some walls v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.08",
+      "raw": "Blast Pack Initial damage reduced to 15 with a 2 meter inner radius, falling off to 5 minimum damage The satchel will retain its max damage of 50 after arming (once it lands) for .5 seconds Patch notes state .2 m inner radius, this is likely a typo Shooting the blast pack causes it to detonate, dealing its current damage amount Satchel no longer does damage to allies v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer does damage to allies v",
+          "stat": "effect",
+          "description": "no longer does damage to allies v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.05",
+      "raw": "Blast Pack Damage decreased 75 >>> 50 Damage to objects now consistently does 600 Showstopper Equip Time increased 1.1 >>> 1.4 Quick Equip Time increased 0.5 >>> 0.7 VFX reduced when firing rocket VFX on rocket’s trail slightly reduced v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blast Pack Damage decreased",
+          "stat": "damage",
+          "before": 75.0,
+          "before_unit": "",
+          "after": 50.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Damage to objects now consistently does 600 Showstopper Equip Time increased",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "",
+          "after": 1.4,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Quick Equip Time increased",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "",
+          "after": 0.7,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blast Pack Damage decreased",
+          "stat": "damage",
+          "before": 75.0,
+          "before_unit": "",
+          "after": 50.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Damage to objects now consistently does 600 Showstopper Equip Time increased",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "",
+          "after": 1.4,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Quick Equip Time increased",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "",
+          "after": 0.7,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.04",
+      "raw": "Showstopper Cost changed 6 >>> 7 Ult points v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Showstopper Cost changed",
+          "stat": "cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Showstopper Cost changed",
+          "stat": "cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.0",
+      "raw": "Blast Pack Maximum damage radius reduced 2 >>> 1 meters v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blast Pack Maximum damage radius reduced",
+          "stat": "damage",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blast Pack Maximum damage radius reduced",
+          "stat": "damage",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "0.50",
+      "raw": "Blast Pack Cost increased 100 >>> 200 credits v0.47+ Tuned and adjusted audio for Paint Shells, Blast Pack, and Showstopper so that they’ll be easier to hear in hectic scenarios Paint Shells Reduced number of charges 2 >>> 1 Now has a kill reset, requiring players to get 2 kills to refresh charge Fixed an edge case where the secondary cluster would explode quicker than intended. They now have a minimum duration before exploding Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blast Pack Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "ll be easier to hear in hectic scenarios Paint Shells Reduced number of charges",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blast Pack Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "ll be easier to hear in hectic scenarios Paint Shells Reduced number of charges",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Now has a kill reset, requiring players to get 2 kills to refresh charge Fixed an edge case where th",
+          "stat": "effect",
+          "description": "Now has a kill reset, requiring players to get 2 kills to refresh charge Fixed an edge case where th",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.10",
+      "raw": "Showstopper Fixed an issue where sensitivity is severely reduced when using Showstopper until engaging Focus. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.01",
+      "raw": "Blast Pack Second Blast Pack’s horizontal force has been reduced.",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

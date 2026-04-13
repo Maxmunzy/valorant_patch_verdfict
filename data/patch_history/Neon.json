@@ -1,0 +1,956 @@
+{
+  "agent": "Neon",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 24,
+    "balance_patches": 16,
+    "numeric_changes": 23,
+    "all_changes": 32
+  },
+  "current_stats": {
+    "C": {
+      "name": "Fast Lane",
+      "creds": 300,
+      "charges": 1,
+      "function": "[[Vision Blocker#Wall",
+      "stats": {
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Deploy time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Length": {
+          "value": 46.5,
+          "unit": "m total45 meters in front of Neon1.5 m behind Neon",
+          "raw": "<u>46.5 m total</u><br>45 meters in front of Neon<br>1.5 m behind Neon"
+        },
+        "Distance between walls": {
+          "value": 3.5,
+          "unit": "meters",
+          "raw": "3.5 meters"
+        },
+        "Duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "rowspan=2|Wall Dissolve Duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "(Includes 1-second telegraph time during walls' active duration)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        }
+      }
+    },
+    "Q": {
+      "name": "Relay Bolt",
+      "creds": 200,
+      "charges": 1,
+      "function": "[[Crowd Control#Concuss",
+      "stats": {
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max projectile duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Radius": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        },
+        "Explosion windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "High Gear",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Mobility#Dash",
+      "stats": {
+        "Activation animation duration": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Movement speed increase": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki/>+35% (9.11 m/s)"
+        },
+        "Slide duration": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Slide distance": {
+          "value": 7.0,
+          "unit": "meters",
+          "raw": "7 meters"
+        }
+      }
+    },
+    "X": {
+      "name": "Overdrive",
+      "creds": null,
+      "charges": null,
+      "function": "[[Empowerment#Weapon Equip",
+      "stats": {
+        "Initial windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Ammunition": {
+          "value": 40.0,
+          "unit": "per \"magazine\"Minimum 10 ammo required to fire beamInfinite reserve",
+          "raw": "40 per \"magazine\"<br>Minimum 10 ammo required to fire beam<br>Infinite reserve"
+        },
+        "Reequip time": {
+          "value": 0.333,
+          "unit": "seconds",
+          "raw": "0.333 seconds"
+        },
+        "Damage": {
+          "value": 0.0,
+          "unit": "-20 meters: 1820-42 meters: 18-1043+ meters: 10",
+          "raw": "0-20 meters: 18<br>20-42 meters: 18-10<br>43+ meters: 10"
+        },
+        "Damage multipliers": {
+          "value": null,
+          "unit": "",
+          "raw": "Headshot: x3<Br>Leg shot: x0.85"
+        },
+        "Fire rate": {
+          "value": 20.0,
+          "unit": "per second1 every 0.05 seconds",
+          "raw": "20 per second<br>1 every 0.05 seconds"
+        },
+        "Movement penalties": {
+          "value": null,
+          "unit": "",
+          "raw": "Airborne: +7° spread"
+        },
+        "Reload time": {
+          "value": 0.5,
+          "unit": "second delay then 1 ammo every 0.05 seconds",
+          "raw": "0.5 second delay then 1 ammo every 0.05 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "11.08",
+      "raw": "Energy Battery recharge decreased, time to recharge to full battery increased from 20s >>> 60s Battery drain reduced, increasing sprint time with full battery from 10s >>> 16s Relay Bolt Concuss duration decreased 3.5s >>> 2.5s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "time to recharge to full battery increased from",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "increasing sprint time with full battery from",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 16.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Relay Bolt Concuss duration decreased",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "time to recharge to full battery increased from",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "increasing sprint time with full battery from",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 16.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Relay Bolt Concuss duration decreased",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.04",
+      "raw": "High Gear Fixed a bug where Neon could skip her unequip delay by binding High Gear to multiple keys. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Relay Bolt Windup increased 0.8s >>> 1.0s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Relay Bolt Windup increased",
+          "stat": "other",
+          "before": 0.8,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Relay Bolt Windup increased",
+          "stat": "other",
+          "before": 0.8,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.04",
+      "raw": "High Gear Checked in a more systemic fix to an issue where Neon could jiggle her head up and down while sliding if mashing strafing inputs. Overdrive VFX have been updated to make Neon and her directionality clearer when she is fighting with Overdrive active. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.11",
+      "raw": "Energy Duration of ultimate: 20s >>> 10s High Gear Slides 2 >>> 1 Accuracy during slide: Full accuracy >>> Crouch-walking accuracy Overdrive Ultimate points 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Energy Duration of ultimate",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 10.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "High Gear Slides",
+          "stat": "other",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Crouch-walking accuracy Overdrive Ultimate points",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Energy Duration of ultimate",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 10.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "High Gear Slides",
+          "stat": "other",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Crouch-walking accuracy Overdrive Ultimate points",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "non_numeric",
+          "ability_slot": null,
+          "context_label": "Full",
+          "stat": "mechanic",
+          "before": "accuracy",
+          "after": "Crouch-walking accuracy Overdrive Ultimat",
+          "direction": "change"
+        }
+      ]
+    },
+    {
+      "patch": "9.10",
+      "raw": "High Gear Concuss now slows dashes by 50% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "now slows dashes by 50% v",
+          "stat": "effect",
+          "description": "now slows dashes by 50% v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.07",
+      "raw": "High Gear Fixed a bug where Neon utilizing backwards slide inputs could slide while standing v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.04",
+      "raw": "(fixed in {{patch|9.02}}) High Gear Fixed an issue where Neon could slide into the barrier at the beginning of a round and get a free slide charge. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.02",
+      "raw": "High Gear Fixed a bug where Neon’s hitbox could be slightly offset while sliding. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.01",
+      "raw": "High Gear Fixed a bug where Neon could equip faster out of her slide than intended by manually inputting an equip action. [https://twitter.com/Altombre/status/1801412397472878947 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.11",
+      "raw": "(PC) / v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.0",
+      "raw": "(Console) Hotfix] High Gear Removed Neon's air accuracy while sliding v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Removed Neon's air accuracy while sliding v",
+          "stat": "effect",
+          "description": "Removed Neon's air accuracy while sliding v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "8.11",
+      "raw": "Energy Time until Full Fuel Regen 60s >>> 20s Fast Lane Fast Lane dissipates from behind to minimize visual noise in combat space while giving cover for Neon. Fast Lane’s audio has been updated to travel with the fade out of the wall. Wall Duration 6s >>> 4s Wall Dissolve Duration 1s >>> 2s High Gear Sprint Neon no longer has her strafe speed reduced while sprinting. Max Sprint Speed while moving sideways 6.73 meters/second >>> 9.11 meters/second Slide Slide charges 1 >>> 2 Neon now removes all weapon movement error when sliding. This effectively means she’s more accurate while sliding. Second Slide Cost: 150 Equips out of slide: Fast >>> Instant Slide equip buffer >>> .2s (after sliding, there is .2 seconds before her gun comes out) Relay Bolt Charges 2 >>> 1 Windup delay 1.1s >>> .8s Con",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Energy Time until Full Fuel Regen",
+          "stat": "duration",
+          "before": 60.0,
+          "before_unit": "s",
+          "after": 20.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s audio has been updated to travel with the fade out of the wall. Wall Duration",
+          "stat": "duration",
+          "before": 6.0,
+          "before_unit": "s",
+          "after": 4.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Wall Dissolve Duration",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "meters/second Slide Slide charges",
+          "stat": "charges",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "there is .2 seconds before her gun comes out) Relay Bolt Charges",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Windup delay",
+          "stat": "delay",
+          "before": 1.1,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concuss Duration",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 3.5,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Energy Time until Full Fuel Regen",
+          "stat": "duration",
+          "before": 60.0,
+          "before_unit": "s",
+          "after": 20.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s audio has been updated to travel with the fade out of the wall. Wall Duration",
+          "stat": "duration",
+          "before": 6.0,
+          "before_unit": "s",
+          "after": 4.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Wall Dissolve Duration",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "meters/second Slide Slide charges",
+          "stat": "charges",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "there is .2 seconds before her gun comes out) Relay Bolt Charges",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Windup delay",
+          "stat": "delay",
+          "before": 1.1,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concuss Duration",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 3.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "no longer has her strafe speed reduced while sprinting",
+          "stat": "effect",
+          "description": "no longer has her strafe speed reduced while sprinting",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.08",
+      "raw": "Fast Lane Now more reliably fully extends through Fracture’s A Door when cast from the outside, behaving the same as when used from inside A Hall. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.03",
+      "raw": "Adjusted hair height to fit within standardized vertical range v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.10",
+      "raw": "High Gear Can no longer use slide to boost upwards in specific map locations v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer use slide to boost upwards in specific map locations v",
+          "stat": "effect",
+          "description": "Can no longer use slide to boost upwards in specific map locations v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.03",
+      "raw": "Overdrive Damage per shot reduced 22 >>> 18 Leg shot multiplier reduced 1.0 >>> 0.85 Killzone increased 15m >>> 20m Headshot multiplier increased 1 >>> 3 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Overdrive Damage per shot reduced",
+          "stat": "damage",
+          "before": 22.0,
+          "before_unit": "",
+          "after": 18.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Leg shot multiplier reduced",
+          "stat": "multiplier",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.85,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Killzone increased",
+          "stat": "range",
+          "before": 15.0,
+          "before_unit": "m",
+          "after": 20.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Headshot multiplier increased",
+          "stat": "multiplier",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Overdrive Damage per shot reduced",
+          "stat": "damage",
+          "before": 22.0,
+          "before_unit": "",
+          "after": 18.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Leg shot multiplier reduced",
+          "stat": "multiplier",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.85,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Killzone increased",
+          "stat": "range",
+          "before": 15.0,
+          "before_unit": "m",
+          "after": 20.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Headshot multiplier increased",
+          "stat": "multiplier",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.10",
+      "raw": "High Gear Fixed a bug where High Gear would automatically stop after using Fast Lane or Relay Bolt v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.08",
+      "raw": "Energy Energy received upon killing an enemy increased 25% >>> 100% Fast Lane Damage removed High Gear Velocity restriction to cast slide removed Slide cannot be cast during equip delay Can now slide sideways and forward, only requiring Neon to be moving Energy drain increased 6.7/s >>> 10/s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Energy Energy received upon killing an enemy increased",
+          "stat": "other",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 100.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "only requiring Neon to be moving Energy drain increased",
+          "stat": "other",
+          "before": 6.7,
+          "before_unit": "/s",
+          "after": 10.0,
+          "after_unit": "/s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Energy Energy received upon killing an enemy increased",
+          "stat": "other",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 100.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "only requiring Neon to be moving Energy drain increased",
+          "stat": "other",
+          "before": 6.7,
+          "before_unit": "/s",
+          "after": 10.0,
+          "after_unit": "/s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Can now slide sideways and forward, only requiring Neon to be moving Energy drain increased 6",
+          "stat": "effect",
+          "description": "Can now slide sideways and forward, only requiring Neon to be moving Energy drain increased 6",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "removed High Gear Velocity restriction to cast slide removed Slide cannot be cast during equip delay",
+          "stat": "effect",
+          "description": "removed High Gear Velocity restriction to cast slide removed Slide cannot be cast during equip delay",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.07",
+      "raw": "Overdrive Can now be input-queued to equip after the current action v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Can now be input-queued to equip after the current action v",
+          "stat": "effect",
+          "description": "Can now be input-queued to equip after the current action v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.0",
+      "raw": "Added Console-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added Console-only[] v",
+          "stat": "effect",
+          "description": "Added Console-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.04",
+      "raw": "Overdrive Head Damage Multiplier increased 2.5 >>> 3.0 (Standardizing to PC) Leg Damage Multiplier increased 0.75 >>> 0.85 (Standardizing to PC) Energy Fuel Drain Per Second: 0.11 >>> 0.1 (Standardizing to PC) v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Overdrive Head Damage Multiplier increased",
+          "stat": "multiplier",
+          "before": 2.5,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Standardizing to PC) Leg Damage Multiplier increased",
+          "stat": "multiplier",
+          "before": 0.75,
+          "before_unit": "",
+          "after": 0.85,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Standardizing to PC) Energy Fuel Drain Per Second",
+          "stat": "other",
+          "before": 0.11,
+          "before_unit": "",
+          "after": 0.1,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Overdrive Head Damage Multiplier increased",
+          "stat": "multiplier",
+          "before": 2.5,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Standardizing to PC) Leg Damage Multiplier increased",
+          "stat": "multiplier",
+          "before": 0.75,
+          "before_unit": "",
+          "after": 0.85,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Standardizing to PC) Energy Fuel Drain Per Second",
+          "stat": "other",
+          "before": 0.11,
+          "before_unit": "",
+          "after": 0.1,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "9.02",
+      "raw": "High Gear High Gear’s description in the Ability Info Panel has been updated to match the ability’s bindings. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.01",
+      "raw": "High Gear Re-equip Speed changed from Fast to Instant.",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

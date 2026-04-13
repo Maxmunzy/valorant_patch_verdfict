@@ -1,0 +1,634 @@
+{
+  "agent": "Clove",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 24,
+    "balance_patches": 7,
+    "numeric_changes": 10,
+    "all_changes": 15
+  },
+  "current_stats": {
+    "C": {
+      "name": "Pick-me-up",
+      "creds": 200,
+      "charges": 1,
+      "function": "Empowerment<br>[[Sustain#Heal",
+      "stats": {
+        "Max duration allowed for damaging assist to enable ability activation": {
+          "value": null,
+          "unit": "",
+          "raw": "Within 6 seconds"
+        },
+        "Activation window upon eligible takedown": {
+          "value": 4.5,
+          "unit": "seconds",
+          "raw": "4.5 seconds"
+        },
+        "Activation duration": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Bonus movement speed": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki/>+15%"
+        },
+        "Buff duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds (Overheal)<br>3 seconds (Movement Speed)"
+        },
+        "Overhealing rates": {
+          "value": null,
+          "unit": "",
+          "raw": "Healing: 50 HP/s<br>Decay: 25 HP/s"
+        },
+        "Maximum Overheal": {
+          "value": 50.0,
+          "unit": "HP",
+          "raw": "<nowiki/>50 HP"
+        }
+      }
+    },
+    "Q": {
+      "name": "Meddle",
+      "creds": 250,
+      "charges": 1,
+      "function": "Cripple",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup": {
+          "value": 0.75,
+          "unit": "seconds after in contact with ground",
+          "raw": "0.75 seconds after in contact with ground"
+        },
+        "Radius": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Decay rates": {
+          "value": null,
+          "unit": "",
+          "raw": "Decay: 90 HP over 0.75 seconds (120 HP/s)<br>Restoration: 90 HP over 1.75 seconds (51 HP/s)"
+        },
+        "Maximum decayed health": {
+          "value": 90.0,
+          "unit": "HP",
+          "raw": "90 HP"
+        },
+        "Decay duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds (Includes decaying and restoration times)"
+        }
+      }
+    },
+    "E": {
+      "name": "Ruse",
+      "creds": 150,
+      "charges": 2,
+      "function": "[[Vision Blocker#Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max cast range": {
+          "value": 60.0,
+          "unit": "meters",
+          "raw": "60 meters (Alive)<br>42.5 meters (Dead)"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "rowspan=2|Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Alive: 14 seconds (includes 0.5-second formation time and 0.5-second expiration time)<br>Expiration warning at 12 seconds"
+        },
+        "Dead: 6 seconds (includes 0.5-second formation time and 0.5-second expiration time)<br>Expiration warning at 4 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|12.05}}"
+        }
+      }
+    },
+    "X": {
+      "name": "Not Dead Yet",
+      "creds": null,
+      "charges": null,
+      "function": "[[Mobility#Intangibility",
+      "stats": {
+        "Revive duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Maximum intangibility duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Deactivation duration": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Resurrection timer": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.06",
+      "raw": "Ruse Fixed a bug where post-death Ruse could not be unequipped without casting it. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.05",
+      "raw": "Ruse Smoke duration 14s >> 6s when casted while dead Meddle Area of effect reduced 6m >> 4m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Pick-me-up Fixed a bug where their total health pool was displaying 151 instead of 150 when overhealed Meddle Fixed an issue where throw animations would break if aiming straight down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.11",
+      "raw": "Not Dead Yet Fixed a bug where killing Clove right after they use it would cause some finishers to have erratic behavior Fixed a bug where Clove’s agent icon in the top team composition bar would not update properly when Clove was killed inside of a smoke after using it Fixed a bug where Clove would revive in spawn if their body had too many players standing over it Pick-me-up Fixed a bug where the overheal UI effects would persist on the HUD even after the overheal had been reduced to 0 v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "Fixed a bug that incorrectly teleported Clove to spawn when teleporting back from Iso's Kill Contract Fixed a bug where Clove would be moved into a wall if their body was intersecting Sage’s Barrier Orb Ruse Charges are now restricted to 1 maximum when Clove is dead Pick-me-up Overheal reduced from 100 HP >>> 50 HP Not Dead Yet Fixed a bug where Clove would sometimes revive in unexpected locations v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": " now restricted to 1 maximum when Clove is dead Pick-me-up Overheal reduced from",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "hp",
+          "after": 50.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": " now restricted to 1 maximum when Clove is dead Pick-me-up Overheal reduced from",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "hp",
+          "after": 50.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.05",
+      "raw": "Pick-me-up Fixed an issue where the cast sound was silent for enemies. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Pick-me-up Visuals updated to show when Clove’s speed boost is active v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.11",
+      "raw": "Pick-me-up Fixed an issue where the audio wouldn’t play properly for all players. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "Ruse Fixed an issue where Clove’s Ruse battlefield view could be seen from underneath elevated locations while they have it equipped. Pick-me-up Fixed an issue where Clove’s Pick-me-up duration was incorrect for observer/spectator clients. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.06",
+      "raw": "Meddle Updated tooltips to reflect patch changes. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.05",
+      "raw": "Not Dead Yet Fixed a bug where Clove could take damage or die for a single frame upon reviving v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.04",
+      "raw": "Meddle No longer explodes after a 1.3 second timer after casting. Explodes after contact with the ground after a 0.75s timer. Projectile audio has been updated Ruse Cooldown duration increased from 30s >>> 40s Pick-me-up Health buff duration increased from 8s >>> 10s Move speed duration reduced from 8s >>> 3s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "s timer. Projectile audio has been updated Ruse Cooldown duration increased from",
+          "stat": "duration",
+          "before": 30.0,
+          "before_unit": "s",
+          "after": 40.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Pick-me-up Health buff duration increased from",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "s",
+          "after": 10.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Move speed duration reduced from",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "s",
+          "after": 3.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "s timer. Projectile audio has been updated Ruse Cooldown duration increased from",
+          "stat": "duration",
+          "before": 30.0,
+          "before_unit": "s",
+          "after": 40.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Pick-me-up Health buff duration increased from",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "s",
+          "after": 10.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Move speed duration reduced from",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "s",
+          "after": 3.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "No longer explodes after a 1",
+          "stat": "effect",
+          "description": "No longer explodes after a 1",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.02",
+      "raw": "Pick-me-up Fixed issues where Clove could tank lethal damage specifically when Regen Shield and Pick-me-up were active at the same time. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.00",
+      "raw": "Not Dead Yet Fixed an issue where Not Dead Yet could fail to cast when pressed in the last few frames of the activation window v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.10",
+      "raw": "Ruse Enemy smokes updated to appear more red than ally smokes Visual cues have been added to the inside of the smoke before it expires. Not Dead Yet (changed in ) Time to get a kill: 12s >>> 10s Meddle Fixed a bug where Meddle was hitting through level geometry. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "de of the smoke before it expires. Not Dead Yet (changed in ) Time to get a kill",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 10.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "de of the smoke before it expires. Not Dead Yet (changed in ) Time to get a kill",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 10.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "added to the inside of the smoke before it expires",
+          "stat": "effect",
+          "description": "added to the inside of the smoke before it expires",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.03",
+      "raw": "Ruse Can now ping and see additional icons on maps used for ability targeting v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Can now ping and see additional icons on maps used for ability targeting v",
+          "stat": "effect",
+          "description": "Can now ping and see additional icons on maps used for ability targeting v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.01",
+      "raw": "Not Dead Yet Fixed an issue regarding resurrection not being visible for Spectators and Observers. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.11",
+      "raw": "Pick-me-up Cost 100 >>> 200 Duration 10s >>> 8s Damaging Assist Time to activate 10s >>> 6s Fixed an issue where Clove’s Pick-me-up could not proc on training range bots Ruse Fixed an issue where players inside Clove’s smoke forming location were at a disadvantage compared to players on the outside of the smoke. Not Dead Yet Cost 7 >>> 8 Unequip Delay .7 >>> .8s Fixed an issue where it allowed smoke assists to allow them to survive Fixed issues where Clove could play the incorrect animation or slide along the ground during a skin finisher if they were the last player alive and had their ultimate available. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Pick-me-up Cost",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 8.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damaging Assist Time to activate",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": " disadvantage compared to players on the outside of the smoke. Not Dead Yet Cost",
+          "stat": "cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip Delay",
+          "stat": "delay",
+          "before": 0.7,
+          "before_unit": "",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Pick-me-up Cost",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 8.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damaging Assist Time to activate",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": " disadvantage compared to players on the outside of the smoke. Not Dead Yet Cost",
+          "stat": "cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip Delay",
+          "stat": "delay",
+          "before": 0.7,
+          "before_unit": "",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "8.10",
+      "raw": "Pick-me-up Fixed issues where the timer for Pick-me-up could be restarted which would allow Clove to have more time than intended to activate the ability. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.08",
+      "raw": "Ruse Fixed Clove's icons being incorrect when Ruse was equipped. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.07",
+      "raw": "Speculative fix for an issue where Clove’s corpse would sometimes remain upright after dying. Fixed a bug where dead allies or observers spectating Clove would skip the death camera ceremony upon Clove’s death. Pick-me-up Speculative fix for Pick-me-up HUD sometimes showing > 150 total health values when taking fall damage as Clove activated the ability. Fixed a bug where damage to Pick-me-up temporary health did not appear in Combat Report. Meddle Fixed a bug where Meddle used an incorrect ability icon in the combat report. Fixed a bug where Meddle could rarely cause a client-side hitch. Ruse Fixed a bug where Ruse used after death does not report to the Match Details. Fixed a bug where Clove’s head and arm hitboxes could be offset when aiming sharply up or down, and while crouched with R",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.05",
+      "raw": "Added PC-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added PC-only[] v",
+          "stat": "effect",
+          "description": "Added PC-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.02",
+      "raw": "Ruse Fixed a bug for Coaches and Observers where Agents with an ability map UI would repeatedly play their equip animation when switching to their POV. Team Deathmatch only: Pick-me-up Fixed a bug where the overheal would sometimes not give health when they died previously with the buff active. Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.06",
+      "raw": "Ruse Added Agent-specific cursor curve settings for map ability controls.",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Added Agent-specific cursor curve settings for map ability controls",
+          "stat": "effect",
+          "description": "Added Agent-specific cursor curve settings for map ability controls",
+          "direction": "buff"
+        }
+      ]
+    }
+  ]
+}

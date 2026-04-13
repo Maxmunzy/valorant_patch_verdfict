@@ -1,0 +1,957 @@
+{
+  "agent": "Skye",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 33,
+    "balance_patches": 17,
+    "numeric_changes": 16,
+    "all_changes": 31
+  },
+  "current_stats": {
+    "C": {
+      "name": "Regrowth",
+      "creds": 150,
+      "charges": 1,
+      "function": "[[Sustain#Heal",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Healing": {
+          "value": 1.0,
+          "unit": "per tickTotal 100",
+          "raw": "1 per tick<br>Total 100"
+        },
+        "Tick/Tick rate": {
+          "value": 20.0,
+          "unit": "per second1 every 0.05 secondsTotal 100 ticks",
+          "raw": "20 per second<br>1 every 0.05 seconds<br>Total 100 ticks"
+        },
+        "Healing pool": {
+          "value": 100.0,
+          "unit": "HP",
+          "raw": "100 HP"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Trailblazer",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Crowd Control#Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deploy time": {
+          "value": 0.18,
+          "unit": "seconds",
+          "raw": "0.18 seconds"
+        },
+        "Vision radius": {
+          "value": 22.5,
+          "unit": "meters",
+          "raw": "22.5 meters"
+        },
+        "Duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        },
+        "Jump distance": {
+          "value": 12.0,
+          "unit": "meters",
+          "raw": "12 meters"
+        },
+        "Explosion radius": {
+          "value": 3.5,
+          "unit": "meters",
+          "raw": "3.5 meters"
+        },
+        "Damage": {
+          "value": 30.0,
+          "unit": "",
+          "raw": "30"
+        },
+        "rowspan=\"2\"|Concuss duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Minimum: 2.5 seconds"
+        },
+        "Maximum: 4 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|3.0}}"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Guiding Light",
+      "creds": null,
+      "charges": 2,
+      "function": "[[Intel#Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Velocity": {
+          "value": 18.0,
+          "unit": "meters per second",
+          "raw": "18 meters per second"
+        },
+        "Duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Flash max duration windup time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Flash activation windup time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Max flash duration": {
+          "value": 1.0,
+          "unit": "-2.25 seconds",
+          "raw": "1-2.25 seconds<br>(based on duration windup)"
+        }
+      }
+    },
+    "X": {
+      "name": "Seekers",
+      "creds": null,
+      "charges": null,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.55,
+          "unit": "seconds",
+          "raw": "0.55 seconds"
+        },
+        "Number of Seekers deployed": {
+          "value": 3.0,
+          "unit": "",
+          "raw": "3"
+        },
+        "Max lifespan": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Nearsight duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "Nearsight vision radius": {
+          "value": 7.5,
+          "unit": "meters",
+          "raw": "7.5 meters"
+        },
+        "Slow duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Slow potency": {
+          "value": 60.0,
+          "unit": "%",
+          "raw": "60%"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.05",
+      "raw": "Guiding Light Added 60s Cooldown v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Added 60s Cooldown v",
+          "stat": "effect",
+          "description": "Added 60s Cooldown v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.04",
+      "raw": "Seekers Fixed an observer bug where they would not show on the minimap when she is an attacker. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.02",
+      "raw": "Seekers Can now be concussed. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Can now be concussed",
+          "stat": "effect",
+          "description": "Can now be concussed",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.11",
+      "raw": "Regrowth Fixed a bug where it was healing certain deployable abilities v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Guiding Light Fixed an issue that caused visual effects to linger when equipping and unequipping immediately v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Fixed inconsistent spacing in ability tooltips v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.08",
+      "raw": "Trailblazer Fixed an issue where Skye’s Trailblazer leap did not get slowed by Waylay’s Saturate debuff. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.03",
+      "raw": "Seekers Now slows enemy dashes v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Now slows enemy dashes v",
+          "stat": "effect",
+          "description": "Now slows enemy dashes v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.00",
+      "raw": "Guiding Light Fixed a bug where Guiding Light’s flash duration was not scaling properly Fixed a bug where Guiding Light’s hit confirm sound and VO would not play when hitting Yoru’s Fakeout Clone v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.04",
+      "raw": "Seekers Fixed an issue where Seekers would not consume Ultimate Points under certain conditions. Undocumented Guiding Light Max flash duration changed from 1-2.25s (based on windup) >>> 1.25s This was a bug that was eventually fixed in v10.00, having first been reported to the wiki after v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.03",
+      "raw": "v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.01",
+      "raw": "Guiding Light No longer regenerates charges during a round. Now automatically activates the flash at the end of its lifetime. Seekers When a Seeker gets close to its target, the target player will now get a yellow directional warning indicator. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "No longer regenerates charges during a round",
+          "stat": "effect",
+          "description": "No longer regenerates charges during a round",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.12",
+      "raw": "Trailblazer Camera movement is disabled during the leap. When the Trailblazer is destroyed during the leap, it no longer causes a concuss explosion. Trailblazer plays the destruction voice line when destroyed during the leap. Trailblazer explosion now concusses allies as well as enemies. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "no longer causes a concuss explosion",
+          "stat": "effect",
+          "description": "no longer causes a concuss explosion",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.09",
+      "raw": "Trailblazer Adjusted collision so that it goes under Trapwires placed at mid-height. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.04",
+      "raw": "Guiding Light Max duration while casting reduced 2.5s >>> 2s Trailblazer HP reduced 100 >>> 80 Seekers Ultimate Points increased 7 >>> 8 Seeker Health decreased 150 >>> 120 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Guiding Light Max duration while casting reduced",
+          "stat": "duration",
+          "before": 2.5,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Trailblazer HP reduced",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 80.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Seekers Ultimate Points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Seeker Health decreased",
+          "stat": "health",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 120.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Guiding Light Max duration while casting reduced",
+          "stat": "duration",
+          "before": 2.5,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Trailblazer HP reduced",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 80.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Seekers Ultimate Points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Seeker Health decreased",
+          "stat": "health",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 120.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.02",
+      "raw": "Guiding Light Fixed an issue where Skye would get an additional charge of Guiding Light upon swapping sides. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.07",
+      "raw": "Seekers Yellow indicator removed from Seekers v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "removed from Seekers v",
+          "stat": "effect",
+          "description": "removed from Seekers v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.0",
+      "raw": "Trailblazer No longer deals damage to enemy Trailblazers or Owl Drone Seekers Seekers are no longer visible on the minimap while they are still invisible if an enemy has line of sight to their hidden location Undocumented Guiding Light Can no longer continue controlling hawks while suppressed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "No longer deals damage to enemy Trailblazers or Owl Drone Seekers Seekers are no longer visible on t",
+          "stat": "effect",
+          "description": "No longer deals damage to enemy Trailblazers or Owl Drone Seekers Seekers are no longer visible on t",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer continue controlling hawks while suppressed v",
+          "stat": "effect",
+          "description": "Can no longer continue controlling hawks while suppressed v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.12",
+      "raw": "Regrowth Cost decreased 200 >>> 150 Trailblazer Cost increased 250 >>> 300 Now immune to all allied damage Seekers Now immune to all allied damage v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Regrowth Cost decreased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Trailblazer Cost increased",
+          "stat": "cost",
+          "before": 250.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Regrowth Cost decreased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Trailblazer Cost increased",
+          "stat": "cost",
+          "before": 250.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now immune to all allied damage Seekers Now immune to all allied damage v",
+          "stat": "effect",
+          "description": "Now immune to all allied damage Seekers Now immune to all allied damage v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.09",
+      "raw": "Seekers Improvements made to how Seekers navigate around obstacles after they've acquired a target to more reliably and efficiently reach them Will no longer debuff targets if they are intangible on reaching them v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Will no longer debuff targets if they are intangible on reaching them v",
+          "stat": "effect",
+          "description": "Will no longer debuff targets if they are intangible on reaching them v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.07",
+      "raw": "Guiding Light The max flash duration of Skye's Guiding Light now scales from 1s to 2.25s over a .75s charge up after being cast Guiding Light can no longer be shot and destroyed New VFX, UI, and sounds added to communicate new gameplay intent Unequip Delay out of Guiding Light increased .75s >>> .85s v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": " to communicate new gameplay intent Unequip Delay out of Guiding Light increased",
+          "stat": "delay",
+          "before": 0.75,
+          "before_unit": "s",
+          "after": 0.85,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": " to communicate new gameplay intent Unequip Delay out of Guiding Light increased",
+          "stat": "delay",
+          "before": 0.75,
+          "before_unit": "s",
+          "after": 0.85,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "added to communicate new gameplay intent Unequip Delay out of Guiding Light increased",
+          "stat": "effect",
+          "description": "added to communicate new gameplay intent Unequip Delay out of Guiding Light increased",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "can no longer be shot and destroyed New VFX, UI, and sounds added to communicate new gameplay intent",
+          "stat": "effect",
+          "description": "can no longer be shot and destroyed New VFX, UI, and sounds added to communicate new gameplay intent",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.11",
+      "raw": "Fixed a bug where Skye would sometimes make an unintended pose, seen in third-person, when holding a gun v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.07",
+      "raw": "Seekers Can once again break through the destructible doors on Ascent v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.06",
+      "raw": "Guiding Light Unequip time after casting or bending Guiding Light’s projectile increased .5 >>> .75 Windup time after activation before the flash goes off increased .25 >>> .3 Seekers Cost increased 6 >>> 7 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s projectile increased",
+          "stat": "other",
+          "before": 0.5,
+          "before_unit": "",
+          "after": 0.75,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Windup time after activation before the flash goes off increased",
+          "stat": "duration",
+          "before": 0.25,
+          "before_unit": "",
+          "after": 0.3,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Seekers Cost increased",
+          "stat": "cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s projectile increased",
+          "stat": "other",
+          "before": 0.5,
+          "before_unit": "",
+          "after": 0.75,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Windup time after activation before the flash goes off increased",
+          "stat": "duration",
+          "before": 0.25,
+          "before_unit": "",
+          "after": 0.3,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Seekers Cost increased",
+          "stat": "cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.01",
+      "raw": "Guiding Light Can no longer be activated while suppressed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer be activated while suppressed v",
+          "stat": "effect",
+          "description": "Can no longer be activated while suppressed v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.0",
+      "raw": "Trailblazer Vision radius increased 1750 >>> 2250 Max concussion duration increased 3 >>> 4 Cost increased 200 >>> 250 Guiding Light Charges reduced 3 >>> 2 Cost of charges increased 100 >>> 250 Charges now replenished on a 40-second cooldown No longer need to re-equip Guiding Light to trigger flash detonation Projectile now goes around corners tighter when free flying and is more responsive to guiding Audio attenuation when cast reduced 3250 >>> 1250 Seekers Fixed issue causing Seekers to show up on the enemy's minimap even when the Seekers aren’t visible to them v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Trailblazer Vision radius increased",
+          "stat": "range",
+          "before": 1750.0,
+          "before_unit": "",
+          "after": 2250.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Max concussion duration increased",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 4.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Guiding Light Charges reduced",
+          "stat": "charges",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost of charges increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ree flying and is more responsive to guiding Audio attenuation when cast reduced",
+          "stat": "other",
+          "before": 3250.0,
+          "before_unit": "",
+          "after": 1250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Trailblazer Vision radius increased",
+          "stat": "range",
+          "before": 1750.0,
+          "before_unit": "",
+          "after": 2250.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Max concussion duration increased",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 4.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Guiding Light Charges reduced",
+          "stat": "charges",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost of charges increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ree flying and is more responsive to guiding Audio attenuation when cast reduced",
+          "stat": "other",
+          "before": 3250.0,
+          "before_unit": "",
+          "after": 1250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "No longer need to re-equip Guiding Light to trigger flash detonation Projectile now goes around corn",
+          "stat": "effect",
+          "description": "No longer need to re-equip Guiding Light to trigger flash detonation Projectile now goes around corn",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.07",
+      "raw": "Guiding Light Fixed an issue where Guiding Light appeared to go underground when thrown directly down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.05",
+      "raw": "Trailblazer Fixed a rare bug that could leave players unable to move or process inputs until they died when entering or returning from Trailblazer \"We previously addressed some causes of this bug last patch, this fix should address the remaining known causes\" v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.03",
+      "raw": "Trailblazer Fixed a couple input bugs around possessing and unpossessing Trailblazer in the same frame which lead to locking all inputs or locking view direction Seekers Seekers now work if Skye is killed at a very specific moment while casting them v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.02",
+      "raw": "Seekers Fixed Seekers not being able to find enemies on the zipline platform on B-Site of Split v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.11",
+      "raw": "Added Console-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added Console-only[] v",
+          "stat": "effect",
+          "description": "Added Console-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.02",
+      "raw": "Guiding Light Can be set to Togglable in the Agent Profile Settings, allowing you to press and let go of the input to steer the ability freely while it’s active",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

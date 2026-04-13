@@ -1,0 +1,664 @@
+{
+  "agent": "Vyse",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 17,
+    "balance_patches": 4,
+    "numeric_changes": 11,
+    "all_changes": 17
+  },
+  "current_stats": {
+    "C": {
+      "name": "Razorvine",
+      "creds": 150,
+      "charges": 2,
+      "function": "[[Crowd Control#Slow",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deploy time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Detection radius": {
+          "value": 3.5,
+          "unit": "meters",
+          "raw": "3.5 meters"
+        },
+        "Windup": {
+          "value": 0.2,
+          "unit": "seconds",
+          "raw": "0.2 seconds"
+        },
+        "Radius": {
+          "value": 6.25,
+          "unit": "meters",
+          "raw": "6.25 meters"
+        },
+        "Slow amount": {
+          "value": 15.0,
+          "unit": "%",
+          "raw": "15%"
+        },
+        "Damage per distance": {
+          "value": 10.0,
+          "unit": "per 1.25 meters",
+          "raw": "10 per 1.25 meters"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total 6 seconds (Includes Windup)"
+        }
+      }
+    },
+    "Q": {
+      "name": "Shear",
+      "creds": 200,
+      "charges": 1,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max deploy distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "rowspan=3|Wall dimensions": {
+          "value": null,
+          "unit": "",
+          "raw": "Min-Max Length: 1-12 meters"
+        },
+        "Width: 1 meter": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Height: 2.5 meters": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deploy time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Detection distance": {
+          "value": 3.5,
+          "unit": "meters",
+          "raw": "3.5 meters"
+        },
+        "Windup": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "rowspan=3|Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total 6 seconds"
+        },
+        "Expiration warning at 3.7 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}*-->"
+        },
+        "0.8-second deactivation time": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        }
+      }
+    },
+    "E": {
+      "name": "Arc Rose",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Blind#Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max targeting distance": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Max wall penetration": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Max deploy height": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Detection radius": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Deploy time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max recall distance": {
+          "value": 32.5,
+          "unit": "meters",
+          "raw": "32.5 meters"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max blind duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Steel Garden",
+      "creds": null,
+      "charges": null,
+      "function": "Limiter",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 28.0,
+          "unit": "meters",
+          "raw": "28 meters"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Windup": {
+          "value": 4.4,
+          "unit": "seconds",
+          "raw": "4.4 seconds"
+        },
+        "Jammed duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.03",
+      "raw": "Razorvine All Random One Site only: Fixed an issue where she could continuously place infinite Razorvines during Buy phase. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Steel Garden Radius increased from 26m >>> 28m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Steel Garden Radius increased from",
+          "stat": "range",
+          "before": 26.0,
+          "before_unit": "m",
+          "after": 28.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Steel Garden Radius increased from",
+          "stat": "range",
+          "before": 26.0,
+          "before_unit": "m",
+          "after": 28.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.11",
+      "raw": "Shear Fixed a bug where Sova’s Recon Bolt and KAY/O’s ZERO/point would get stuck inside an activated wall instead of being destroyed v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "Razorvine Fixed a bug with its decals being able to be seen under certain platforms. Fixed a bug with the projectile where it wouldn’t disappear upon landing. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Razorvine Fixed a bug that caused it to appear to be missing its bottom half when Vyse died or it became inactive v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Arc Rose Now destructible after the flash windup starts rather than being invulnerable. When enemy players are successfully flashed, the audio cue and voiceline alerting Vyse and her allies is removed Flash duration decreased from 2.25s >>> 2.0s After destruction, cooldown is increased from 45s >>> 60s Recalling the ability will now always incur a 20s cooldown Shear Trigger logic has been reworked to make it easier to bait out. The wall now spawns immediately when an enemy enters and then leaves its trigger zone. Enemies will also hear an audio cue, audible only to them, when they enter the trigger zone Razorvine Health decreased from 40 >>> 20 Steel Garden Initial windup increased from 3.4s >>> 4.4s Radius decreased from 32.5m >>> 26m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " voiceline alerting Vyse and her allies is removed Flash duration decreased from",
+          "stat": "duration",
+          "before": 2.25,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "cooldown is increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "when they enter the trigger zone Razorvine Health decreased from",
+          "stat": "health",
+          "before": 40.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Steel Garden Initial windup increased from",
+          "stat": "other",
+          "before": 3.4,
+          "before_unit": "s",
+          "after": 4.4,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Radius decreased from",
+          "stat": "range",
+          "before": 32.5,
+          "before_unit": "m",
+          "after": 26.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " voiceline alerting Vyse and her allies is removed Flash duration decreased from",
+          "stat": "duration",
+          "before": 2.25,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "cooldown is increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "when they enter the trigger zone Razorvine Health decreased from",
+          "stat": "health",
+          "before": 40.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Steel Garden Initial windup increased from",
+          "stat": "other",
+          "before": 3.4,
+          "before_unit": "s",
+          "after": 4.4,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Radius decreased from",
+          "stat": "range",
+          "before": 32.5,
+          "before_unit": "m",
+          "after": 26.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "will now always incur a 20s cooldown Shear Trigger logic has been reworked to make it easier to bait",
+          "stat": "effect",
+          "description": "will now always incur a 20s cooldown Shear Trigger logic has been reworked to make it easier to bait",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "removed Flash duration decreased from 2",
+          "stat": "effect",
+          "description": "removed Flash duration decreased from 2",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "rework",
+          "ability_slot": "C",
+          "context_label": "reworked to make it easier to bait out",
+          "stat": "mechanic",
+          "description": "reworked to make it easier to bait out",
+          "direction": "change"
+        }
+      ]
+    },
+    {
+      "patch": "11.05",
+      "raw": "Steel Garden Fixed issue where the audio could trigger twice after Observers swap targets. Razorvine Fixed a bug where it would leave circles on the minimap for observers when Vyse died. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.10",
+      "raw": "Arc Rose Fixed an issue where hit confirm would play when affecting non-players Fixed an issue where Vyse could no longer use Arc Rose for the remainder of the round if it was placed too close to the spike v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer use Arc Rose for the remainder of the round if it was placed too close to the spike v",
+          "stat": "effect",
+          "description": "no longer use Arc Rose for the remainder of the round if it was placed too close to the spike v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.08",
+      "raw": "Arc Rose Fixed an issue where the cooldown on Vyse’s Arc Rose was not properly set after it was destroyed. Shear Fixed an issue where Vyse’s activated Shear wall didn’t display the warning fade out visual cue. Fixed an issue where Vyse’s Shear wall blocked bullets after the visual wall despawned. Steel Garden Fixed an issue where Vyse’s Steel Garden warning indicator did not properly match the debuff area. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "Shear Fixed an issue where enemies could get stuck inside Vyse’s wall if the wall was overlapping with a smoke ability at specific times. Fixed an issue where enemies could get stuck in Vyse’s Shear if they jumped when it was triggered. Fixed an issue where Vyse’s Shear’s SFX could get stuck playing for enemies after moving out of range or if Vyse dies. Undocumented Razorvine Activation windup decreased 0.3s >>> 0.2s v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "out of range or if Vyse dies. Undocumented Razorvine Activation windup decreased",
+          "stat": "range",
+          "before": 0.3,
+          "before_unit": "s",
+          "after": 0.2,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "out of range or if Vyse dies. Undocumented Razorvine Activation windup decreased",
+          "stat": "range",
+          "before": 0.3,
+          "before_unit": "s",
+          "after": 0.2,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.06",
+      "raw": "Razorvine Duration when activated: 10s >>> 6s Shear Triggered Wall Duration: 8s >>> 6s Arc Rose Fixed a bug where Vyse’s Arc Rose idle animation stopped looping when she crouched. Fixed a bug where destroying the Arc Rose while Vyse was recalling it did not respect the 40 second “destroyed” cooldown. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Razorvine Duration when activated",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Shear Triggered Wall Duration",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Razorvine Duration when activated",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Shear Triggered Wall Duration",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.02",
+      "raw": "Razorvine and Arc Rose Fixed an issue where Arc Rose and Razorvine were visible when placed on specific water surfaces. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.11",
+      "raw": "Razorvine Damage per tick of moving through Razorvine: 6 >>> 10 Vertical drop spawn height: 450 >>> 300 Now slows enemy dashes similar to Sage’s Slow Orb and concusses. Arc Rose Equip speed after cast: Normal >>> Fast v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Razorvine Damage per tick of moving through Razorvine",
+          "stat": "damage",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 10.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Vertical drop spawn height",
+          "stat": "range",
+          "before": 450.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Razorvine Damage per tick of moving through Razorvine",
+          "stat": "damage",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 10.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Vertical drop spawn height",
+          "stat": "range",
+          "before": 450.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now slows enemy dashes similar to Sage’s Slow Orb and concusses",
+          "stat": "effect",
+          "description": "Now slows enemy dashes similar to Sage’s Slow Orb and concusses",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.06",
+      "raw": "Razorvine Fixed an issue where Razorvine had lingering VFX when canceling early. Shear Fixed an issue where ’s Fakeout did not trigger Shear Fixed an issue where was unable to cast abilities through Shear. Fixed an issue where ’s Recon Bolt was destroyed by Shear. Fixed an issue where ’s Thrash and ’s Showstopper could hit people on the other side of Shear. Fixed various collision issues with Vyse’s Shear, that blocked bullets and people while despawning. Fixed rare instances of people’s bodies being clipped inside Vyse’s Shear. Fixed an issue where Shear had lingering VFX when canceling early. Arc Rose Fixed an issue where Arc Rose could be placed on invalid objects. Steel Garden AOE windup audio integration have been updated from being positioned directly on the Agent when in the AOE to ",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.04",
+      "raw": "Added PC-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added PC-only[] v",
+          "stat": "effect",
+          "description": "Added PC-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.02",
+      "raw": "Shear Fixed a bug where it was sometimes destroying Gekko’s Thrash, Skye’s Trailblazer, Sova’s Owl Drone, and Tejo’s Stealth Drone instead of pushing them aside. Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.05",
+      "raw": "Fixed an issue where the combat report would show the incorrect abilities for Vyse. Shear Fixed an issue where KAY/O's ZERO/point was destroyed by Shear. Fixed an issue where Shear's collision would linger after being placed on sloped surfaces. Fixed an issue where Shear could extend over gaps improperly. Fixed instances where Shear's destruction voice line was not properly playing. Arc Rose Fixed an issue where Arc Rose could not be placed on some map walls during the Buy Phase. Fixed instances of Arc Rose voice line being cut off prematurely. Steel Garden [PS5] Fixed rare client crash instances related to Steel Garden.",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

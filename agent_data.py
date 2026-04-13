@@ -662,9 +662,9 @@ AGENT_RELATIONS = {
         ],
     },
     "Miks": {
-        "meta_impact": "음파 연막 + CC + 팀 버프 복합 킷. 척후대+전략가 혼합 역할. 신규 요원으로 메타 데이터 부족.",
+        "meta_impact": "음파 연막 + CC + 팀 버프 복합 킷. 전략가 슬롯에서 유틸리티 제공. 신규 요원으로 메타 데이터 부족.",
         "suppressed_by": [
-            {"agent":"Breach",  "type":"competes", "reason":"CC 척후대 슬롯에서 브리치의 S급 CC 3개와 경쟁"},
+            {"agent":"Clove",   "type":"competes", "reason":"전략가 슬롯에서 클로브의 강력한 유틸리티와 경쟁"},
         ],
     },
 }

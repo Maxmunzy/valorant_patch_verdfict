@@ -31,7 +31,7 @@ AGENT_PR_BASELINE: dict[str, float] = {
     "Harbor":    0.43,
     "Iso":       1.81,
     "Jett":     13.93,
-    "Kay/O":     4.10,
+    "KAYO":      4.10,
     "Killjoy":   3.76,
     "Neon":      1.92,
     "Omen":      6.96,
@@ -124,14 +124,12 @@ def precompute_role_util_avgs(rank_df: "pd.DataFrame") -> dict:
             entry["rank_pr_rel_meta"] = pr / meta_mean if meta_mean > 0 else 1.0
             entry["rank_pr_zscore"]   = (pr - meta_mean) / max(meta_std, 0.5)
 
-            # 유틸 타입별 상대 픽률
+            # 유틸 타입별 보유 여부 (0/1 이진)
+            # 비율 대신 보유 여부만 인코딩 → NaN 제거, 요원 정체성 피처로 사용
             ag_types = agent_util_types.get(ag, set())
             for ut in _UTIL_RATIO_TYPES:
                 key = f"util_{ut}_rank_pr_ratio"
-                if ut in ag_types and util_avg.get(ut, 0) > 0:
-                    entry[key] = pr / util_avg[ut]
-                else:
-                    entry[key] = np.nan  # 해당 유틸 미보유 → XGBoost NaN 처리
+                entry[key] = 1.0 if ut in ag_types else 0.0
 
             result[(int(act_idx), ag)] = entry
 
@@ -174,9 +172,64 @@ def compute_vct_profile(vct_pre_avg):
     else:         return "pro_absent"
 
 
+def build_skill_stat_features(agent: str, agent_skills: dict) -> dict:
+    """agent_skills.json 기반 절대 강도 피처 (Phase 4)
+
+    각 요원의 현재 스킬 수치를 추가 피처로 활용:
+    - 비용 구조 (creds, ult_points)
+    - 시그니처(E) 스탯 수 / 핵심 스탯 값
+    - 킷 전체 복잡도
+    """
+    feat: dict = {}
+
+    ag = agent_skills.get(agent, {})
+
+    e = ag.get("E", {})
+    feat["sig_creds"]   = float(e.get("creds", 0) or 0)
+    feat["sig_charges"] = float(e.get("charges", 1) or 1)
+    e_stats = e.get("stats", {})
+    feat["sig_stat_count"] = float(len(e_stats))
+
+    x = ag.get("X", {})
+    feat["ult_points"] = float(x.get("ult_points", 7) or 7)
+
+    c = ag.get("C", {})
+    q = ag.get("Q", {})
+    feat["total_skill_cost"] = float((c.get("creds", 0) or 0) + (q.get("creds", 0) or 0))
+
+    def _first_stat(stats: dict, *keywords):
+        for name, sv in stats.items():
+            nl = name.lower()
+            if any(kw in nl for kw in keywords):
+                v = sv.get("value")
+                if v is not None:
+                    return float(v)
+        return np.nan
+
+    feat["sig_cooldown_val"] = _first_stat(e_stats, "cooldown", "recharge", "recovery")
+    feat["sig_duration_val"] = _first_stat(e_stats, "duration")
+    feat["sig_damage_val"]   = _first_stat(e_stats, "damage")
+    feat["has_cooldown_sig"] = float(not np.isnan(feat["sig_cooldown_val"]))
+    feat["has_damage_sig"]   = float(not np.isnan(feat["sig_damage_val"]))
+
+    total_stats = sum(len(ag.get(sl, {}).get("stats", {})) for sl in ("C", "Q", "E", "X"))
+    feat["skill_stat_count_total"] = float(total_stats)
+
+    return feat
+
+
+_SKILL_FEAT_DEFAULTS = {
+    "sig_creds": np.nan, "sig_charges": np.nan, "sig_stat_count": np.nan,
+    "ult_points": np.nan, "total_skill_cost": np.nan,
+    "sig_cooldown_val": np.nan, "sig_duration_val": np.nan, "sig_damage_val": np.nan,
+    "has_cooldown_sig": 0.0, "has_damage_sig": 0.0,
+    "skill_stat_count_total": np.nan,
+}
+
+
 def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
                    map_versatility_dict=None, pn_df=None, skill_ceiling_proxy=None,
-                   role_util_dict=None):
+                   role_util_dict=None, agent_skills=None):
     """
     (요원, 액트) 기준 현재 상태 피처 계산
     """
@@ -215,13 +268,40 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
             feat["rank_pr_slope"] = 0.0
         # rank_pr_avg3: 최근 3액트 (단기 추세 포착용, rank_pr와 구분)
         feat["rank_pr_avg3"] = float(all_hist.tail(3)["pick_rate_pct"].mean())
-        feat["rank_pr_peak"] = float(all_hist["pick_rate_pct"].max())
+        feat["rank_pr_peak"]       = float(all_hist["pick_rate_pct"].max())
+        # 로컬 피크: 최근 5액트 내 최고값 (출시 초반 hype 피크에 끌리지 않도록)
+        feat["rank_pr_local_peak"] = float(all_hist.tail(5)["pick_rate_pct"].max())
         # rank_pr_delta: 최근 2액트 간 픽률 변화 (단기 방향성)
         if len(all_hist) >= 2:
             _pr2 = all_hist.tail(2)["pick_rate_pct"].values
             feat["rank_pr_delta"] = float(_pr2[-1] - _pr2[-2])
         else:
             feat["rank_pr_delta"] = 0.0
+
+        # 요원 자신의 역사적 WR 평균 (vs 50 단순 비교 대신 "자기 기준 이탈" 포착)
+        if "win_rate_pct" in all_hist.columns:
+            feat["rank_wr_hist_mean"] = float(all_hist["win_rate_pct"].mean())
+        else:
+            feat["rank_wr_hist_mean"] = 50.0
+
+        # PR 슬로프 5액트 (3액트보다 긴 추세 — 서서히 하락하는 버프 후보 포착)
+        _hist5 = all_hist.tail(5)
+        if len(_hist5) >= 3:
+            _pv5 = _hist5["pick_rate_pct"].values
+            feat["pr_slope_5act"] = float(np.polyfit(np.arange(len(_pv5)), _pv5, 1)[0])
+        else:
+            feat["pr_slope_5act"] = 0.0
+
+        # PR as fraction of peak (정규화된 하락 폭 — 피크 대비 얼마나 내려왔나)
+        _pr_peak_all = float(all_hist["pick_rate_pct"].max())
+        feat["pr_pct_of_peak"] = float(feat.get("rank_pr", 0.0)) / max(_pr_peak_all, 0.01)
+
+        # PR 3액트 전 대비 % 변화 (중기 하락/상승 속도)
+        if len(all_hist) >= 4:
+            _pr_3ago = float(all_hist.iloc[-4]["pick_rate_pct"])
+            feat["rank_pr_pct_change_3act"] = (float(feat.get("rank_pr", 0.0)) - _pr_3ago) / max(_pr_3ago, 0.01)
+        else:
+            feat["rank_pr_pct_change_3act"] = 0.0
 
     # ── VCT 피처 ───────────────────────────────────────────────────────────────
     # [모델 피처] vct_pr_last / vct_wr_last = 가장 최근 액트 기준 (신호 강도 유지)
@@ -255,9 +335,16 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
             feat["vct_pr_last"] = float(
                 (last_vct_evs["pick_rate_pct"] * last_vct_evs["total_maps"]).sum() / total_maps
             ) if total_maps > 0 else 0.0
-            feat["vct_wr_last"] = float(
+
+            # VCT 승률: 픽 수 적을수록 50%로 수렴 (Bayesian shrinkage)
+            # prior=20 → 픽 5개이면 50% 쪽으로 80% 수렴, 픽 40개이면 거의 raw 유지
+            _VCT_WR_PRIOR = 8
+            _raw_vct_wr = float(
                 (last_vct_evs["win_rate_pct"] * last_vct_evs["picks"]).sum() / total_picks
             )
+            feat["vct_wr_last"] = (
+                _raw_vct_wr * total_picks + 50.0 * _VCT_WR_PRIOR
+            ) / (total_picks + _VCT_WR_PRIOR)
             feat["vct_last_act_idx"] = last_vct_act
             feat["vct_data_lag"]     = act_idx - last_vct_act
 
@@ -292,9 +379,15 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
             feat["vct_pr_post"] = float(
                 (_acc_evs["pick_rate_pct"] * _acc_evs["total_maps"]).sum() / _am
             ) if _am > 0 else feat["vct_pr_last"]
-            feat["vct_wr_post"] = float(
-                (_acc_evs["win_rate_pct"] * _acc_evs["picks"]).sum() / _ap
-            ) if _ap > 0 else feat["vct_wr_last"]
+            if _ap > 0:
+                _raw_post_wr = float(
+                    (_acc_evs["win_rate_pct"] * _acc_evs["picks"]).sum() / _ap
+                )
+                feat["vct_wr_post"] = (
+                    _raw_post_wr * _ap + 50.0 * _VCT_WR_PRIOR
+                ) / (_ap + _VCT_WR_PRIOR)
+            else:
+                feat["vct_wr_post"] = feat["vct_wr_last"]
         else:
             feat["vct_pr_last"]      = 0.0
             feat["vct_wr_last"]      = 50.0
@@ -331,6 +424,21 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
     else:
         feat["rank_vct_gap"] = np.nan
 
+    # ── Excess 피처 (urgency 도메인 룰 → 모델 피처로 전환) ─────────────────────
+    # VCT 초과: 현재 VCT 픽률이 역대 평균 대비 얼마나 높은가
+    _vct_avg = feat.get("vct_pr_avg", 0.0) or 0.0
+    _vct_last = feat.get("vct_pr_last", 0.0) or 0.0
+    _wr_u = feat.get("rank_wr_vs50", 0.0) or 0.0
+    feat["vct_pr_excess"] = max(_vct_last - _vct_avg, 0.0)
+    # 인터랙션: VCT 초과 × 랭크 승률 우위 (높은 VCT + 이기는 팀에서 주로 픽 = 너프 핵심 트리거)
+    feat["vct_excess_x_wr"] = feat["vct_pr_excess"] * max(_wr_u, 0.0)
+    # 랭크 픽률 초과: 역대 평균 대비 현재 랭크 픽률
+    _rank_pr = feat.get("rank_pr", 0.0) or 0.0
+    _pr_base = AGENT_PR_BASELINE.get(agent, 5.0)
+    feat["rank_pr_excess"] = max(_rank_pr - _pr_base, 0.0)
+    # 인터랙션: 랭크 픽률 초과 × 승률 우위
+    feat["rank_excess_x_wr"] = feat["rank_pr_excess"] * max(_wr_u, 0.0)
+
     # ── Step 1 이력 피처 ───────────────────────────────────────────────────────
     hist = step1_df[
         (step1_df["agent"] == agent) &
@@ -340,6 +448,16 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
     feat["n_total_patches"] = len(hist)
     feat["n_nerf_patches"]  = int((hist["direction"] == "nerf").sum())
     feat["n_buff_patches"]  = int((hist["direction"] == "buff").sum())
+
+    # 마지막 BUFF / NERF 패치로부터 경과 액트 (방향별 분리)
+    _buff_hist = hist[hist["direction"] == "buff"]
+    _nerf_hist = hist[hist["direction"] == "nerf"]
+    feat["last_buff_acts_ago"] = (
+        act_idx - int(_buff_hist["patch_act_idx"].max()) if not _buff_hist.empty else 99
+    )
+    feat["last_nerf_acts_ago"] = (
+        act_idx - int(_nerf_hist["patch_act_idx"].max()) if not _nerf_hist.empty else 99
+    )
 
     # patch_notes에서 최신 buff/nerf 액트 조회 (training_data보다 최신 패치 반영)
     pn_last_act_idx = -1
@@ -539,8 +657,10 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         feat["skill_ceiling_score"] = int(design.get("skill_ceiling", 5)) / 10.0
 
     vct_peak_ = float(feat.get("vct_pr_peak_all", 0) or 0)
+    # 프로에서 활발하고(vct_pr > 15%) 랭크도 어느 정도 있는 경우 → pro_dominant
+    # 혹은 design이 pro_only
     feat["pro_dominant_flag"] = 1.0 if (
-        is_pro or (vct_pr_last_ > 5.0 or vct_peak_ > 20.0) and _rel_meta_ < 0.7
+        is_pro or vct_pr_last_ >= 15.0
     ) else 0.0
 
     # ── 맵 다양성 피처 ─────────────────────────────────────────────────────────
@@ -561,10 +681,6 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         feat["specialist_low_pr"]     = 0.0
         feat["versatile_high_pr"]     = 0.0
 
-    # ── 전성기 대비 현재 픽률 ──────────────────────────────────────────────────
-    rank_pr      = float(feat.get("rank_pr", 0) or 0)
-    rank_pr_peak = float(feat.get("rank_pr_peak", 0) or 0)
-    feat["rank_pr_vs_peak"] = rank_pr / rank_pr_peak if rank_pr_peak > 0 else 1.0
 
     # ── 상호작용 파생 피처 ─────────────────────────────────────────────────────
     d = feat.get("last_direction", "none")
@@ -622,6 +738,9 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         feat["role_rank_pr_ratio"] = float(ru.get("role_rank_pr_ratio", 1.0))
         feat["rank_pr_rel_meta"]   = float(ru.get("rank_pr_rel_meta", 1.0))
         feat["rank_pr_zscore"]     = float(ru.get("rank_pr_zscore", 0.0))
+        # rank_pr_vs_peak: 현재 액트 메타 평균 대비 픽률
+        # 역사적 피크 기준 대신 현재 메타 맥락으로 비교 (매 액트 독립 판단)
+        feat["rank_pr_vs_peak"]    = feat["rank_pr_rel_meta"]
         for ut in _UTIL_RATIO_TYPES:
             key = f"util_{ut}_rank_pr_ratio"
             val = ru.get(key, np.nan)
@@ -630,6 +749,7 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         feat["role_rank_pr_ratio"] = 1.0
         feat["rank_pr_rel_meta"]   = 1.0
         feat["rank_pr_zscore"]     = 0.0
+        feat["rank_pr_vs_peak"]    = 1.0
         for ut in _UTIL_RATIO_TYPES:
             feat[f"util_{ut}_rank_pr_ratio"] = np.nan
 
@@ -640,35 +760,95 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
         * float(feat.get("vct_pr_last", 0.0) or 0.0)
     )
 
-    # ── 인기도 프록시 피처 ────────────────────────────────────────────────────
-    # 팬덤/장인 보정: 승률이 낮아도 픽률이 유지되면 성능 외 팬덤이 픽률을 지탱한다는 신호
-    _baseline       = AGENT_PR_BASELINE.get(agent, 5.0)
-    _wr_vs50_pop    = float(feat.get("rank_wr_vs50", 0) or 0)
-    feat["agent_pr_baseline"] = _baseline
-    # 현재 PR vs 역대 평균: 음수면 팬덤도 이탈 중, 양수면 베이스라인 유지 or 강함
-    feat["pr_vs_baseline"]    = rank_pr - _baseline
-    # 팬덤 프리미엄: PR이 베이스라인 대비 얼마나 높은가 - WR 약세가 얼마나 반영됐는가
-    # (baseline 대비 PR 초과 비율) - (WR 약세를 2로 나눈 값)
-    # 양수 크면 → "지면서도 픽됨" = 팬덤 보정
-    _pr_excess_ratio = (rank_pr - _baseline) / max(_baseline, 0.5)
-    feat["pr_wr_gap"]         = _pr_excess_ratio - _wr_vs50_pop / 2.0
+    # ══════════════════════════════════════════════════════════════════════
+    # 2D 사분면 피처 v3: 요원별 baseline 중심, 스케일 보정
+    # ══════════════════════════════════════════════════════════════════════
+    # 핵심 원칙:
+    #   1) PR 축: 요원 자신의 역대 평균(baseline) 기준 이탈
+    #   2) WR 축: 요원 자신의 역대 WR 평균 기준 이탈 (50% 아님!)
+    #   3) VCT 축: 요원 자신의 VCT 평균 기준 이탈 + 절대 지배(35%+)
+    #   4) 임계값 없이 순수 곱셈 → 데이터가 고르게 나뉨
+    # ──────────────────────────────────────────────────────────────────────
 
-    # ── Pre-patch anchor 파생 피처 ───────────────────────────────────────────
-    # 마지막 패치가 픽률에 미친 실질 효과: (현재PR - 패치전PR) / 패치전PR
+    # 기본 축 계산 — baseline과 같은 원본 스케일 사용 (×5 하지 않음)
+    _rank_pr_raw  = float(feat.get("rank_pr", 0.0) or 0.0)        # 원본 스케일 (1~17)
+    _baseline_pr  = AGENT_PR_BASELINE.get(agent, 5.0)              # 같은 스케일
+    _rank_wr      = float(feat.get("rank_wr", 50.0) or 50.0)
+    _rank_wr_avg  = float(feat.get("rank_wr_hist_mean", 50.0) or 50.0)
+    _vct_pr       = float(feat.get("vct_pr_last", 0.0) or 0.0)
+    _vct_wr       = float(feat.get("vct_wr_last", 50.0) or 50.0) if not pd.isna(feat.get("vct_wr_last")) else 50.0
+    _vct_pr_avg   = float(feat.get("vct_pr_avg", 0.0) or 0.0)
+
+    # 축: 요원 자기 자신의 평균 대비 이탈량
+    _pr_excess = _rank_pr_raw - _baseline_pr       # +: 평소보다 인기, -: 비인기
+    _wr_excess = _rank_wr - _rank_wr_avg           # +: 평소보다 강함, -: 약함
+    _vct_excess = _vct_pr - _vct_pr_avg            # +: VCT 평소 이상, -: 이하
+    _vct_wr_excess = _vct_wr - 50.0                # VCT WR은 50% 기준 (역대 평균 없음)
+
+    # ── 랭크 2D 사분면 ──────────────────────────────────────────────────
+    # 요원 자신의 baseline PR + 역대 WR 평균 기준 → 임계값 0 → 데이터 균등 분할
+    feat["rank_nerf_2d"]   = max(_pr_excess, 0) * max(_wr_excess, 0)    # Q1: 인기↑ + 강함↑ → 너프
+    feat["rank_buff_2d"]   = max(-_pr_excess, 0) * max(-_wr_excess, 0)  # Q3: 비인기 + 약함 → 버프
+    feat["rank_fandom_2d"] = max(_pr_excess, 0) * max(-_wr_excess, 0)   # Q4: 인기↑ + 약함 → 팬덤
+    feat["rank_niche_2d"]  = max(-_pr_excess, 0) * max(_wr_excess, 0)   # Q2: 비인기 + 강함 → 니치OP
+
+    # ── VCT 2D 사분면 (요원 VCT 평균 기준) ──────────────────────────────
+    feat["vct_nerf_2d"]  = max(_vct_excess, 0) * max(_vct_wr_excess, 0)    # VCT 인기↑ + 승리↑
+    feat["vct_buff_2d"]  = max(-_vct_excess, 0) * max(-_vct_wr_excess, 0)  # VCT 이탈 + 패배
+
+    # VCT 절대 지배: 35%+ → 역대 평균 무관, 너프 압박 (Viper/Omen/Neon)
+    feat["vct_must_nerf"] = max(_vct_pr - 35.0, 0)
+
+    # ── 통합: 랭크 × VCT 교차 판단 ─────────────────────────────────────
+    # 이중 너프: 랭크도 VCT도 너프 방향 (Neon 타입)
+    feat["cross_nerf_2d"] = feat["rank_nerf_2d"] + feat["vct_nerf_2d"]
+
+    # 프로 전용 너프: VCT 35%+ 이면서 랭크에서는 상위가 아닌 요원 (Viper 타입)
+    # baseline_pr 스케일(1~14)에서 "2배 이상 인기 = 랭크 상위" 기준
+    feat["pro_only_nerf"] = feat["vct_must_nerf"] * max(_baseline_pr * 2.0 - _rank_pr_raw, 0) / max(_baseline_pr * 2.0, 1.0)
+
+    # 랭크 전용 너프: 랭크 강한데 VCT 안 뽑힘 (Clove 타입)
+    feat["rank_only_nerf"] = feat["rank_nerf_2d"] * max(20.0 - _vct_pr, 0) / 20.0
+
+    # VCT 상대 위치: 현재 / 역대 평균 비율
+    feat["vct_pr_vs_agent_avg"] = _vct_pr / max(_vct_pr_avg, 2.0)
+
+    # ── 인기도 프록시 피처 ────────────────────────────────────────────────
+    _rank_pr_val    = float(feat.get("rank_pr", 0) or 0)
+    feat["agent_pr_baseline"] = _baseline_pr
+    feat["pr_vs_baseline"]    = _rank_pr_val - _baseline_pr
+    _pr_excess_ratio = (_rank_pr_val - _baseline_pr) / max(_baseline_pr, 0.5)
+    _wr_vs50 = _rank_wr - 50.0
+    feat["pr_wr_gap"] = _pr_excess_ratio - _wr_vs50 / 2.0
+
+    # ── Pre-patch anchor ────────────────────────────────────────────────
     _last_pr_pre_val = float(feat.get("last_pr_pre", 0) or 0)
     if _last_pr_pre_val > 0.3:
-        feat["pr_effect_ratio"] = (rank_pr - _last_pr_pre_val) / _last_pr_pre_val
+        feat["pr_effect_ratio"] = (_rank_pr_val - _last_pr_pre_val) / _last_pr_pre_val
     else:
         feat["pr_effect_ratio"] = 0.0
 
-    # 과너프 플래그: 너프 방향 + 현재 PR이 패치 전 대비 40% 이상 하락
     feat["overshoot_flag"] = 1.0 if (
         d == "nerf" and feat["pr_effect_ratio"] < -0.40
     ) else 0.0
-
-    # 보정 버프 위험: 과너프 + WR도 약함 → correction_buff 가능성 높음
     feat["correction_risk_flag"] = 1.0 if (
-        feat["overshoot_flag"] == 1.0 and _wr_vs50_pop < -2.0
+        feat["overshoot_flag"] == 1.0 and _wr_vs50 < -2.0
     ) else 0.0
+
+    # ── 방향 신호 (1D — SHAP 상위 유지분만 보존) ────────���───────────────
+    feat["wr_nerf_signal"] = max(_wr_vs50, 0.0)    # WR > 50%
+    feat["wr_buff_signal"] = max(-_wr_vs50, 0.0)   # WR < 50%
+    feat["vct_buff_signal"] = max(_vct_pr_avg - _vct_pr, 0.0) if _vct_pr_avg > 0 else 0.0
+
+    # 패치 맥락 일관성
+    _ld = feat.get("last_direction", "none")
+    feat["nerf_context"]           = float(_ld == "nerf" and _rank_pr_raw > _baseline_pr)
+    feat["correction_nerf_signal"] = float(_ld == "buff" and _rank_pr_raw > _baseline_pr * 1.5)
+
+    # WR vs 요원 역사적 평균
+    feat["rank_wr_vs_agent_avg"] = _wr_excess
+
+    # VCT 상대 위치 비율
+    feat["vct_rel_pos"] = _vct_pr / max(_vct_pr_avg, 0.5) if _vct_pr_avg > 0 else 1.0
 
     return feat

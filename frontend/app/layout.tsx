@@ -1,0 +1,78 @@
+import type { Metadata } from "next";
+import { JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+export const metadata: Metadata = {
+  title: "PATCH VERDICT // Valorant",
+  description: "다음에 너프/버프받을 요원을 데이터로 예측합니다.",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ko" className={`antialiased ${mono.variable}`}>
+      <body className="min-h-screen" style={{ background: "#080c14" }}>
+
+        {/* Top accent line */}
+        <div
+          className="fixed top-0 left-0 right-0 h-px z-50"
+          style={{ background: "linear-gradient(90deg, #FF4655, #FF465530, transparent)" }}
+        />
+
+        <header className="sticky top-0 z-40 backdrop-blur-md border-b border-slate-800/70"
+          style={{ background: "rgba(8,12,20,0.92)" }}
+        >
+          <div className="max-w-7xl mx-auto flex items-center justify-between h-11 px-4 sm:px-6">
+            {/* Left: brand */}
+            <div className="flex items-center gap-3">
+              {/* Diamond indicator */}
+              <div
+                className="w-2 h-2 rotate-45 shrink-0"
+                style={{ background: "#FF4655", boxShadow: "0 0 8px 2px rgba(255,70,85,0.55)" }}
+              />
+              <div className="flex items-center gap-1.5">
+                <span className="text-[11px] font-black tracking-[0.22em] uppercase" style={{ color: "#FF4655" }}>
+                  PATCH
+                </span>
+                <span className="text-slate-700 text-[11px]">/</span>
+                <span className="text-[11px] font-black tracking-[0.22em] uppercase text-white">VERDICT</span>
+              </div>
+              {/* Live badge */}
+              <div
+                className="hidden sm:flex items-center gap-1 px-1.5 py-0.5"
+                style={{ border: "1px solid rgba(16,185,129,0.25)", background: "rgba(16,185,129,0.06)" }}
+              >
+                <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[9px] uppercase tracking-widest" style={{ color: "rgba(52,211,153,0.7)" }}>
+                  LIVE
+                </span>
+              </div>
+            </div>
+
+            {/* Right: act info */}
+            <div className="flex items-center gap-3">
+              <span className="text-[9px] uppercase tracking-widest text-slate-700 hidden sm:block">SYS:ACT</span>
+              <span
+                className="text-[10px] font-mono text-slate-400 px-2 py-0.5"
+                style={{ border: "1px solid rgba(30,41,59,0.8)", background: "rgba(13,18,32,0.6)" }}
+              >
+                V26A2
+              </span>
+            </div>
+          </div>
+        </header>
+
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
+          {children}
+        </main>
+
+      </body>
+    </html>
+  );
+}

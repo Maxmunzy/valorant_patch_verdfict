@@ -1,0 +1,961 @@
+{
+  "agent": "Astra",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 29,
+    "balance_patches": 11,
+    "numeric_changes": 23,
+    "all_changes": 33
+  },
+  "current_stats": {
+    "C": {
+      "name": "Gravity Well",
+      "creds": null,
+      "charges": 1,
+      "function": "Cripple<br>[[Crowd Control#Displacement",
+      "stats": {
+        "Windup time": {
+          "value": 1.25,
+          "unit": "seconds",
+          "raw": "1.25 seconds"
+        },
+        "Radius": {
+          "value": 4.75,
+          "unit": "meters",
+          "raw": "4.75 meters"
+        },
+        "Pull duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Vulnerable duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Nova Pulse",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Crowd Control#Concuss",
+      "stats": {
+        "Radius": {
+          "value": 4.75,
+          "unit": "meters",
+          "raw": "4.75 meters"
+        },
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Nebula/Dissipate / Stars",
+      "creds": null,
+      "charges": 2,
+      "function": "[[Vision Blocker#Smoke",
+      "stats": {
+        "Windup time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Radius": {
+          "value": 4.75,
+          "unit": "meters",
+          "raw": "4.75 meters"
+        },
+        "rowspan=\"2\"|Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "'''Nebula''': 14.25 seconds<br>Expiration warning at 12.75 seconds"
+        },
+        "Dissipate: 1 second": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Placement deploy time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Round Start windup time": {
+          "value": 1.4,
+          "unit": "seconds",
+          "raw": "1.4 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Cosmic Divide",
+      "creds": null,
+      "charges": null,
+      "function": "[[Vision Blocker#Wall",
+      "stats": {
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Windup time": {
+          "value": 2.667,
+          "unit": "seconds",
+          "raw": "2.667 seconds"
+        },
+        "Duration": {
+          "value": 21.0,
+          "unit": "-second total effective duration2.5-second deformation time",
+          "raw": "21-second total effective duration<br>2.5-second deformation time"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.05",
+      "raw": "Astral Form Fixed a bug where a floating gun may briefly appear when a suppression effect interrupts it v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Nebula/Dissipate Fixed a bug where Nebula created by Dissipate did not have an icon on the minimap. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Stars Fixed an issue that caused the activation sound for an already used Star to play when Astra was revived v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Gravity Well Fragile (Vulnerable) duration decreased from 5s >>> 2.5s Cooldown increased from 45s >>> 60s Nova Pulse Concuss duration decreased from 3.5s >>> 2.5s Cooldown increased from 45s >>> 60s Nebula/Dissipate Cooldown increased 25s >>> 35s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Gravity Well Fragile (Vulnerable) duration decreased from",
+          "stat": "duration",
+          "before": 5.0,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nova Pulse Concuss duration decreased from",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Nebula/Dissipate Cooldown increased",
+          "stat": "cooldown",
+          "before": 25.0,
+          "before_unit": "s",
+          "after": 35.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Gravity Well Fragile (Vulnerable) duration decreased from",
+          "stat": "duration",
+          "before": 5.0,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nova Pulse Concuss duration decreased from",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Nebula/Dissipate Cooldown increased",
+          "stat": "cooldown",
+          "before": 25.0,
+          "before_unit": "s",
+          "after": 35.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.05",
+      "raw": "Cosmic Divide Fixed an issue where bullet tracers pass through v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.04",
+      "raw": "Cosmic Divide Fixed an issue where bullet tracers could be seen passing through v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.02",
+      "raw": "Gravity Well Fixed a bug where the incorrect audio cue would play when getting caught in an allied (or self-casted) Gravity Well. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Astral Form Fixed an issue where disconnecting and reconnecting within Astral World could result in Astral World's visuals persisting for the round despite the player not being in Astral World. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.08",
+      "raw": "Nova Pulse Stun duration: 4s >>> 3.5s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nova Pulse Stun duration",
+          "stat": "duration",
+          "before": 4.0,
+          "before_unit": "s",
+          "after": 3.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nova Pulse Stun duration",
+          "stat": "duration",
+          "before": 4.0,
+          "before_unit": "s",
+          "after": 3.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "9.10",
+      "raw": "Nebula/Dissipate Visual cues have been added to the inside of the smoke before it expires. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "added to the inside of the smoke before it expires",
+          "stat": "effect",
+          "description": "added to the inside of the smoke before it expires",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.09",
+      "raw": "Fixed a bug where Astra would not receive the alert sound effect when being watched by Cypher's Spycam v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.07",
+      "raw": "Cosmic Divide Agent ability projectiles, walls, and AOEs have been updated to have more consistent audio presentation when clipping/passing through Cosmic Divide v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.05",
+      "raw": "Stars Charges increased from 4 >>> 5 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Stars Charges increased from",
+          "stat": "charges",
+          "before": 4.0,
+          "before_unit": "",
+          "after": 5.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Stars Charges increased from",
+          "stat": "charges",
+          "before": 4.0,
+          "before_unit": "",
+          "after": 5.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "7.08",
+      "raw": "Nebula/Dissipate Nebula now plays an audio and visual cue 1.5 seconds before it expires v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.05",
+      "raw": "Astral Form Astra will now be able to hear everything happening around her physical body while in Astral form Cosmic Divide Fixed a bug where there was a small audio deadzone v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.04",
+      "raw": "Gravity Well Startup time increased .6 >>> 1.25 Gravity time duration decreased 2.75 >>> 2.0 Nova Pulse Startup time decreased from 1.25 >>> 1.0 Cosmic Divide Audio now is blocked completely by the wall rather than muffled v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Gravity Well Startup time increased",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "",
+          "after": 1.25,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Gravity time duration decreased",
+          "stat": "duration",
+          "before": 2.75,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nova Pulse Startup time decreased from",
+          "stat": "duration",
+          "before": 1.25,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Gravity Well Startup time increased",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "",
+          "after": 1.25,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Gravity time duration decreased",
+          "stat": "duration",
+          "before": 2.75,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nova Pulse Startup time decreased from",
+          "stat": "duration",
+          "before": 1.25,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.10",
+      "raw": "Nebula/Dissipate Can no longer cast Dissipate right at round start before stars are charged up v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Can no longer cast Dissipate right at round start before stars are charged up v",
+          "stat": "effect",
+          "description": "Can no longer cast Dissipate right at round start before stars are charged up v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.11",
+      "raw": "Stars Fixed a bug where you would sometimes see the location of enemy Astra stars v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Hotfix Stars Fixed a bug where Astra was able to sell her starting star v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Astral Form Increased the speed of the overlay that covers Astra's screen when transitioning in and out of Astral form Astra's targeting ring in Astral form is reduced to one ring that reflects the now unified size of all her utility While in Astral form, pings are no longer blocked by level geometry that Astra cannot see Astra's targeting ring no longer randomly disappears when aiming across some map locations Fixed the boom not showing up for Astra if planted while in Astral Form Gravity Well Cooldown Increased 25 >>> 45 Gravity Well Size Decreased 525 >>> 475 Gravity Well no longer affects anyone fully underneath the Gravity Well. Nova Pulse Cooldown Increased 25 >>> 45 Nova Pulse no longer affects anyone fully underneath the Nova Pulse. Nebula/Dissipate Nebula size increased 410 >>> 47",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ing up for Astra if planted while in Astral Form Gravity Well Cooldown Increased",
+          "stat": "cooldown",
+          "before": 25.0,
+          "before_unit": "",
+          "after": 45.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Gravity Well Size Decreased",
+          "stat": "range",
+          "before": 525.0,
+          "before_unit": "",
+          "after": 475.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": " affects anyone fully underneath the Gravity Well. Nova Pulse Cooldown Increased",
+          "stat": "cooldown",
+          "before": 25.0,
+          "before_unit": "",
+          "after": 45.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s anyone fully underneath the Nova Pulse. Nebula/Dissipate Nebula size increased",
+          "stat": "range",
+          "before": 410.0,
+          "before_unit": "",
+          "after": 475.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown Increased",
+          "stat": "cooldown",
+          "before": 14.0,
+          "before_unit": "",
+          "after": 25.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ula cooldowns are now sequential instead of simultaneous Stars Max Stars reduced",
+          "stat": "multiplier",
+          "before": 5.0,
+          "before_unit": "",
+          "after": 4.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown on retrieving a Star increased",
+          "stat": "cooldown",
+          "before": 14.0,
+          "before_unit": "",
+          "after": 25.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ase to refund their charge immediately. Max distance of Star Placement increased",
+          "stat": "charges",
+          "before": 10000.0,
+          "before_unit": "",
+          "after": 30000.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ing up for Astra if planted while in Astral Form Gravity Well Cooldown Increased",
+          "stat": "cooldown",
+          "before": 25.0,
+          "before_unit": "",
+          "after": 45.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Gravity Well Size Decreased",
+          "stat": "range",
+          "before": 525.0,
+          "before_unit": "",
+          "after": 475.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": " affects anyone fully underneath the Gravity Well. Nova Pulse Cooldown Increased",
+          "stat": "cooldown",
+          "before": 25.0,
+          "before_unit": "",
+          "after": 45.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s anyone fully underneath the Nova Pulse. Nebula/Dissipate Nebula size increased",
+          "stat": "range",
+          "before": 410.0,
+          "before_unit": "",
+          "after": 475.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown Increased",
+          "stat": "cooldown",
+          "before": 14.0,
+          "before_unit": "",
+          "after": 25.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ula cooldowns are now sequential instead of simultaneous Stars Max Stars reduced",
+          "stat": "multiplier",
+          "before": 5.0,
+          "before_unit": "",
+          "after": 4.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown on retrieving a Star increased",
+          "stat": "cooldown",
+          "before": 14.0,
+          "before_unit": "",
+          "after": 25.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ase to refund their charge immediately. Max distance of Star Placement increased",
+          "stat": "charges",
+          "before": 10000.0,
+          "before_unit": "",
+          "after": 30000.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "can now pick up placed Stars during the Buy Phase to refund their charge immediately",
+          "stat": "effect",
+          "description": "can now pick up placed Stars during the Buy Phase to refund their charge immediately",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer blocked by level geometry that Astra cannot see Astra's targeting ring no longer randomly ",
+          "stat": "effect",
+          "description": "no longer blocked by level geometry that Astra cannot see Astra's targeting ring no longer randomly ",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer affects anyone fully underneath the Gravity Well",
+          "stat": "effect",
+          "description": "no longer affects anyone fully underneath the Gravity Well",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "no longer affects anyone fully underneath the Nova Pulse",
+          "stat": "effect",
+          "description": "no longer affects anyone fully underneath the Nova Pulse",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.05",
+      "raw": "Astral Form Will no longer equip weapons slower than intended after exiting Astral Form v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Will no longer equip weapons slower than intended after exiting Astral Form v",
+          "stat": "effect",
+          "description": "Will no longer equip weapons slower than intended after exiting Astral Form v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.03",
+      "raw": "Gravity Well Can no longer pull people while they are attached to ascenders Nebula/Dissipate Dissipate can no longer be activated while Astra is attached to ascenders v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Can no longer pull people while they are attached to ascenders Nebula/Dissipate Dissipate can no lon",
+          "stat": "effect",
+          "description": "Can no longer pull people while they are attached to ascenders Nebula/Dissipate Dissipate can no lon",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.0",
+      "raw": "Astral Form On Attack, Astra can now see the Spike's location in Astral form Gravity Well Cooldown time increased 12 >>> 25 Nova Pulse Cooldown time increased 12 >>> 25 Stars Cost decreased 200 >>> 150 Stars are now inactive when placed during the buy phase Recall cooldown increased 8 >>> 15 Granted signature charges decreased 2 >>> 1 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s location in Astral form Gravity Well Cooldown time increased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "",
+          "after": 25.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nova Pulse Cooldown time increased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "",
+          "after": 25.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Stars Cost decreased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "tars are now inactive when placed during the buy phase Recall cooldown increased",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 15.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Granted signature charges decreased",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s location in Astral form Gravity Well Cooldown time increased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "",
+          "after": 25.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nova Pulse Cooldown time increased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "",
+          "after": 25.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Stars Cost decreased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "tars are now inactive when placed during the buy phase Recall cooldown increased",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 15.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Granted signature charges decreased",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "can now see the Spike's location in Astral form Gravity Well Cooldown time increased 12 >>> 25 Nova ",
+          "stat": "effect",
+          "description": "can now see the Spike's location in Astral form Gravity Well Cooldown time increased 12 >>> 25 Nova ",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "2.09",
+      "raw": "Nebula/Dissipate Fixed issue where Nebula was slightly offset once fully formed v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.08",
+      "raw": "Nebula/Dissipate No longer blocks flashes even when you are not fully inside the smoke v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "No longer blocks flashes even when you are not fully inside the smoke v",
+          "stat": "effect",
+          "description": "No longer blocks flashes even when you are not fully inside the smoke v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.07",
+      "raw": "Astral Form Fixed an unintended dome in the sky that Astra saw if she came out of Astral Form while Omen is ulting Gravity Well Now pulls Agents that are defusing the Spike v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.06",
+      "raw": "Stars Fixed an issue where it looks like Astra is casting a Star but doesn't actually create one when targeting close to another Star v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.05",
+      "raw": "Astral Form Fixed a rare bug that could leave players unable to move or process inputs until they died when entering or returning from Astral Form v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.04",
+      "raw": "Added",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

@@ -1,188 +1,262 @@
-# valorant_patch_verdict
+# Valorant Patch Verdict
 
-## 프로젝트 개요
+## Overview
 
-> **발로란트 패치 예측 시스템**
-> "다음에 너프/버프받을 요원이 누구인지 데이터로 예측한다."
+> **Predict who gets patched next, and simulate how any patch changes the meta.**
 
-랭크 픽률·승률, VCT 픽률·승률, 패치 이력, 요원 설계 특성을 조합해
-**현재 액트 기준으로 각 요원의 패치 가능성과 방향을 예측**하는 2단계 XGBoost 모델.
+A machine learning system that predicts Valorant agent patch pressure using ranked pick/win rates, VCT tournament data, patch history, and agent design characteristics.
 
----
-
-## 아이디어 배경
-
-발로란트에서 너프/버프가 날 때마다 커뮤니티는 "이거 맞냐 틀리냐"로 감정적 논쟁이 벌어진다.
-기존 tracker.gg, blitz.gg, vlr.gg는 현재 픽률·승률만 보여줄 뿐, **패치 전후 비교**나 **다음 패치 예측**은 해주지 않는다.
-
-이 프로젝트는 그 공백을 채운다. 감정이 아닌 **데이터**로 판단한다.
+Given current meta data, the model outputs nerf/buff/stable probabilities for all 29 agents.
 
 ---
 
-## 데이터 소스
+## How It Works
 
-| 출처 | 데이터 종류 | 구간 |
-|---|---|---|
-| vstats.gg | 액트별 픽률·승률·매치 수 (다이아+, 전 지역 합산) | E6A3~ |
-| maxmunzy/valorant-agent-stats | 다이아+ 픽률·승률·KD | E2A1~E9A3 |
-| vlr.gg | VCT 대회별 픽률·승률 | E6A3~ |
-| playvalorant.com | 공식 패치 노트 | E2A1~ |
+### 2-Stage Hierarchical Classification
 
-- **티어 기준**: 다이아몬드+ (그 이하는 메타 이해도보다 선호도 픽이 많아 노이즈 큼). vstats.gg와 maxmunzy 둘 다 동일 기준
-- **서버**: 전 지역 합산 (발로란트는 전 서버 동시 패치, 요원 풀이 작아 지역 편차 제한적)
-- **데이터 병합**: vstats.gg 우선, 빈 구간(E2A1~E6A2)은 maxmunzy 보완
+```
+Input: Agent + Act features (ranked stats, VCT stats, patch history, design traits)
+                    |
+           [Stage A: XGBoost]  (50 features)
+           stable vs patched?
+                /         \
+          stable        patched
+                          |
+                   [Stage B: XGBoost]  (51 features)
+                   buff vs nerf?
+                    /         \
+                 buff         nerf
+                    |           |
+              mild / strong  mild / strong
+```
 
----
+**Stage A** determines whether an agent is under patch pressure.
+**Stage B** determines the direction (buff or nerf).
+Each stage uses its own optimized feature set.
+Severity (mild/strong) comes from patch context and skill importance.
 
-## 모델 구조
+### Current Performance (2026-04-13)
 
-### Stage A — 패치 여부 예측 (이진 분류)
-
-> "이 요원이 이번 액트에 패치를 받을까?"
-
-- **입력**: 피처 (랭크/VCT 픽률·승률 추세, 패치 이력, 요원 설계 특성, 역할군·유틸 상대 픽률, 맵 다양성)
-- **출력**: `stable` / `patched` 확률
-- **임계값**: 0.28
-- **학습 데이터**: horizon=1 행만 (단기 판정 일관성 유지)
-
-### Stage B — 패치 유형 분류 (5분류)
-
-> "어떤 종류의 패치인가?"
-
-- **입력**: Stage B 전용 피처 (patched 케이스만, 타이밍 노이즈 피처 제거)
-- **출력**: 아래 5개 클래스
-- **학습 데이터**: horizon=1,2,3 전부 (방향 데이터 최대화)
-
-| 클래스 | 설명 |
+| Metric | Value |
 |---|---|
-| `nerf_rank` | 랭크/VCT 지표 기반 너프 |
-| `nerf_followup` | 이전 너프 효과 미달, 추가 너프 |
-| `buff_rank` | 랭크/VCT 지표 기반 버프 |
-| `buff_followup` | 이전 버프 효과 미달, 추가 버프 |
-| `rework` | 수치 조정으로 해결 불가, 구조 변경 |
+| Stage A balanced accuracy | 0.6614 |
+| Stage B balanced accuracy | 0.7779 |
+| Training data | 659 rows / 29 agents / E2A1 ~ V26A2 |
+| Stage A features | 50 |
+| Stage B features | 51 |
 
 ---
 
-## 레이블 생성 전략 (`classify_stable_state`)
+## Latest Predictions (V26A2)
 
-> 매 액트마다 현재 수치만으로 독립 판정. acts_since/last_direction 같은 이력 조건 없음.
-> 액트 = 약 2개월 단위이므로 매 액트 독립 재판정이 적합.
+### Nerf Ranking
 
-### nerf_followup 조건 (OR)
+| # | Agent | p_nerf | Rank PR | VCT PR |
+|---|---|---|---|---|
+| 1 | Neon | 76.1% | 22.2% | 77.2% |
+| 2 | Waylay | 75.0% | 37.0% | 44.2% |
+| 3 | Omen | 67.3% | 16.9% | 46.5% |
+| 4 | Viper | 64.1% | 6.4% | 50.4% |
+| 5 | Sova | 53.2% | 32.4% | 24.4% |
 
-| 신호 | 조건 | 설명 |
-|---|---|---|
-| 랭크 지배 | `rank_pr_pct >= 20% AND rank_wr_vs50 >= 0%` | 픽률 높고 승률 평균 이상 |
-| 승률 극단 | `rank_wr_vs50 >= 2.5%` | 픽률 무관 비정상 고승률 |
-| VCT 지배 + 맵 비종속 | `vct_pr >= 40% AND map_hhi <= 0.15 AND rank_wr_vs50 >= -1%` | pro_dom 패턴 포착 (체임버·스카이·바이퍼형) |
+### Buff Ranking
 
-`map_hhi <= 0.15` 조건: 맵 로테이션과 무관하게 모든 맵에서 고르게 나오는 요원만 적용.
-맵 특화 요원(바이퍼 현재 map_hhi=0.46)은 VCT 픽률이 높아도 맵 로테 효과로 처리.
-
-### buff_followup 조건 (OR)
-
-| 신호 | 조건 | 설명 |
-|---|---|---|
-| 랭크 부진 | `rank_pr_pct <= 12% AND rank_wr_vs50 <= -1.5%` | 픽률·승률 동시 낮음 |
-| 승률 극단 | `rank_wr_vs50 <= -4%` | 픽률 무관 비정상 저승률 |
-| 존재감 없음 | `rank_pr_pct <= 5%` | 사실상 픽 없음 |
-
-### 버그픽스 패치 처리
-
-nerf/buff 없는 패치(버그픽스, 수치 오기정 등)는 `stable` 고정이 아닌 **수치 기반 재판정**.
-패치 전후 수치가 같으면 레이블도 같아 모델 학습 노이즈 없음.
+| # | Agent | p_buff | Rank PR | VCT PR |
+|---|---|---|---|---|
+| 1 | KAYO | 78.6% | 4.6% | 7.0% |
+| 2 | Gekko | 66.8% | 4.9% | 1.2% |
+| 3 | Miks | 64.0% | 5.3% | 1.7% |
+| 4 | Yoru | 63.6% | 3.1% | 1.8% |
+| 5 | Vyse | 54.6% | 5.1% | 7.0% |
 
 ---
 
-## 멀티 호라이즌 (Stage B 데이터 확장)
+## Data Sources
 
-| horizon | 사용 Stage | 설명 |
+| Source | Data | Period |
 |---|---|---|
-| 1 | A + B | 현재 액트 → 다음 1액트 후 패치 (기본) |
-| 2 | B만 | 현재 액트 피처 → 2액트 후 실제 패치 방향 |
-| 3 | B만 | 현재 액트 피처 → 3액트 후 실제 패치 방향 |
+| vstats.gg | Per-act pick rate, win rate, match count (Diamond+, all regions) | E6A3~ |
+| maxmunzy/valorant-agent-stats | Diamond+ pick rate, win rate, KD | E2A1~E9A3 |
+| vlr.gg | VCT tournament pick rate, win rate | E6A3~ |
+| playvalorant.com | Official patch notes | E2A1~ |
 
-- Stage A는 horizon=1만 사용 (단기 판정 일관성 유지)
-- Stage B는 전체 horizon 활용 → 655행 (이전 403행 대비 +63%)
-- 지연 패치 케이스(라이엇이 2~3액트 후에 조정) 학습 가능
+- **Tier**: Diamond+ (lower ranks are preference-driven, too noisy)
+- **Region**: All regions combined (Valorant patches globally, small agent pool limits regional variance)
+- **Merge**: vstats.gg primary, maxmunzy fills E2A1~E6A2 gap
 
 ---
 
-## 도메인 규칙 레이어
+## Model Architecture
 
-모델 출력 후 최소한의 하드 룰만 적용:
+### Feature Engineering: 2D Quadrant System
 
-| 규칙 | 조건 | 효과 |
+The core insight: Riot's patch decisions operate on a **2D plane (pick rate x win rate)**, not 1D metrics independently. Features are designed around this:
+
+**Rank 2D Quadrants** (centered on agent's own historical baseline):
+```
+                   WR above agent avg
+                        |
+    Q2 Niche OP         |         Q1 Nerf target
+    (low PR, high WR)   |   (high PR, high WR)
+                         |
+   ──────────────────────┼──────────────── PR above baseline
+                         |
+    Q3 Buff target       |         Q4 Fandom
+    (low PR, low WR)     |   (high PR, low WR)
+                         |
+                   WR below agent avg
+```
+
+**VCT Features**:
+- `vct_must_nerf`: absolute dominance threshold (VCT PR > 35%)
+- `pro_only_nerf`: VCT dominant + rank not popular (Viper/Omen type)
+
+**Stage-Specific Features**:
+- Stage A gets `map_hhi`, `kit_score`, `recent_dual_miss_count`, `vct_pr_avg`
+- Stage B gets `vct_data_lag`, `geo_synergy`, `n_nerf_patches`, `n_total_patches`, `vct_pr_peak_all`
+
+### Labeling System
+
+5-class labels with two key innovations:
+
+**1. VCT Absolute Threshold**
+Agents with VCT pick rate > 35% receive `mild_nerf` label regardless of their historical average.
+This catches agents like Viper (always high VCT) that relative metrics miss.
+
+**2. Signal Carryover**
+If an agent was labeled `mild_nerf` in act N, the signal persists into act N+1 unless metrics normalize.
+This prevents flickering between stable/nerf for agents under sustained pressure.
+
+| Label | Description |
+|---|---|
+| `stable` | Metrics near baseline, no patch pressure |
+| `mild_nerf` | Nerf signal present (rank excess or VCT dominance) |
+| `strong_nerf` | Actual patch: followup/correction or core skill (E/X) nerf |
+| `mild_buff` | Buff signal present (below baseline + losing) |
+| `strong_buff` | Actual patch: followup/correction, core skill buff, or rework |
+
+### Training Pipeline
+
+- **Stage A**: Walk-forward temporal CV, train-only 1:1 undersampling (stable majority reduced to match patched count)
+- **Stage B**: Walk-forward temporal CV, SMOTE oversampling (buff minority)
+- **HPO**: Optuna TPE Sampler (60 trials per stage)
+- **Feature selection**: Stage A/B each have independent feature sets optimized by SHAP importance
+- **No domain rules**: Model output used directly without post-hoc probability adjustments
+
+### Top SHAP Features
+
+**Stage A (stable vs patched) — 50 features:**
+
+| Rank | Feature | SHAP |
 |---|---|---|
-| acts_since=0 억제 | 이번 액트에 방금 패치됨 | p_patch × 0.15 |
+| 1 | rank_pr_excess | 0.163 |
+| 2 | vct_pr_last | 0.155 |
+| 3 | wr_buff_signal | 0.133 |
+| 4 | strength_vs_direction | 0.123 |
+| 5 | tier_gap | 0.122 |
+| 6 | rank_pr_slope | 0.119 |
+| 7 | last_pr_pre | 0.103 |
+| 8 | rank_wr | 0.098 |
+| 9 | kit_x_rank_pr | 0.089 |
+| 10 | kit_score | 0.080 |
 
-이전에 있던 신규 요원 억제, 저픽 연속 억제, 스킬 천장 보정, VCT 승률 보정 등 모두 제거.
-SHAP=0 규칙은 모델이 해당 신호를 피처에서 이미 학습하므로 불필요.
+**Stage B (buff vs nerf) — 51 features:**
+
+| Rank | Feature | SHAP |
+|---|---|---|
+| 1 | rank_pr_avg3 | 0.383 |
+| 2 | pr_pct_of_peak | 0.346 |
+| 3 | skill_ceiling_x_vct_pr | 0.342 |
+| 4 | vct_pr_last | 0.291 |
+| 5 | last_pr_pre | 0.280 |
+| 6 | vct_wr_last | 0.280 |
+| 7 | rank_pr | 0.277 |
+| 8 | acts_since_patch | 0.251 |
+| 9 | vct_rel_pos | 0.236 |
+| 10 | rank_pr_vs_peak | 0.212 |
 
 ---
 
-## 검증 결과 (2026-04-08 기준)
+## Project Structure
 
-| 검증 방식 | Stage A | Stage B |
-|---|---|---|
-| Temporal OOF balanced accuracy | **0.8577** | **0.5468** |
-| Leave-One-Agent-Out 평균 BA | **0.836** | **0.436** |
-
-- Stage A 학습: 596행 (horizon=1) / Stage B 학습: 655행 (horizon=1,2,3)
-- 전체 데이터: 939행 / 29요원 / E2A1 ~ V26A2
-- stable:patched 비율 55:45 (이전 73:27 대비 균형 개선)
-
-### BA 분해 (Stage A)
-| 그룹 | 행 수 | BA |
-|---|---|---|
-| 수치기반 레이블 (classify_stable_state) | 470 | 0.905 |
-| 실제 라이엇 패치 | 149 | **0.852** |
-
----
-
-## 현재 예측 결과 (V26A2 기준, 주요 케이스)
-
-| 요원 | 예측 | 근거 |
-|---|---|---|
-| 네온 | nerf_followup | VCT 77%, map_hhi 0.006 (맵 비종속 pro_dom) |
-| 소바 | nerf_followup | 랭크 픽률 32.4%, 승률 +0.45% |
-| 스카이 | nerf_followup | VCT 39.5%, map_hhi 0.053 (최근 버프 후 상승 중) |
-| 페이드 | nerf_followup | 랭크 픽률 25.6%, VCT 29.8% |
-| 요루 | buff_followup | 랭크 픽률 3.3% |
-
----
-
-## 실행 방법
-
-```bash
-# 데이터 빌드 (horizon=1,2,3 포함)
-python build_step2_data.py
-
-# 모델 학습 (full HPO)
-python train_step2.py
-
-# 피처 실험 (저장된 파라미터 재사용, 빠름)
-python train_step2.py --fast
-
-# HPO 강제 재실행 + 파라미터 갱신
-python train_step2.py --hpo
+```
+valorant_patch_verdict/
+  build_step2_data.py      # Training data builder
+  label_builder.py         # 5-class labeling logic
+  feature_builder.py       # Feature engineering (2D quadrants, signals)
+  train_step2.py           # Model training pipeline (HPO, CV, SHAP)
+  predict_service.py       # Prediction API wrapper
+  predict_report.py        # CLI prediction report
+  main.py                  # FastAPI server
+  crawl_patch_notes.py     # Patch note crawler
+  agent_data.py            # Agent design data, skill weights
+  data/                    # Raw data (ranked stats, VCT, patch notes)
+  frontend/                # Next.js + Tailwind CSS frontend
+  step2_training_data.csv  # Built training data
+  step2_pipeline.pkl       # Trained model artifact
 ```
 
 ---
 
-## 기술 스택
+## Run
 
-| 구분 | 사용 기술 |
-|---|---|
-| 데이터 수집 | Python (Playwright, BeautifulSoup) |
-| 패치 노트 정형화 | Claude API |
-| 데이터 전처리 | pandas, numpy |
-| 머신러닝 | XGBoost, scikit-learn (LogisticRegression, SimpleImputer) |
-| HPO | Optuna (TPE Sampler) |
-| 피처 중요도 | SHAP |
-| AI 분석 텍스트 | Claude Haiku (claude-haiku-4-5-20251001) |
-| 프론트엔드 | Next.js, Tailwind CSS |
+```bash
+# Build training data
+python build_step2_data.py
+
+# Train model (full HPO)
+python train_step2.py
+
+# Fast mode (reuse saved hyperparams)
+python train_step2.py --fast
+
+# Force HPO re-run
+python train_step2.py --hpo
+
+# Crawl patch notes + update patch_dates.json
+python crawl_patch_notes.py
+
+# Start server
+python main.py
+```
 
 ---
 
-*Started from a random idea on the subway*
+## Roadmap
+
+### Phase 1 — Skill Stats DB (Complete)
+- `agent_skills.json`: 29 agents, 851 stats (initial values per skill)
+- `patch_history.json`: all stat changes since E2A1, current values computed
+
+### Phase 2 — Patch Impact Model (Next)
+- Regression model: given a patch (skill, change type, magnitude), predict pick/win rate delta
+- 136 real patch cases as training data
+- Input: `[skill_weight, change_type, magnitude, pre_rank_pr, pre_rank_wr, vct_pr]`
+- Output: `[delta_rank_pr, delta_rank_wr]`
+
+### Phase 3 — Patch Simulator
+- User inputs a hypothetical patch (e.g. "Jett E cooldown 12s -> 8s")
+- System parses input, computes magnitude, runs impact model
+- Applies predicted deltas to current meta, re-runs patch pressure model
+- Outputs: new nerf/buff rankings + AI interpretation
+
+### Phase 4 — Model Enhancement
+- Agent current stats as absolute strength features
+- Similar historical patch case retrieval
+- Expanded dataset for better strong-class recall
+
+---
+
+## Tech Stack
+
+| Component | Technology |
+|---|---|
+| Data Collection | Python (Playwright, BeautifulSoup) |
+| Patch Note Parsing | Claude API |
+| Data Processing | pandas, numpy |
+| ML | XGBoost, scikit-learn |
+| HPO | Optuna (TPE Sampler) |
+| Feature Importance | SHAP |
+| AI Analysis | Claude Haiku (claude-haiku-4-5-20251001) |
+| Frontend | Next.js, Tailwind CSS |
+| API | FastAPI |

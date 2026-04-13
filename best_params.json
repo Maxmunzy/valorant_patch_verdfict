@@ -1,0 +1,35 @@
+{
+  "stage_a": {
+    "n_estimators": 223,
+    "max_depth": 4,
+    "lr": 0.026525660544958526,
+    "subsample": 0.65589926595205,
+    "colsample": 0.4279141896234451,
+    "min_child_weight": 7,
+    "gamma": 1.892123635807203,
+    "reg_alpha": 0.006388098615446624,
+    "reg_lambda": 0.7622288736746473
+  },
+  "stage_b": {
+    "n_estimators": 253,
+    "max_depth": 2,
+    "lr": 0.07099540879242236,
+    "subsample": 0.8749895035018548,
+    "colsample": 0.7017671621632439,
+    "min_child_weight": 1,
+    "gamma": 1.1183149890380168,
+    "reg_alpha": 0.012021713879575839,
+    "reg_lambda": 0.3882081679881999
+  },
+  "single": {
+    "n_estimators": 388,
+    "max_depth": 5,
+    "lr": 0.07146961714770166,
+    "subsample": 0.6493035871435461,
+    "colsample": 0.9918638928099396,
+    "min_child_weight": 9,
+    "gamma": 0.317442785899658,
+    "reg_alpha": 0.028316735123131234,
+    "reg_lambda": 0.15183817348584835
+  }
+}

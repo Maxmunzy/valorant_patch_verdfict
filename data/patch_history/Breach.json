@@ -1,0 +1,1132 @@
+{
+  "agent": "Breach",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 18,
+    "balance_patches": 13,
+    "numeric_changes": 34,
+    "all_changes": 36
+  },
+  "current_stats": {
+    "C": {
+      "name": "Aftershock",
+      "creds": 200,
+      "charges": 1,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Max deploy distance": {
+          "value": 35.0,
+          "unit": "meters",
+          "raw": "35 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "rowspan=\"2\"|Cylinder size": {
+          "value": 10.0,
+          "unit": "meter length",
+          "raw": "10 meter length"
+        },
+        "3 meter radius": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|3.0}}"
+        },
+        "Windup time": {
+          "value": 2.2,
+          "unit": "seconds",
+          "raw": "2.2 seconds"
+        },
+        "Damage": {
+          "value": 80.0,
+          "unit": "per tickTotal 160",
+          "raw": "80 per tick<br>Total 160"
+        },
+        "Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 0.6 secondsTotal 2 ticks",
+          "raw": "1 every 0.6 seconds<br>Total 2 ticks"
+        }
+      }
+    },
+    "Q": {
+      "name": "Flashpoint",
+      "creds": 250,
+      "charges": 2,
+      "function": "[[Blind#Flash",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Max deploy distance": {
+          "value": 35.0,
+          "unit": "meters",
+          "raw": "35 meters"
+        },
+        "Max wall penetration depth": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max blind duration": {
+          "value": 2.25,
+          "unit": "seconds",
+          "raw": "2.25 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Fault Line",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Crowd Control#Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "rowspan=\"2\"|Area size": {
+          "value": 8.0,
+          "unit": "to 56-meter length, depending on charge time",
+          "raw": "8 to 56-meter length, depending on charge time"
+        },
+        "8-meter width": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|12.00}}"
+        },
+        "Distance between Breach and AoE": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Time required to fully charge": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Rolling Thunder",
+      "creds": null,
+      "charges": null,
+      "function": "[[Crowd Control#Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Channel time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "rowspan=\"2\"|Area size": {
+          "value": 32.0,
+          "unit": "-meter length",
+          "raw": "32-meter length"
+        },
+        "18-meter width": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|11.08}}"
+        },
+        "Distance between Breach and AoE": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Blast delay": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 0.255 secondsTotal 8 ticks",
+          "raw": "1 every 0.255 seconds<br>Total 8 ticks"
+        },
+        "Displacement Distance": {
+          "value": 7.0,
+          "unit": "meters",
+          "raw": "7 meters"
+        },
+        "Concuss duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.00",
+      "raw": "Flashpoint Projectile speed increased from 2000 >>> 2400 Fault Line Width increased from 7.5m >>> 8m Rolling Thunder Fixed a bug where it was launching people at inconsistent heights if Breach was on different elevation. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Flashpoint Projectile speed increased from",
+          "stat": "health",
+          "before": 2000.0,
+          "before_unit": "",
+          "after": 2400.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Width increased from",
+          "stat": "range",
+          "before": 7.5,
+          "before_unit": "m",
+          "after": 8.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Flashpoint Projectile speed increased from",
+          "stat": "health",
+          "before": 2000.0,
+          "before_unit": "",
+          "after": 2400.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Width increased from",
+          "stat": "range",
+          "before": 7.5,
+          "before_unit": "m",
+          "after": 8.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.08",
+      "raw": "Fault Line Cooldown increased from 40s >>> 60s Initial windup decreased from 1.2s >>> 1.1s Concuss duration decreased from 3.5s >>> 2.5s Flashpoint Flash duration increased up from 2s >>> 2.25s Rolling Thunder Width decreased from 23m >>> 18m Concuss duration decreased from 6s >>> 4s Ult points decreased from 9 >>> 8 Undocumented Team Deathmatch only: Rolling Thunder Cost increased 80 >>> 90 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Initial windup decreased from",
+          "stat": "other",
+          "before": 1.2,
+          "before_unit": "s",
+          "after": 1.1,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concuss duration decreased from",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Flashpoint Flash duration increased up from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 2.25,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Width decreased from",
+          "stat": "range",
+          "before": 23.0,
+          "before_unit": "m",
+          "after": 18.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concuss duration decreased from",
+          "stat": "duration",
+          "before": 6.0,
+          "before_unit": "s",
+          "after": 4.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Ult points decreased from",
+          "stat": "ult_cost",
+          "before": 9.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Undocumented Team Deathmatch only: Rolling Thunder Cost increased",
+          "stat": "cost",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 90.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Initial windup decreased from",
+          "stat": "other",
+          "before": 1.2,
+          "before_unit": "s",
+          "after": 1.1,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concuss duration decreased from",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Flashpoint Flash duration increased up from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 2.25,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Width decreased from",
+          "stat": "range",
+          "before": 23.0,
+          "before_unit": "m",
+          "after": 18.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concuss duration decreased from",
+          "stat": "duration",
+          "before": 6.0,
+          "before_unit": "s",
+          "after": 4.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Ult points decreased from",
+          "stat": "ult_cost",
+          "before": 9.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Undocumented Team Deathmatch only: Rolling Thunder Cost increased",
+          "stat": "cost",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 90.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.00",
+      "raw": "Aftershock Visual effects around the windup and explosions resolve slightly more quickly and block less gameplay space Fault Line Fixed an issue where Breach’s Fault Line could rarely fail to apply its debuff to targets around varying elevations on specific charge levels v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.11",
+      "raw": "Fault Line Fixed an issue where the area of effect VFX was not matching collision volume depending on charge duration. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.09",
+      "raw": "Fault Line Time until Fault Line detonates after its cast increased from 1 second >>> 1.2 seconds Rolling Thunder Swiftplay only: Starting points 2 >>> 3 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Time until Fault Line detonates after its cast increased from",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "second",
+          "after": 1.2,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Swiftplay only: Starting points",
+          "stat": "ult_cost",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Time until Fault Line detonates after its cast increased from",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "second",
+          "after": 1.2,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Swiftplay only: Starting points",
+          "stat": "ult_cost",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.06",
+      "raw": "Aftershock Fixed an issue where Breach would go into an incorrect idle animation pose in third-person after Aftershock was fired. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.04",
+      "raw": "Aftershock Ticks reduced from 3 to 2 Damage increased from 60 per tick to 80 Rolling Thunder Ultimate points increased 8 >>> 9 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "amage increased from 60 per tick to 80 Rolling Thunder Ultimate points increased",
+          "stat": "damage",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 9.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "amage increased from 60 per tick to 80 Rolling Thunder Ultimate points increased",
+          "stat": "damage",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 9.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "6.11",
+      "raw": "Rolling Thunder Warning visuals have been updated to provide a clearer edge to the ultimate’s area of effect. This should make it easier to understand when you will and will not be hit by the ultimate. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.12",
+      "raw": "Aftershock Damage modifier to non-players reduced 250% >>> 100% Rolling Thunder Ultimate Points increased 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Aftershock Damage modifier to non-players reduced",
+          "stat": "damage",
+          "before": 250.0,
+          "before_unit": "%",
+          "after": 100.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Ultimate Points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Aftershock Damage modifier to non-players reduced",
+          "stat": "damage",
+          "before": 250.0,
+          "before_unit": "%",
+          "after": 100.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Ultimate Points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.07",
+      "raw": "Rolling Thunder Combat report will no longer show dead enemies hit v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "will no longer show dead enemies hit v",
+          "stat": "effect",
+          "description": "will no longer show dead enemies hit v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.05",
+      "raw": "Aftershock Now deals damage to the following: Killjoy's Alarmbot, Nanoswarm, and Lockdown Cypher's Trapwire Reyna's Leer Sage's Barrier Orb Sova's Recon Bolt KAY/O's ZERO/point v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Now deals damage to the following: Killjoy's Alarmbot, Nanoswarm, and Lockdown Cypher's Trapwire Rey",
+          "stat": "effect",
+          "description": "Now deals damage to the following: Killjoy's Alarmbot, Nanoswarm, and Lockdown Cypher's Trapwire Rey",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "3.0",
+      "raw": "Aftershock Now explodes 3 times with each blast dealing 60 damage with no fall off Blasts are .6 seconds apart Explosion radius increased 260 >>> 300 Unequip time after firing decreased 1.1 >>> 0.7 seconds The correct value is undocumented, instead officially being documented in the patch notes as being reduced to 0.9 seconds Cost increased 100 >>> 200 Flashpoint Total charges reduced 3 >>> 2 Cost increased 200 >>> 250 Projectile speed decreased 2500 >>> 2000 Fault Line Full charge time decreased 1.5 >>> 1 second Width increased 600 >>> 750 Telegraph windup time decreased 1.3 >>> 1 Concussion duration increased 3 >>> 3.5 Unequip time after firing decreased 1 >>> 0.7 Cooldown time increased 35 >>> 40 Rolling Thunder Area of effect changed from cone increasing to max width of 2300 >>> Line w",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "damage with no fall off Blasts are .6 seconds apart Explosion radius increased",
+          "stat": "damage",
+          "before": 260.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip time after firing decreased",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "",
+          "after": 0.7,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ing documented in the patch notes as being reduced to 0.9 seconds Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Flashpoint Total charges reduced",
+          "stat": "charges",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Projectile speed decreased",
+          "stat": "speed",
+          "before": 2500.0,
+          "before_unit": "",
+          "after": 2000.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Full charge time decreased",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "second",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Width increased",
+          "stat": "range",
+          "before": 600.0,
+          "before_unit": "",
+          "after": 750.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Telegraph windup time decreased",
+          "stat": "duration",
+          "before": 1.3,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concussion duration increased",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 3.5,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip time after firing decreased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.7,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown time increased",
+          "stat": "duration",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "damage with no fall off Blasts are .6 seconds apart Explosion radius increased",
+          "stat": "damage",
+          "before": 260.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip time after firing decreased",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "",
+          "after": 0.7,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ing documented in the patch notes as being reduced to 0.9 seconds Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Flashpoint Total charges reduced",
+          "stat": "charges",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Projectile speed decreased",
+          "stat": "speed",
+          "before": 2500.0,
+          "before_unit": "",
+          "after": 2000.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Full charge time decreased",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "second",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Width increased",
+          "stat": "range",
+          "before": 600.0,
+          "before_unit": "",
+          "after": 750.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Telegraph windup time decreased",
+          "stat": "duration",
+          "before": 1.3,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concussion duration increased",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 3.5,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip time after firing decreased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.7,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown time increased",
+          "stat": "duration",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.11",
+      "raw": "Flashpoint Full flash time increased from 1.75 seconds >>> 2 seconds Fault Line Spawn location from Breach increased 0 >>> 8 meters Full charge time reduced 2 >>> 1.5 seconds Rolling Thunder Spawn location from Breach increased 0 >>> 8 meters v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Flashpoint Full flash time increased from",
+          "stat": "duration",
+          "before": 1.75,
+          "before_unit": "seconds",
+          "after": 2.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Spawn location from Breach increased",
+          "stat": "ult_cost",
+          "before": 0.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "meters Full charge time reduced",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Spawn location from Breach increased",
+          "stat": "other",
+          "before": 0.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Flashpoint Full flash time increased from",
+          "stat": "duration",
+          "before": 1.75,
+          "before_unit": "seconds",
+          "after": 2.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fault Line Spawn location from Breach increased",
+          "stat": "ult_cost",
+          "before": 0.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "meters Full charge time reduced",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Spawn location from Breach increased",
+          "stat": "other",
+          "before": 0.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.07",
+      "raw": "Concuss now de-scopes players and prevents re-scoping Flashpoint Off-screen flashes now match behavior of other flashes in the game and apply a minimum amount of flash more aggressively Charges increased from 2 >>> 3 Reduced windup time from 0.6 seconds >>> 0.5 seconds Rolling Thunder Detonation delay between blasts decreased from 0.3 >>> 0.255 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ame and apply a minimum amount of flash more aggressively Charges increased from",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reduced windup time from",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "seconds",
+          "after": 0.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Detonation delay between blasts decreased from",
+          "stat": "delay",
+          "before": 0.3,
+          "before_unit": "",
+          "after": 0.255,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ame and apply a minimum amount of flash more aggressively Charges increased from",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reduced windup time from",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "seconds",
+          "after": 0.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Rolling Thunder Detonation delay between blasts decreased from",
+          "stat": "delay",
+          "before": 0.3,
+          "before_unit": "",
+          "after": 0.255,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.06",
+      "raw": "Flashpoint The audio and visuals for Flashpoint should better indicate when to turn away, and when it's safe to look again v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.04",
+      "raw": "Aftershock Fixed Aftershock not properly applying damage to all characters if multiple are hit by it v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "0.49",
+      "raw": "Updated Breach’s visuals",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

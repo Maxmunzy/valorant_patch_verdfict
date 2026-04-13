@@ -1,0 +1,698 @@
+{
+  "agent": "Harbor",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 22,
+    "balance_patches": 7,
+    "numeric_changes": 7,
+    "all_changes": 20
+  },
+  "current_stats": {
+    "C": {
+      "name": "Storm Surge",
+      "creds": 200,
+      "charges": 1,
+      "function": "[[Blind#Nearsight",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Uneuqip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Nearsight duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Slow duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "High Tide",
+      "creds": 300,
+      "charges": 1,
+      "function": "[[Crowd Control#Slow",
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Sphere Velocity": {
+          "value": 25.0,
+          "unit": "meters/second",
+          "raw": "25 meters/second"
+        },
+        "Maximum bend": {
+          "value": 180.0,
+          "unit": "degrees/second",
+          "raw": "180 degrees/second"
+        },
+        "Travel distance": {
+          "value": 60.0,
+          "unit": "meters",
+          "raw": "60 meters"
+        },
+        "Wall Height": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Duration": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Debuff": {
+          "value": 30.0,
+          "unit": "% Slow",
+          "raw": "30% Slow"
+        },
+        "Slow Duration": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Deactivation time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Cove",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Vision Blocker#Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max deploy distance": {
+          "value": 80.0,
+          "unit": "meters",
+          "raw": "80 meters"
+        },
+        "Smoke unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Orb velocity": {
+          "value": 64.0,
+          "unit": "meters per second",
+          "raw": "64 meters per second"
+        },
+        "Deploy time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 4.6,
+          "unit": "meters",
+          "raw": "4.6 meters"
+        },
+        "Duration": {
+          "value": 19.25,
+          "unit": "seconds",
+          "raw": "19.25 seconds"
+        },
+        "Shield windup": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Shield unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Shield deactivation time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Smoke deactivation time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        }
+      }
+    },
+    "X": {
+      "name": "Reckoning",
+      "creds": null,
+      "charges": null,
+      "function": "[[Blind#Nearsight",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Cast time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Unequip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Chunks": {
+          "value": 5.0,
+          "unit": "",
+          "raw": "5"
+        },
+        "rowspan=2|Length": {
+          "value": 5.6,
+          "unit": "meters per chunk",
+          "raw": "5.6 meters per chunk (Including overlap)"
+        },
+        "21 meters total (width)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Effective distance between Harbor and wave": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Velocity": {
+          "value": 8.0,
+          "unit": "meters/second",
+          "raw": "8 meters/second"
+        },
+        "Maximum rise": {
+          "value": 1.1,
+          "unit": "meters",
+          "raw": "1.1 meters"
+        },
+        "Maximum drop": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Travel distance": {
+          "value": 34.0,
+          "unit": "meters",
+          "raw": "34 meters"
+        },
+        "Duration (if stopped)": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        },
+        "Nearsight duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "Slow duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.05",
+      "raw": "Storm Surge Fixed a bug where his relic was not glowing when equipping it in Left Handed Mode. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.04",
+      "raw": "Storm Surge Fixed a bug where it could briefly persist into the next round when cast right before a round ends. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.02",
+      "raw": "Cove Cooldown decreased 40s >> 30s Smoke duration increased from 15s >>> 19.25s Health increased from 500 to 680 Harbor now re-equips his gun faster after activation Storm Surge Now plays audio in world if enemies are hit High Tide Wall height increased 6m >> 8m Max wall length increased from 50m to 60m Reckoning Wave speed increased by 25% (8 >>> 10 m/s) Can now re-use the ultimate to stop it in place for 7s. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Smoke duration increased from",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "s",
+          "after": 19.25,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Smoke duration increased from",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "s",
+          "after": 19.25,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Can now re-use the ultimate to stop it in place for 7s",
+          "stat": "effect",
+          "description": "Can now re-use the ultimate to stop it in place for 7s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.01",
+      "raw": "Reckoning Fixed a bug where the overworld range indicator was not lining up with the actual ability. Cove Fixed a bug where it was missing an ability icon when viewing it on the placement minimap. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Storm Surge Explosion no longer requires line of sight to nearsight and slow players Explosion windup decreased from 0.8s >>> 0.6s Slow duration increased from 0.6s >>> 2s Reckoning Slow duration increased from 0.6s >>> 2s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ires line of sight to nearsight and slow players Explosion windup decreased from",
+          "stat": "other",
+          "before": 0.8,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Slow duration increased from",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Reckoning Slow duration increased from",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ires line of sight to nearsight and slow players Explosion windup decreased from",
+          "stat": "other",
+          "before": 0.8,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Slow duration increased from",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Reckoning Slow duration increased from",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer requires line of sight to nearsight and slow players Explosion windup decreased from 0",
+          "stat": "effect",
+          "description": "no longer requires line of sight to nearsight and slow players Explosion windup decreased from 0",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.11",
+      "raw": "Storm Surge Fixed a bug where it could affect Yoru during Dimensional Drift Fixed a bug where it would cause a dead Clove to see a Nearsight HUD effect if the Storm Surge hit their corpse. Fixed a bug where it would display colored boxes on a spectator’s screen if they changed perspectives to someone who was just hit by one of the abilities Cove Fixed a bug where it would snap rotate 180 degrees when looking upwards or downwards Reckoning Fixed a bug where the minimap indicator would briefly linger and block vision cones Fixed a bug where it would display colored boxes on a spectator’s screen if they changed perspectives to someone who was just hit by one of the abilities v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "Cove - Reworked EQUIP Cove. ACTIVATE to form a water Smoke in the select location. HOLD FIRE while targeting to move the marker further away and HOLD ALT FIRE to move it closer. RELOAD to toggle targeting view. REACTIVATE to Shield the water Smoke, blocking any bullets that hit it. The Shielded water Smoke can be destroyed. UNDOCUMENTED: Shield HP decay towards end duration removed Ability slot changed from Basic >>> Signature Now 1 free charge on a 40-second cooldown Now grants assists for players killed while affected by it. Viper’s Snake Bite, Brimstone’s Incendiary, Sova’s Hunter's Fury, and Killjoy’s Nanoswarm should properly damage it High Tide Ability slot changed from Signature >>> Basic Now costs 300 credits Storm Surge - New basic ability EQUIP Storm Surge. FIRE to throw, creatin",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "non_numeric",
+          "ability_slot": null,
+          "context_label": "Shield HP decay towards end duration",
+          "stat": "mechanic",
+          "before": "removed Ability slot changed from Basic",
+          "after": "Signature Now 1 free charge on a 40-secon",
+          "direction": "change"
+        },
+        {
+          "change_type": "non_numeric",
+          "ability_slot": "Q",
+          "context_label": "s Nanoswarm should properly damage it High",
+          "stat": "mechanic",
+          "before": "Tide Ability slot changed from Signature",
+          "after": "Basic Now costs 300 credits Storm Surge -",
+          "direction": "change"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Now grants assists for players killed while affected by it",
+          "stat": "effect",
+          "description": "Now grants assists for players killed while affected by it",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "removed Ability slot changed from Basic >>> Signature Now 1 free charge on a 40-second cooldown Now ",
+          "stat": "effect",
+          "description": "removed Ability slot changed from Basic >>> Signature Now 1 free charge on a 40-second cooldown Now ",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "removed in place of Storm Surge Reckoning - Reworked EQUIP Reckoning",
+          "stat": "effect",
+          "description": "removed in place of Storm Surge Reckoning - Reworked EQUIP Reckoning",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "rework",
+          "ability_slot": "C",
+          "context_label": "Reworked EQUIP Cove",
+          "stat": "mechanic",
+          "description": "Reworked EQUIP Cove",
+          "direction": "change"
+        },
+        {
+          "change_type": "rework",
+          "ability_slot": "Q",
+          "context_label": "Reworked EQUIP Reckoning",
+          "stat": "mechanic",
+          "description": "Reworked EQUIP Reckoning",
+          "direction": "change"
+        }
+      ]
+    },
+    {
+      "patch": "11.05",
+      "raw": "Reckoning Reduced visual noise. Updated ground indicator to more clearly show its impact range. The yellow wisp is now closer to the Agent being hit, so it’s easier to see where someone is hiding before the concuss comes down. Shortened water splash on the ground for visibility. Cove Improved visual clarity of shield health states. The health state is now more reflected in the visual water animation. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.04",
+      "raw": "Cove Fixed an issue where bullet tracers could be seen passing through v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.08",
+      "raw": "Fixed a bug where Harbor’s water bracelet would sometimes bleed through thin walls like the doors on Ascent. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.03",
+      "raw": "Cascade and High Tide Now slows enemy dashes v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now slows enemy dashes v",
+          "stat": "effect",
+          "description": "Now slows enemy dashes v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.03",
+      "raw": "High Tide Fixed an issue where the wall would end prematurely. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.08",
+      "raw": "High Tide Fixed an issue where AI-controlled abilities (e.g., Killjoy’s Turret) could detect you through High Tide. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.10",
+      "raw": "Updated Harbor’s in-game portrait for better gameplay readability and quality consistency. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.12",
+      "raw": "Cascade Duration increased 5s >>> 7s High Tide Duration increased 12s >>> 15s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Cascade Duration increased",
+          "stat": "duration",
+          "before": 5.0,
+          "before_unit": "s",
+          "after": 7.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "High Tide Duration increased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 15.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Cascade Duration increased",
+          "stat": "duration",
+          "before": 5.0,
+          "before_unit": "s",
+          "after": 7.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "High Tide Duration increased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 15.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.10",
+      "raw": "Cascade Charges increased 1 >>> 2 Fixed Cascade being visible on the minimap for enemies with vision of it Cascade will no longer sometimes spawn under the map The targeter on the minimap no longer shortens when aiming up or down The targeter on the minimap no longer shows a slightly shorter travel distance than its actual length v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Cascade Charges increased",
+          "stat": "charges",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Cascade Charges increased",
+          "stat": "charges",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "will no longer sometimes spawn under the map The targeter on the minimap no longer shortens when aim",
+          "stat": "effect",
+          "description": "will no longer sometimes spawn under the map The targeter on the minimap no longer shortens when aim",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer shows a slightly shorter travel distance than its actual length v",
+          "stat": "effect",
+          "description": "no longer shows a slightly shorter travel distance than its actual length v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.09",
+      "raw": "High Tide Fixed a bug where High Tide would have large gaps when cast in specific map locations. Reckoning Fixed a bug where geysers would not spawn on the area where the player was standing. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.08",
+      "raw": "Hotfix Cascade Fixed a bug where Cascade would sometimes disappear when looking away from it Cove Fixed a bug where walking through Cove was not blinding players at the intended distance v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.08",
+      "raw": "Added PC-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added PC-only[] v",
+          "stat": "effect",
+          "description": "Added PC-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.02",
+      "raw": "Reckoning Fixed a bug where VFX indicator lines were not lined up with the hit box. Fixed a bug where SFX would persist between rounds Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.02",
+      "raw": "High Tide Can be set to Togglable in the Agent Profile Settings, allowing you to press and let go of the input to steer the ability freely while it’s active v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.01",
+      "raw": "Cascade and Cove Fixed an issue where AimAssist was incorrectly being applied.",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

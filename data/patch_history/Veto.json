@@ -1,0 +1,375 @@
+{
+  "agent": "Veto",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 10,
+    "balance_patches": 2,
+    "numeric_changes": 4,
+    "all_changes": 5
+  },
+  "current_stats": {
+    "C": {
+      "name": "Crosscut",
+      "creds": 200,
+      "charges": 2,
+      "function": "[[Mobility#Teleport",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast distance": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Deployment time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Vortex radius": {
+          "value": 24.0,
+          "unit": "meters",
+          "raw": "24 meters"
+        },
+        "rowspan=2|Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total duration: 1.6 seconds"
+        },
+        "1-second windup<br>0.8-second arrival at vortex": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        }
+      }
+    },
+    "Q": {
+      "name": "Chokehold",
+      "creds": 200,
+      "charges": null,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Deployment time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "rowspan=2|Detection radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Trap detecting enemies: 6.58 meters"
+        },
+        "Agents detecting the trap: 9 meters": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Windup": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Decay stats": {
+          "value": 75.0,
+          "unit": "HPHealth restored over 4.5 seconds",
+          "raw": "75 HP<br>Health restored over 4.5 seconds"
+        },
+        "Zone radius": {
+          "value": 6.58,
+          "unit": "meters",
+          "raw": "6.58 meters"
+        },
+        "Zone Duration": {
+          "value": 4.5,
+          "unit": "seconds",
+          "raw": "4.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Interceptor",
+      "creds": null,
+      "charges": 1,
+      "function": "Utility Defense",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deployment distance": {
+          "value": 7.0,
+          "unit": "meters",
+          "raw": "7 meters<br>(Can be reduced if pushed back by terrain)"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deployment time": {
+          "value": 0.35,
+          "unit": "seconds to travel to target location at max deployment distance",
+          "raw": "0.35 seconds to travel to target location at max deployment distance"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Cast time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Duration": {
+          "value": 9.0,
+          "unit": "seconds",
+          "raw": "9 seconds"
+        },
+        "Radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Damage": {
+          "value": 100.0,
+          "unit": "per tick",
+          "raw": "100 per tick"
+        },
+        "Ticks/Tick rate": {
+          "value": 8.0,
+          "unit": "per second",
+          "raw": "8 per second<br>(1 every 0.125 secs)"
+        },
+        "Targeting delay": {
+          "value": 0.2,
+          "unit": "seconds",
+          "raw": "0.2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Evolution",
+      "creds": null,
+      "charges": null,
+      "function": "Empowerment<br>[[Sustain#Heal",
+      "stats": {
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Equip speed<br><nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed"
+        },
+        "Healing": {
+          "value": 40.0,
+          "unit": "HP/sec",
+          "raw": "40 HP/sec"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.06",
+      "raw": "Crosscut Fixed a bug where the icon was missing on the minimap when the Enemy Highlight Color setting was set to red. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.05",
+      "raw": "Interceptor Fixed a bug where it would detect a stealthed Cypher Spycam. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.01",
+      "raw": "Crosscut Fixed a bug where its indicators would overlap on agents and make them difficult to see. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Chokehold Fixed a bug where the jump throw trajectory was inconsistent. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.11",
+      "raw": "Crosscut Fixed a bug where it could sometimes be shot through non-penetrable walls v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "Crosscut Targeting should be more consistent now to other targetable usables. Fixed a bug where it was invisible or non-functional when used in Buy Phase with high ping or packet loss. Interceptor Fixed a bug with Veto’s animation while recalling. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Fixed some bright spots flickering during Evolution transformation in Agent Select Crosscut Fixed an issue where the radius indicator when placing the vortex wouldn't match the placed one Fixed an issue where Veto's the ability descriptions were inconsistent with their in-game behavior Fixed an issue where some visual swirl effects wouldn't show up during the equip animation in some specific occasions Chokehold Fixed an issue where Veto's the ability descriptions were inconsistent with their in-game behavior Fixed the tendrils' exit animation not showing up Evolution Softened the visual effects during the transformation Fixed a bug where it would sometimes not count towards weekly mission progress v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "([[Undocumented]]) Evolution Equip speed buff decreased 25% >>> 10% Fire rate buff decreased 15% >>> 10% Recovery speed buff decreased 20% >>> 10% Reload speed buff decreased 25% >>> 10% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Evolution Equip speed buff decreased",
+          "stat": "speed",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fire rate buff decreased",
+          "stat": "other",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Recovery speed buff decreased",
+          "stat": "speed",
+          "before": 20.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reload speed buff decreased",
+          "stat": "speed",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Evolution Equip speed buff decreased",
+          "stat": "speed",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fire rate buff decreased",
+          "stat": "other",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Recovery speed buff decreased",
+          "stat": "speed",
+          "before": 20.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reload speed buff decreased",
+          "stat": "speed",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.07b",
+      "raw": "Added Team Deathmatch only: Disabled agent due to a bug until patch v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added Team Deathmatch only: Disabled agent due to a bug until patch v",
+          "stat": "effect",
+          "description": "Added Team Deathmatch only: Disabled agent due to a bug until patch v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.08",
+      "raw": "Spotify Playlist[] Trivia[] Development[] Relations[]",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

@@ -1,0 +1,886 @@
+{
+  "agent": "Sova",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 35,
+    "balance_patches": 13,
+    "numeric_changes": 13,
+    "all_changes": 24
+  },
+  "current_stats": {
+    "C": {
+      "name": "Owl Drone",
+      "creds": 400,
+      "charges": 1,
+      "function": "[[Intel#Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Deploy time": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        },
+        "Duration": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        },
+        "rowspan=\"2\"|Reveal stats": {
+          "value": 0.6,
+          "unit": "-second reveal per ping",
+          "raw": "0.6-second reveal per ping"
+        },
+        "Total 2 pings<br>1st ping 1.6 seconds after dart impact<br>2nd ping 1.2 seconds after 1st ping ends": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|4.08}}"
+        },
+        "Dart cooldown": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Shock Bolt",
+      "creds": 150,
+      "charges": 2,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Maximum bounces": {
+          "value": 2.0,
+          "unit": "",
+          "raw": "2"
+        },
+        "Minimum charge times and projectile strengths": {
+          "value": null,
+          "unit": "",
+          "raw": "Immediately cast as a Class 2 Projectile<br>0.333 seconds/1st bar filled for Class 3 Projectile<br>0.667 seconds/2nd bar filled for Class 4 Projectile<br>1.000 second/3rd bar filled for Class 5 Projectile"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Radii": {
+          "value": 1.5,
+          "unit": "meters",
+          "raw": "1.5 meters (Inner)<br>4 meters (Outer)"
+        },
+        "rowspan=2|Damage": {
+          "value": null,
+          "unit": "",
+          "raw": "Minimum: 1"
+        },
+        "Maximum: 75<br><small>(Minimum Outer radius damage to Inner radius damage)</small>": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|4.08}}"
+        }
+      }
+    },
+    "E": {
+      "name": "Recon Bolt",
+      "creds": null,
+      "charges": 1,
+      "function": "Intel",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Maximum bounces": {
+          "value": 2.0,
+          "unit": "",
+          "raw": "2"
+        },
+        "Minimum charge times and projectile strengths": {
+          "value": null,
+          "unit": "",
+          "raw": "Immediately cast as a Class 2 Projectile<br>0.333 seconds/1st bar filled for Class 3 Projectile<br>0.667 seconds/2nd bar filled for Class 4 Projectile<br>1.000 second/3rd bar filled for Class 5 Projectile"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 0.667,
+          "unit": "seconds",
+          "raw": "0.667 seconds"
+        },
+        "Radius": {
+          "value": 30.0,
+          "unit": "meters",
+          "raw": "30 meters"
+        },
+        "rowspan=2|Sonar pulses": {
+          "value": 1.0,
+          "unit": "every 1.6 seconds",
+          "raw": "1 every 1.6 seconds"
+        },
+        "Total 2 pulses": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|7.04}}"
+        },
+        "Reveal duration": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Hunter's Fury",
+      "creds": null,
+      "charges": null,
+      "function": "[[Empowerment#Weapon Equip",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Ammunition": {
+          "value": 3.0,
+          "unit": "charges",
+          "raw": "3 charges"
+        },
+        "Max Duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds (Not including equip time)"
+        },
+        "Windup time per charge": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Fire rate": {
+          "value": 1.0,
+          "unit": "every 2.125 seconds",
+          "raw": "1 every 2.125 seconds (including charge windup time)"
+        },
+        "Self-knockback distance": {
+          "value": 1.5,
+          "unit": "meters",
+          "raw": "1.5 meters"
+        },
+        "Cylinder size": {
+          "value": 66.0,
+          "unit": "meter length1.76 meter radius",
+          "raw": "66 meter length<br>1.76 meter radius"
+        },
+        "Damage": {
+          "value": 80.0,
+          "unit": "",
+          "raw": "80"
+        },
+        "Reveal duration": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.05",
+      "raw": "Owl Drone Fixed a bug where a floating gun may briefly appear when a suppression effect interrupts it v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Shock Bolt and Recon Bolt Fixed a bug where switching to melee after fully charging caused the lightning VFX to disappear for the rest of the game. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Recon Bolt Cooldown increased from 40s >>> 60s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Recon Bolt Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Recon Bolt Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.05",
+      "raw": "Owl Drone Fixed audio issue where the “being watched” sonic feedback wouldn't trigger if the drone had line-of-sight to the player when the drone spawned. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.04",
+      "raw": "Hunter's Fury Visual effects around Hunter's Fury have been adjusted to resolve more quickly and take up less gameplay space v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Recon Bolt Increased volume of Recon Bolt’s projectile loop and improved how the arrow’s sound travels through the air to make it easier to track Audio priority and attenuation adjusted so that you can more reliably hear the arrow when multiple audio cues are present Audio tech updated to make it easier understand the trajectory of the arrow, point of impact, and reveal radius Owl Drone Enemies now hear a light warning audio loop when they are spotted by Sova’s drone Audio hit confirm feedback has been added when shooting the drone successfully v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "added when shooting the drone successfully v",
+          "stat": "effect",
+          "description": "added when shooting the drone successfully v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.07",
+      "raw": "Fixed an issue where Sova’s arm and Drone overlapped each other in Agent Select. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.06",
+      "raw": "Owl Drone Fixed an issue where Sova would go into an incorrect idle animation pose in third person after exiting Owl Drone. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.00",
+      "raw": "Gameplay logic around ability effects themed as explosions has been updated. Explosions should behave more consistently in how they deal damage. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.12",
+      "raw": "Owl Drone Fixed an issue causing kills with Shock Bolt to not be awarded while using Owl Drone v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.04",
+      "raw": "Recon Bolt Total number of scans reduced 3 >>> 2 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Recon Bolt Total number of scans reduced",
+          "stat": "other",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Recon Bolt Total number of scans reduced",
+          "stat": "other",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.11",
+      "raw": "Sova's cape dynamics were redone and smoothed out, while still maintaining a silhouette close to his body to not give away enemy position. Undocumented (6.08-7.04) Hunter's Fury Now damages map objects v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.07",
+      "raw": "Recon Bolt Now correctly appears when playing with Bloom turned off. Scanning VFX updated to be more visible as it travels through the world. Model size increased to more accurately represent its hitbox. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.12",
+      "raw": "Owl Drone Now immune to all allied damage Shock Bolt Now deals damage to Fade's Prowler Recon Bolt Health increased 1 HP >>> 20 HP Now immune to all allied damage Hunter's Fury Now deals damage to: Chamber's Rendezvous Fade's Prowler Raze's Blast Pack Reyna's Leer v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s Prowler Recon Bolt Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s Prowler Recon Bolt Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now immune to all allied damage Shock Bolt Now deals damage to Fade's Prowler Recon Bolt Health incr",
+          "stat": "effect",
+          "description": "Now immune to all allied damage Shock Bolt Now deals damage to Fade's Prowler Recon Bolt Health incr",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now deals damage to: Chamber's Rendezvous Fade's Prowler Raze's Blast Pack Reyna's Leer v",
+          "stat": "effect",
+          "description": "Now deals damage to: Chamber's Rendezvous Fade's Prowler Raze's Blast Pack Reyna's Leer v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.01",
+      "raw": "Shock Bolt Fixed issue with the bolts not damaging enemy traps and other game objects other than players v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.0",
+      "raw": "Recon Bolt Fixed a bug where revealed agents would sometimes briefly appear in an incorrect location on the minimap v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.11",
+      "raw": "Shock Bolt Fixed the trick shot VO line so that it only plays when he kills an enemy agent with 1-bounce or 2-bounce bolt The line will no longer play if it destroys any utility under these conditions v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "will no longer play if it destroys any utility under these conditions v",
+          "stat": "effect",
+          "description": "will no longer play if it destroys any utility under these conditions v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.08",
+      "raw": "Owl Drone Duration reduced 10s >>> 7s Health reduced 125 >>> 100 Number of reveal pings reduced 3 >>> 2 Initial delay before first ping reveals increased 1.2s >>> 1.6s Delay between the first and second ping remains 1.2s Changed crosshair color to green to better stand out against the white HUD Removed delay on [Target Hit] confirmation text [Target Hit] confirmation text now remains on the player HUD when transitioning out of Owl Drone Duration that [Target Hit] confirmation text remains on screen increased 1s >>> 2s Adjusted audio on drone dart hits for both Sova and the player hit to make confirmations more noticeable Fixed a bug where the Dart Cooldown UI element would not properly update after tagging an opponent Shock Bolt Max Damage decreased 90 >>> 75 Radial damage has been scaled ",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Owl Drone Duration reduced",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 7.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Health reduced",
+          "stat": "health",
+          "before": 125.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Number of reveal pings reduced",
+          "stat": "other",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Initial delay before first ping reveals increased",
+          "stat": "delay",
+          "before": 1.2,
+          "before_unit": "s",
+          "after": 1.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "confirmation text remains on screen increased",
+          "stat": "other",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "ld not properly update after tagging an opponent Shock Bolt Max Damage decreased",
+          "stat": "damage",
+          "before": 90.0,
+          "before_unit": "",
+          "after": 75.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Owl Drone Duration reduced",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 7.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Health reduced",
+          "stat": "health",
+          "before": 125.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Number of reveal pings reduced",
+          "stat": "other",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Initial delay before first ping reveals increased",
+          "stat": "delay",
+          "before": 1.2,
+          "before_unit": "s",
+          "after": 1.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "confirmation text remains on screen increased",
+          "stat": "other",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "ld not properly update after tagging an opponent Shock Bolt Max Damage decreased",
+          "stat": "damage",
+          "before": 90.0,
+          "before_unit": "",
+          "after": 75.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "added to HUD v",
+          "stat": "effect",
+          "description": "added to HUD v",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Removed delay on [Target Hit] confirmation text [Target Hit] confirmation text now remains on the pl",
+          "stat": "effect",
+          "description": "Removed delay on [Target Hit] confirmation text [Target Hit] confirmation text now remains on the pl",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.05",
+      "raw": "Recon Bolt Fixed issue where the bolt could be destroyed by Brimstone's Orbital Strike even if it was well out of the laser's target area v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.05",
+      "raw": "Hunter's Fury Now deals damage to the following: Killjoy's Nanoswarm Cypher's Trapwire Sage's Barrier Orb Recon Bolt KAY/O's ZERO/point v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now deals damage to the following: Killjoy's Nanoswarm Cypher's Trapwire Sage's Barrier Orb Recon Bo",
+          "stat": "effect",
+          "description": "Now deals damage to the following: Killjoy's Nanoswarm Cypher's Trapwire Sage's Barrier Orb Recon Bo",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "3.01",
+      "raw": "Recon Bolt Fixed the projectile from looking deployed for enemies when flying through the air v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.0",
+      "raw": "Owl Drone Cost increased 300 >>> 400 Shock Bolt Cost increased 100 >>> 150 Recon Bolt Cooldown time increased 35 >>> 40 Hunter's Fury Ultimate points required increased 7 >>> 8 Fixed a bug where cancelling Hunter's Fury while charging a shot allowed the player to skip the unequip animation by equipping a weapon, ability, or the Spike v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Owl Drone Cost increased",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Shock Bolt Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Recon Bolt Cooldown time increased",
+          "stat": "duration",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Fury Ultimate points required increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Owl Drone Cost increased",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Shock Bolt Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Recon Bolt Cooldown time increased",
+          "stat": "duration",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Fury Ultimate points required increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.05",
+      "raw": "Owl Drone Fixed a rare bug that could leave players unable to move or process inputs until they died when entering or returning from Owl Drone \"We previously addressed some causes of this bug last patch, this fix should address the remaining known causes\" v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.03",
+      "raw": "Fixed issue where Sova could sometimes get the voice over for Hunter's Fury to play, even though it isn't used, by trying to equip Owl Drone at the same time Owl Drone Fixed issue where Owl Drone could clip through specific map geo and view the other side Fixed a couple input bugs around possessing and unpossessing Owl Drone in the same frame which lead to locking all inputs or locking view direction v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.09",
+      "raw": "Owl Drone Fixed issue where Sova's hitbox was incorrect while using Owl Drone v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.07",
+      "raw": "Sova Model Updated the physics on Sova's cape so that it should wiggle outside his hitbox less frequently Polish work on Sova's 1P hands to bring them up to the fidelity bar of the rest of the agents Recon Bolt No longer reveals Killjoy's Turrets v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "No longer reveals Killjoy's Turrets v",
+          "stat": "effect",
+          "description": "No longer reveals Killjoy's Turrets v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.05",
+      "raw": "Owl Drone Fixed issue causing Owl Drone to rotate slower v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.04",
+      "raw": "Owl Drone Fixed jittering when reaching the max flight height v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.03",
+      "raw": "Recon Bolt Removed more locations where Recon Bolt was able to go through walls v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "Removed more locations where Recon Bolt was able to go through walls v",
+          "stat": "effect",
+          "description": "Removed more locations where Recon Bolt was able to go through walls v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.01",
+      "raw": "Recon Bolt Will now behave more consistently and only reveal the portion of enemies behind a wall The Area-of-Effect indicators now only show up on the enemy's minimap if the player or their allies are close to the affected area v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "0.50",
+      "raw": "Reduced collision size on  arrows so they don't get stuck on corners when fired near them Owl Drone Now includes a layer of sound for engine rotors. Audio should better reflect thematics, while maintaining how noticeable the previous version of Owl Drone audio was for allies and enemies, as heard in 3rd-person Sova will no longer float in the air if the Sage Barrier Orb wall he is standing on is destroyed while using Owl Drone No longer rapid-fires darts if the prior one hits an enemy Recon Bolt Fixed multiple spots where Recon Bolt could over-penetrate map geometry Hunter's Fury Added foe coloring Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Added foe coloring Console-only[] v",
+          "stat": "effect",
+          "description": "Added foe coloring Console-only[] v",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "will no longer float in the air if the Sage Barrier Orb wall he is standing on is destroyed while us",
+          "stat": "effect",
+          "description": "will no longer float in the air if the Sage Barrier Orb wall he is standing on is destroyed while us",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "9.04",
+      "raw": "Hunter's Fury There are now reduced spikes in rotational speed after firing each shot of Hunter’s Fury. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.02",
+      "raw": "Hunter's Fury Hunter’s Fury applies less drag on your controls, allowing more control over the charge’s duration. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.01",
+      "raw": "Recon Bolt Fixed an issue where Recon Bolt did not properly apply AimAssist to Revealed Targets. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.0",
+      "raw": "Owl Drone HP is now 100, up from 60.",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

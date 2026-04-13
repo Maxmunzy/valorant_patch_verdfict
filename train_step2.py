@@ -1,9 +1,8 @@
 """
 Step 2 Model Training
-Stage A: stable vs patched (binary)
-Stage B: patched → nerf/buff/rework + followup/correction 세분화
+단일 5-class XGBoost: stable / mild_nerf / strong_nerf / mild_buff / strong_buff
 
-시계열 보정: StratifiedKFold(shuffle) 대신 walk-forward temporal split 사용
+시계열 보정: walk-forward temporal split 사용
 → 미래 act 정보가 과거 검증에 누출되는 leakage 방지
 """
 
@@ -30,50 +29,28 @@ import joblib
 import optuna
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 
-# ─── 레이블 매핑 ─────────────────────────────────────────────────────────────
+try:
+    from imblearn.over_sampling import SMOTE
+    HAS_SMOTE = True
+except ImportError:
+    HAS_SMOTE = False
+
+# ─── 레이블 ──────────────────────────────────────────────────────────────────
+
+# 5-class 순서 (ordinal)
+LABEL_ORDER = ["strong_buff", "mild_buff", "stable", "mild_nerf", "strong_nerf"]
 
 def collapse_label(label):
-    """
-    세분화 레이블 → 학습 가능한 그룹으로 묶기
-    방향(nerf/buff) × 컨텍스트(first/followup/rework) 기준
-
-    병합 규칙:
-      correction_buff → buff_followup  (과너프 후 복구 = 버프 추가 필요)
-      correction_nerf → nerf_followup  (과버프 후 재조정 = 너프 추가 필요)
-      nerf_pro        → nerf_rank      (샘플 4개, 학습 불가)
-      buff_pro        → buff_rank      (샘플 5개, 학습 불가)
-    → 최종 5클래스: nerf_rank / nerf_followup / buff_rank / buff_followup / rework
-    """
-    if label == "stable_balanced":  return "stable"
-    if label == "stable_strong":    return "stable_strong"
-    if label == "stable_weak":      return "stable_weak"
-    if label == "stable_rank_only": return "stable_rank_only"
-    if label == "stable":           return "stable"
-    if label == "rework":           return "rework"
-    # correction → followup 병합
-    if label.startswith("correction_buff"): return "buff_followup"
-    if label.startswith("correction_nerf"): return "nerf_followup"
-
-    parts     = label.split("_")
-    direction = parts[0]
-    is_followup = label.endswith("followup")
-
-    if direction == "nerf":
-        return "nerf_followup" if is_followup else "nerf_rank"
-    if direction == "buff":
-        return "buff_followup" if is_followup else "buff_rank"
-
-    return "other"
-
-
-def stable_weight(label_collapsed):
-    """
-    stable_strong / stable_weak / stable_rank_only 는 노이즈 → 가중치 낮춤
-    stable_rank_only: 버프가 아닌 설계 문제인 요원 → 패치 예측에 혼선 유발
-    """
-    if label_collapsed in ("stable_strong", "stable_weak", "stable_rank_only"):
-        return 0.3
-    return 1.0
+    """구버전 레이블 → 5-class 정규화 (CSV 호환용)"""
+    if label in LABEL_ORDER:
+        return label
+    # 구버전 매핑
+    if label in ("nerf_followup", "correction_nerf"):       return "strong_nerf"
+    if label in ("nerf_rank", "nerf_watch", "nerf_pro"):    return "mild_nerf"
+    if label in ("buff_followup", "correction_buff",
+                 "rework"):                                  return "strong_buff"
+    if label in ("buff_rank", "buff_watch", "buff_pro"):    return "mild_buff"
+    return "stable"
 
 # ─── 시계열 교차검증 ──────────────────────────────────────────────────────────
 
@@ -112,71 +89,149 @@ def temporal_cv_splits(act_idx_arr, n_splits=3, min_train_ratio=0.5):
 # ─── 전처리 ──────────────────────────────────────────────────────────────────
 
 CAT_COLS = [
-    "vct_profile", "last_direction", "last_combined",
-    "last_rank_verdict", "last_vct_verdict", "patch_streak_direction",
-    "last_trigger_type",
+    "last_direction", "patch_streak_direction", "last_trigger_type",
 ]
 
-DROP_COLS = [
+# ── 공통 드롭 (메타/누출/SHAP=0 양쪽) ──────────────────────────────────────
+DROP_COLS_COMMON = [
+    # 메타 컬럼
     "agent", "act", "act_idx", "label", "horizon",
-    "vct_last_event_name",   # 표시용 문자열, 모델 피처 아님
+    "vct_last_event_name",
     "label_direction", "label_skill", "label_trigger", "label_context",
     "label_has_rework", "label_group",
-    "rank_vct_gap",      # NaN 30%
-    "map_dep_score",     # raw 맵 의존도 → 모델이 오해석, 조건부 파생 피처로 대체
-    "effective_map_dep", # in_rotation 곱해져 있어 이중 인코딩
-    "last_combined",     # 방향 정보 없이 DUAL_MISS만으로는 버프/너프 맥락 모호
-                         # dir_verdict_code + buff_miss_flag/nerf_miss_flag 로 대체
-    # ── SHAP=0 피처 제거 (양 Stage 모두 기여 없음) ──────────────────────────────
-    "buff_hit_flag", "nerf_hit_flag",          # hit/miss 비대칭: miss는 유효, hit은 무의미
-    "map_specialist", "specialist_low_pr",      # 맵 전문 요원 플래그 신호 없음
-    "geo_bonus",                                # 지오메트리 잠재 보너스 분산 없음
-    "rank_dominant_flag",                       # design_rank_only 복사본, 둘 다 약함
-    "low_kit_weak_signal",                      # 복합 이진 플래그, 변동성 없음
-    "op_synergy",                               # 오퍼 시너지 요원 너무 적음
-    "replaceable_low_pr",                       # 대체 가능성 × 픽률 플래그 상수
-    "versatile_high_pr",                        # 구버전 이진 플래그
-    "versatile_nerf_signal",                    # map_hhi × rank_pr 교차 — XGBoost가 원본 두 피처로 이미 학습, 중복
-    "rank_low_unexpected",                      # rank_pr 실수값으로 흡수됨, SHAP 0.008로 기여 없음
-    "map_versatility",                          # 맵 다양성 수치 분산 부족
-    "vct_pr_post", "vct_wr_post",               # 표시용 누적 집계, 모델 피처 아님
-    "rank_pr_t+1", "rank_wr_t+1",              # 패치 후 데이터 → 학습 시점에는 미래 데이터 누수
-    "agent_pr_baseline",                        # 요원별 상수 → 모델에 고정값, 기여 없음 (도메인룰 전용)
-    "pr_vs_baseline",                           # = rank_pr - 수동설정 baseline → 우리 사전지식이 학습에 이중 반영, 도메인룰 전용
-    "pr_wr_gap",                                # pr_vs_baseline 기반 파생 → 동일 문제, 도메인룰 전용
-    "rank_pr_rel_meta",                         # SHAP=0, rank_pr과 정보 중복, 타 seed에서 Stage B 성능 저하
-    "rank_pr_zscore",                           # SHAP=0, rank_pr과 정보 중복, 타 seed에서 Stage B 성능 저하
+    "rank_vct_gap",
+    "map_dep_score", "effective_map_dep",
+    "last_combined",
 
-    # 이진 임계값 교차 피처: 요원별 상수 → 시간 변동성 없음
-    "heal_low_rank", "revive_low_rank",
-    "cc_low_rank", "info_low_vct",
+    # 표시용 / 미래 누수 컬럼
+    "vct_pr_post", "vct_wr_post",
+    "rank_pr_t+1", "rank_wr_t+1",
+
+    # 요원별 고정 상수 (시간 변동 없음)
+    "agent_pr_baseline",
+    "pr_vs_baseline",
+    "pr_wr_gap",
+
+    # SHAP=0 (양쪽 공통)
+    "buff_hit_flag", "nerf_hit_flag",
+    "buff_hit_wr_weak", "nerf_hit_wr_strong",
+    "buff_miss_wr_weak", "nerf_miss_wr_strong",
+    "map_specialist", "specialist_low_pr",
+    "geo_bonus", "op_synergy",
+    "rank_dominant_flag", "low_kit_weak_signal",
+    "replaceable_low_pr", "versatile_high_pr", "versatile_nerf_signal",
+    "rank_low_unexpected",
+    "map_versatility",
+    "rank_pr_rel_meta", "rank_pr_zscore",
+
+    # util_*_rank_pr_ratio: 0/1 이진 → has_* 와 동일, 둘 다 SHAP=0
+    "has_smoke", "has_cc", "has_info", "has_mobility",
+    "has_heal", "has_revive", "has_flash", "has_blind",
+    "high_value_smoke", "high_value_cc",
+    "util_smoke_rank_pr_ratio", "util_cc_rank_pr_ratio",
+    "util_info_rank_pr_ratio", "util_mobility_rank_pr_ratio",
+    "util_heal_rank_pr_ratio", "util_revive_rank_pr_ratio",
+    "util_flash_rank_pr_ratio", "util_blind_rank_pr_ratio",
+
+    # VCT 교차 피처 SHAP=0
+    "vct_pr_excess_x_rank_wr",
+
+    # 중복/저신호 피처
+    "patch_streak",
+    "rank_pr_local_peak", "rank_pr_peak",
+    "last_rank_verdict", "last_vct_verdict",
+    "n_rank_acts",
+    "overshoot_flag", "correction_risk_flag",
+    "last_max_skill_w",
+    "both_weak_signal",
+    "heal_low_rank", "revive_low_rank", "cc_low_rank", "info_low_vct",
     "smoke_vct_dom", "smoke_low_vct",
-    # design 분류 플래그: 모델 기여 0, 도메인 룰도 함께 완화
     "design_rank_only", "design_pro_only",
 
-    # ── 기타 SHAP=0 (양 Stage 공통 확인된 것만) ─────────────────────────────
-    "util_blind_rank_pr_ratio",  # 결측 91% → 사실상 무의미
+    # Phase 4 스킬 피처: SHAP=0 (요원별 고정값)
+    "sig_creds", "sig_charges", "sig_stat_count",
+    "ult_points", "total_skill_cost",
+    "sig_cooldown_val", "sig_duration_val", "sig_damage_val",
+    "has_cooldown_sig", "has_damage_sig", "skill_stat_count_total",
+
+    # 기타
+    "pro_dominant_flag", "agent_tier_score",
+    "patch_streak_direction",
+    "recent_buff_fail_count",
+
+    # SHAP=0 (양쪽 공통)
+    "vct_profile",
+    "buff_miss_flag", "nerf_miss_flag",
+    "pr_above_baseline",
+    "pr_buff_signal",
+    "vct_above_hist_avg",
+    "buff_context",
+    "correction_buff_signal",
+
+    # 중복/저신호 추가 드롭
+    "rank_wr_vs50",
+    "dir_verdict_code",
+    "last_direction",
+
+    # v3 2D 리팩터에서 제거/대체된 피처
+    "pr_nerf_signal",
+    "vct_nerf_signal",
+    # 구버전 사분면 (v1~v2)
+    "rank_q1_nerf", "rank_q2_niche_op", "rank_q3_buff", "rank_q4_fandom",
+    "vct_q1_nerf", "vct_q2_niche", "vct_q3_irrelevant",
+    "dual_nerf", "vct_dominance", "vct_rank_divergence", "vct_high_rank_low",
+    "vct_pr_x_rank_wr", "rank_pr_x_rank_wr",
+
+    # v3 SHAP < 0.02 (양쪽 공통)
+    "vct_nerf_2d",              # A=0.000, B=0.000
+    "vct_buff_2d",              # A=0.011, B=0.000
+    "vct_excess_x_wr",          # A=0.000, B=0.000
+    "rank_fandom_2d",           # A=0.010, B=0.000
+    "rank_only_nerf",           # A=0.005, B=0.018
+    "cross_nerf_2d",            # A=0.015, B=0.006
+    "correction_nerf_signal",   # A=0.000, B=0.000
+    "nerf_context",             # A=0.000, B=0.000
+    "mobility_rank_dom",        # A=0.008, B=0.000
+    "vct_low_unexpected",       # A=0.008, B=0.000
+    "wr_nerf_signal",           # A=0.016, B=0.013
+    "patch_streak_n",           # A=0.011, B=0.010
+    "n_buff_patches",           # A=0.004, B=0.019
+    "agent_complexity",         # A=0.012, B=0.007
+    "agent_team_synergy",       # A=0.013, B=0.019
+    "map_explains_vct_drop",    # A=0.000, B=0.000
+    "top_map_in_rotation",      # A=0.000, B=0.000
 ]
 
-DROP_COLS_A = []  # Stage A 전용 추가 제거 (현재 없음 — 피처 제거 실험 결과 원본 대비 성능 저하 확인)
-
-# Stage B 추가 제거 피처 (패치 유형 분류에 노이즈)
-DROP_COLS_B = [
-    "last_trigger_type",      # 레이블 생성 기준과 순환 의존 → Stage A 전용
-    "acts_since_patch",       # 패치 압박 누적 타이밍 신호 → 유형과 무관
-    "patch_streak_n",         # 연속 패치 횟수 → 패치 여부(Stage A) 신호
-    "patch_streak_direction", # 방향 스트릭 → CAT 피처지만 유형 예측엔 노이즈
-    "both_weak_signal",       # 버프 후보 이진 플래그 → Stage A 전용 (B에서 LOAO-CV 저하 확인)
-    "skill_ceiling_score",       # 패치 가능성 신호 → Stage A 전용
-    "skill_ceiling_x_vct_pr",   # skill_ceiling 파생 교차 피처 → Stage A 전용
-    "kit_x_rank_pr",          # 킷 × 픽률 교차 → 패치 여부 신호, 유형 불필요
-    "map_hhi",                # 맵 편중도 → 패치 타이밍 신호, 유형과 무관
+# ── Stage A 전용 드롭 (Stage A에서만 SHAP ≈ 0, Stage B에서는 유효) ──────────
+DROP_COLS_A_ONLY = [
+    "geo_synergy",              # A=0.006
+    "vct_pr_peak_all",          # A=0.005
+    "n_nerf_patches",           # A=0.010
+    "n_total_patches",          # A=0.012
+    # vct_data_lag: A=0.000이지만 B=SHAP#1(0.477) → A에서만 드롭
+    "vct_data_lag",             # A=0.000
 ]
 
-def prepare(df, drop_extra=None):
+# ── Stage B 전용 드롭 (Stage B에서만 SHAP ≈ 0, Stage A에서는 유효) ──────────
+DROP_COLS_B_ONLY = [
+    "vct_pr_avg",               # B=0.000
+    "kit_score",                # B=0.000
+    "recent_dual_miss_count",   # B=0.000
+    # map_hhi: B=0.000이지만 맵 종속 요원 판별에 Stage A에서 유효 가능
+    "map_hhi",                  # B=0.000
+]
+
+# 하위 호환: 기존 코드에서 DROP_COLS 참조 시
+DROP_COLS = list(set(DROP_COLS_COMMON) | set(DROP_COLS_A_ONLY) | set(DROP_COLS_B_ONLY))
+
+
+def prepare(df):
+    """
+    전처리 후 Stage A/B 각각의 피처 목록을 반환.
+    Returns: (df, feat_cols_a, feat_cols_b)
+    """
     df = df.copy()
     df["label_collapsed"] = df["label"].apply(collapse_label)
-    # vct_wr_last: VCT 데이터 없을 때 NaN → 50%으로 대체 (승률 기준값)
     if "vct_wr_last" in df.columns:
         df["vct_wr_last"] = df["vct_wr_last"].fillna(50.0)
 
@@ -185,13 +240,16 @@ def prepare(df, drop_extra=None):
         if col in df.columns:
             df[col] = oe.fit_transform(df[[col]])
 
-    all_drops = DROP_COLS + (drop_extra or []) + ["label_collapsed"]
-    feat_cols = [c for c in df.columns if c not in all_drops]
-    return df, feat_cols
+    meta_drops = {"label_collapsed"}
+    drops_a = set(DROP_COLS_COMMON) | set(DROP_COLS_A_ONLY) | meta_drops
+    drops_b = set(DROP_COLS_COMMON) | set(DROP_COLS_B_ONLY) | meta_drops
+    feat_cols_a = [c for c in df.columns if c not in drops_a]
+    feat_cols_b = [c for c in df.columns if c not in drops_b]
+    return df, feat_cols_a, feat_cols_b
 
 # ─── HPO ─────────────────────────────────────────────────────────────────────
 
-def run_hpo(X, y, act_idx_arr, n_trials=60, noise_w=None):
+def run_hpo(X, y, act_idx_arr, n_trials=60, noise_w=None, use_smote=False):
     splits = temporal_cv_splits(act_idx_arr)
     n_cls  = len(np.unique(y))
 
@@ -214,14 +272,29 @@ def run_hpo(X, y, act_idx_arr, n_trials=60, noise_w=None):
         if params["num_class"] is None:
             del params["num_class"]
 
-        cw = compute_class_weight("balanced", classes=np.unique(y), y=y)
-        sw = np.array([cw[yi] for yi in y])
-        if noise_w is not None:
-            sw = sw * noise_w
-
         scores = []
         for tr, val in splits:
             y_tr, y_val = y[tr], y[val]
+            X_tr = X[tr].copy()
+
+            # SMOTE: train fold만 오버샘플링 (val은 원본 분포 유지)
+            if use_smote and HAS_SMOTE and len(np.unique(y_tr)) >= 2:
+                min_cls_n = int(np.bincount(y_tr).min())
+                k = min(3, min_cls_n - 1)
+                if k >= 1:
+                    # SMOTE는 NaN 불허 → median imputation 후 적용
+                    from sklearn.impute import SimpleImputer as _SI
+                    _imp = _SI(strategy="median")
+                    X_tr = _imp.fit_transform(X_tr)
+                    sm = SMOTE(random_state=SEED, k_neighbors=k)
+                    X_tr, y_tr = sm.fit_resample(X_tr, y_tr)
+
+            cw = compute_class_weight("balanced", classes=np.unique(y_tr), y=y_tr)
+            sw_tr = np.array([cw[yi] for yi in y_tr])
+            if noise_w is not None and not use_smote:
+                # noise_w는 원본 인덱스 기준 → SMOTE 사용 시 무의미
+                sw_tr = sw_tr * noise_w[tr[:len(sw_tr)]]
+
             le_fold = LabelEncoder()
             y_tr_enc  = le_fold.fit_transform(y_tr)
             if not set(y_val).issubset(set(le_fold.classes_)):
@@ -238,7 +311,7 @@ def run_hpo(X, y, act_idx_arr, n_trials=60, noise_w=None):
                 fp["num_class"] = n_cls_fold
 
             m = xgb.XGBClassifier(**fp)
-            m.fit(X[tr], y_tr_enc, sample_weight=sw[tr], verbose=False)
+            m.fit(X_tr, y_tr_enc, sample_weight=sw_tr, verbose=False)
             preds = m.predict(X[val])
             scores.append(balanced_accuracy_score(y_val_enc, preds))
 
@@ -250,7 +323,7 @@ def run_hpo(X, y, act_idx_arr, n_trials=60, noise_w=None):
     return study.best_params, study.best_value
 
 
-def train_eval(X, y, labels, best_params, stage_name, act_idx_arr, noise_w=None):
+def train_eval(X, y, labels, best_params, stage_name, act_idx_arr, noise_w=None, use_smote=False):
     n_cls  = len(np.unique(y))
     params = dict(
         **best_params,
@@ -266,17 +339,30 @@ def train_eval(X, y, labels, best_params, stage_name, act_idx_arr, noise_w=None)
     if "colsample" in params:
         params["colsample_bytree"] = params.pop("colsample")
 
-    cw = compute_class_weight("balanced", classes=np.unique(y), y=y)
-    sw = np.array([cw[yi] for yi in y])
-    if noise_w is not None:
-        sw = sw * noise_w
-
     splits = temporal_cv_splits(act_idx_arr)
     oof = np.full(len(y), -1, dtype=int)
 
     for tr, val in splits:
+        y_tr_raw = y[tr]
+        X_tr     = X[tr].copy()
+
+        # SMOTE: train fold만 오버샘플링 (NaN → median impute 선적용)
+        if use_smote and HAS_SMOTE and len(np.unique(y_tr_raw)) >= 2:
+            min_cls_n = int(np.bincount(y_tr_raw).min())
+            k = min(3, min_cls_n - 1)
+            if k >= 1:
+                from sklearn.impute import SimpleImputer as _SI
+                X_tr = _SI(strategy="median").fit_transform(X_tr)
+                sm = SMOTE(random_state=SEED, k_neighbors=k)
+                X_tr, y_tr_raw = sm.fit_resample(X_tr, y_tr_raw)
+
+        cw_fold = compute_class_weight("balanced", classes=np.unique(y_tr_raw), y=y_tr_raw)
+        sw_fold = np.array([cw_fold[yi] for yi in y_tr_raw])
+        if noise_w is not None and not use_smote:
+            sw_fold = sw_fold * noise_w[tr[:len(sw_fold)]]
+
         le_fold   = LabelEncoder()
-        y_tr_enc  = le_fold.fit_transform(y[tr])
+        y_tr_enc  = le_fold.fit_transform(y_tr_raw)
         n_cls_fold = len(le_fold.classes_)
 
         p = {**params}
@@ -288,7 +374,7 @@ def train_eval(X, y, labels, best_params, stage_name, act_idx_arr, noise_w=None)
             p["num_class"] = n_cls_fold
 
         m = xgb.XGBClassifier(**p)
-        m.fit(X[tr], y_tr_enc, sample_weight=sw[tr], verbose=False)
+        m.fit(X_tr, y_tr_enc, sample_weight=sw_fold, verbose=False)
         pred_enc = m.predict(X[val])
 
         for vi, pe in zip(val, pred_enc):
@@ -318,9 +404,23 @@ def train_eval(X, y, labels, best_params, stage_name, act_idx_arr, noise_w=None)
     )
     print(cm.to_string())
 
-    # 전체 데이터로 최종 모델
+    # 전체 데이터로 최종 모델 (SMOTE 적용 시 전체에도 오버샘플링)
+    X_final, y_final = X, y
+    if use_smote and HAS_SMOTE and len(np.unique(y)) >= 2:
+        min_cls_n = int(np.bincount(y).min())
+        k = min(3, min_cls_n - 1)
+        if k >= 1:
+            from sklearn.impute import SimpleImputer as _SI
+            X_imp = _SI(strategy="median").fit_transform(X)
+            sm = SMOTE(random_state=SEED, k_neighbors=k)
+            X_final, y_final = sm.fit_resample(X_imp, y)
+    cw_fin = compute_class_weight("balanced", classes=np.unique(y_final), y=y_final)
+    sw_fin = np.array([cw_fin[yi] for yi in y_final])
+    if noise_w is not None and not use_smote:
+        sw_fin = sw_fin * noise_w
+
     model = xgb.XGBClassifier(**params)
-    model.fit(X, y, sample_weight=sw)
+    model.fit(X_final, y_final, sample_weight=sw_fin)
     return model, oof, ba
 
 # ─── LR 학습/평가 ─────────────────────────────────────────────────────────────
@@ -389,14 +489,106 @@ def train_eval_lr(X, y, labels, stage_name, act_idx_arr, noise_w=None):
     return final, oof, ba
 
 
+# ─── Stage A 전용: train-only 언더샘플링 ─────────────────────────────────────
+
+def train_eval_stage_a(df_full: "pd.DataFrame", feat_cols: list, params: dict):
+    """
+    Stage A (stable vs patched) 학습 및 평가.
+
+    핵심: 언더샘플링을 train split에만 적용, val은 원본 분포로 평가.
+    → BA가 실제 서빙 분포(stable 58%, patched 42%)를 반영.
+    """
+    df_full = df_full.copy().reset_index(drop=True)
+    df_full["_label_a"] = (df_full["label_collapsed"] != "stable").astype(int)
+
+    act_idx_arr = df_full["act_idx"].values
+    splits      = temporal_cv_splits(act_idx_arr)
+    oof         = np.full(len(df_full), -1, dtype=int)
+
+    for tr_idx, val_idx in splits:
+        tr_df = df_full.iloc[tr_idx].copy()
+
+        # ── train split만 1:1 언더샘플링 ─────────────────────────────────────
+        tr_patched = tr_df[tr_df["_label_a"] == 1]
+        tr_stable  = tr_df[tr_df["_label_a"] == 0]
+        n_pat      = len(tr_patched)
+        tr_stable_s = tr_stable.sample(n=min(n_pat, len(tr_stable)), random_state=SEED)
+        tr_bal      = pd.concat([tr_stable_s, tr_patched]).sample(frac=1, random_state=SEED)
+
+        y_tr = tr_bal["_label_a"].values
+        X_tr = tr_bal[feat_cols].values.astype(np.float32)
+
+        # val은 원본 분포 그대로
+        val_df = df_full.iloc[val_idx]
+        y_val  = val_df["_label_a"].values
+        X_val  = val_df[feat_cols].values.astype(np.float32)
+
+        cw = compute_class_weight("balanced", classes=np.unique(y_tr), y=y_tr)
+        sw = np.array([cw[yi] for yi in y_tr])
+
+        n_cls = len(np.unique(y_tr))
+        p = dict(**params)
+        if "lr" in p:      p["learning_rate"]    = p.pop("lr")
+        if "colsample" in p: p["colsample_bytree"] = p.pop("colsample")
+        p.update(dict(
+            objective   = "binary:logistic",
+            eval_metric = "logloss",
+            random_state = SEED, verbosity = 0,
+        ))
+        p.pop("num_class", None)
+
+        m = xgb.XGBClassifier(**p)
+        m.fit(X_tr, y_tr, sample_weight=sw, verbose=False)
+        preds = m.predict(X_val)
+        for vi, pred in zip(val_idx, preds):
+            oof[vi] = pred
+
+    mask     = oof >= 0
+    y_true   = df_full["_label_a"].values[mask]
+    y_pred   = oof[mask]
+    ba       = balanced_accuracy_score(y_true, y_pred)
+    label_a_cats = ["stable", "patched"]
+
+    print(f"\n[Stage A XGB - train-only undersampling]  BA: {ba:.4f}  (eval_rows={mask.sum()}/{len(df_full)})")
+    print(classification_report(y_true, y_pred,
+                                labels=[0, 1], target_names=label_a_cats, zero_division=0))
+    print("[혼동 행렬]")
+    cm = pd.DataFrame(confusion_matrix(y_true, y_pred, labels=[0, 1]),
+                      index=label_a_cats, columns=label_a_cats)
+    print(cm.to_string())
+
+    # 전체 데이터로 최종 모델 학습 (train-only 언더샘플링)
+    all_patched = df_full[df_full["_label_a"] == 1]
+    all_stable  = df_full[df_full["_label_a"] == 0]
+    all_stable_s = all_stable.sample(n=min(len(all_patched), len(all_stable)), random_state=SEED)
+    df_final     = pd.concat([all_stable_s, all_patched]).sample(frac=1, random_state=SEED)
+
+    y_final = df_final["_label_a"].values
+    X_final = df_final[feat_cols].values.astype(np.float32)
+    cw_f    = compute_class_weight("balanced", classes=np.unique(y_final), y=y_final)
+    sw_f    = np.array([cw_f[yi] for yi in y_final])
+
+    p_fin = dict(**params)
+    if "lr" in p_fin:        p_fin["learning_rate"]    = p_fin.pop("lr")
+    if "colsample" in p_fin: p_fin["colsample_bytree"] = p_fin.pop("colsample")
+    p_fin.update(dict(objective="binary:logistic", eval_metric="logloss",
+                      random_state=SEED, verbosity=0))
+    p_fin.pop("num_class", None)
+    final_model = xgb.XGBClassifier(**p_fin)
+    final_model.fit(X_final, y_final, sample_weight=sw_f)
+
+    return final_model, oof, ba
+
+
 # ─── SHAP ────────────────────────────────────────────────────────────────────
 
-def loao_cv(df, feat_cols, stable_types, stage="A"):
+def loao_cv(df, feat_cols):
     """
-    Leave-One-Agent-Out CV
+    Leave-One-Agent-Out CV (단일 5-class)
     요원 하나씩 통째로 빼고 나머지로 학습 → 빠진 요원 예측
-    "특정 요원 패턴 암기 vs 일반 패턴 학습" 검증용
     """
+    all_cats = sorted(df["label_collapsed"].unique())
+    cat_enc  = {l: i for i, l in enumerate(all_cats)}
     agents   = df["agent"].unique()
     scores   = []
     failures = []
@@ -405,59 +597,44 @@ def loao_cv(df, feat_cols, stable_types, stage="A"):
         train_df = df[df["agent"] != agent].copy()
         test_df  = df[df["agent"] == agent].copy()
 
-        if stage == "A":
-            y_train = (~train_df["label_collapsed"].isin(stable_types)).astype(int).values
-            y_test  = (~test_df["label_collapsed"].isin(stable_types)).astype(int).values
-        else:
-            patched_train = train_df[~train_df["label_collapsed"].isin(stable_types)]
-            patched_test  = test_df[~test_df["label_collapsed"].isin(stable_types)]
-            if len(patched_test) == 0:
-                continue
-            all_cats = sorted(df[~df["label_collapsed"].isin(stable_types)]["label_collapsed"].unique())
-            cat_enc  = {l: i for i, l in enumerate(all_cats)}
-            y_train  = patched_train["label_collapsed"].map(cat_enc).values
-            y_test   = patched_test["label_collapsed"].map(cat_enc).values
-            train_df = patched_train
-            test_df  = patched_test
+        if len(test_df) == 0:
+            continue
 
-        if len(np.unique(y_train)) < 2 or len(y_test) == 0:
+        y_train = train_df["label_collapsed"].map(cat_enc).values
+        y_test  = test_df["label_collapsed"].map(cat_enc).values
+
+        if not set(np.unique(y_test)).issubset(set(np.unique(y_train))):
+            failures.append(agent)
+            continue
+        if len(np.unique(y_train)) < 2:
             continue
 
         X_train = train_df[feat_cols].values.astype(np.float32)
         X_test  = test_df[feat_cols].values.astype(np.float32)
 
-        cw_classes = np.unique(y_train)
-        cw = compute_class_weight("balanced", classes=cw_classes, y=y_train)
-        cw_dict = dict(zip(cw_classes, cw))
-        sw = np.array([cw_dict[yi] for yi in y_train])
+        cw  = compute_class_weight("balanced", classes=np.unique(y_train), y=y_train)
+        cw_dict = dict(zip(np.unique(y_train), cw))
+        sw  = np.array([cw_dict[yi] for yi in y_train])
 
         n_cls = len(np.unique(y_train))
         params = dict(
             n_estimators=100, max_depth=3, learning_rate=0.05,
             subsample=0.8, colsample_bytree=0.8,
-            objective="binary:logistic" if n_cls == 2 else "multi:softmax",
-            eval_metric="logloss" if n_cls == 2 else "mlogloss",
-            random_state=SEED, verbosity=0,
+            objective="multi:softmax", num_class=n_cls,
+            eval_metric="mlogloss", random_state=SEED, verbosity=0,
         )
-        if n_cls > 2:
-            params["num_class"] = n_cls
 
-        # test 클래스가 train에 없으면 skip
-        if not set(np.unique(y_test)).issubset(set(np.unique(y_train))):
-            failures.append(agent)
-            continue
-
+        le_fold = LabelEncoder()
+        y_tr_enc = le_fold.fit_transform(y_train)
         m = xgb.XGBClassifier(**params)
-        le = LabelEncoder()
-        y_tr_enc = le.fit_transform(y_train)
         m.fit(X_train, y_tr_enc, sample_weight=sw, verbose=False)
 
         y_pred_enc = m.predict(X_test)
-        y_test_enc = le.transform(y_test)
+        y_test_enc = le_fold.transform(y_test)
         ba = balanced_accuracy_score(y_test_enc, y_pred_enc)
         scores.append((agent, ba, len(y_test)))
 
-    print(f"\n[LOAO-CV Stage {stage}]  요원별 balanced_accuracy:")
+    print(f"\n[LOAO-CV]  요원별 balanced_accuracy:")
     print(f"  {'요원':<12} {'BA':>6}  {'샘플':>4}")
     print(f"  {'-'*26}")
     for ag, ba, n in sorted(scores, key=lambda x: x[1]):
@@ -513,244 +690,181 @@ def main():
 
     raw_csv = pd.read_csv("step2_training_data.csv")
 
-    # 현재 진행 중인 최신 액트는 학습 제외: 미래 레이블 미확정 → 모두 stable로 찍혀 노이즈
+    # 현재 진행 중인 최신 액트는 학습 제외 (레이블 미확정)
     EXCLUDE_TRAIN_ACTS = {"V26A2"}
     train_raw = raw_csv[~raw_csv["act"].isin(EXCLUDE_TRAIN_ACTS)].copy()
     n_excl = len(raw_csv) - len(train_raw)
     if n_excl > 0:
-        print(f"  [{'+'.join(EXCLUDE_TRAIN_ACTS)} 제외] {n_excl}행 학습 제외 (현재 액트, 레이블 미확정)")
+        print(f"  [{'+'.join(EXCLUDE_TRAIN_ACTS)} 제외] {n_excl}행 학습 제외")
 
-    # Stage A: horizon=1만 (단기 판정 유지, horizon=2,3 혼재 시 레이블 노이즈)
-    train_a = train_raw[train_raw.get("horizon", pd.Series(1, index=train_raw.index)) == 1] \
-        if "horizon" in train_raw.columns else train_raw
-    print(f"  Stage A 학습 행: {len(train_a)} (horizon=1만)")
+    df, feat_cols_a, feat_cols_b = prepare(train_raw)
 
-    df, feat_cols_a = prepare(train_a, drop_extra=DROP_COLS_A)
-    _, feat_cols_b  = prepare(train_raw, drop_extra=DROP_COLS_B)
-
-    # B안: stable_strong / stable_weak 학습 제외
-    noise_labels = {"stable_strong", "stable_weak"}
-    n_before = len(df)
-    df = df[~df["label_collapsed"].isin(noise_labels)].reset_index(drop=True)
-    print(f"전체: {n_before}행 → stable_strong/weak 제외 후 {len(df)}행")
-    print(f"Stage A 피처: {len(feat_cols_a)}개 / Stage B 피처: {len(feat_cols_b)}개")
-    print("\n[collapsed 레이블 분포]")
+    print(f"  피처: Stage A {len(feat_cols_a)}개 / Stage B {len(feat_cols_b)}개")
+    print("\n[레이블 분포]")
     print(df["label_collapsed"].value_counts().to_string())
 
-    X_all       = df[feat_cols_a].values.astype(np.float32)
-    act_idx_all = df["act_idx"].values
-
     # ================================================================
-    # Stage A: stable vs patched
+    # 2-Stage 계층 분류
+    #   Stage A: stable vs patched  (1:1 언더샘플링 + class_weight balanced)
+    #   Stage B: buff   vs nerf     (scale_pos_weight 비용 민감 학습)
     # ================================================================
-    print("\n" + "-"*50)
-    print("Stage A: stable vs patched")
-    print("-"*50)
 
-    stable_types = ["stable", "stable_rank_only"]
-    ya = (~df["label_collapsed"].isin(stable_types)).astype(int).values
-
-    # 데이터 부족 요원 가중치 할인: n_rank_acts < 8이면 비례적으로 줄임
-    # acts_since=99 (패치 이력 없음) + 데이터 적음 → 모델 학습에 혼란 유발
-    if "n_rank_acts" in df.columns:
-        _n_acts = df["n_rank_acts"].fillna(99).values.astype(float)
-        _no_patch = (df["acts_since_patch"].fillna(99).values.astype(float) >= 99)
-        data_quality_w = np.where(
-            _no_patch & (_n_acts < 8),
-            np.clip(_n_acts / 8.0, 0.2, 1.0),
-            1.0
-        )
-    else:
-        data_quality_w = None
-    noise_w = data_quality_w  # element-wise multiplier on class weights
-
-    n_stable   = (ya == 0).sum()
-    n_patched  = (ya == 1).sum()
-    n_rankonly = (df["label_collapsed"] == "stable_rank_only").sum()
-    print(f"  stable: {n_stable - n_rankonly}  stable_rank_only: {n_rankonly}  patched: {n_patched}")
-
-    # HPO: --fast면 저장된 파라미터 사용, 없으면 새로 실행
     saved_params = {}
     if os.path.exists(PARAMS_FILE):
         with open(PARAMS_FILE) as f:
             saved_params = json.load(f)
 
+    # ── Stage A 데이터 준비 ───────────────────────────────────────────────────
+    print("\n" + "="*50)
+    print("Stage A: stable vs patched  [언더샘플링 1:1]")
+    print("="*50)
+
+    df_patched = df[df["label_collapsed"] != "stable"].copy()
+    df_stable  = df[df["label_collapsed"] == "stable"].copy()
+    n_patched  = len(df_patched)
+
+    # stable을 patched 수만큼 언더샘플링 (1:1 균형)
+    df_stable_s = df_stable.sample(n=min(n_patched, len(df_stable)), random_state=SEED)
+    df_a = pd.concat([df_stable_s, df_patched]).sample(frac=1, random_state=SEED).reset_index(drop=True)
+
+    print(f"  stable(샘플): {len(df_stable_s)} / patched: {n_patched}  (원본 stable: {len(df_stable)})")
+
+    y_a       = (df_a["label_collapsed"] != "stable").astype(int).values  # 0=stable, 1=patched
+    X_a       = df_a[feat_cols_a].values.astype(np.float32)
+    act_idx_a = df_a["act_idx"].values
+    label_a_cats = ["stable", "patched"]
+
+    # HPO는 언더샘플된 df_a로 수행 (속도), 평가는 train_eval_stage_a로 원본 분포 기준
     use_saved_a = args.fast and "stage_a" in saved_params and not args.hpo
     if use_saved_a:
         params_a = saved_params["stage_a"]
-        print(f"  [빠른 모드] 저장된 Stage A 파라미터 사용")
+        print("  [빠른 모드] 저장된 파라미터 사용")
     else:
-        print("  HPO 중...")
-        params_a, best_a = run_hpo(X_all, ya, act_idx_all, n_trials=60, noise_w=noise_w)
-        print(f"  best balanced_accuracy: {best_a:.4f}")
+        print("  HPO 중 (Stage A)...")
+        params_a, best_a = run_hpo(X_a, y_a, act_idx_a, n_trials=60)
+        print(f"  best BA (HPO 기준): {best_a:.4f}")
 
-    model_a_xgb, oof_a_xgb, ba_a_xgb = train_eval(
-        X_all, ya, ["stable", "patched"], params_a, "Stage A (XGB)", act_idx_all, noise_w=noise_w
-    )
-    model_a_lr, oof_a_lr, ba_a_lr = train_eval_lr(
-        X_all, ya, ["stable", "patched"], "Stage A", act_idx_all, noise_w=noise_w
-    )
-    if ba_a_lr > ba_a_xgb:
-        model_a, ba_a = model_a_lr, ba_a_lr
-        print(f"\n  [채택] Stage A: LR ({ba_a_lr:.4f} > {ba_a_xgb:.4f})")
-    else:
-        model_a, ba_a = model_a_xgb, ba_a_xgb
-        print(f"\n  [채택] Stage A: XGB ({ba_a_xgb:.4f} >= {ba_a_lr:.4f})")
-        shap_top(model_a_xgb, X_all, feat_cols_a, "Stage A (stable vs patched)", save_path="shap_importance_a.csv")
-    joblib.dump(model_a, "step2_model_a.pkl")
+    # ① 원본 분포로 올바른 BA 측정
+    model_a, _, ba_a = train_eval_stage_a(df, feat_cols_a, params_a)
+    shap_top(model_a, X_a, feat_cols_a, "Stage A", save_path="shap_importance_a.csv")
 
-    # Stage A 파라미터 저장 (--fast가 아닐 때만)
-    if not args.fast or args.hpo:
-        saved_params["stage_a"] = params_a
+    # ── Stage B 데이터 준비 ───────────────────────────────────────────────────
+    print("\n" + "="*50)
+    print("Stage B: buff vs nerf  [patched 행만 / cost-sensitive]")
+    print("="*50)
 
-    # ================================================================
-    # Stage B: patched 케이스 내 세분류
-    # ================================================================
-    print("\n" + "-"*50)
-    print("Stage B: patched 유형 분류")
-    print("-"*50)
+    df_b = df[df["label_collapsed"] != "stable"].copy()
+    df_b["label_b"] = df_b["label_collapsed"].apply(lambda x: "buff" if "buff" in x else "nerf")
 
-    # Stage B: horizon=1,2,3 모두 활용 (nerf/buff 방향 데이터 최대화)
-    raw_b        = raw_csv[~raw_csv["act"].isin(EXCLUDE_TRAIN_ACTS)].copy()
-    df_b_full, _ = prepare(raw_b, drop_extra=DROP_COLS_B)
-    df_b_full    = df_b_full[~df_b_full["label_collapsed"].isin(noise_labels)].reset_index(drop=True)
-    patched_df   = df_b_full[~df_b_full["label_collapsed"].isin(stable_types)].copy()
+    le_b = LabelEncoder()
+    y_b  = le_b.fit_transform(df_b["label_b"].values)
+    label_b_cats = list(le_b.classes_)   # ['buff', 'nerf']
+    X_b          = df_b[feat_cols_b].values.astype(np.float32)
+    act_idx_b    = df_b["act_idx"].values
 
-    X_b          = patched_df[feat_cols_b].values.astype(np.float32)
-    act_idx_b    = patched_df["act_idx"].values
-    label_b_cats = sorted(patched_df["label_collapsed"].unique())
-    label_b_enc  = {l: i for i, l in enumerate(label_b_cats)}
-    yb           = patched_df["label_collapsed"].map(label_b_enc).values
+    n_buff = (df_b["label_b"] == "buff").sum()
+    n_nerf = (df_b["label_b"] == "nerf").sum()
 
-    h1 = (df_b_full["horizon"] == 1).sum() if "horizon" in df_b_full.columns else len(df_b_full)
-    h23 = len(df_b_full) - h1
-    print(f"  케이스: {len(patched_df)} (horizon=1: {h1}행 중 patched + horizon=2,3: {h23}행)  /  클래스: {len(label_b_cats)}")
+    print(f"  buff: {n_buff} / nerf: {n_nerf}")
     print(f"  클래스: {label_b_cats}")
-
-    small = [l for l in label_b_cats if (patched_df["label_collapsed"] == l).sum() < 4]
-    if small:
-        print(f"  [경고] 케이스 4개 미만 클래스: {small}")
+    print(f"  SMOTE: {'활성' if HAS_SMOTE else '비활성 (imbalanced-learn 없음)'}")
 
     use_saved_b = args.fast and "stage_b" in saved_params and not args.hpo
     if use_saved_b:
         params_b = saved_params["stage_b"]
-        print(f"  [빠른 모드] 저장된 Stage B 파라미터 사용")
+        print("  [빠른 모드] 저장된 파라미터 사용")
     else:
-        print("  HPO 중...")
-        params_b, best_b = run_hpo(X_b, yb, act_idx_b, n_trials=60)
-        print(f"  best balanced_accuracy: {best_b:.4f}")
+        print("  HPO 중 (Stage B + SMOTE)...")
+        params_b, best_b = run_hpo(X_b, y_b, act_idx_b, n_trials=60, use_smote=True)
+        print(f"  best BA: {best_b:.4f}")
 
-    model_b_xgb, oof_b_xgb, ba_b_xgb = train_eval(
-        X_b, yb, label_b_cats, params_b, "Stage B (XGB)", act_idx_b
-    )
-    model_b_lr, oof_b_lr, ba_b_lr = train_eval_lr(
-        X_b, yb, label_b_cats, "Stage B", act_idx_b
-    )
+    model_b_xgb, _, ba_b_xgb = train_eval(X_b, y_b, label_b_cats, params_b,
+                                            "Stage B (XGB)", act_idx_b, use_smote=True)
+    model_b_lr,  _, ba_b_lr  = train_eval_lr(X_b, y_b, label_b_cats,
+                                              "Stage B (LR)", act_idx_b)
+
     if ba_b_lr > ba_b_xgb:
         model_b, ba_b = model_b_lr, ba_b_lr
-        print(f"\n  [채택] Stage B: LR ({ba_b_lr:.4f} > {ba_b_xgb:.4f})")
+        print(f"\n  [Stage B 채택] LR ({ba_b_lr:.4f} > {ba_b_xgb:.4f})")
     else:
         model_b, ba_b = model_b_xgb, ba_b_xgb
-        print(f"\n  [채택] Stage B: XGB ({ba_b_xgb:.4f} >= {ba_b_lr:.4f})")
-        shap_top(model_b_xgb, X_b, feat_cols_b, "Stage B (patch type)", save_path="shap_importance_b.csv")
-    joblib.dump(model_b, "step2_model_b.pkl")
+        print(f"\n  [Stage B 채택] XGB ({ba_b_xgb:.4f} >= {ba_b_lr:.4f})")
+        shap_top(model_b_xgb, X_b, feat_cols_b, "Stage B", save_path="shap_importance_b.csv")
 
     # 파라미터 저장
     if not args.fast or args.hpo:
+        saved_params["stage_a"] = params_a
         saved_params["stage_b"] = params_b
         with open(PARAMS_FILE, "w") as f:
             json.dump(saved_params, f, indent=2)
         print(f"\n  파라미터 저장: {PARAMS_FILE}")
 
-    # ================================================================
-    # 현재 시점 예측 (최신 액트 기준)
-    # ================================================================
+    # ── 현재 시점 예측 미리보기 ───────────────────────────────────────────────
     print("\n" + "-"*50)
-    print("현재 시점 예측 (최신 액트 기준)")
+    print("현재 시점 예측 미리보기 (2-stage 합성 확률)")
     print("-"*50)
 
-    # 예측 미리보기: 제외된 최신 액트 포함한 전체 데이터 사용
-    df_all, _ = prepare(raw_csv, drop_extra=DROP_COLS_A)
-    df_all    = df_all[~df_all["label_collapsed"].isin(noise_labels)].reset_index(drop=True)
-    latest = df_all.loc[df_all.groupby("agent")["act_idx"].idxmax()].copy()
-    X_now_a = latest[feat_cols_a].values.astype(np.float32)
-    X_now_b = latest[feat_cols_b].values.astype(np.float32)
+    df_all, _, _ = prepare(raw_csv)
+    latest    = df_all.loc[df_all.groupby("agent")["act_idx"].idxmax()].copy().reset_index(drop=True)
+    X_now_a   = latest[feat_cols_a].values.astype(np.float32)
+    X_now_b   = latest[feat_cols_b].values.astype(np.float32)
 
-    prob_patch = model_a.predict_proba(X_now_a)[:, 1]
-    prob_b_all = model_b.predict_proba(X_now_b)   # (n_agents, n_classes)
-    pred_b_raw = model_b.predict(X_now_b)
-    pred_type  = list([label_b_cats[i] for i in pred_b_raw])
-    pred_b_conf = prob_b_all.max(axis=1).copy()
-    prob_patch  = prob_patch.copy()
+    prob_a_now = model_a.predict_proba(X_now_a)  # (N, 2): [stable, patched]
+    prob_b_now = model_b.predict_proba(X_now_b)  # (N, 2): [buff, nerf]
 
-    # ── 도메인 규칙 보정 레이어 ────────────────────────────────────────────────
-    # ML 모델은 방향(buff/nerf) 구분에서 데이터 부족으로 혼동이 발생하므로
-    # 피처 기반 hard rule로 방향과 신뢰도를 보정
+    buff_b_idx = label_b_cats.index("buff")
+    nerf_b_idx = label_b_cats.index("nerf")
 
-    for i, row in latest.reset_index(drop=True).iterrows():
-        buff_miss  = float(row.get("buff_miss_flag", 0) or 0)
-        nerf_miss  = float(row.get("nerf_miss_flag", 0) or 0)
-        buff_hit   = float(row.get("buff_hit_flag", 0) or 0)
-        nerf_hit   = float(row.get("nerf_hit_flag", 0) or 0)
-        rank_only  = float(row.get("design_rank_only", 0) or 0)
-        pro_only   = float(row.get("design_pro_only", 0) or 0)
-        both_weak  = float(row.get("both_weak_signal", 0) or 0)
-        rank_pr    = float(row.get("rank_pr", 0) or 0)
-        vct_pr     = float(row.get("vct_pr_last", 0) or 0)
+    rows_preview = []
+    for i in range(len(latest)):
+        row        = latest.iloc[i]
+        p_patched  = float(prob_a_now[i, 1])
+        p_buff_dir = p_patched * float(prob_b_now[i, buff_b_idx])
+        p_nerf_dir = p_patched * float(prob_b_now[i, nerf_b_idx])
+        p_stable   = float(prob_a_now[i, 0])
 
-        pt = pred_type[i]
+        # verdict: 임계값 기반 mild/strong 분류
+        if p_stable > max(p_nerf_dir, p_buff_dir):
+            verdict = "stable"
+        elif p_nerf_dir >= p_buff_dir:
+            verdict = "strong_nerf" if p_nerf_dir > 0.40 else "mild_nerf"
+        else:
+            verdict = "strong_buff" if p_buff_dir > 0.25 else "mild_buff"
 
-        # 규칙 1: 버프 후 MISS인데 nerf 방향 예측 → buff_followup으로 교정
-        # 버프가 효과 없으면 더 강한 버프가 필요한 것이지 너프가 아님
-        if buff_miss and pt.startswith("nerf") and "correction" not in pt:
-            pred_type[i] = "buff_followup"
+        rows_preview.append({
+            "agent":    str(row["agent"]),
+            "act":      str(row.get("act", "")),
+            "rank_pr%": round(float(row.get("rank_pr", 0) or 0) * 5, 1),
+            "vct_pr%":  round(float(row.get("vct_pr_last", 0) or 0), 1),
+            "p_nerf":   round(p_nerf_dir * 100, 1),
+            "p_buff":   round(p_buff_dir * 100, 1),
+            "p_stable": round(p_stable * 100, 1),
+            "verdict":  verdict,
+        })
 
-        # 규칙 2: 너프 후 MISS인데 buff 방향 예측 → nerf_followup으로 교정
-        if nerf_miss and pt.startswith("buff") and "correction" not in pt:
-            pred_type[i] = "nerf_followup"
+    preview_df = pd.DataFrame(rows_preview).sort_values("p_nerf", ascending=False)
+    print(preview_df.to_string(index=False))
 
-        # 규칙 3: 설계상 랭크 전용 요원(레이나, 아이소)이 랭크에서 건재 → p_patch 억제
-        # VCT 저픽은 설계 문제이지 패치 신호가 아님. 랭크 픽률이 정상이면 stable
-        if rank_only and rank_pr > 2.5:
-            prob_patch[i] *= 0.35
+    # ── 저장 ────────────────────────────────────────────────────────────────
+    joblib.dump({
+        "model_a":      model_a,
+        "model_b":      model_b,
+        "feat_cols_a":  feat_cols_a,
+        "feat_cols_b":  feat_cols_b,
+        "label_b_cats": label_b_cats,   # ['buff', 'nerf']
+    }, "step2_pipeline.pkl")
+    print(f"\n저장: step2_pipeline.pkl  (Stage A BA: {ba_a:.4f} / Stage B BA: {ba_b:.4f})")
 
-        # 규칙 4: both_weak_signal=1인데 pro_only 설계도 rank_only 설계도 아닌 요원
-        # + 마지막 패치가 버프 방향이었으나 효과 부족(MISS 또는 FAIL)
-        # → 두 도메인 모두 낮음은 강한 버프 신호 → p_patch 소폭 상향
-        dir_code = float(row.get("dir_verdict_code", 0) or 0)
-        if both_weak and not rank_only and not pro_only and dir_code > 0:
-            prob_patch[i] = min(1.0, prob_patch[i] * 1.3)
-
-    # Stage A 임계값 0.35: 요루처럼 Stage B가 명확하게 패치 유형을 가리키는 경우 포착
-    THRESHOLD = 0.35
-    pred_a_adj = (prob_patch >= THRESHOLD).astype(int)
-
-    latest["p_patch"]    = prob_patch
-    latest["patch_type"] = pred_type
-    latest["type_conf"]  = pred_b_conf
-    latest["final_pred"] = np.where(pred_a_adj == 1, latest["patch_type"], "stable")
-
-    show = latest[["agent","act","rank_pr","vct_pr_last",
-                   "p_patch","patch_type","type_conf","final_pred"]].sort_values("p_patch", ascending=False)
-    print(show.to_string(index=False))
-
-    # 저장
-    joblib.dump({"model_a": model_a, "model_b": model_b,
-                 "feat_cols_a": feat_cols_a, "feat_cols_b": feat_cols_b,
-                 "label_b_cats": label_b_cats},
-                "step2_pipeline.pkl")
-    print("\n저장: step2_model_a.pkl / step2_model_b.pkl / step2_pipeline.pkl")
-    print(f"\nStage A balanced_accuracy: {ba_a:.4f}")
-    print(f"Stage B balanced_accuracy: {ba_b:.4f}")
-
-    # ================================================================
-    # Leave-One-Agent-Out CV
-    # ================================================================
+    # ── Leave-One-Agent-Out CV (Stage A 기준) ────────────────────────────────
     print("\n" + "="*50)
-    print("Leave-One-Agent-Out CV (일반화 능력 검증)")
+    print("Leave-One-Agent-Out CV - Stage A (stable vs patched)")
     print("="*50)
-    loao_cv(df, feat_cols_a, stable_types, stage="A")
-    loao_cv(df, feat_cols_b, stable_types, stage="B")
+    # LOAO는 Stage A 레이블로 실행
+    df_loao = df.copy()
+    df_loao["label_collapsed"] = df_loao["label_collapsed"].apply(
+        lambda x: "stable" if x == "stable" else "patched"
+    )
+    loao_cv(df_loao, feat_cols_a)
 
 if __name__ == "__main__":
     main()

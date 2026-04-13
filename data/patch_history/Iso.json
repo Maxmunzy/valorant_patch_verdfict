@@ -1,0 +1,608 @@
+{
+  "agent": "Iso",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 18,
+    "balance_patches": 9,
+    "numeric_changes": 9,
+    "all_changes": 17
+  },
+  "current_stats": {
+    "C": {
+      "name": "Contingency",
+      "creds": 200,
+      "charges": 1,
+      "function": "[[Vision Blocker#Wall",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Travel distance": {
+          "value": 27.5,
+          "unit": "meters",
+          "raw": "27.5 meters (primary cast)<br>13.75 meters (alt cast)"
+        },
+        "Distance between Iso and wall on cast": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        },
+        "Time taken to fully form": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Duration": {
+          "value": 5.4,
+          "unit": "seconds total4.6 seconds at full size",
+          "raw": "5.4 seconds total<br>4.6 seconds at full size"
+        },
+        "Deactivation time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Undercut",
+      "creds": 300,
+      "charges": 1,
+      "function": "Cripple<br>Limiter",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Velocity": {
+          "value": 22.5,
+          "unit": "meters/second",
+          "raw": "22.5 meters/second"
+        },
+        "Duration": {
+          "value": 1.55,
+          "unit": "seconds",
+          "raw": "1.55 seconds"
+        },
+        "Travel distance": {
+          "value": 34.875,
+          "unit": "meters",
+          "raw": "34.875 meters"
+        },
+        "Radius": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Vulnerable duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Double Tap",
+      "creds": null,
+      "charges": 1,
+      "function": "Empowerment<br>[[Sustain#Invulnerability",
+      "stats": {
+        "Windup": {
+          "value": 1.0,
+          "unit": "seconds",
+          "raw": "1 seconds"
+        },
+        "Reload speed increase": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki/>+25%"
+        },
+        "Flow state duration": {
+          "value": 12.0,
+          "unit": "seconds",
+          "raw": "12 seconds"
+        },
+        "Energy orb duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "Shield width": {
+          "value": 1.0,
+          "unit": "meter",
+          "raw": "1 meter"
+        }
+      }
+    },
+    "X": {
+      "name": "Kill Contract",
+      "creds": null,
+      "charges": null,
+      "function": "[[Crowd Control#Banish",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Column area": {
+          "value": 36.0,
+          "unit": "-meter length15-meter width",
+          "raw": "36-meter length<br>15-meter width"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Capture windup": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Transportation duration to and from arena": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Arena creation duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Max duel duration": {
+          "value": 13.0,
+          "unit": "seconds",
+          "raw": "13 seconds"
+        },
+        "Initial distance between agents on Arena spawn": {
+          "value": 21.0,
+          "unit": "meters",
+          "raw": "21 meters"
+        },
+        "Contingency duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        },
+        "Time until exit on kill": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.00",
+      "raw": "Undercut Fixed an issue where throw animations would break if aiming straight down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.11",
+      "raw": "Kill Contract Fixed a bug where Clove and Reyna would not enter the arena at full health and with full shields or overheal if they entered with damaged overheal. Fixed a bug where Phoenix would not get his original health and armor back when is in Run it Back and has left the arena v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Kill Contract Fixed a bug that caused it to scale up when spectating Iso with this ability equipped v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Kill Contract Length decreased from 48m >>> 36m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Kill Contract Length decreased from",
+          "stat": "range",
+          "before": 48.0,
+          "before_unit": "m",
+          "after": 36.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Kill Contract Length decreased from",
+          "stat": "range",
+          "before": 48.0,
+          "before_unit": "m",
+          "after": 36.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.08",
+      "raw": "Double Tap Updated Iso’s Double Tap tooltip to mention the reload speed buff. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.06",
+      "raw": "Double Tap Fixed an issue where swapping to Iso with Double Tap active could result in the wrong UI bar displaying for spectators or observers. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.05",
+      "raw": "Double Tap Fixed a bug where Double Tap’s HUD bar could look visually incorrect for spectators or observers v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.04",
+      "raw": "Undercut Reduced charges from 2 >>> 1 Cost increased from 200 >>> 300 credits Now applies Suppression alongside Vulnerability for the same duration (4s) on players hit. Contingency Now has an Alt-Fire cast that makes the wall move at half the speed. This does not affect the duration of Contingency. Double Tap Iso now receives a Heavy Penetration tag rather than a Wall Penetration tag when the shield is broken. This means he’s slowed more upon his shield breaking. Kill Contract If Iso does not have Double Tap’s buff applied, the ultimate will now automatically apply it so that won ultimate duels always spawn an orb. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Undercut Reduced charges from",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased from",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Undercut Reduced charges from",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased from",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Now applies Suppression alongside Vulnerability for the same duration (4s) on players hit",
+          "stat": "effect",
+          "description": "Now applies Suppression alongside Vulnerability for the same duration (4s) on players hit",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Now has an Alt-Fire cast that makes the wall move at half the speed",
+          "stat": "effect",
+          "description": "Now has an Alt-Fire cast that makes the wall move at half the speed",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "will now automatically apply it so that won ultimate duels always spawn an orb",
+          "stat": "effect",
+          "description": "will now automatically apply it so that won ultimate duels always spawn an orb",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.03",
+      "raw": "Kill Contract Improved performance v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.0",
+      "raw": "(PC) / v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.01",
+      "raw": "(Console) Double Tap Duration: 20s >>> 12s Signature kill reset removed [https://twitter.com/Altombre/status/1801412397472878947 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Console) Double Tap Duration",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 12.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Console) Double Tap Duration",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 12.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "removed [https://twitter",
+          "stat": "effect",
+          "description": "removed [https://twitter",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "8.11",
+      "raw": "(PC) / v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.0",
+      "raw": "(Console) Hotfix] Double Tap Fixed an issue with Iso's orb spawn logic after he disconnects v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.11",
+      "raw": "Double Tap - Iso now grants himself a shield upon finishing a 1 second animation during which he can’t use his gun. This plays a shield forming sound at the end of the channel when the shield is activated. Charges 2 >>> 1 Kill reset added to Double Tap (Iso gets a charge back if he gets 2 kills). Iso now receives a Wall Penetration tag instead of a standard Heavy Penetration tag when the shield is broken. This means he’s slowed less upon his shield breaking. Additionally, Iso now gets a damage indicator towards the direction of the enemy that broke the shield Iso can now recast Double Tap while it’s active to refresh the duration of the shield. This is relevant if he gets a refreshed charge of his Double Tap from getting 2 kills. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ld forming sound at the end of the channel when the shield is activated. Charges",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ld forming sound at the end of the channel when the shield is activated. Charges",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "now grants himself a shield upon finishing a 1 second animation during which he can’t use his gun",
+          "stat": "effect",
+          "description": "now grants himself a shield upon finishing a 1 second animation during which he can’t use his gun",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "added to Double Tap (Iso gets a charge back if he gets 2 kills)",
+          "stat": "effect",
+          "description": "added to Double Tap (Iso gets a charge back if he gets 2 kills)",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "can now recast Double Tap while it’s active to refresh the duration of the shield",
+          "stat": "effect",
+          "description": "can now recast Double Tap while it’s active to refresh the duration of the shield",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "8.05",
+      "raw": "Kill Contract Fixed an issue where the cover walls would not appear when playing with an unstable network connection. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.01",
+      "raw": "Double Tap Shootable orb duration increased 2 >>> 3 seconds Initial buff and shield duration increased 15 >>> 20 Shield width reduced 120 >>> 100 Contingency Cost reduced 250 >>> 200 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Double Tap Shootable orb duration increased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Initial buff and shield duration increased",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Shield width reduced",
+          "stat": "range",
+          "before": 120.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Contingency Cost reduced",
+          "stat": "cost",
+          "before": 250.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Double Tap Shootable orb duration increased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Initial buff and shield duration increased",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Shield width reduced",
+          "stat": "range",
+          "before": 120.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Contingency Cost reduced",
+          "stat": "cost",
+          "before": 250.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "7.09",
+      "raw": "Added PC-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added PC-only[] v",
+          "stat": "effect",
+          "description": "Added PC-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.0",
+      "raw": "Double Tap Fixed an issue where Iso's shield hitbox could be misaligned.",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

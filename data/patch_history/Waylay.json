@@ -1,0 +1,551 @@
+{
+  "agent": "Waylay",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 10,
+    "balance_patches": 5,
+    "numeric_changes": 12,
+    "all_changes": 14
+  },
+  "current_stats": {
+    "C": {
+      "name": "Saturate",
+      "creds": 300,
+      "charges": 1,
+      "function": "[[Crowd Control#Hinder",
+      "stats": {
+        "Equip time": {
+          "value": null,
+          "unit": "",
+          "raw": "? seconds"
+        },
+        "Unequip time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Maximum air time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Windup": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Hinder duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Lightspeed",
+      "creds": 300,
+      "charges": 1,
+      "function": "[[Mobility#Dash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Dash duration": {
+          "value": 0.45,
+          "unit": "seconds per dash",
+          "raw": "0.45 seconds per dash"
+        },
+        "Dash distance": {
+          "value": 9.0,
+          "unit": "meters",
+          "raw": "9 meters"
+        },
+        "Unequip time": {
+          "value": 0.0,
+          "unit": "seconds",
+          "raw": "0 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Refract",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Mobility#Intangibility",
+      "stats": {
+        "Activation windup": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Empowered duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        },
+        "Reactivation windup": {
+          "value": 0.05,
+          "unit": "seconds",
+          "raw": "0.05 seconds"
+        },
+        "Travel duration": {
+          "value": 0.35,
+          "unit": "-2 seconds based on travel distanceMinimum travel duration at travel distances Maximum travel duration at travel distances >50 meters",
+          "raw": "0.35-2 seconds based on travel distance<br>Minimum travel duration at travel distances <2.5 meters<br>Maximum travel duration at travel distances >50 meters"
+        },
+        "Max vision radius while nearsighted": {
+          "value": 35.0,
+          "unit": "meters",
+          "raw": "35 meters"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Self-blind duration on arrival": {
+          "value": 0.2,
+          "unit": "seconds",
+          "raw": "0.2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Convergent Paths",
+      "creds": null,
+      "charges": null,
+      "function": "[[Crowd Control#Hinder",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Area size": {
+          "value": 36.0,
+          "unit": "x 13.5 meters",
+          "raw": "36 x 13.5 meters"
+        },
+        "Distance between Waylay and AoE": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Channel time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Windup": {
+          "value": 1.0,
+          "unit": "seconds",
+          "raw": "1 seconds"
+        },
+        "rowspan=2|Ticks/Tick rate": {
+          "value": 1.0,
+          "unit": "every 0.125 seconds",
+          "raw": "1 every 0.125 seconds"
+        },
+        "Total 4 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki/>+10% speed boost"
+        },
+        "Buff duration": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        },
+        "Debuff duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.06",
+      "raw": "Saturate Changed from INSTANT to EQUIP. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Saturate Hindered duration decreased from 4s >>> 3s Convergent Paths No longer spawns an afterimage of Waylay No longer pushed back when casting Now briefly restricts aim rotation and movement speed similar to Breach's Rolling Thunder when casting Hindered duration decreased from 7s >>> 6s Initial windup decreased from 2s >>> 1s Width decreased from 18m >>> 13.5m Decreased movement speed buff on ult from 15% >>> 10% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Saturate Hindered duration decreased from",
+          "stat": "duration",
+          "before": 4.0,
+          "before_unit": "s",
+          "after": 3.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "s Rolling Thunder when casting Hindered duration decreased from",
+          "stat": "duration",
+          "before": 7.0,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Initial windup decreased from",
+          "stat": "other",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Width decreased from",
+          "stat": "range",
+          "before": 18.0,
+          "before_unit": "m",
+          "after": 13.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Decreased movement speed buff on ult from",
+          "stat": "ult_cost",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Saturate Hindered duration decreased from",
+          "stat": "duration",
+          "before": 4.0,
+          "before_unit": "s",
+          "after": 3.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "s Rolling Thunder when casting Hindered duration decreased from",
+          "stat": "duration",
+          "before": 7.0,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Initial windup decreased from",
+          "stat": "other",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Width decreased from",
+          "stat": "range",
+          "before": 18.0,
+          "before_unit": "m",
+          "after": 13.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Decreased movement speed buff on ult from",
+          "stat": "ult_cost",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "No longer spawns an afterimage of Waylay No longer pushed back when casting Now briefly restricts ai",
+          "stat": "effect",
+          "description": "No longer spawns an afterimage of Waylay No longer pushed back when casting Now briefly restricts ai",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.07",
+      "raw": "Convergent Paths Improved clarity so you know exactly where the edges are when dodging. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.05",
+      "raw": "Saturate Fixed a bug where it could affect enemies after they left the range of the area of effect. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Refract Minimum time in refract decreased 0.5s >>> 0.35s Maximum time in refract decreased 3s >>> 2s Unequip time decreased 1.0s >>> 0.8s Delay after reactivation decreased 0.1s >>> 0.05s Lightspeed Unequip delay decreased 0.2s >>> 0s Saturate Windup before explosion decreased 0.75s >>> 0.6s Size increased 10m total size >>> 12m total size (radius increased 5m >>> 6m) v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Refract Minimum time in refract decreased",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.35,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Maximum time in refract decreased",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip time decreased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Delay after reactivation decreased",
+          "stat": "delay",
+          "before": 0.1,
+          "before_unit": "s",
+          "after": 0.05,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Lightspeed Unequip delay decreased",
+          "stat": "speed",
+          "before": 0.2,
+          "before_unit": "s",
+          "after": 0.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Saturate Windup before explosion decreased",
+          "stat": "other",
+          "before": 0.75,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "m total size (radius increased",
+          "stat": "range",
+          "before": 5.0,
+          "before_unit": "m",
+          "after": 6.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Refract Minimum time in refract decreased",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.35,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Maximum time in refract decreased",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip time decreased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Delay after reactivation decreased",
+          "stat": "delay",
+          "before": 0.1,
+          "before_unit": "s",
+          "after": 0.05,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Lightspeed Unequip delay decreased",
+          "stat": "speed",
+          "before": 0.2,
+          "before_unit": "s",
+          "after": 0.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Saturate Windup before explosion decreased",
+          "stat": "other",
+          "before": 0.75,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "m total size (radius increased",
+          "stat": "range",
+          "before": 5.0,
+          "before_unit": "m",
+          "after": 6.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.11",
+      "raw": "Convergent Paths Fixed an issue where targeting indicator for Convergent Paths wouldn't display properly for spectators, allies, and observer perspectives. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.08",
+      "raw": "Refract Fixed a bug where reactivating Refract immediately after casting Convergent Paths would prevent the reactivate from working. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "Refract Fixed an issue so Waylay will teleport properly back if she activates her Refract while picking up an ult orb. Fixed an issue where Waylay could activate Refract outside of the playable space on Abyss. Fixed an issue so Waylay should no longer end looking straight up in the air when she triggers Refract return when she's directly above the teleport point. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer end looking straight up in the air when she triggers Refract return when she's directly ab",
+          "stat": "effect",
+          "description": "no longer end looking straight up in the air when she triggers Refract return when she's directly ab",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.05",
+      "raw": "Convergent Paths Fixed a bug where there was a performance hitch upon casting Fixed a bug where Convergent Paths was unable to be equipped during the buy phase. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.04",
+      "raw": "Added",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

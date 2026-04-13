@@ -1,0 +1,999 @@
+{
+  "agent": "Cypher",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 46,
+    "balance_patches": 12,
+    "numeric_changes": 13,
+    "all_changes": 29
+  },
+  "current_stats": {
+    "C": {
+      "name": "Trapwire",
+      "creds": 200,
+      "charges": 2,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy distance": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Max wire length": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Detection distance": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Recall duration": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Triggered Slow duration": {
+          "value": 1.25,
+          "unit": "seconds",
+          "raw": "1.25 seconds"
+        },
+        "Windup time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Distance required to move away when affected": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Damage": {
+          "value": 5.0,
+          "unit": "",
+          "raw": "5"
+        },
+        "Re-arm time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Cyber Cage",
+      "creds": 100,
+      "charges": 2,
+      "function": "Vision Blocker",
+      "stats": {
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Cylinder radius": {
+          "value": 3.72,
+          "unit": "meters",
+          "raw": "3.72 meters"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total duration: 7.25 seconds</u><br>0.75-second formation time<br>6 seconds at full size<br>0.5-second deactivation time"
+        }
+      }
+    },
+    "E": {
+      "name": "Spycam",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Intel#Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy distance": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Max deploy height": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.15,
+          "unit": "seconds",
+          "raw": "1.15 seconds"
+        },
+        "rowspan=2|Detection radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Agent detecting cam while inactive: 8 meters"
+        },
+        "Agent detecting cam while active: 12 meters": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|11.08}}"
+        },
+        "Reveal ticks/tick Rate": {
+          "value": 1.0,
+          "unit": "every 2 secondsContinues indefinitely until dart removed",
+          "raw": "1 every 2 seconds<br>Continues indefinitely until dart removed"
+        },
+        "Dart removal channel time": {
+          "value": 1.85,
+          "unit": "seconds",
+          "raw": "1.85 seconds"
+        },
+        "Dart cooldown": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Neural Theft",
+      "creds": null,
+      "charges": null,
+      "function": "Intel",
+      "stats": {
+        "Max cast distance": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "1st reveal windup time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "2nd reveal windup time": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.00",
+      "raw": "Cyber Cage Fixed an issue where throw animations would break if aiming straight down Trapwire Fixed a bug where a placed Trapwire could be heard being placed again as the barrier drops. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.11",
+      "raw": "Cyber Cage Fixed a bug where enemy player positions could be briefly revealed on the minimap while they are hidden by it Spycam Fixed a bug where it would appear to be recovered even if the camera was destroyed while being recovered Trapwire Fixed a bug where it would appear to be visually active if Cypher was killed just before it finished arming v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "Neural Theft Fixed a bug where it would sometimes display a blank icon on the minimap v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Spycam Added stealthing functionality Inactive camera will be revealed to enemies when you are within 8 meter radius of the camera, and will also have an accompanying audio tell When the camera is active, there will be a louder persistent camera audio for enemies with a 12m range Cooldown when destroyed is increased from 45s >>> 60s Trapwire Trapwire activation has been adjusted to remove the Concuss and Tether debuffs. Timing of other debuffs has been changed. Previously, players were Tethered and Revealed after 0.5 seconds. Trapwire would then activate after 1.5 seconds and Concuss players if it was not destroyed. Now, players will be immediately Slowed upon crossing the Trapwire. Trapwire will now activate after 0.9 seconds and Reveal players if not destroyed OR if the player moves 4 me",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "era audio for enemies with a 12m range Cooldown when destroyed is increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "era audio for enemies with a 12m range Cooldown when destroyed is increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Added stealthing functionality Inactive camera will be revealed to enemies when you are within 8 met",
+          "stat": "effect",
+          "description": "Added stealthing functionality Inactive camera will be revealed to enemies when you are within 8 met",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.07",
+      "raw": "Spycam Parts of visual glitch effects have been removed. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.05",
+      "raw": "Trapwire Fixed an issue where it was more difficult to place than intended. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.02",
+      "raw": "Spycam Fixed an issue that caused Cypher’s Spycam dart to not display the correct VFX when seen in first-person perspective. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Fixed inconsistent spacing in ability tooltips Spycam Dart visuals have been updated so that is easier to understand the dart’s directionality v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "Trapwire Fixed an issue where opponents who teleported out of the Trapwire after being hit could run through the same reactivated wire without getting tethered. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.00",
+      "raw": "Cyber Cage Fixed an issue where shooting through Cyber Cage could cheat wall penetration if they were placed too close to level geometry v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.10",
+      "raw": "Trapwire Now has a .5 second windup before the full wallhack reveal applies and fades in. Trapwire now has updated minimap icon treatment to better display what the trap wire is connected to. Neural Theft Ult Cost 6 >>> 7 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "ment to better display what the trap wire is connected to. Neural Theft Ult Cost",
+          "stat": "ult_cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "ment to better display what the trap wire is connected to. Neural Theft Ult Cost",
+          "stat": "ult_cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "now has updated minimap icon treatment to better display what the trap wire is connected to",
+          "stat": "effect",
+          "description": "now has updated minimap icon treatment to better display what the trap wire is connected to",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.06",
+      "raw": "Trapwire Fixed an issue where Trapwire did not take damage from certain abilities. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.05",
+      "raw": "Spycam Fixed an issue where Spycam could not be placed on some map walls during the Buy Phase. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.01",
+      "raw": "Spycam Fixed an issue when exiting Cypher's Spycam that causes a brief stutter for Spectators. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.0",
+      "raw": "Spycam Fixed an issue when exiting Cypher's Spycam that caused Cypher's hands to stutter for Spectators. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.10",
+      "raw": "Spycam Fixed an issue where shots fired immediately after exiting Spycam would bypass the weapon’s raise animation and not deal damage. The weapon raise animation is now played for its full duration. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.08",
+      "raw": "Trapwire Re-arm time increased 1 >>> 2s Slow reduced 2 >>> 1.25s Fixed a bug where Trapwire showed on the map even when disabled. Spycam Enemies now hear looping audio when they are actively being watched by Cypher from within the Spycam v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Re-arm time increased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Slow reduced",
+          "stat": "other",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.25,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Re-arm time increased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Slow reduced",
+          "stat": "other",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.25,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.12",
+      "raw": "Spycam Fixed an issue causing kills with Trapwire to not be awarded while using Spycam v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.09",
+      "raw": "Trapwire Decreased the time until the trap concusses a captured enemy 3 >>> 1.5 seconds. After concussing an enemy or an enemy in the trap was killed, the Trapwire no longer destroys itself but instead re-arms after 0.5 seconds, allowing it to ensnare another enemy. Duration of tag slow when hit by the trap increased 0.75 >>> 2 seconds. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Decreased the time until the trap concusses a captured enemy",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "it to ensnare another enemy. Duration of tag slow when hit by the trap increased",
+          "stat": "duration",
+          "before": 0.75,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Decreased the time until the trap concusses a captured enemy",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "it to ensnare another enemy. Duration of tag slow when hit by the trap increased",
+          "stat": "duration",
+          "before": 0.75,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "no longer destroys itself but instead re-arms after 0",
+          "stat": "effect",
+          "description": "no longer destroys itself but instead re-arms after 0",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.07",
+      "raw": "Spycam Fixed an issue where you could remain blinded if spectating a flash through Cypher’s Spycam as the round ended. Neural Theft Neural Theft now completes even if Cypher dies after casting. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.05",
+      "raw": "Trapwire Fixed a bug where Cypher’s Trapwire would sometimes fail to activate when placed on stairs. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.0",
+      "raw": "Cyber Cage Fixed issues where on some map geo Cypher could not pick up Cyber Cage. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.02",
+      "raw": "Neural Theft Fixed bug where Neural Theft would only reveal one time if he had been killed or the round had changed during a previous cast Fixed a bug where Neural Theft reveals would be interrupted when he was killed after it had been deployed v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.0",
+      "raw": "Trapwire Can no longer be placed through Sage's Barrier Orb v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer be placed through Sage's Barrier Orb v",
+          "stat": "effect",
+          "description": "Can no longer be placed through Sage's Barrier Orb v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.12",
+      "raw": "Trapwire Health increased 1 HP >>> 20 HP No longer prevented from being placed on the glass panels by the yellow crate on Icebox Can no longer be triggered by an enemy Spycam or Turret Spycam Now immune to all allied damage v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Now immune to all allied damage v",
+          "stat": "effect",
+          "description": "Now immune to all allied damage v",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "No longer prevented from being placed on the glass panels by the yellow crate on Icebox Can no longe",
+          "stat": "effect",
+          "description": "No longer prevented from being placed on the glass panels by the yellow crate on Icebox Can no longe",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.10",
+      "raw": "Improvements made to the yellow silhouette used for reveals from Spycam and Neural Theft Now disappears if the revealed enemy becomes visible to you to help reduce confusion of seeing two representations of the enemy in different places Now starts dimmer and fades faster to make it more distinguishable from an actual enemy Trapwire and Spycam are no longer destroyed by allies' AOE damage Trapwire Maximum length increased 10 m >>> 15 m Neural Theft Now reveals enemies two times 4 s delay between reveals Time restriction to cast on enemy corpses removed Maximum cast distance increased 12 m >>> 18 m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "AOE damage Trapwire Maximum length increased",
+          "stat": "damage",
+          "before": 10.0,
+          "before_unit": "m",
+          "after": 15.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ime restriction to cast on enemy corpses removed Maximum cast distance increased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "m",
+          "after": 18.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "AOE damage Trapwire Maximum length increased",
+          "stat": "damage",
+          "before": 10.0,
+          "before_unit": "m",
+          "after": 15.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ime restriction to cast on enemy corpses removed Maximum cast distance increased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "m",
+          "after": 18.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Now reveals enemies two times 4 s delay between reveals Time restriction to cast on enemy corpses re",
+          "stat": "effect",
+          "description": "Now reveals enemies two times 4 s delay between reveals Time restriction to cast on enemy corpses re",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "no longer destroyed by allies' AOE damage Trapwire Maximum length increased 10 m >>> 15 m Neural The",
+          "stat": "effect",
+          "description": "no longer destroyed by allies' AOE damage Trapwire Maximum length increased 10 m >>> 15 m Neural The",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "removed Maximum cast distance increased 12 m >>> 18 m v",
+          "stat": "effect",
+          "description": "removed Maximum cast distance increased 12 m >>> 18 m v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.0",
+      "raw": "Spycam Fixed a bug where equipping a weapon after exiting Spycam could play the wrong equip speed animation and visually misrepresent when you were able to fire v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.11",
+      "raw": "Cyber Cage Fixed a bug where Cyber Cage would sometimes disappear from the minimap v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size Voice lines relating to Trapwire and Spycam will now be heard globally by allies [https://twitter.com/PlayVALORANT/status/1499538265988161537 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Hotfix] Trapwire Fixed an exploit v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Trapwire Fixed an issue where enemies wouldn't trigger trapwires in rare situations v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.09",
+      "raw": "Spycam Cypher can no longer place Spycam on the Breeze door in order to destroy or see through the door when it's lowered Similarly, fixed random spots where Cypher could not place Spycam in the same area v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "can no longer place Spycam on the Breeze door in order to destroy or see through the door when it's ",
+          "stat": "effect",
+          "description": "can no longer place Spycam on the Breeze door in order to destroy or see through the door when it's ",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.04",
+      "raw": "Cyber Cage Other abilities can no longer be placed on the projectile while it’s in mid-air or deployed on the ground v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "can no longer be placed on the projectile while it’s in mid-air or deployed on the ground v",
+          "stat": "effect",
+          "description": "can no longer be placed on the projectile while it’s in mid-air or deployed on the ground v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.0",
+      "raw": "Fixed a bug where picking up Trapwires or Cyber Cages during the Buy phase would prevent you from purchasing a second charge Neural Theft Ultimate points required decreased 7 >>> 6 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": " from purchasing a second charge Neural Theft Ultimate points required decreased",
+          "stat": "charges",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 6.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": " from purchasing a second charge Neural Theft Ultimate points required decreased",
+          "stat": "charges",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 6.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.07",
+      "raw": "Can no longer place Spycam in Cyber Cage projectiles v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer place Spycam in Cyber Cage projectiles v",
+          "stat": "effect",
+          "description": "Can no longer place Spycam in Cyber Cage projectiles v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.06",
+      "raw": "Spycam Fixed issue where Spycam broke Sage's Barrier Orb when placed close to it v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.05",
+      "raw": "Spycam Fixed issue where Spycam's dart could sometimes hit players that were on the other side of a wall Fixed Spycam targeting going through Sage's wall Fixed a rare bug that could leave players unable to move or process inputs until they died when entering or returning from Spycam \"We previously addressed some causes of this bug last patch, this fix should address the remaining known causes\" v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.03",
+      "raw": "Spycam Fixed a couple input bugs around possessing and unpossessing Spycam in the same frame which lead to locking all inputs or locking view direction v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.11",
+      "raw": "Trapwire Disabled and revealed upon death Spycam Disabled and revealed upon death v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.04",
+      "raw": "Cyber Cage Can now be picked up during buy phase v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Can now be picked up during buy phase v",
+          "stat": "effect",
+          "description": "Can now be picked up during buy phase v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.03",
+      "raw": "Trapwire Fixed a bug where traps that were placed such that they were on the inside of a doorway, would not trigger when someone walked through them v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.02",
+      "raw": "Fixed an issue where players could place a Cyber Cage on a Trapwire Spycam Fixed an issue where Spycam blocked Spike defusal v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "0.50",
+      "raw": "Trapwire Can no longer pick up the trap after an enemy has triggered it Cyber Cage No longer slows enemies that move through it Spycam Spycam cooldown when destroyed increased 30 >>> 45 seconds Cypher will no longer float in the air if the Sage Barrier Orb wall he is standing on is destroyed while using the Spycam Exploit fixes v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "ows enemies that move through it Spycam Spycam cooldown when destroyed increased",
+          "stat": "cooldown",
+          "before": 30.0,
+          "before_unit": "",
+          "after": 45.0,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "ows enemies that move through it Spycam Spycam cooldown when destroyed increased",
+          "stat": "cooldown",
+          "before": 30.0,
+          "before_unit": "",
+          "after": 45.0,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "Can no longer pick up the trap after an enemy has triggered it Cyber Cage No longer slows enemies th",
+          "stat": "effect",
+          "description": "Can no longer pick up the trap after an enemy has triggered it Cyber Cage No longer slows enemies th",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "will no longer float in the air if the Sage Barrier Orb wall he is standing on is destroyed while us",
+          "stat": "effect",
+          "description": "will no longer float in the air if the Sage Barrier Orb wall he is standing on is destroyed while us",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "0.49",
+      "raw": "Cyber Cage Fixed a bug where Cyber Cage would be selected at a larger range than intended causing overlapping interaction issues v0.47+ Spycam Can no longer use weapons PC-only[] v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer use weapons PC-only[] v",
+          "stat": "effect",
+          "description": "Can no longer use weapons PC-only[] v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.08",
+      "raw": "Trapwire Trapwire activation windup decreased 1.5s >>> 0.9s Console-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Trapwire activation windup decreased",
+          "stat": "other",
+          "before": 1.5,
+          "before_unit": "s",
+          "after": 0.9,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Trapwire activation windup decreased",
+          "stat": "other",
+          "before": 1.5,
+          "before_unit": "s",
+          "after": 0.9,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.08",
+      "raw": "Trapwire Trapwire activation windup decreased 2.5s >>> 1.9s",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Trapwire activation windup decreased",
+          "stat": "other",
+          "before": 2.5,
+          "before_unit": "s",
+          "after": 1.9,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trapwire Trapwire activation windup decreased",
+          "stat": "other",
+          "before": 2.5,
+          "before_unit": "s",
+          "after": 1.9,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    }
+  ]
+}

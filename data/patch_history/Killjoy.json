@@ -1,0 +1,1253 @@
+{
+  "agent": "Killjoy",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 38,
+    "balance_patches": 17,
+    "numeric_changes": 22,
+    "all_changes": 44
+  },
+  "current_stats": {
+    "C": {
+      "name": "Nanoswarm",
+      "creds": 200,
+      "charges": 2,
+      "function": "[[Deterrent#Molotov",
+      "stats": {
+        "Equip time": {
+          "value": 0.74,
+          "unit": "seconds",
+          "raw": "0.74 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Buy Phase pickup range": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Detection radius": {
+          "value": 5.25,
+          "unit": "meters",
+          "raw": "5.25 meters"
+        },
+        "rowspan=\"3\"|Activation windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 1 second</u>"
+        },
+        "0.5-second windup": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "0.5-second damage delay": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Damage": {
+          "value": 1.0,
+          "unit": "per tickTotal 180x0.5 multiplier to objects",
+          "raw": "1 per tick<br>Total 180<br>x0.5 multiplier to objects"
+        },
+        "rowspan=\"2\"|Ticks/Tick Rate": {
+          "value": 45.0,
+          "unit": "per second",
+          "raw": "45 per second<br>(1 every 0.022 seconds)"
+        },
+        "Total 180 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>[[Range#Target_Practice|Range's training bot]]"
+        },
+        "Duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Alarmbot",
+      "creds": 200,
+      "charges": 1,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Max deploy length": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Unequip time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Deploy time": {
+          "value": 1.85,
+          "unit": "seconds",
+          "raw": "1.85 seconds"
+        },
+        "Proximity radius to remain active": {
+          "value": 40.0,
+          "unit": "meters",
+          "raw": "40 meters"
+        },
+        "rowspan=\"2\" |Detection radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Bot detecting enemies: 5.5 meters"
+        },
+        "Agents detecting the bot: 7 meters": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|1.11}}"
+        },
+        "Proximity to target needed to explode": {
+          "value": 2.0,
+          "unit": "meters",
+          "raw": "2 meters"
+        },
+        "Windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total minimum: 1 second</u><br>0.5-second alert phase<br>0.5-second windup phase<br><small>(Duration further increased by travel time)</small>"
+        },
+        "Vulnerable duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "Reactivation time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Turret",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Max deploy length": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 2.7,
+          "unit": "seconds",
+          "raw": "2.7 seconds"
+        },
+        "Detection cone angle": {
+          "value": 100.0,
+          "unit": "°",
+          "raw": "100°"
+        },
+        "Proximity radius to remain active": {
+          "value": 40.0,
+          "unit": "meters",
+          "raw": "40 meters"
+        },
+        "Windup time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Damage": {
+          "value": 0.0,
+          "unit": "–20 meters: 8 per shot, 24 per burst20–35 meters: 6 per shot, 18 per burst35+ meters: 4 per shot, 12 per burst",
+          "raw": "0–20 meters: 8 per shot, 24 per burst<br>20–35 meters: 6 per shot, 18 per burst<br>35+ meters: 4 per shot, 12 per burst"
+        },
+        "Bullet tagging slow": {
+          "value": 50.0,
+          "unit": "%",
+          "raw": "50%"
+        },
+        "Fire rate": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Overall cycle: 1.375 seconds</u><br>1 second between bursts<br>0.125 seconds between shots"
+        },
+        "Reactivation time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Lockdown",
+      "creds": null,
+      "charges": null,
+      "function": "[[Crowd Control#Detain",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy length": {
+          "value": 0.5,
+          "unit": "meters",
+          "raw": "0.5 meters"
+        },
+        "Deploy time": {
+          "value": 0.52,
+          "unit": "seconds",
+          "raw": "0.52 seconds"
+        },
+        "Unequip time": {
+          "value": 0.15,
+          "unit": "seconds",
+          "raw": "0.15 seconds"
+        },
+        "Radius": {
+          "value": 32.5,
+          "unit": "meters",
+          "raw": "32.5 meters"
+        },
+        "rowspan=2|Windup time": {
+          "value": 13.0,
+          "unit": "seconds",
+          "raw": "13 seconds"
+        },
+        "0.15-second pulse delay": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|11.00}}"
+        },
+        "Detain duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.04",
+      "raw": "Turret Can now be rotated while holding down ALT-FIRE. ACTIVATE now swaps its direction. Fixed a bug where its vision cone would disappear from the minimap if the player right-clicks. Nanoswarm Fixed a bug where an enemy’s Nanoswarm could remain invisible if you moved too quickly in and out of its detection range. Fixed a bug where an enemy’s Nanoswarm could remain invisible to you after she is suppressed. Fixed a bug where an enemy’s Nanoswarm would not reveal to you if you are in an Intangible state, like during Yoru’s Dimensional Drift or Reyna’s Dismiss Fixed a bug where its disabled effects sometimes wouldn’t play when she is suppressed. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Can now be rotated while holding down ALT-FIRE",
+          "stat": "effect",
+          "description": "Can now be rotated while holding down ALT-FIRE",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.01",
+      "raw": "Fixed a bug where Killjoy’s neck and hair clip would shift inconsistently while moving with an Odin equipped. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "Alarmbot Fixed a bug where the minimap icons would occasionally disappear when deactivated outside their active ranges. Fixed inaccurate hit detection while it is jumping Turret Fixed a bug where the minimap icons would occasionally disappear when deactivated outside their active ranges. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Lockdown Fixed a bug that caused Detain visual effects to show through thin walls and doors. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Turret Cooldown when destroyed increased from 45s >>> 60s Reactivation time for turret increased from 0.5s >>> 2s Movement tagging per bullet increased 29.5% >>> 50% Added a “windup” effect when Killjoy first re-enters the activation range Alarmbot Health decreased from 50 >>> 20 Reactivation time increased from 1s >>> 2s Added a “windup” effect when Killjoy first re-enters the activation range v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Turret Cooldown when destroyed increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Reactivation time for turret increased from",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Movement tagging per bullet increased",
+          "stat": "other",
+          "before": 29.5,
+          "before_unit": "%",
+          "after": 50.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "when Killjoy first re-enters the activation range Alarmbot Health decreased from",
+          "stat": "health",
+          "before": 50.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reactivation time increased from",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Turret Cooldown when destroyed increased from",
+          "stat": "cooldown",
+          "before": 45.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Reactivation time for turret increased from",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Movement tagging per bullet increased",
+          "stat": "other",
+          "before": 29.5,
+          "before_unit": "%",
+          "after": 50.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "when Killjoy first re-enters the activation range Alarmbot Health decreased from",
+          "stat": "health",
+          "before": 50.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reactivation time increased from",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added a “windup” effect when Killjoy first re-enters the activation range Alarmbot Health decreased ",
+          "stat": "effect",
+          "description": "Added a “windup” effect when Killjoy first re-enters the activation range Alarmbot Health decreased ",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added a “windup” effect when Killjoy first re-enters the activation range v",
+          "stat": "effect",
+          "description": "Added a “windup” effect when Killjoy first re-enters the activation range v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.02",
+      "raw": "Turret Fixed an issue where Iso’s Undercut would suppress Killjoy’s Turret and cause it to become inactive if hit directly without hitting Killjoy. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Lockdown Detain pulse delay: 0.5s >>> 0.15s Lockdown’s visual effects have been updated to match this new behavior v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Lockdown Detain pulse delay",
+          "stat": "delay",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.15,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Lockdown Detain pulse delay",
+          "stat": "delay",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.15,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.09",
+      "raw": "Lockdown Swiftplay only: Starting points 2 >>> 3 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Lockdown Swiftplay only: Starting points",
+          "stat": "ult_cost",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Lockdown Swiftplay only: Starting points",
+          "stat": "ult_cost",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.02",
+      "raw": "Fixed an issue where Killjoy’s recall minimap indicator could get stuck in a state where it was invisible. Alarmbot Alarmbot logic has been updated to be more intelligent. In niche circumstances, the Alarmbot will now path towards players if they are on ledges and explode on them if they would be hit by the size of the explosion rather than trying to run extremely long paths around the map. Undocumented Team Deathmatch only: Lockdown Cost increased 80 >>> 90 Game file data further indicates this could possibly be a bug v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "paths around the map. Undocumented Team Deathmatch only: Lockdown Cost increased",
+          "stat": "cost",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 90.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "paths around the map. Undocumented Team Deathmatch only: Lockdown Cost increased",
+          "stat": "cost",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 90.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "9.10",
+      "raw": "Alarmbot Fixed a bug where it did not play the proper reactivation ceremony and would instantly reactivate when Killjoy reentered its range. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.09",
+      "raw": "Turret Fixed a bug where the deactivation range would not display on the minimap after switching between Turret and other abilities or weapons v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.0",
+      "raw": "Turret Vision radius reduced 180 degrees >>> 100 degrees Added a representation of the Turret’s vision cone on Killjoy’s minimap when she is placing the Turret. Added VFX and updated the Turret’s animations to communicate the Turret’s new vision radius. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Turret Vision radius reduced",
+          "stat": "range",
+          "before": 180.0,
+          "before_unit": "degrees",
+          "after": 100.0,
+          "after_unit": "degrees",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Turret Vision radius reduced",
+          "stat": "range",
+          "before": 180.0,
+          "before_unit": "degrees",
+          "after": 100.0,
+          "after_unit": "degrees",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Added a representation of the Turret’s vision cone on Killjoy’s minimap when she is placing the Turr",
+          "stat": "effect",
+          "description": "Added a representation of the Turret’s vision cone on Killjoy’s minimap when she is placing the Turr",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Added VFX and updated the Turret’s animations to communicate the Turret’s new vision radius",
+          "stat": "effect",
+          "description": "Added VFX and updated the Turret’s animations to communicate the Turret’s new vision radius",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "7.04",
+      "raw": "Lockdown Ultimate points increased 8 >>> 9 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Lockdown Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 9.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Lockdown Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 9.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.11",
+      "raw": "Nanoswarm and Alarmbot Fixed bug with Killjoy’s utility not fading back into stealth when recovering from a disabled state v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.10",
+      "raw": "Turret Fixed a bug that was causing her Turret to aim at the ground. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.08",
+      "raw": "Nanoswarm Nanoswarm reveal radius increased 350 >> 525 Nanoswarm audio has been updated. Audio loop now also turns off when disabled as a result of Killjoy being killed or suppressed. Improved feedback for the enemy when they destroy Nanoswarm. Nanoswarm is now revealed when it is disabled. Lockdown Updated visuals for when being destroyed. Removed the yellow warning UI Indicator for enemies Killjoy’s Lockdown. Turret and Alarmbot Updated deactivate sounds to make them more distinct. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "now also turns off when disabled as a result of Killjoy being killed or suppressed",
+          "stat": "effect",
+          "description": "now also turns off when disabled as a result of Killjoy being killed or suppressed",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "Removed the yellow warning UI Indicator for enemies Killjoy’s Lockdown",
+          "stat": "effect",
+          "description": "Removed the yellow warning UI Indicator for enemies Killjoy’s Lockdown",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.07",
+      "raw": "Alarmbot Yellow indicator removed from Alarmbot Lockdown Warning indicator added to Lockdown This is an undocumented change v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "added to Lockdown This is an undocumented change v",
+          "stat": "effect",
+          "description": "added to Lockdown This is an undocumented change v",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "removed from Alarmbot Lockdown Warning indicator added to Lockdown This is an undocumented change v",
+          "stat": "effect",
+          "description": "removed from Alarmbot Lockdown Warning indicator added to Lockdown This is an undocumented change v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.03",
+      "raw": "Turret Health decreased 125 >>> 100 Lockdown Point cost increased 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Turret Health decreased",
+          "stat": "health",
+          "before": 125.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Lockdown Point cost increased",
+          "stat": "cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Turret Health decreased",
+          "stat": "health",
+          "before": 125.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Lockdown Point cost increased",
+          "stat": "cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.01",
+      "raw": "Nanoswarm Will no longer deal more damage to destructible objects than intended. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "Will no longer deal more damage to destructible objects than intended",
+          "stat": "effect",
+          "description": "Will no longer deal more damage to destructible objects than intended",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.0",
+      "raw": "Nanoswarm Fixed Nanoswarm not dealing any damage to enemy utility The correct fix is undocumented, with its official documentation in the patch notes instead claiming that this was only an issue when interacting with Chamber's utility Will no longer take damage from allied Aftershock, Showstopper, or Paint Shells Lockdown Now properly takes damage from all abilities v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Now properly takes damage from all abilities v",
+          "stat": "effect",
+          "description": "Now properly takes damage from all abilities v",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "Will no longer take damage from allied Aftershock, Showstopper, or Paint Shells Lockdown Now properl",
+          "stat": "effect",
+          "description": "Will no longer take damage from allied Aftershock, Showstopper, or Paint Shells Lockdown Now properl",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.12",
+      "raw": "Alarmbot Now immune to all allied damage Nanoswarm Health increased 1 HP >>> 20 HP Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% The correct functionality is undocumented, instead officially being documented as affecting any non-player object (see Health#Abilities) Lockdown Health increased 150 HP >>> 200 HP Now immune to all allied damage v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Alarmbot Now immune to all allied damage Nanoswarm Health increased",
+          "stat": "damage",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Abilities) Lockdown Health increased",
+          "stat": "health",
+          "before": 150.0,
+          "before_unit": "hp",
+          "after": 200.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Alarmbot Now immune to all allied damage Nanoswarm Health increased",
+          "stat": "damage",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Abilities) Lockdown Health increased",
+          "stat": "health",
+          "before": 150.0,
+          "before_unit": "hp",
+          "after": 200.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now immune to all allied damage Nanoswarm Health increased 1 HP >>> 20 HP Now deals damage to all en",
+          "stat": "effect",
+          "description": "Now immune to all allied damage Nanoswarm Health increased 1 HP >>> 20 HP Now deals damage to all en",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Now immune to all allied damage v",
+          "stat": "effect",
+          "description": "Now immune to all allied damage v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.07",
+      "raw": "Turret Will no longer be disabled by KAY/O's if the pulse hit the turret without Killjoy also being hit Will no longer fire straight forward after firing at an enemy and then losing sight of them Fixed an issue where the turret would fire with no target when coming online if it was disabled while firing at a target v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Will no longer be disabled by KAY/O's if the pulse hit the turret without Killjoy also being hit Wil",
+          "stat": "effect",
+          "description": "Will no longer be disabled by KAY/O's if the pulse hit the turret without Killjoy also being hit Wil",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.01",
+      "raw": "Lockdown Added voiceovers that inform allies when Lockdown is destroyed or if it detains any enemies or not, also stating exactly how many enemies have been detained This is an undocumented change v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Added voiceovers that inform allies when Lockdown is destroyed or if it detains any enemies or not, ",
+          "stat": "effect",
+          "description": "Added voiceovers that inform allies when Lockdown is destroyed or if it detains any enemies or not, ",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.11",
+      "raw": "Nanoswarm Fixed a bug where Nanoswarm would sometimes disappear from the minimap v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.10",
+      "raw": "Voice lines relating to Alarmbot and Turret will now be heard globally by allies v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Improved the system used to place all of Killjoy's abilities at targeted ground locations v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.02",
+      "raw": "Fixed a bug where Alarmbot and Turret were unretrievable after being resurrected by Sage v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.05",
+      "raw": "Turret Bullet tagging reduced 72.5% slow >>> 29.5% slow v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.03",
+      "raw": "Turret Fixed Turret not being affected by stuns v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.0",
+      "raw": "Alarmbot Cooldown after pickup increased 7 >>> 20 seconds Nanoswarm Fixed a bug where picking up Nanoswarms during the buy phase would prevent you from purchasing a second charge Turret Cooldown after pickup increased 10 >>> 20 seconds v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Alarmbot Cooldown after pickup increased",
+          "stat": "cooldown",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "event you from purchasing a second charge Turret Cooldown after pickup increased",
+          "stat": "charges",
+          "before": 10.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Alarmbot Cooldown after pickup increased",
+          "stat": "cooldown",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "event you from purchasing a second charge Turret Cooldown after pickup increased",
+          "stat": "charges",
+          "before": 10.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "2.07",
+      "raw": "Turret Placing Killjoy’s turret next to Sage's Barrier Orb will no longer break it Alarmbot Disabled Alarmbots will no longer chase far away targets that ran by them when they are re-enabled v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "will no longer break it Alarmbot Disabled Alarmbots will no longer chase far away targets that ran b",
+          "stat": "effect",
+          "description": "will no longer break it Alarmbot Disabled Alarmbots will no longer chase far away targets that ran b",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.06",
+      "raw": "Nanoswarm Killjoy can now pick up deployed Nanoswarm grenades during the buy phase to get the charge back v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "can now pick up deployed Nanoswarm grenades during the buy phase to get the charge back v",
+          "stat": "effect",
+          "description": "can now pick up deployed Nanoswarm grenades during the buy phase to get the charge back v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "2.05",
+      "raw": "Fixed Killjoy not getting charges from her Alarmbot and Turret back if they are recalled after she is resurrected Lockdown Can no longer place Lockdown off the ground by jumping and placing it on cosmetic pieces of geo on the walls v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "Can no longer place Lockdown off the ground by jumping and placing it on cosmetic pieces of geo on t",
+          "stat": "effect",
+          "description": "Can no longer place Lockdown off the ground by jumping and placing it on cosmetic pieces of geo on t",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.03",
+      "raw": "Lockdown Can no longer be placed inside Sage's Barrier Orb in some instances If Barrier Orb is placed on top of Lockdown, the section of the wall covering the ult will now be destroyed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer be placed inside Sage's Barrier Orb in some instances If Barrier Orb is placed on top ",
+          "stat": "effect",
+          "description": "Can no longer be placed inside Sage's Barrier Orb in some instances If Barrier Orb is placed on top ",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.14",
+      "raw": "Turret Fixed an issue where Killjoy’s turret could be placed underneath the ground in some maps v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.11",
+      "raw": "Alarmbot Alarmbot now deactivates if Killjoy is more than 40m away from it. Reentering the 40m range reactivates the ability Range at which Alarmbot can be detected decreased from 9m >>> 7m Cooldown after pickup reduced from 20 seconds >>> 7 seconds Nanoswarm Range at which Nanoswarm can be detected decreased from 5m >>> 3.5m Damage increased from 40/s >>> 45/s Damage now ticks smoother and faster while in Nanoswarm, instead of in chunks of 10 every 1/4 of a second. Turret Turret now deactivates if Killjoy is more than 40m away from it. Reentering the 40m range reactivates the ability Cooldown after pickup reduced from 20 seconds >>> 10 seconds v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "e reactivates the ability Range at which Alarmbot can be detected decreased from",
+          "stat": "range",
+          "before": 9.0,
+          "before_unit": "m",
+          "after": 7.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown after pickup reduced from",
+          "stat": "cooldown",
+          "before": 20.0,
+          "before_unit": "seconds",
+          "after": 7.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nanoswarm Range at which Nanoswarm can be detected decreased from",
+          "stat": "range",
+          "before": 5.0,
+          "before_unit": "m",
+          "after": 3.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage increased from",
+          "stat": "damage",
+          "before": 40.0,
+          "before_unit": "/s",
+          "after": 45.0,
+          "after_unit": "/s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ntering the 40m range reactivates the ability Cooldown after pickup reduced from",
+          "stat": "cooldown",
+          "before": 20.0,
+          "before_unit": "seconds",
+          "after": 10.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "e reactivates the ability Range at which Alarmbot can be detected decreased from",
+          "stat": "range",
+          "before": 9.0,
+          "before_unit": "m",
+          "after": 7.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cooldown after pickup reduced from",
+          "stat": "cooldown",
+          "before": 20.0,
+          "before_unit": "seconds",
+          "after": 7.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nanoswarm Range at which Nanoswarm can be detected decreased from",
+          "stat": "range",
+          "before": 5.0,
+          "before_unit": "m",
+          "after": 3.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage increased from",
+          "stat": "damage",
+          "before": 40.0,
+          "before_unit": "/s",
+          "after": 45.0,
+          "after_unit": "/s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ntering the 40m range reactivates the ability Cooldown after pickup reduced from",
+          "stat": "cooldown",
+          "before": 20.0,
+          "before_unit": "seconds",
+          "after": 10.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.07",
+      "raw": "Nanoswarm Added a brief windup before damage begins DPS reduced from 60 >>> 40 Visual effects have been added to make it easier to spot the grenade on the ground Stealth audio range has been slightly increased Turret No longer revealed by Sova's Recon Bolt More effectively shoots at an enemy’s last known location v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nanoswarm Added a brief windup before damage begins DPS reduced from",
+          "stat": "damage",
+          "before": 60.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Nanoswarm Added a brief windup before damage begins DPS reduced from",
+          "stat": "damage",
+          "before": 60.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Added a brief windup before damage begins DPS reduced from 60 >>> 40 Visual effects have been added ",
+          "stat": "effect",
+          "description": "Added a brief windup before damage begins DPS reduced from 60 >>> 40 Visual effects have been added ",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "No longer revealed by Sova's Recon Bolt More effectively shoots at an enemy’s last known location v",
+          "stat": "effect",
+          "description": "No longer revealed by Sova's Recon Bolt More effectively shoots at an enemy’s last known location v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.05",
+      "raw": "Added",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

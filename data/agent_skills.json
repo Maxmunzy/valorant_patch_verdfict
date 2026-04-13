@@ -1,0 +1,5392 @@
+{
+  "Breach": {
+    "C": {
+      "name": "Aftershock",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Max deploy distance": {
+          "value": 35.0,
+          "unit": "meters",
+          "raw": "35 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "rowspan=\"2\"|Cylinder size": {
+          "value": 10.0,
+          "unit": "meter length",
+          "raw": "10 meter length"
+        },
+        "3 meter radius": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|3.0}}"
+        },
+        "Windup time": {
+          "value": 2.2,
+          "unit": "seconds",
+          "raw": "2.2 seconds"
+        },
+        "Damage": {
+          "value": 80.0,
+          "unit": "per tickTotal 160",
+          "raw": "80 per tick<br>Total 160"
+        },
+        "Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 0.6 secondsTotal 2 ticks",
+          "raw": "1 every 0.6 seconds<br>Total 2 ticks"
+        }
+      }
+    },
+    "Q": {
+      "name": "Flashpoint",
+      "slot": "Q",
+      "creds": 250,
+      "charges": 2,
+      "function": "Flash",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Max deploy distance": {
+          "value": 35.0,
+          "unit": "meters",
+          "raw": "35 meters"
+        },
+        "Max wall penetration depth": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max blind duration": {
+          "value": 2.25,
+          "unit": "seconds",
+          "raw": "2.25 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Fault Line",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "rowspan=\"2\"|Area size": {
+          "value": 8.0,
+          "unit": "to 56-meter length, depending on charge time",
+          "raw": "8 to 56-meter length, depending on charge time"
+        },
+        "8-meter width": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|12.00}}"
+        },
+        "Distance between Breach and AoE": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Time required to fully charge": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Rolling Thunder",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Channel time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "rowspan=\"2\"|Area size": {
+          "value": 32.0,
+          "unit": "-meter length",
+          "raw": "32-meter length"
+        },
+        "18-meter width": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|11.08}}"
+        },
+        "Distance between Breach and AoE": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Blast delay": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 0.255 secondsTotal 8 ticks",
+          "raw": "1 every 0.255 seconds<br>Total 8 ticks"
+        },
+        "Displacement Distance": {
+          "value": 7.0,
+          "unit": "meters",
+          "raw": "7 meters"
+        },
+        "Concuss duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    }
+  },
+  "Brimstone": {
+    "C": {
+      "name": "Stim Beacon",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Empowerment",
+      "stats": {
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Equip speed<br><nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed<br><nowiki>+</nowiki>10% Speed Boost"
+        },
+        "Buff duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "Beacon duration": {
+          "value": 12.0,
+          "unit": "seconds",
+          "raw": "12 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Incendiary",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 250,
+      "charges": 1,
+      "function": "Molotov",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "rowspan=\"2\"|Damage": {
+          "value": 1.0,
+          "unit": "per tick",
+          "raw": "1 per tick"
+        },
+        "Total 420-465<br>x0.5 multiplier to objects": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{#tag:ref|Inferred from Damage, Tick Rate, and Duration|group=\"s\"}} & {{patchv|5.12}}"
+        },
+        "Ticks/Tick rate": {
+          "value": 60.0,
+          "unit": "per second",
+          "raw": "60 per second<br>(1 every 0.0167 secs)<br>Total 420-465 ticks"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 8 seconds</u><br>0.25-second explosion time<br>0.75-second spread time<br>7 seconds at full size"
+        }
+      }
+    },
+    "E": {
+      "name": "Sky Smoke",
+      "slot": "E",
+      "type": "Signature",
+      "creds": 100,
+      "charges": 3,
+      "function": "Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast range": {
+          "value": 55.0,
+          "unit": "meters",
+          "raw": "55 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.0,
+          "unit": "seconds",
+          "raw": "1 seconds"
+        },
+        "Radius": {
+          "value": 4.15,
+          "unit": "meters",
+          "raw": "4.15 meters"
+        },
+        "rowspan=2|Duration": {
+          "value": 19.25,
+          "unit": "seconds",
+          "raw": "19.25 seconds"
+        },
+        "Expiration warning at 17.75 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|7.08}}"
+        }
+      }
+    },
+    "X": {
+      "name": "Orbital Strike",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.74,
+          "unit": "seconds",
+          "raw": "0.74 seconds"
+        },
+        "Max cast range": {
+          "value": 60.0,
+          "unit": "meters",
+          "raw": "60 meters"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Windup time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Radius": {
+          "value": 9.0,
+          "unit": "meters",
+          "raw": "9 meters"
+        },
+        "Damage": {
+          "value": 20.0,
+          "unit": "per tickTotal 400-500",
+          "raw": "20 per tick<br>Total 400-500"
+        },
+        "Ticks/Tick rate": {
+          "value": 6.67,
+          "unit": "per second",
+          "raw": "6.67 per second<br>(1 every 0.15 seconds)<br>Total 20-25 ticks"
+        },
+        "Duration": {
+          "value": 3.0,
+          "unit": "seconds at full size0.75-second fadeaway time",
+          "raw": "3 seconds at full size<br>0.75-second fadeaway time"
+        }
+      }
+    }
+  },
+  "Clove": {
+    "C": {
+      "name": "Pick-me-up",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Empowerment, Heal",
+      "stats": {
+        "Max duration allowed for damaging assist to enable ability activation": {
+          "value": null,
+          "unit": "",
+          "raw": "Within 6 seconds"
+        },
+        "Activation window upon eligible takedown": {
+          "value": 4.5,
+          "unit": "seconds",
+          "raw": "4.5 seconds"
+        },
+        "Activation duration": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Bonus movement speed": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki/>+15%"
+        },
+        "Buff duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds (Overheal)<br>3 seconds (Movement Speed)"
+        },
+        "Overhealing rates": {
+          "value": null,
+          "unit": "",
+          "raw": "Healing: 50 HP/s<br>Decay: 25 HP/s"
+        },
+        "Maximum Overheal": {
+          "value": 50.0,
+          "unit": "HP",
+          "raw": "<nowiki/>50 HP"
+        }
+      }
+    },
+    "Q": {
+      "name": "Meddle",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 250,
+      "charges": 1,
+      "function": "Cripple",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup": {
+          "value": 0.75,
+          "unit": "seconds after in contact with ground",
+          "raw": "0.75 seconds after in contact with ground"
+        },
+        "Radius": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Decay rates": {
+          "value": null,
+          "unit": "",
+          "raw": "Decay: 90 HP over 0.75 seconds (120 HP/s)<br>Restoration: 90 HP over 1.75 seconds (51 HP/s)"
+        },
+        "Maximum decayed health": {
+          "value": 90.0,
+          "unit": "HP",
+          "raw": "90 HP"
+        },
+        "Decay duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds (Includes decaying and restoration times)"
+        }
+      }
+    },
+    "E": {
+      "name": "Ruse",
+      "slot": "E",
+      "type": "Signature",
+      "creds": 150,
+      "charges": 2,
+      "function": "Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max cast range": {
+          "value": 60.0,
+          "unit": "meters",
+          "raw": "60 meters (Alive)<br>42.5 meters (Dead)"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "rowspan=2|Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Alive: 14 seconds (includes 0.5-second formation time and 0.5-second expiration time)<br>Expiration warning at 12 seconds"
+        },
+        "Dead: 6 seconds (includes 0.5-second formation time and 0.5-second expiration time)<br>Expiration warning at 4 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|12.05}}"
+        }
+      }
+    },
+    "X": {
+      "name": "Not Dead Yet",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Intangibility",
+      "stats": {
+        "Revive duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Maximum intangibility duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Deactivation duration": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Resurrection timer": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds"
+        }
+      }
+    }
+  },
+  "Cypher": {
+    "C": {
+      "name": "Trapwire",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 2,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy distance": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Max wire length": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Detection distance": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Recall duration": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Triggered Slow duration": {
+          "value": 1.25,
+          "unit": "seconds",
+          "raw": "1.25 seconds"
+        },
+        "Windup time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Distance required to move away when affected": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Damage": {
+          "value": 5.0,
+          "unit": "",
+          "raw": "5"
+        },
+        "Re-arm time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Cyber Cage",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 100,
+      "charges": 2,
+      "function": "Vision Blocker",
+      "stats": {
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Cylinder radius": {
+          "value": 3.72,
+          "unit": "meters",
+          "raw": "3.72 meters"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total duration: 7.25 seconds</u><br>0.75-second formation time<br>6 seconds at full size<br>0.5-second deactivation time"
+        }
+      }
+    },
+    "E": {
+      "name": "Spycam",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy distance": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Max deploy height": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.15,
+          "unit": "seconds",
+          "raw": "1.15 seconds"
+        },
+        "rowspan=2|Detection radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Agent detecting cam while inactive: 8 meters"
+        },
+        "Agent detecting cam while active: 12 meters": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|11.08}}"
+        },
+        "Reveal ticks/tick Rate": {
+          "value": 1.0,
+          "unit": "every 2 secondsContinues indefinitely until dart removed",
+          "raw": "1 every 2 seconds<br>Continues indefinitely until dart removed"
+        },
+        "Dart removal channel time": {
+          "value": 1.85,
+          "unit": "seconds",
+          "raw": "1.85 seconds"
+        },
+        "Dart cooldown": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Neural Theft",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Intel",
+      "stats": {
+        "Max cast distance": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "1st reveal windup time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "2nd reveal windup time": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    }
+  },
+  "Deadlock": {
+    "C": {
+      "name": "Barrier Mesh",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 300,
+      "charges": 1,
+      "function": "Barrier",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Time taken to fortify": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds (Begins on impact with ground)"
+        },
+        "Barrier lengths": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total 30 seconds (Includes deploy time)<br>Begins to decay after 25 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Sonic Sensor",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 2,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy distance": {
+          "value": 14.0,
+          "unit": "meters",
+          "raw": "14 meters"
+        },
+        "Max deploy height": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.75,
+          "unit": "seconds",
+          "raw": "1.75 seconds"
+        },
+        "Area": {
+          "value": 9.0,
+          "unit": "-meter length8-meter width2-meter depth",
+          "raw": "9-meter length<br>8-meter width<br>2-meter depth"
+        },
+        "Windup": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "GravNet",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Crowd Control",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Radius": {
+          "value": 6.5,
+          "unit": "meters",
+          "raw": "6.5 meters"
+        },
+        "Slow amount": {
+          "value": 70.0,
+          "unit": "%",
+          "raw": "70%"
+        },
+        "Net removal channel time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Annihilation",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Detain",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Reequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds<br>(including Equip time)"
+        },
+        "Pulse radius": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Pulse speed": {
+          "value": 82.5,
+          "unit": "meters/second",
+          "raw": "82.5 meters/second"
+        },
+        "Maximum pulse travel distance": {
+          "value": 40.0,
+          "unit": "meters",
+          "raw": "40 meters"
+        },
+        "Pulse radius at path end": {
+          "value": 6.5,
+          "unit": "meters",
+          "raw": "6.5 meters"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Self-knockback distance": {
+          "value": 1.5,
+          "unit": "meters",
+          "raw": "1.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        },
+        "Cocoon duration": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        }
+      }
+    }
+  },
+  "Fade": {
+    "P": {
+      "name": "Terror Trail",
+      "stats": {},
+      "slot": "P"
+    },
+    "C": {
+      "name": "Prowler",
+      "slot": "C",
+      "charges": 2,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Search duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        },
+        "Detection distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters (Agent)<br>10 meters (Terror Trail)"
+        },
+        "Travel speeds": {
+          "value": 10.0,
+          "unit": "meters/second",
+          "raw": "10 meters/second (Initial)<br>12 meters/second (Agent detected)<br>15 meters/second (Terror Trail detected)"
+        },
+        "Proximity needed to target to nearsight": {
+          "value": 2.5,
+          "unit": "meters",
+          "raw": "2.5 meters"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Nearsight duration": {
+          "value": 2.75,
+          "unit": "seconds",
+          "raw": "2.75 seconds"
+        },
+        "Nearsight vision radius": {
+          "value": 7.0,
+          "unit": "meters",
+          "raw": "7 meters"
+        }
+      }
+    },
+    "Q": {
+      "name": "Seize",
+      "slot": "Q",
+      "function": "Cripple, Tether",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Maximum air time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Windup": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Decay stats": {
+          "value": 75.0,
+          "unit": "HPHealth restored over 5 seconds",
+          "raw": "75 HP<br>Health restored over 5 seconds"
+        },
+        "Zone radius": {
+          "value": 6.58,
+          "unit": "meters",
+          "raw": "6.58 meters"
+        },
+        "Zone Duration": {
+          "value": 4.5,
+          "unit": "seconds",
+          "raw": "4.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Haunt",
+      "slot": "E",
+      "function": "Intel",
+      "stats": {
+        "Equip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Maximum air time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Windup": {
+          "value": 0.825,
+          "unit": "seconds",
+          "raw": "0.825 seconds"
+        },
+        "Radius": {
+          "value": 30.0,
+          "unit": "meters",
+          "raw": "30 meters"
+        },
+        "Eye duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Trail duration": {
+          "value": 12.0,
+          "unit": "seconds",
+          "raw": "12 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Nightfall",
+      "slot": "X",
+      "function": "Cripple, Intel",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Area size": {
+          "value": 40.0,
+          "unit": "-meter length20-meter width",
+          "raw": "40-meter length<br>20-meter width"
+        },
+        "Windup": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 0.355 secondsTotal 10 ticks",
+          "raw": "1 every 0.355 seconds<br>Total 10 ticks"
+        },
+        "Debuff duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        },
+        "Decay Stats": {
+          "value": 80.0,
+          "unit": "HP",
+          "raw": "80 HP"
+        }
+      }
+    }
+  },
+  "Gekko": {
+    "C": {
+      "name": "Mosh Pit",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 250,
+      "charges": 1,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Unequip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Inner: 5.5 meters<br>Outer: 6.2 meters"
+        },
+        "Windup": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "rowspan=2|Damage": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>'''DoT'''</u><br>1 per tick<br>Total 30 damage"
+        },
+        "<u>Explosion</u><br>Inner radius: 50 per tick<br>Outer radius: 25 per tick<br>Total 150/75 damage": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "rowspan=2|Ticks/Tick rate": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>'''DoT'''</u><br>1 every 0.1 seconds<br>Total 30 ticks"
+        },
+        "<u>Explosion</u><br>1 every 0.1 seconds<br>Total 3 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        }
+      }
+    },
+    "Q": {
+      "name": "Wingman",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 300,
+      "charges": 1,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Run speed": {
+          "value": 6.3,
+          "unit": "meters/second",
+          "raw": "6.3 meters/second"
+        },
+        "Search duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Max detection cone distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Detection cone angle": {
+          "value": 90.0,
+          "unit": "°",
+          "raw": "90°<br><small>(either side of the direction Wingman is looking in)</small>"
+        },
+        "Proximity to target needed to activate blast": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Blast windup": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Dizzy",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Blind, Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Unequip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Activation windup": {
+          "value": 0.65,
+          "unit": "seconds",
+          "raw": "0.65 seconds"
+        },
+        "Blind windup on target acquisition": {
+          "value": 0.35,
+          "unit": "seconds",
+          "raw": "0.35 seconds"
+        },
+        "Effective active duration": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Max detection distance": {
+          "value": 45.0,
+          "unit": "meters",
+          "raw": "45 meters"
+        },
+        "Plasma explosion radius on target": {
+          "value": 2.5,
+          "unit": "meters",
+          "raw": "2.5 meters"
+        },
+        "Plasma blind duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 2 seconds</u><br>1 second at max potency<br>1 second to fade away"
+        }
+      }
+    },
+    "X": {
+      "name": "Thrash",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Deployment duration": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max vision radius": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Speed": {
+          "value": 11.22,
+          "unit": "meters/second",
+          "raw": "11.22 meters/second"
+        },
+        "Search duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        },
+        "Lunge distance": {
+          "value": 13.0,
+          "unit": "meters",
+          "raw": "13 meters"
+        },
+        "Lunge duration": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Lunge radius": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        },
+        "Detain duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Vision restoration duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    }
+  },
+  "Harbor": {
+    "C": {
+      "name": "Storm Surge",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Nearsight",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Uneuqip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Nearsight duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Slow duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "High Tide",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 300,
+      "charges": 1,
+      "function": "Slow",
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Sphere Velocity": {
+          "value": 25.0,
+          "unit": "meters/second",
+          "raw": "25 meters/second"
+        },
+        "Maximum bend": {
+          "value": 180.0,
+          "unit": "degrees/second",
+          "raw": "180 degrees/second"
+        },
+        "Travel distance": {
+          "value": 60.0,
+          "unit": "meters",
+          "raw": "60 meters"
+        },
+        "Wall Height": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Duration": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Debuff": {
+          "value": 30.0,
+          "unit": "% Slow",
+          "raw": "30% Slow"
+        },
+        "Slow Duration": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Deactivation time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Cove",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max deploy distance": {
+          "value": 80.0,
+          "unit": "meters",
+          "raw": "80 meters"
+        },
+        "Smoke unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Orb velocity": {
+          "value": 64.0,
+          "unit": "meters per second",
+          "raw": "64 meters per second"
+        },
+        "Deploy time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 4.6,
+          "unit": "meters",
+          "raw": "4.6 meters"
+        },
+        "Duration": {
+          "value": 19.25,
+          "unit": "seconds",
+          "raw": "19.25 seconds"
+        },
+        "Shield windup": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Shield unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Shield deactivation time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Smoke deactivation time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        }
+      }
+    },
+    "X": {
+      "name": "Reckoning",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Nearsight",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Cast time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Unequip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Chunks": {
+          "value": 5.0,
+          "unit": "",
+          "raw": "5"
+        },
+        "rowspan=2|Length": {
+          "value": 5.6,
+          "unit": "meters per chunk",
+          "raw": "5.6 meters per chunk (Including overlap)"
+        },
+        "21 meters total (width)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Effective distance between Harbor and wave": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Velocity": {
+          "value": 8.0,
+          "unit": "meters/second",
+          "raw": "8 meters/second"
+        },
+        "Maximum rise": {
+          "value": 1.1,
+          "unit": "meters",
+          "raw": "1.1 meters"
+        },
+        "Maximum drop": {
+          "value": 8.0,
+          "unit": "meters",
+          "raw": "8 meters"
+        },
+        "Travel distance": {
+          "value": 34.0,
+          "unit": "meters",
+          "raw": "34 meters"
+        },
+        "Duration (if stopped)": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        },
+        "Nearsight duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "Slow duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    }
+  },
+  "Iso": {
+    "C": {
+      "name": "Contingency",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Wall",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Travel distance": {
+          "value": 27.5,
+          "unit": "meters",
+          "raw": "27.5 meters (primary cast)<br>13.75 meters (alt cast)"
+        },
+        "Distance between Iso and wall on cast": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        },
+        "Time taken to fully form": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Duration": {
+          "value": 5.4,
+          "unit": "seconds total4.6 seconds at full size",
+          "raw": "5.4 seconds total<br>4.6 seconds at full size"
+        },
+        "Deactivation time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Undercut",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 300,
+      "charges": 1,
+      "function": "Cripple, Limiter",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Velocity": {
+          "value": 22.5,
+          "unit": "meters/second",
+          "raw": "22.5 meters/second"
+        },
+        "Duration": {
+          "value": 1.55,
+          "unit": "seconds",
+          "raw": "1.55 seconds"
+        },
+        "Travel distance": {
+          "value": 34.875,
+          "unit": "meters",
+          "raw": "34.875 meters"
+        },
+        "Radius": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Vulnerable duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Double Tap",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Empowerment, Invulnerability",
+      "stats": {
+        "Windup": {
+          "value": 1.0,
+          "unit": "seconds",
+          "raw": "1 seconds"
+        },
+        "Reload speed increase": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki/>+25%"
+        },
+        "Flow state duration": {
+          "value": 12.0,
+          "unit": "seconds",
+          "raw": "12 seconds"
+        },
+        "Energy orb duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "Shield width": {
+          "value": 1.0,
+          "unit": "meter",
+          "raw": "1 meter"
+        }
+      }
+    },
+    "X": {
+      "name": "Kill Contract",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Banish",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Column area": {
+          "value": 36.0,
+          "unit": "-meter length15-meter width",
+          "raw": "36-meter length<br>15-meter width"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Capture windup": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Transportation duration to and from arena": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Arena creation duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Max duel duration": {
+          "value": 13.0,
+          "unit": "seconds",
+          "raw": "13 seconds"
+        },
+        "Initial distance between agents on Arena spawn": {
+          "value": 21.0,
+          "unit": "meters",
+          "raw": "21 meters"
+        },
+        "Contingency duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        },
+        "Time until exit on kill": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    }
+  },
+  "Jett": {
+    "P": {
+      "name": "Drift",
+      "stats": {},
+      "slot": "P"
+    },
+    "C": {
+      "name": "Cloudburst",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 2,
+      "function": "Smoke",
+      "stats": {
+        "Unequip time": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        },
+        "Maximum travel time in air": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Radius": {
+          "value": 3.35,
+          "unit": "meters",
+          "raw": "3.35 meters"
+        },
+        "Duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds<br>(includes 0.6-second deployment time)"
+        }
+      }
+    },
+    "Q": {
+      "name": "Updraft",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 150,
+      "function": "Dash",
+      "stats": {
+        "Duration": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Dash distance": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        }
+      }
+    },
+    "E": {
+      "name": "Tailwind",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Dash",
+      "stats": {
+        "Windup": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Empowered Duration": {
+          "value": 7.5,
+          "unit": "seconds",
+          "raw": "7.5 seconds"
+        },
+        "Dash Duration": {
+          "value": 0.45,
+          "unit": "seconds",
+          "raw": "0.45 seconds"
+        },
+        "Base dash distance": {
+          "value": 11.0,
+          "unit": "meters",
+          "raw": "11 meters"
+        },
+        "Unequip time": {
+          "value": 0.2,
+          "unit": "seconds",
+          "raw": "0.2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Blade Storm",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Weapon Equip",
+      "stats": {
+        "Initial windup time": {
+          "value": 1.02,
+          "unit": "seconds",
+          "raw": "1.02 seconds"
+        },
+        "Ammunition": {
+          "value": 5.0,
+          "unit": "blades",
+          "raw": "5 blades"
+        },
+        "Reequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Quick equip time": {
+          "value": 0.15,
+          "unit": "seconds",
+          "raw": "0.15 seconds"
+        },
+        "Damage": {
+          "value": 50.0,
+          "unit": "",
+          "raw": "50"
+        },
+        "Damage multipliers": {
+          "value": null,
+          "unit": "",
+          "raw": "Headshot: x3<Br>Leg shot: x0.85"
+        },
+        "'Single Fire' fire rate": {
+          "value": 6.0,
+          "unit": "per second1 every 0.167 seconds",
+          "raw": "6 per second<br>1 every 0.167 seconds"
+        },
+        "Unequip times<br><small>(out of ammo)</small>": {
+          "value": 0.167,
+          "unit": "seconds",
+          "raw": "0.167 seconds (Single fire)<br>0.45 seconds (Burst fire)"
+        }
+      }
+    }
+  },
+  "Miks": {
+    "C": {
+      "name": "M-pulse",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 250,
+      "charges": 2,
+      "function": "Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 0.71,
+          "unit": "seconds",
+          "raw": "0.71 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Radius": {
+          "value": 5.5,
+          "unit": "meters",
+          "raw": "5.5 meters"
+        },
+        "Pulses": {
+          "value": 3.0,
+          "unit": "",
+          "raw": "3"
+        },
+        "Pulse rate": {
+          "value": 0.5,
+          "unit": "pulses per second",
+          "raw": "0.5 pulses per second"
+        },
+        "Windup to first pulse": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Heal-over-time": {
+          "value": 6.67,
+          "unit": "HP per second",
+          "raw": "6.67 HP per second"
+        },
+        "Pulse heal": {
+          "value": 20.0,
+          "unit": "HP",
+          "raw": "20 HP"
+        },
+        "Max Concuss duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds<!--Estimated 1.4 s minimum-->"
+        }
+      }
+    },
+    "Q": {
+      "name": "Harmonize",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Empowerment",
+      "stats": {
+        "Equip time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Cast time": {
+          "value": 0.1,
+          "unit": "seconds",
+          "raw": "0.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Equip speed<br><nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed"
+        },
+        "Buff duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Waveform",
+      "slot": "E",
+      "type": "Signature",
+      "creds": 100,
+      "charges": 2,
+      "function": "Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max cast range": {
+          "value": 55.5,
+          "unit": "meters",
+          "raw": "55.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 4.72,
+          "unit": "meters",
+          "raw": "4.72 meters"
+        },
+        "Duration": {
+          "value": 16.75,
+          "unit": "seconds",
+          "raw": "16.75 seconds (includes 0.5-second formation time and 0.5-second expiration time)<br>Expiration warning at 14.75 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Bassquake",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Displacement",
+      "stats": {
+        "Equip time": {
+          "value": 1.0,
+          "unit": "seconds",
+          "raw": "1 seconds"
+        },
+        "Channel time": {
+          "value": 1.6,
+          "unit": "seconds",
+          "raw": "1.6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        },
+        "Radius": {
+          "value": 40.0,
+          "unit": "meters",
+          "raw": "40 meters"
+        },
+        "Angle": {
+          "value": 60.0,
+          "unit": "°",
+          "raw": "60°"
+        },
+        "Knockback distance": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        },
+        "Debuff duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    }
+  },
+  "Omen": {
+    "C": {
+      "name": "Shrouded Step",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 100,
+      "charges": 2,
+      "function": "Teleport",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max cast distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "rowspan=\"3\"|Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total duration: 1.2 seconds</u>"
+        },
+        "0.7-second windup": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|4.04}}"
+        },
+        "0.5-second arrival at target location": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Arrival audio cue radius": {
+          "value": 12.5,
+          "unit": "meters",
+          "raw": "12.5 meters"
+        }
+      }
+    },
+    "Q": {
+      "name": "Paranoia",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 250,
+      "charges": 1,
+      "function": "Nearsight",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "rowspan=\"2\"|Area size": {
+          "value": 25.0,
+          "unit": "meter travel length",
+          "raw": "25 meter travel length"
+        },
+        "4.3 meter radius": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Orb velocity": {
+          "value": 20.0,
+          "unit": "meters per second",
+          "raw": "20 meters per second"
+        },
+        "Nearsight duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Nearsighted vision radius": {
+          "value": 7.5,
+          "unit": "meters",
+          "raw": "7.5 meters"
+        }
+      }
+    },
+    "E": {
+      "name": "Dark Cover",
+      "slot": "E",
+      "creds": 150,
+      "charges": 2,
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max deploy distance": {
+          "value": 80.0,
+          "unit": "meters",
+          "raw": "80 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Orb velocity": {
+          "value": 64.0,
+          "unit": "meters per second",
+          "raw": "64 meters per second"
+        },
+        "Deploy time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 4.1,
+          "unit": "meters",
+          "raw": "4.1 meters"
+        },
+        "rowspan=2|Duration": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Expiration warning at 13.5 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|7.08}}"
+        }
+      }
+    },
+    "X": {
+      "name": "From the Shadows",
+      "slot": "X",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total duration: 4 seconds</u><br>1.5-second windup<br>2.5-second arrival at target location"
+        },
+        "Audio cue radius": {
+          "value": 22.5,
+          "unit": "meters",
+          "raw": "22.5 meters"
+        }
+      }
+    }
+  },
+  "Phoenix": {
+    "C": {
+      "name": "Blaze",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 150,
+      "charges": 1,
+      "function": "Wall",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deploy time": {
+          "value": 0.125,
+          "unit": "-0.75 seconds",
+          "raw": "0.125-0.75 seconds<br><small>(Depending on distance)</small>"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Length": {
+          "value": 1.0,
+          "unit": "–21 meters",
+          "raw": "1–21 meters"
+        },
+        "rowspan=\"2\"|Damage": {
+          "value": 1.0,
+          "unit": "per tickTotal 225-240",
+          "raw": "1 per tick<br>Total 225-240"
+        },
+        "x0.5 multiplier to objects": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files ({{patchv|5.12}})"
+        },
+        "Ticks/Tick Rate": {
+          "value": 30.0,
+          "unit": "per second",
+          "raw": "30 per second<br>(1 every 0.033 seconds)<br>Total 225-240 ticks"
+        },
+        "Duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Hot Hands",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Molotov",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Maximum air time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Damage": {
+          "value": 1.0,
+          "unit": "per tickTotal 195-240x0.5 multiplier to objects",
+          "raw": "1 per tick<br>Total 195-240<br>x0.5 multiplier to objects"
+        },
+        "Ticks/Tick Rate": {
+          "value": 60.0,
+          "unit": "per second",
+          "raw": "60 per second<br>(1 every 0.0167 seconds)<br>Total 195-240 ticks"
+        },
+        "rowspan=\"3\"|Duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "0.75-second spread time": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "3.25 seconds at full size": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        }
+      }
+    },
+    "E": {
+      "name": "Curveball",
+      "slot": "E",
+      "type": "Signature",
+      "creds": 250,
+      "charges": 2,
+      "function": "Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.48,
+          "unit": "seconds",
+          "raw": "0.48 seconds"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max blind duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Run it Back",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Revive",
+      "stats": {
+        "Duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds<br>(Includes 1-second activation animation)"
+        },
+        "Revive duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 2.4 seconds</u><br>1-second dissipate<br>1.4-second respawn"
+        }
+      }
+    }
+  },
+  "Raze": {
+    "C": {
+      "name": "Boom Bot",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 300,
+      "charges": 1,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Deploy time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Unequip time": {
+          "value": 0.0,
+          "unit": "seconds",
+          "raw": "0 seconds"
+        },
+        "Duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds<br><small>(Includes Deploy time)</small>"
+        },
+        "Max detection cone distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Proximity to target needed to explode": {
+          "value": 2.5,
+          "unit": "meters",
+          "raw": "2.5 meters"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Radii": {
+          "value": 2.0,
+          "unit": "meters",
+          "raw": "2 meters (Inner)<br>6 meters (Outer)"
+        },
+        "Damage": {
+          "value": 30.0,
+          "unit": "-80150 in x2.5 multiplier to objects",
+          "raw": "30-80<br>150 in [[Escalation]]<br>x2.5 multiplier to objects<br><small>(Minimum Outer radius damage to Inner radius damage)</small>"
+        }
+      }
+    },
+    "Q": {
+      "name": "Blast Pack",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 2,
+      "function": "Dash",
+      "stats": {
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Radii": {
+          "value": 2.0,
+          "unit": "meters",
+          "raw": "2 meters (Inner)<br>5 meters (Outer)"
+        },
+        "Time needed to arm": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "rowspan=3|Damage": {
+          "value": null,
+          "unit": "",
+          "raw": "No damage before arming"
+        },
+        "20-50 after arming<br><small>(Minimum Outer radius damage to Inner radius damage)</small>": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>[[Range#Target_Practice|Range's training bot]] & {{patchv|1.05}}"
+        },
+        "x2.25 multiplier to objects": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}<sup/>{{#tag:ref|Calculated based on current in-game damage to map objects|group=\"s\"}}"
+        }
+      }
+    },
+    "E": {
+      "name": "Paint Shells",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup times": {
+          "value": 2.25,
+          "unit": "seconds",
+          "raw": "2.25 seconds (Initial grenade)<br>0.667 seconds (Sub-munitions)"
+        },
+        "rowspan=2|Radii": {
+          "value": 2.5,
+          "unit": "meters",
+          "raw": "2.5 meters (Inner)"
+        },
+        "5.5 meters (Outer; Initial grenade)<br>5.25 meters (Outer; Sub-munitions)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|7.09}}"
+        },
+        "Damage": {
+          "value": 1.0,
+          "unit": "-55",
+          "raw": "1-55<br><small>(Minimum Outer radius damage to Inner radius damage)</small>"
+        }
+      }
+    },
+    "X": {
+      "name": "Showstopper",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Weapon Equip",
+      "stats": {
+        "Equip time": {
+          "value": 1.4,
+          "unit": "seconds",
+          "raw": "1.4 seconds"
+        },
+        "Reequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds<br>(including Equip time)"
+        },
+        "Radii": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters (Inner)<br>7 meters (Outer)"
+        },
+        "Damage": {
+          "value": 30.0,
+          "unit": "-150",
+          "raw": "30-150<br><small>(Minimum Outer radius damage to Inner radius damage)</small><br>x10 multiplier to objects"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        }
+      }
+    }
+  },
+  "Sage": {
+    "C": {
+      "name": "Barrier Orb",
+      "slot": "C",
+      "creds": 300,
+      "charges": 1,
+      "function": "Barrier, Wall",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast length": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.35,
+          "unit": "seconds",
+          "raw": "1.35 seconds"
+        },
+        "Time taken to fortify": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds (Begins upon casting)"
+        },
+        "Size": {
+          "value": 4.0,
+          "unit": "segments2.6 x 1.5 meters per segmentTotal 10.4 x 1.5 meters",
+          "raw": "4 segments<br>2.6 x 1.5 meters per segment<br>Total 10.4 x 1.5 meters"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total 40 seconds (Includes deploy time)<br>Begins to decay after 35 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Slow Orb",
+      "slot": "Q",
+      "creds": 200,
+      "charges": 2,
+      "function": "Slow",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Slow amount": {
+          "value": 50.0,
+          "unit": "%",
+          "raw": "50%"
+        },
+        "Duration": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Healing Orb",
+      "slot": "E",
+      "charges": 1,
+      "function": "Heal",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Healing": {
+          "value": 20.0,
+          "unit": "HP/sec, total 100 HP",
+          "raw": "20 HP/sec, total 100 HP (Heal)<br>10 HP/sec, total 50 HP (Self heal)"
+        },
+        "Duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Resurrection",
+      "slot": "X",
+      "function": "Revive",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast distance": {
+          "value": 12.0,
+          "unit": "meters",
+          "raw": "12 meters"
+        },
+        "Windup time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Revive duration": {
+          "value": 1.3,
+          "unit": "seconds",
+          "raw": "1.3 seconds"
+        }
+      }
+    }
+  },
+  "Sova": {
+    "C": {
+      "name": "Owl Drone",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 400,
+      "charges": 1,
+      "function": "Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Deploy time": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        },
+        "Duration": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        },
+        "rowspan=\"2\"|Reveal stats": {
+          "value": 0.6,
+          "unit": "-second reveal per ping",
+          "raw": "0.6-second reveal per ping"
+        },
+        "Total 2 pings<br>1st ping 1.6 seconds after dart impact<br>2nd ping 1.2 seconds after 1st ping ends": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|4.08}}"
+        },
+        "Dart cooldown": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Shock Bolt",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 150,
+      "charges": 2,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Maximum bounces": {
+          "value": 2.0,
+          "unit": "",
+          "raw": "2"
+        },
+        "Minimum charge times and projectile strengths": {
+          "value": null,
+          "unit": "",
+          "raw": "Immediately cast as a Class 2 Projectile<br>0.333 seconds/1st bar filled for Class 3 Projectile<br>0.667 seconds/2nd bar filled for Class 4 Projectile<br>1.000 second/3rd bar filled for Class 5 Projectile"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Radii": {
+          "value": 1.5,
+          "unit": "meters",
+          "raw": "1.5 meters (Inner)<br>4 meters (Outer)"
+        },
+        "rowspan=2|Damage": {
+          "value": null,
+          "unit": "",
+          "raw": "Minimum: 1"
+        },
+        "Maximum: 75<br><small>(Minimum Outer radius damage to Inner radius damage)</small>": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|4.08}}"
+        }
+      }
+    },
+    "E": {
+      "name": "Recon Bolt",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Intel",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Maximum bounces": {
+          "value": 2.0,
+          "unit": "",
+          "raw": "2"
+        },
+        "Minimum charge times and projectile strengths": {
+          "value": null,
+          "unit": "",
+          "raw": "Immediately cast as a Class 2 Projectile<br>0.333 seconds/1st bar filled for Class 3 Projectile<br>0.667 seconds/2nd bar filled for Class 4 Projectile<br>1.000 second/3rd bar filled for Class 5 Projectile"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup time": {
+          "value": 0.667,
+          "unit": "seconds",
+          "raw": "0.667 seconds"
+        },
+        "Radius": {
+          "value": 30.0,
+          "unit": "meters",
+          "raw": "30 meters"
+        },
+        "rowspan=2|Sonar pulses": {
+          "value": 1.0,
+          "unit": "every 1.6 seconds",
+          "raw": "1 every 1.6 seconds"
+        },
+        "Total 2 pulses": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|7.04}}"
+        },
+        "Reveal duration": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Hunter's Fury",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Weapon Equip",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Ammunition": {
+          "value": 3.0,
+          "unit": "charges",
+          "raw": "3 charges"
+        },
+        "Max Duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds (Not including equip time)"
+        },
+        "Windup time per charge": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Fire rate": {
+          "value": 1.0,
+          "unit": "every 2.125 seconds",
+          "raw": "1 every 2.125 seconds (including charge windup time)"
+        },
+        "Self-knockback distance": {
+          "value": 1.5,
+          "unit": "meters",
+          "raw": "1.5 meters"
+        },
+        "Cylinder size": {
+          "value": 66.0,
+          "unit": "meter length1.76 meter radius",
+          "raw": "66 meter length<br>1.76 meter radius"
+        },
+        "Damage": {
+          "value": 80.0,
+          "unit": "",
+          "raw": "80"
+        },
+        "Reveal duration": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        }
+      }
+    }
+  },
+  "Tejo": {
+    "C": {
+      "name": "Stealth Drone",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 400,
+      "charges": 1,
+      "function": "Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy length": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Deploy time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Vision radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Vision cone angle": {
+          "value": 60.0,
+          "unit": "°",
+          "raw": "60°<br>(either side of the direction Stealth Drone is looking in)"
+        },
+        "Detection radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Re-stealth timer": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        },
+        "Windup time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Detonation radius": {
+          "value": 16.0,
+          "unit": "meters",
+          "raw": "16 meters"
+        },
+        "Pulse velocity": {
+          "value": 16.0,
+          "unit": "meters over 0.7 seconds",
+          "raw": "16 meters over 0.7 seconds"
+        },
+        "Suppress duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Special Delivery",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Max projectile duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "Radii": {
+          "value": 1.25,
+          "unit": "meters",
+          "raw": "1.25 meters (Inner)<br>5.25 meters (Outer)"
+        },
+        "Windup time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Damage<br>": {
+          "value": 20.0,
+          "unit": "-35",
+          "raw": "20-35"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Guided Salvo",
+      "slot": "E",
+      "type": "Signature",
+      "creds": 150,
+      "charges": 2,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max deploy distance": {
+          "value": 45.0,
+          "unit": "meters",
+          "raw": "45 meters"
+        },
+        "Unequip time": {
+          "value": 0.92,
+          "unit": "seconds",
+          "raw": "0.92 seconds"
+        },
+        "Flight altitude": {
+          "value": 2.0,
+          "unit": "meters",
+          "raw": "2 meters"
+        },
+        "Radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Inner: 2.5 meters<br>Outer: 4.5 meters"
+        },
+        "Windup time": {
+          "value": 1.25,
+          "unit": "seconds",
+          "raw": "1.25 seconds"
+        },
+        "Damage": {
+          "value": null,
+          "unit": "",
+          "raw": "Inner radius: 65 per tick<br>Outer radius: 50 per tick<br>Total 195/150 damage<br>x0.5 multiplier to objects"
+        },
+        "Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 0.8 secondsTotal 3 ticks",
+          "raw": "1 every 0.8 seconds<br>Total 3 ticks"
+        }
+      }
+    },
+    "X": {
+      "name": "Armageddon",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max deploy distance": {
+          "value": 52.5,
+          "unit": "meters",
+          "raw": "52.5 meters"
+        },
+        "rowspan=3|Windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 3.08 seconds</u>"
+        },
+        "0.33-second activation delay": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "2.75-second windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Area size": {
+          "value": 12.0,
+          "unit": "-meter width2-meter length per segment16 segments, 32-meter total length",
+          "raw": "12-meter width<br>2-meter length per segment<br>16 segments, 32-meter total length"
+        },
+        "Damage": {
+          "value": 60.0,
+          "unit": "per tick",
+          "raw": "60 per tick"
+        },
+        "rowspan=2|Detonation Ticks/Tick Rate per segment": {
+          "value": 1.0,
+          "unit": "every 0.25 seconds",
+          "raw": "1 every 0.25 seconds"
+        },
+        "Total 4 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>In-game"
+        },
+        "Delay between successive segment detonations": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        }
+      }
+    }
+  },
+  "Veto": {
+    "C": {
+      "name": "Crosscut",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 2,
+      "function": "Teleport",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast distance": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Deployment time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Vortex radius": {
+          "value": 24.0,
+          "unit": "meters",
+          "raw": "24 meters"
+        },
+        "rowspan=2|Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total duration: 1.6 seconds"
+        },
+        "1-second windup<br>0.8-second arrival at vortex": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        }
+      }
+    },
+    "Q": {
+      "name": "Chokehold",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 200,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Deployment time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "rowspan=2|Detection radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Trap detecting enemies: 6.58 meters"
+        },
+        "Agents detecting the trap: 9 meters": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Windup": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Decay stats": {
+          "value": 75.0,
+          "unit": "HPHealth restored over 4.5 seconds",
+          "raw": "75 HP<br>Health restored over 4.5 seconds"
+        },
+        "Zone radius": {
+          "value": 6.58,
+          "unit": "meters",
+          "raw": "6.58 meters"
+        },
+        "Zone Duration": {
+          "value": 4.5,
+          "unit": "seconds",
+          "raw": "4.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Interceptor",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Utility Defense",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deployment distance": {
+          "value": 7.0,
+          "unit": "meters",
+          "raw": "7 meters<br>(Can be reduced if pushed back by terrain)"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deployment time": {
+          "value": 0.35,
+          "unit": "seconds to travel to target location at max deployment distance",
+          "raw": "0.35 seconds to travel to target location at max deployment distance"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Cast time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Duration": {
+          "value": 9.0,
+          "unit": "seconds",
+          "raw": "9 seconds"
+        },
+        "Radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Damage": {
+          "value": 100.0,
+          "unit": "per tick",
+          "raw": "100 per tick"
+        },
+        "Ticks/Tick rate": {
+          "value": 8.0,
+          "unit": "per second",
+          "raw": "8 per second<br>(1 every 0.125 secs)"
+        },
+        "Targeting delay": {
+          "value": 0.2,
+          "unit": "seconds",
+          "raw": "0.2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Evolution",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Empowerment, Heal",
+      "stats": {
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Equip speed<br><nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed"
+        },
+        "Healing": {
+          "value": 40.0,
+          "unit": "HP/sec",
+          "raw": "40 HP/sec"
+        }
+      }
+    }
+  },
+  "Viper": {
+    "C": {
+      "name": "Snake Bite",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 300,
+      "charges": 1,
+      "function": "Cripple, Molotov",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "rowspan=3|Damage": {
+          "value": 1.0,
+          "unit": "per tick",
+          "raw": "1 per tick"
+        },
+        "Total 76-79<br>(152-158 with Vulnerable)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}<sup/>[[Range#Target_Practice|Range's training bot]]<ref group=\"s\" name=\"b\"/>"
+        },
+        "x0.5 multiplier to objects": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|5.12}}"
+        },
+        "rowspan=2|Ticks/Tick rate": {
+          "value": 12.5,
+          "unit": "per second1 every 0.08 seconds",
+          "raw": "12.5 per second<br>1 every 0.08 seconds"
+        },
+        "Total 76-79 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}<sup/>[[Range#Target_Practice|Range's training bot]]{{#tag:ref|Values were tested using the Range's training bot, though it is inconsistent with confirmed values for tick rate and duration. It can be resolved assuming that the full zone duration includes a ~0.25-second period immediately upon detonation during which no damage is taken before the zone begins to spread.|group=\"s\"|name=\"b\"}}"
+        },
+        "Duration": {
+          "value": 6.5,
+          "unit": "seconds",
+          "raw": "6.5 seconds"
+        },
+        "Vulnerable duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Poison Cloud",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Pickup distance (Buy phase only)": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 1.75 seconds</u><br>0.75-second windup (fuel consumed after this point)<br> 1 second for smoke to fully form"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Deactivation time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "rowspan=\"2\"|Activation cooldowns": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds (Deactivation)"
+        },
+        "5 seconds (Activation)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|8.08}}"
+        }
+      }
+    },
+    "E": {
+      "name": "Toxic Screen",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Wall",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Total Emitters at max range": {
+          "value": 30.0,
+          "unit": "",
+          "raw": "30"
+        },
+        "Wall Dimensions": {
+          "value": 2.0,
+          "unit": "meters between emitters60 meters at max length4-meter height",
+          "raw": "2 meters between emitters<br>60 meters at max length<br>4-meter height"
+        },
+        "rowspan=\"2\"|Windup times": {
+          "value": 0.5,
+          "unit": "-second windup",
+          "raw": "0.5-second windup (fuel consumed after this point)"
+        },
+        "1.55 seconds for wall to fully form at max length": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Deactivation time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "rowspan=\"2\"|Activation cooldowns": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds (Deactivation)"
+        },
+        "5 seconds (Activation)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|8.08}}"
+        }
+      }
+    },
+    "X": {
+      "name": "Viper's Pit",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Vision Blocker",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max cast radius for cloud's center": {
+          "value": 7.25,
+          "unit": "meters",
+          "raw": "7.25 meters"
+        },
+        "Unequip time": {
+          "value": 1.35,
+          "unit": "seconds",
+          "raw": "1.35 seconds"
+        },
+        "Deploy time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 6 seconds</u><br>1-second channel time<br>5-second expansion time"
+        },
+        "Maximum radius": {
+          "value": 9.0,
+          "unit": "meters",
+          "raw": "9 meters"
+        },
+        "Vision radius": {
+          "value": 8.1,
+          "unit": "meters",
+          "raw": "8.1 meters"
+        },
+        "Integrity duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        },
+        "Integrity regeneration rate": {
+          "value": 4.0,
+          "unit": "% per second",
+          "raw": "4% per second"
+        },
+        "Deactivation time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 3.25 seconds</u><br>1-second holding deactivation command<br>0.5-second delay<br>1.75-second collapse time"
+        }
+      }
+    }
+  },
+  "Vyse": {
+    "C": {
+      "name": "Razorvine",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 150,
+      "charges": 2,
+      "function": "Slow",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deploy time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Detection radius": {
+          "value": 3.5,
+          "unit": "meters",
+          "raw": "3.5 meters"
+        },
+        "Windup": {
+          "value": 0.2,
+          "unit": "seconds",
+          "raw": "0.2 seconds"
+        },
+        "Radius": {
+          "value": 6.25,
+          "unit": "meters",
+          "raw": "6.25 meters"
+        },
+        "Slow amount": {
+          "value": 15.0,
+          "unit": "%",
+          "raw": "15%"
+        },
+        "Damage per distance": {
+          "value": 10.0,
+          "unit": "per 1.25 meters",
+          "raw": "10 per 1.25 meters"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total 6 seconds (Includes Windup)"
+        }
+      }
+    },
+    "Q": {
+      "name": "Shear",
+      "slot": "Q",
+      "creds": 200,
+      "charges": 1,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max deploy distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "rowspan=3|Wall dimensions": {
+          "value": null,
+          "unit": "",
+          "raw": "Min-Max Length: 1-12 meters"
+        },
+        "Width: 1 meter": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Height: 2.5 meters": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deploy time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Detection distance": {
+          "value": 3.5,
+          "unit": "meters",
+          "raw": "3.5 meters"
+        },
+        "Windup": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "rowspan=3|Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total 6 seconds"
+        },
+        "Expiration warning at 3.7 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}*-->"
+        },
+        "0.8-second deactivation time": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        }
+      }
+    },
+    "E": {
+      "name": "Arc Rose",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max targeting distance": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Max wall penetration": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Max deploy height": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Detection radius": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Deploy time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max recall distance": {
+          "value": 32.5,
+          "unit": "meters",
+          "raw": "32.5 meters"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max blind duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Steel Garden",
+      "slot": "X",
+      "function": "Limiter",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 28.0,
+          "unit": "meters",
+          "raw": "28 meters"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Windup": {
+          "value": 4.4,
+          "unit": "seconds",
+          "raw": "4.4 seconds"
+        },
+        "Jammed duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    }
+  },
+  "Waylay": {
+    "C": {
+      "name": "Saturate",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 300,
+      "charges": 1,
+      "function": "Hinder",
+      "stats": {
+        "Equip time": {
+          "value": null,
+          "unit": "",
+          "raw": "? seconds"
+        },
+        "Unequip time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Maximum air time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Windup": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Hinder duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Lightspeed",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 300,
+      "charges": 1,
+      "function": "Dash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Dash duration": {
+          "value": 0.45,
+          "unit": "seconds per dash",
+          "raw": "0.45 seconds per dash"
+        },
+        "Dash distance": {
+          "value": 9.0,
+          "unit": "meters",
+          "raw": "9 meters"
+        },
+        "Unequip time": {
+          "value": 0.0,
+          "unit": "seconds",
+          "raw": "0 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Refract",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Intangibility",
+      "stats": {
+        "Activation windup": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Empowered duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        },
+        "Reactivation windup": {
+          "value": 0.05,
+          "unit": "seconds",
+          "raw": "0.05 seconds"
+        },
+        "Travel duration": {
+          "value": 0.35,
+          "unit": "-2 seconds based on travel distanceMinimum travel duration at travel distances Maximum travel duration at travel distances >50 meters",
+          "raw": "0.35-2 seconds based on travel distance<br>Minimum travel duration at travel distances <2.5 meters<br>Maximum travel duration at travel distances >50 meters"
+        },
+        "Max vision radius while nearsighted": {
+          "value": 35.0,
+          "unit": "meters",
+          "raw": "35 meters"
+        },
+        "Unequip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Self-blind duration on arrival": {
+          "value": 0.2,
+          "unit": "seconds",
+          "raw": "0.2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Convergent Paths",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Hinder",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Area size": {
+          "value": 36.0,
+          "unit": "x 13.5 meters",
+          "raw": "36 x 13.5 meters"
+        },
+        "Distance between Waylay and AoE": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Channel time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Windup": {
+          "value": 1.0,
+          "unit": "seconds",
+          "raw": "1 seconds"
+        },
+        "rowspan=2|Ticks/Tick rate": {
+          "value": 1.0,
+          "unit": "every 0.125 seconds",
+          "raw": "1 every 0.125 seconds"
+        },
+        "Total 4 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki/>+10% speed boost"
+        },
+        "Buff duration": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        },
+        "Debuff duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        }
+      }
+    }
+  },
+  "Astra": {
+    "P": {
+      "name": "Astral Form",
+      "stats": {},
+      "slot": "P"
+    },
+    "C": {
+      "name": "Gravity Well",
+      "slot": "C",
+      "type": "Basic",
+      "charges": 1,
+      "function": "Cripple, Displacement",
+      "stats": {
+        "Windup time": {
+          "value": 1.25,
+          "unit": "seconds",
+          "raw": "1.25 seconds"
+        },
+        "Radius": {
+          "value": 4.75,
+          "unit": "meters",
+          "raw": "4.75 meters"
+        },
+        "Pull duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Vulnerable duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Nova Pulse",
+      "slot": "Q",
+      "type": "Basic",
+      "charges": 1,
+      "function": "Concuss",
+      "stats": {
+        "Radius": {
+          "value": 4.75,
+          "unit": "meters",
+          "raw": "4.75 meters"
+        },
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Nebula/Dissipate / Stars",
+      "type": "Basic",
+      "charges": 2,
+      "function": "Smoke",
+      "stats": {
+        "Windup time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Radius": {
+          "value": 4.75,
+          "unit": "meters",
+          "raw": "4.75 meters"
+        },
+        "rowspan=\"2\"|Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "'''Nebula''': 14.25 seconds<br>Expiration warning at 12.75 seconds"
+        },
+        "Dissipate: 1 second": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Placement deploy time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Round Start windup time": {
+          "value": 1.4,
+          "unit": "seconds",
+          "raw": "1.4 seconds"
+        }
+      },
+      "slot": "E"
+    },
+    "X": {
+      "name": "Cosmic Divide",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Wall",
+      "stats": {
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Windup time": {
+          "value": 2.667,
+          "unit": "seconds",
+          "raw": "2.667 seconds"
+        },
+        "Duration": {
+          "value": 21.0,
+          "unit": "-second total effective duration2.5-second deformation time",
+          "raw": "21-second total effective duration<br>2.5-second deformation time"
+        }
+      }
+    }
+  },
+  "Chamber": {
+    "C": {
+      "name": "Trademark",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Max cast radius": {
+          "value": 12.0,
+          "unit": "meters",
+          "raw": "12 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Proximity radius to remain active": {
+          "value": 50.0,
+          "unit": "meters",
+          "raw": "50 meters"
+        },
+        "Search radius": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Recall duration": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Windup time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Slow radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Slow duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Headhunter",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 100,
+      "function": "Weapon Equip",
+      "stats": {
+        "Equip time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Ammunition": {
+          "value": 8.0,
+          "unit": "rounds max",
+          "raw": "8 rounds max.<br><small>(4 rounds max. in [[Spike Rush]])</small><br>No reserve"
+        },
+        "Damage": {
+          "value": 159.0,
+          "unit": "Head55 Body46 Legs",
+          "raw": "159 Head<br>55 Body<br>46 Legs"
+        },
+        "Damage multipliers": {
+          "value": null,
+          "unit": "",
+          "raw": "Headshot: x2.9<Br>Leg shot: x0.85"
+        },
+        "Fire mode": {
+          "value": null,
+          "unit": "",
+          "raw": "Semi"
+        },
+        "Fire rate": {
+          "value": 4.0,
+          "unit": "per second1 every 0.25 seconds",
+          "raw": "4 per second<br>1 every 0.25 seconds"
+        },
+        "Wall penetration": {
+          "value": null,
+          "unit": "",
+          "raw": "High"
+        },
+        "ADS Zoom": {
+          "value": null,
+          "unit": "",
+          "raw": "x1.5"
+        },
+        "Unequip time<br><small>(out of ammo)</small>": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Rendezvous",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Teleport",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast distance": {
+          "value": 8.5,
+          "unit": "meters",
+          "raw": "8.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Anchor radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total duration: 1.3 seconds</u><br>0.1-second windup<br>1.2-second arrival at anchor"
+        },
+        "Audio cue radius": {
+          "value": 42.5,
+          "unit": "meters",
+          "raw": "42.5 meters"
+        },
+        "Recall time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Tour De Force",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Slow",
+      "stats": {
+        "Initial summon time": {
+          "value": 2.3,
+          "unit": "seconds",
+          "raw": "2.3 seconds"
+        },
+        "Equip time": {
+          "value": 0.667,
+          "unit": "seconds",
+          "raw": "0.667 seconds"
+        },
+        "Ammunition": {
+          "value": 5.0,
+          "unit": "roundsNo reserve",
+          "raw": "5 rounds<br>No reserve"
+        },
+        "Damage": {
+          "value": 150.0,
+          "unit": "",
+          "raw": "150"
+        },
+        "Damage multipliers": {
+          "value": null,
+          "unit": "",
+          "raw": "Headshot: x1.7<br>Leg shot: x0.85"
+        },
+        "Fire mode": {
+          "value": null,
+          "unit": "",
+          "raw": "Semi"
+        },
+        "Fire rate": {
+          "value": 0.9,
+          "unit": "per second1 every 1.111 seconds",
+          "raw": "0.9 per second<br>1 every 1.111 seconds"
+        },
+        "Wall penetration": {
+          "value": null,
+          "unit": "",
+          "raw": "High"
+        },
+        "Slow radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Slow duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "Unequip time<br><small>(out of ammo)</small>": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        }
+      }
+    }
+  },
+  "Killjoy": {
+    "C": {
+      "name": "Nanoswarm",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 2,
+      "function": "Molotov",
+      "stats": {
+        "Equip time": {
+          "value": 0.74,
+          "unit": "seconds",
+          "raw": "0.74 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Buy Phase pickup range": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Detection radius": {
+          "value": 5.25,
+          "unit": "meters",
+          "raw": "5.25 meters"
+        },
+        "rowspan=\"3\"|Activation windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 1 second</u>"
+        },
+        "0.5-second windup": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "0.5-second damage delay": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Damage": {
+          "value": 1.0,
+          "unit": "per tickTotal 180x0.5 multiplier to objects",
+          "raw": "1 per tick<br>Total 180<br>x0.5 multiplier to objects"
+        },
+        "rowspan=\"2\"|Ticks/Tick Rate": {
+          "value": 45.0,
+          "unit": "per second",
+          "raw": "45 per second<br>(1 every 0.022 seconds)"
+        },
+        "Total 180 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>[[Range#Target_Practice|Range's training bot]]"
+        },
+        "Duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Alarmbot",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Max deploy length": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Unequip time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Deploy time": {
+          "value": 1.85,
+          "unit": "seconds",
+          "raw": "1.85 seconds"
+        },
+        "Proximity radius to remain active": {
+          "value": 40.0,
+          "unit": "meters",
+          "raw": "40 meters"
+        },
+        "rowspan=\"2\" |Detection radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Bot detecting enemies: 5.5 meters"
+        },
+        "Agents detecting the bot: 7 meters": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|1.11}}"
+        },
+        "Proximity to target needed to explode": {
+          "value": 2.0,
+          "unit": "meters",
+          "raw": "2 meters"
+        },
+        "Windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total minimum: 1 second</u><br>0.5-second alert phase<br>0.5-second windup phase<br><small>(Duration further increased by travel time)</small>"
+        },
+        "Vulnerable duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "Reactivation time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Turret",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Max deploy length": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 2.7,
+          "unit": "seconds",
+          "raw": "2.7 seconds"
+        },
+        "Detection cone angle": {
+          "value": 100.0,
+          "unit": "°",
+          "raw": "100°"
+        },
+        "Proximity radius to remain active": {
+          "value": 40.0,
+          "unit": "meters",
+          "raw": "40 meters"
+        },
+        "Windup time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Damage": {
+          "value": 0.0,
+          "unit": "–20 meters: 8 per shot, 24 per burst20–35 meters: 6 per shot, 18 per burst35+ meters: 4 per shot, 12 per burst",
+          "raw": "0–20 meters: 8 per shot, 24 per burst<br>20–35 meters: 6 per shot, 18 per burst<br>35+ meters: 4 per shot, 12 per burst"
+        },
+        "Bullet tagging slow": {
+          "value": 50.0,
+          "unit": "%",
+          "raw": "50%"
+        },
+        "Fire rate": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Overall cycle: 1.375 seconds</u><br>1 second between bursts<br>0.125 seconds between shots"
+        },
+        "Reactivation time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Lockdown",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Detain",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy length": {
+          "value": 0.5,
+          "unit": "meters",
+          "raw": "0.5 meters"
+        },
+        "Deploy time": {
+          "value": 0.52,
+          "unit": "seconds",
+          "raw": "0.52 seconds"
+        },
+        "Unequip time": {
+          "value": 0.15,
+          "unit": "seconds",
+          "raw": "0.15 seconds"
+        },
+        "Radius": {
+          "value": 32.5,
+          "unit": "meters",
+          "raw": "32.5 meters"
+        },
+        "rowspan=2|Windup time": {
+          "value": 13.0,
+          "unit": "seconds",
+          "raw": "13 seconds"
+        },
+        "0.15-second pulse delay": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|11.00}}"
+        },
+        "Detain duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    }
+  },
+  "Neon": {
+    "P": {
+      "name": "Energy",
+      "stats": {},
+      "slot": "P"
+    },
+    "C": {
+      "name": "Fast Lane",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 300,
+      "charges": 1,
+      "function": "Wall",
+      "stats": {
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Deploy time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Length": {
+          "value": 46.5,
+          "unit": "m total45 meters in front of Neon1.5 m behind Neon",
+          "raw": "<u>46.5 m total</u><br>45 meters in front of Neon<br>1.5 m behind Neon"
+        },
+        "Distance between walls": {
+          "value": 3.5,
+          "unit": "meters",
+          "raw": "3.5 meters"
+        },
+        "Duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "rowspan=2|Wall Dissolve Duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "(Includes 1-second telegraph time during walls' active duration)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        }
+      }
+    },
+    "Q": {
+      "name": "Relay Bolt",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Concuss",
+      "stats": {
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max projectile duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Radius": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        },
+        "Explosion windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "High Gear",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Dash",
+      "stats": {
+        "Activation animation duration": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Movement speed increase": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki/>+35% (9.11 m/s)"
+        },
+        "Slide duration": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Slide distance": {
+          "value": 7.0,
+          "unit": "meters",
+          "raw": "7 meters"
+        }
+      }
+    },
+    "X": {
+      "name": "Overdrive",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Weapon Equip",
+      "stats": {
+        "Initial windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Ammunition": {
+          "value": 40.0,
+          "unit": "per \"magazine\"Minimum 10 ammo required to fire beamInfinite reserve",
+          "raw": "40 per \"magazine\"<br>Minimum 10 ammo required to fire beam<br>Infinite reserve"
+        },
+        "Reequip time": {
+          "value": 0.333,
+          "unit": "seconds",
+          "raw": "0.333 seconds"
+        },
+        "Damage": {
+          "value": 0.0,
+          "unit": "-20 meters: 1820-42 meters: 18-1043+ meters: 10",
+          "raw": "0-20 meters: 18<br>20-42 meters: 18-10<br>43+ meters: 10"
+        },
+        "Damage multipliers": {
+          "value": null,
+          "unit": "",
+          "raw": "Headshot: x3<Br>Leg shot: x0.85"
+        },
+        "Fire rate": {
+          "value": 20.0,
+          "unit": "per second1 every 0.05 seconds",
+          "raw": "20 per second<br>1 every 0.05 seconds"
+        },
+        "Movement penalties": {
+          "value": null,
+          "unit": "",
+          "raw": "Airborne: +7° spread"
+        },
+        "Reload time": {
+          "value": 0.5,
+          "unit": "second delay then 1 ammo every 0.05 seconds",
+          "raw": "0.5 second delay then 1 ammo every 0.05 seconds"
+        }
+      }
+    }
+  },
+  "Reyna": {
+    "P": {
+      "name": "Soul Harvest",
+      "stats": {},
+      "slot": "P"
+    },
+    "C": {
+      "name": "Leer",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 250,
+      "charges": 2,
+      "function": "Nearsight",
+      "stats": {
+        "Equip time": {
+          "value": 0.77,
+          "unit": "seconds",
+          "raw": "0.77 seconds"
+        },
+        "Deployment distance": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters<br>(Can be reduced if pushed back by terrain)"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "rowspan=\"2\"|Windup time": {
+          "value": 0.55,
+          "unit": "seconds to travel to target location at max deployment distance",
+          "raw": "0.55 seconds to travel to target location at max deployment distance"
+        },
+        "0.4 seconds on arrival at target location": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|5.07}}"
+        },
+        "Duration while applying nearsight": {
+          "value": 1.6,
+          "unit": "seconds",
+          "raw": "1.6 seconds"
+        },
+        "Max vision radius while nearsighted": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        }
+      }
+    },
+    "Q": {
+      "name": "Devour",
+      "slot": "Q",
+      "type": "Signature",
+      "creds": 200,
+      "charges": 2,
+      "function": "Heal",
+      "stats": {
+        "Activation delay (without Empress)": {
+          "value": 0.1,
+          "unit": "seconds",
+          "raw": "0.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Healing": {
+          "value": 1.0,
+          "unit": "per tickTotal 50",
+          "raw": "1 per tick<br>Total 50"
+        },
+        "rowspan=2|Ticks/Tick rate": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Standard</u><br>16.7 per second<br>(1 every 0.06 seconds)<br>Total 50 ticks"
+        },
+        "Healing duration": {
+          "value": 3.0,
+          "unit": "seconds2.5 seconds",
+          "raw": "3 seconds<br>2.5 seconds (Empress)"
+        },
+        "Overheal duration (without Empress)": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Dismiss",
+      "slot": "E",
+      "type": "Signature",
+      "creds": 200,
+      "charges": 2,
+      "function": "Intangibility",
+      "stats": {
+        "Duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Movement speed increase": {
+          "value": 12.0,
+          "unit": "m/s",
+          "raw": "12 m/s"
+        }
+      }
+    },
+    "X": {
+      "name": "Empress",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Empowerment",
+      "stats": {
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Equip speed<br><nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed"
+        }
+      }
+    }
+  },
+  "Skye": {
+    "C": {
+      "name": "Regrowth",
+      "slot": "C",
+      "creds": 150,
+      "charges": 1,
+      "function": "Heal",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Healing": {
+          "value": 1.0,
+          "unit": "per tickTotal 100",
+          "raw": "1 per tick<br>Total 100"
+        },
+        "Tick/Tick rate": {
+          "value": 20.0,
+          "unit": "per second1 every 0.05 secondsTotal 100 ticks",
+          "raw": "20 per second<br>1 every 0.05 seconds<br>Total 100 ticks"
+        },
+        "Healing pool": {
+          "value": 100.0,
+          "unit": "HP",
+          "raw": "100 HP"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Trailblazer",
+      "slot": "Q",
+      "charges": 1,
+      "function": "Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Deploy time": {
+          "value": 0.18,
+          "unit": "seconds",
+          "raw": "0.18 seconds"
+        },
+        "Vision radius": {
+          "value": 22.5,
+          "unit": "meters",
+          "raw": "22.5 meters"
+        },
+        "Duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        },
+        "Jump distance": {
+          "value": 12.0,
+          "unit": "meters",
+          "raw": "12 meters"
+        },
+        "Explosion radius": {
+          "value": 3.5,
+          "unit": "meters",
+          "raw": "3.5 meters"
+        },
+        "Damage": {
+          "value": 30.0,
+          "unit": "",
+          "raw": "30"
+        },
+        "rowspan=\"2\"|Concuss duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Minimum: 2.5 seconds"
+        },
+        "Maximum: 4 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|3.0}}"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Guiding Light",
+      "slot": "E",
+      "charges": 2,
+      "function": "Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Velocity": {
+          "value": 18.0,
+          "unit": "meters per second",
+          "raw": "18 meters per second"
+        },
+        "Duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Flash max duration windup time": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Flash activation windup time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Max flash duration": {
+          "value": 1.0,
+          "unit": "-2.25 seconds",
+          "raw": "1-2.25 seconds<br>(based on duration windup)"
+        }
+      }
+    },
+    "X": {
+      "name": "Seekers",
+      "slot": "X",
+      "function": "Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.55,
+          "unit": "seconds",
+          "raw": "0.55 seconds"
+        },
+        "Number of Seekers deployed": {
+          "value": 3.0,
+          "unit": "",
+          "raw": "3"
+        },
+        "Max lifespan": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Nearsight duration": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "Nearsight vision radius": {
+          "value": 7.5,
+          "unit": "meters",
+          "raw": "7.5 meters"
+        },
+        "Slow duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Slow potency": {
+          "value": 60.0,
+          "unit": "%",
+          "raw": "60%"
+        }
+      }
+    }
+  },
+  "Yoru": {
+    "C": {
+      "name": "Fakeout",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Decoy, Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Maximum image duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds"
+        },
+        "Flash angle": {
+          "value": 30.0,
+          "unit": "°",
+          "raw": "30°<br><small>(either side of the direction the image is looking in)</small>"
+        },
+        "Flash windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max flash duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Blindside",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 250,
+      "charges": 1,
+      "function": "Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max travel time in air": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max flash duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Gatecrash",
+      "slot": "E",
+      "type": "Signature",
+      "creds": 150,
+      "charges": 2,
+      "function": "Decoy, Teleport",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy length": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Tether Duration": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Detection radius": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Tether audio cue radius": {
+          "value": 12.5,
+          "unit": "meters",
+          "raw": "12.5 meters"
+        },
+        "Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 1.2 seconds</u><br>0.5-second windup<br>0.7-second arrival at tether location"
+        },
+        "Teleport audio cue radius": {
+          "value": 42.5,
+          "unit": "meters",
+          "raw": "42.5 meters"
+        },
+        "Fake decal duration": {
+          "value": 30.0,
+          "unit": "seconds",
+          "raw": "30 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Dimensional Drift",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Intangibility",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Cast delay": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds"
+        },
+        "Detection radius": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters<br><small>(footstep audio only)</small>"
+        },
+        "Unequip/Return time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        }
+      }
+    }
+  },
+  "KAYO": {
+    "C": {
+      "name": "FRAG/ment",
+      "slot": "C",
+      "type": "Basic",
+      "creds": 200,
+      "charges": 1,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Windup": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "rowspan=\"2\"|Radii": {
+          "value": 1.0,
+          "unit": "meter",
+          "raw": "1 meter (Inner)"
+        },
+        "4 meters (Outer)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|5.01}}"
+        },
+        "Damage": {
+          "value": 25.0,
+          "unit": "-60 per tickTotal 100-240",
+          "raw": "25-60 per tick<br>Total 100-240<br><small>(Minimum Outer radius damage to Inner radius damage)</small>"
+        },
+        "rowspan=\"2\"|Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 1 second",
+          "raw": "1 every 1 second"
+        },
+        "Total 4 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>[[Range#Target_Practice|Range's training bot]]"
+        },
+        "Duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "FLASH/drive",
+      "slot": "Q",
+      "type": "Basic",
+      "creds": 250,
+      "charges": 2,
+      "function": "Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Windup time on bounce": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds (Primary fire)<br><small/>(max windup time not affected)"
+        },
+        "Max windup time": {
+          "value": 1.6,
+          "unit": "seconds",
+          "raw": "1.6 seconds (Primary fire)<br>1 second (Alt fire)"
+        },
+        "Telegraph windup time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "<!--rowspan=2|-->Max blind duration": {
+          "value": 2.25,
+          "unit": "seconds",
+          "raw": "2.25 seconds <!--(Primary fire)-->"
+        },
+        "1.5 seconds (Alt fire)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|10.06}}-->"
+        }
+      }
+    },
+    "E": {
+      "name": "ZERO/point",
+      "slot": "E",
+      "type": "Signature",
+      "charges": 1,
+      "function": "Intel, Limiter",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Radius": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Windup": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Suppression duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "NULL/cmd",
+      "slot": "X",
+      "type": "Ultimate",
+      "function": "Empowerment, Limiter, Revive",
+      "stats": {
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 42.5,
+          "unit": "meters",
+          "raw": "42.5 meters"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed<br>+10% Equip speed"
+        },
+        "Suppression duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "rowspan=\"2\" |Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 3 seconds",
+          "raw": "1 every 3 seconds"
+        },
+        "5 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>In-game"
+        },
+        "Overloaded Duration": {
+          "value": 12.0,
+          "unit": "seconds",
+          "raw": "12 seconds"
+        },
+        "Downed Health": {
+          "value": 850.0,
+          "unit": "HP",
+          "raw": "850 HP"
+        },
+        "Downed Duration": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Stabilization duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Revive duration": {
+          "value": 1.55,
+          "unit": "seconds",
+          "raw": "1.55 seconds"
+        }
+      }
+    }
+  }
+}

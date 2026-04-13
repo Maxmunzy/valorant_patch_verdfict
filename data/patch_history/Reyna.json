@@ -1,0 +1,927 @@
+{
+  "agent": "Reyna",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 33,
+    "balance_patches": 14,
+    "numeric_changes": 20,
+    "all_changes": 28
+  },
+  "current_stats": {
+    "C": {
+      "name": "Leer",
+      "creds": 250,
+      "charges": 2,
+      "function": "[[Blind#Nearsight",
+      "stats": {
+        "Equip time": {
+          "value": 0.77,
+          "unit": "seconds",
+          "raw": "0.77 seconds"
+        },
+        "Deployment distance": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters<br>(Can be reduced if pushed back by terrain)"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "rowspan=\"2\"|Windup time": {
+          "value": 0.55,
+          "unit": "seconds to travel to target location at max deployment distance",
+          "raw": "0.55 seconds to travel to target location at max deployment distance"
+        },
+        "0.4 seconds on arrival at target location": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|5.07}}"
+        },
+        "Duration while applying nearsight": {
+          "value": 1.6,
+          "unit": "seconds",
+          "raw": "1.6 seconds"
+        },
+        "Max vision radius while nearsighted": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        }
+      }
+    },
+    "Q": {
+      "name": "Devour",
+      "creds": 200,
+      "charges": 2,
+      "function": "[[Sustain#Heal",
+      "stats": {
+        "Activation delay (without Empress)": {
+          "value": 0.1,
+          "unit": "seconds",
+          "raw": "0.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Healing": {
+          "value": 1.0,
+          "unit": "per tickTotal 50",
+          "raw": "1 per tick<br>Total 50"
+        },
+        "rowspan=2|Ticks/Tick rate": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Standard</u><br>16.7 per second<br>(1 every 0.06 seconds)<br>Total 50 ticks"
+        },
+        "Healing duration": {
+          "value": 3.0,
+          "unit": "seconds2.5 seconds",
+          "raw": "3 seconds<br>2.5 seconds (Empress)"
+        },
+        "Overheal duration (without Empress)": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Dismiss",
+      "creds": 200,
+      "charges": 2,
+      "function": "[[Mobility#Intangibility",
+      "stats": {
+        "Duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Movement speed increase": {
+          "value": 12.0,
+          "unit": "m/s",
+          "raw": "12 m/s"
+        }
+      }
+    },
+    "X": {
+      "name": "Empress",
+      "creds": null,
+      "charges": null,
+      "function": "Empowerment",
+      "stats": {
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Equip speed<br><nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.02",
+      "raw": "Soul Harvest Orbs duration in world decreased from 4s >> 3s The ability description had incorrectly listed the duration at 3s while they were lasting 4s. The duration now accurately matches the description. Devour Overheal is now temporary and lasts 10s. Healing applied while in Empress is still permanent. UNDOCUMENTED: Full heal time increased from 2s >>> 3s UNDOCUMENTED: Full heal time in Empress increased from 2s >>> 2.5s Empress Ult points increased 6 >> 7 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "while in Empress is still permanent. UNDOCUMENTED: Full heal time increased from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 3.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "UNDOCUMENTED: Full heal time in Empress increased from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "while in Empress is still permanent. UNDOCUMENTED: Full heal time increased from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 3.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "UNDOCUMENTED: Full heal time in Empress increased from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.00",
+      "raw": "Leer Fixed an issue where throw animations would break if aiming straight down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.11",
+      "raw": "Devour Fixed a bug where Reyna’s overheal health was not being displayed accurately on the HUD for spectators Fixed a bug where Reyna’s HUD UI prompts would linger on screen even if Reyna has no ability charges left Dismiss Fixed a bug where Reyna’s HUD UI prompts would linger on screen even if Reyna has no ability charges left v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "Leer Fixed a bug where the projectile would animate forward in the incorrect direction while jumping and rapidly changing her aim location. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Empress Fixed a bug where using it would sometimes not progress the Use Your Ultimate Ability mission v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Leer Health decreased from 80 >>> 60 Empress Faster reload time reduced from 25% >>> 10% Increased fire rate reduced from 15% >>> 10% Increased weapon draw speed reduced from 25% >>> 10% Increased weapon recovery speed reduced from 25% >>> 10% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Leer Health decreased from",
+          "stat": "health",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 60.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Empress Faster reload time reduced from",
+          "stat": "duration",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Increased fire rate reduced from",
+          "stat": "other",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Increased weapon draw speed reduced from",
+          "stat": "speed",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Increased weapon recovery speed reduced from",
+          "stat": "speed",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Leer Health decreased from",
+          "stat": "health",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 60.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Empress Faster reload time reduced from",
+          "stat": "duration",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Increased fire rate reduced from",
+          "stat": "other",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Increased weapon draw speed reduced from",
+          "stat": "speed",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Increased weapon recovery speed reduced from",
+          "stat": "speed",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.06",
+      "raw": "Empress Fixed a bug where in very specific set of circumstances after turning invisible, she would reappear in his original location when the invisibility ends. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.05",
+      "raw": "Empress Fixed a bug where in some cases after turning invisible, she would reappear in her original location when the invisibility ends. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "Leer HP decreased 100 >> 80 Audio and visual hit confirm feedback has been added to shots that land on Leer. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "added to shots that land on Leer",
+          "stat": "effect",
+          "description": "added to shots that land on Leer",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.11",
+      "raw": "Leer Fixed an issue where Targeting visual for Leer wouldn’t properly display for spectators, allies, and observer perspectives. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.08",
+      "raw": "Devour Fixed an issue where Reyna’s Devour Overheal would not be interrupted when taking damage that was less than her current Overheal amount. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "Empress Fixed an issue where Reyna’s ultimate visuals could show through nearsights. [https://x.com/VALORANT/status/1904350424335036824 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.05",
+      "raw": "Hotfix] Devour Fixed a bug preventing Reyna from properly using Overheal where it wasn't updating her health appropriately v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.05",
+      "raw": "Empress Increased rate of fire to have consistent recoil control that matches the default rate of fire. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.11",
+      "raw": "Devour Healing decreased 100 >>> 50 Full heal time reduced from 3s >>> 2s Overheal of armor no longer decays after a timer. Dismiss Top speed increased 9.1 meters/second >>> 12 meters/second Total duration of Dismiss reduced from 2s >>> 1.5s Empress Empress no longer has a timer and is permanent until Reyna is killed or the round ends. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Devour Healing decreased",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 50.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Full heal time reduced from",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "meters/second Total duration of Dismiss reduced from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Devour Healing decreased",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 50.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Full heal time reduced from",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "meters/second Total duration of Dismiss reduced from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "no longer decays after a timer",
+          "stat": "effect",
+          "description": "no longer decays after a timer",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "no longer has a timer and is permanent until Reyna is killed or the round ends",
+          "stat": "effect",
+          "description": "no longer has a timer and is permanent until Reyna is killed or the round ends",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "8.03",
+      "raw": "Leer Fixed an issue where Agents would look like they were still nearsighted in 3rd person for a short period of time if they destroyed Leer right after it became shootable. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.10",
+      "raw": "Team Deathmatch only: Leer Cooldown increased 44s >>> 51s Empress Cost increased 70 >>> 80 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Team Deathmatch only: Leer Cooldown increased",
+          "stat": "cooldown",
+          "before": 44.0,
+          "before_unit": "s",
+          "after": 51.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Empress Cost increased",
+          "stat": "cost",
+          "before": 70.0,
+          "before_unit": "",
+          "after": 80.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Team Deathmatch only: Leer Cooldown increased",
+          "stat": "cooldown",
+          "before": 44.0,
+          "before_unit": "s",
+          "after": 51.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Empress Cost increased",
+          "stat": "cost",
+          "before": 70.0,
+          "before_unit": "",
+          "after": 80.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.0",
+      "raw": "Devour Fixed an issue during healing that caused frame rate to decrease. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.07",
+      "raw": "Leer Yellow indicator removed from Leer v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "removed from Leer v",
+          "stat": "effect",
+          "description": "removed from Leer v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.09",
+      "raw": "Will no longer auto-heal after a kill while suppressed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Will no longer auto-heal after a kill while suppressed v",
+          "stat": "effect",
+          "description": "Will no longer auto-heal after a kill while suppressed v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.07",
+      "raw": "Leer Wind-up of nearsight effect decreased .6s >>> .4s Range Restriction on Leer removed Nearsight unequip delay decreased: .7 >>> .5 Duration decreased 2.6s >>> 2.0s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Leer Wind-up of nearsight effect decreased",
+          "stat": "other",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 0.4,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Range Restriction on Leer removed Nearsight unequip delay decreased",
+          "stat": "range",
+          "before": 0.7,
+          "before_unit": "",
+          "after": 0.5,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration decreased",
+          "stat": "duration",
+          "before": 2.6,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Leer Wind-up of nearsight effect decreased",
+          "stat": "other",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 0.4,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Range Restriction on Leer removed Nearsight unequip delay decreased",
+          "stat": "range",
+          "before": 0.7,
+          "before_unit": "",
+          "after": 0.5,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration decreased",
+          "stat": "duration",
+          "before": 2.6,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "removed Nearsight unequip delay decreased:",
+          "stat": "effect",
+          "description": "removed Nearsight unequip delay decreased:",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.0",
+      "raw": "Leer Cost increased 200 >>> 250 Dismiss Fixed a bug where Dismiss could not be rebought if the Buy Menu is closed and reopened during the same Buy Phase v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Leer Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Leer Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.11",
+      "raw": "Dismiss Fixed an issue where Reyna couldn’t sell then rebuy charges during Buy Phase v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.06",
+      "raw": "Fixed Reyna taking decay damage while intangible v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.04",
+      "raw": "Soul Harvest Fixed parts of Reyna’s Soul Orb feedback triggering when assisting kills on non-players Fixed Reyna’s Soul Orb timer not properly syncing with its actual duration v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.03",
+      "raw": "Maximum Devour and Dismiss charges reduced 4 >>> 2 Cost of Devour and Dismiss charges increased 100 >>> 200 Soul Harvest Slain enemies that Reyna has damaged in the last 3 seconds now drop Soul Orbs, even if Reyna does not land the killing shot v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Maximum Devour and Dismiss charges reduced",
+          "stat": "charges",
+          "before": 4.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Cost of Devour and Dismiss charges increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Maximum Devour and Dismiss charges reduced",
+          "stat": "charges",
+          "before": 4.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Cost of Devour and Dismiss charges increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.09",
+      "raw": "Empress Fire rate bonus decreased from 25% >>> 15% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Empress Fire rate bonus decreased from",
+          "stat": "other",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 15.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Empress Fire rate bonus decreased from",
+          "stat": "other",
+          "before": 25.0,
+          "before_unit": "%",
+          "after": 15.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.05",
+      "raw": "Devour Fixed issue where Reyna did not get her full heal if it began right when her Overheal started to decay v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.02",
+      "raw": "Soul Harvest Soul Orbs are now spawned when Reyna kills Phoenix during Run It Back. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.01",
+      "raw": "Leer Fixed issue where translucent particles, like smoke layers, would show through Reyna’s Nearsight. Area-of-Effect indicator now only shows up on the enemy’s minimap if the player or their allies are close to the affected area. Devour Fixed VFX that obscured Reyna’s screen if she scoped while healing. Overheal health no longer incorrectly shows 151 total when maxed. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer incorrectly shows 151 total when maxed",
+          "stat": "effect",
+          "description": "no longer incorrectly shows 151 total when maxed",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.0",
+      "raw": "Added Console-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added Console-only[] v",
+          "stat": "effect",
+          "description": "Added Console-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.04",
+      "raw": "Leer Health increased 40 >>> 100 (Standardizing to PC)",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Leer Health increased",
+          "stat": "health",
+          "before": 40.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Leer Health increased",
+          "stat": "health",
+          "before": 40.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    }
+  ]
+}

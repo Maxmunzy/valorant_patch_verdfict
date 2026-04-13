@@ -1,0 +1,996 @@
+{
+  "agent": "Brimstone",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 37,
+    "balance_patches": 22,
+    "numeric_changes": 16,
+    "all_changes": 33
+  },
+  "current_stats": {
+    "C": {
+      "name": "Stim Beacon",
+      "creds": 200,
+      "charges": 1,
+      "function": "Empowerment",
+      "stats": {
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Equip speed<br><nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed<br><nowiki>+</nowiki>10% Speed Boost"
+        },
+        "Buff duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "Beacon duration": {
+          "value": 12.0,
+          "unit": "seconds",
+          "raw": "12 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Incendiary",
+      "creds": 250,
+      "charges": 1,
+      "function": "[[Deterrent#Molotov",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "rowspan=\"2\"|Damage": {
+          "value": 1.0,
+          "unit": "per tick",
+          "raw": "1 per tick"
+        },
+        "Total 420-465<br>x0.5 multiplier to objects": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{#tag:ref|Inferred from Damage, Tick Rate, and Duration|group=\"s\"}} & {{patchv|5.12}}"
+        },
+        "Ticks/Tick rate": {
+          "value": 60.0,
+          "unit": "per second",
+          "raw": "60 per second<br>(1 every 0.0167 secs)<br>Total 420-465 ticks"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 8 seconds</u><br>0.25-second explosion time<br>0.75-second spread time<br>7 seconds at full size"
+        }
+      }
+    },
+    "E": {
+      "name": "Sky Smoke",
+      "creds": 100,
+      "charges": 3,
+      "function": "[[Vision Blocker#Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast range": {
+          "value": 55.0,
+          "unit": "meters",
+          "raw": "55 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.0,
+          "unit": "seconds",
+          "raw": "1 seconds"
+        },
+        "Radius": {
+          "value": 4.15,
+          "unit": "meters",
+          "raw": "4.15 meters"
+        },
+        "rowspan=2|Duration": {
+          "value": 19.25,
+          "unit": "seconds",
+          "raw": "19.25 seconds"
+        },
+        "Expiration warning at 17.75 seconds": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|7.08}}"
+        }
+      }
+    },
+    "X": {
+      "name": "Orbital Strike",
+      "creds": null,
+      "charges": null,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.74,
+          "unit": "seconds",
+          "raw": "0.74 seconds"
+        },
+        "Max cast range": {
+          "value": 60.0,
+          "unit": "meters",
+          "raw": "60 meters"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Windup time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Radius": {
+          "value": 9.0,
+          "unit": "meters",
+          "raw": "9 meters"
+        },
+        "Damage": {
+          "value": 20.0,
+          "unit": "per tickTotal 400-500",
+          "raw": "20 per tick<br>Total 400-500"
+        },
+        "Ticks/Tick rate": {
+          "value": 6.67,
+          "unit": "per second",
+          "raw": "6.67 per second<br>(1 every 0.15 seconds)<br>Total 20-25 ticks"
+        },
+        "Duration": {
+          "value": 3.0,
+          "unit": "seconds at full size0.75-second fadeaway time",
+          "raw": "3 seconds at full size<br>0.75-second fadeaway time"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.05",
+      "raw": "Sky Smoke Fixed a bug where his equip pose was displaying unintended VFX when viewed far away. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Sky Smoke and Orbital Strike Tactical map updated for better readability v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Stim Beacon Increased fire rate reduced from 15% >>> 10% Increased movement speed reduced from 15% >>> 10% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Stim Beacon Increased fire rate reduced from",
+          "stat": "other",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Increased movement speed reduced from",
+          "stat": "speed",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Stim Beacon Increased fire rate reduced from",
+          "stat": "other",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Increased movement speed reduced from",
+          "stat": "speed",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.07",
+      "raw": "Orbital Strike The map icon is now removed at the same time the area of effect is turned off. Previously, it lingered while the effect faded out which exceeded when it was visible to players. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "removed at the same time the area of effect is turned off",
+          "stat": "effect",
+          "description": "removed at the same time the area of effect is turned off",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.00",
+      "raw": "Sky Smoke Will now play cast audio within 12.5 meters for allies v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.10",
+      "raw": "Orbital Strike Fixed an issue where the visuals drew underneath the map v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.08",
+      "raw": "Incendiary Molotov audio has been updated to be easier to hear, especially when placed underneath smokes. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.00",
+      "raw": "Stim Beacon Equip time after casting adjusted from Normal >>> Fast Sky Smoke Improved the performance around Sky Smoke dissipation effect v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "non_numeric",
+          "ability_slot": "C",
+          "context_label": "Stim Beacon Equip",
+          "stat": "mechanic",
+          "before": "time after casting adjusted from Normal",
+          "after": "Fast Sky Smoke Improved the performance a",
+          "direction": "change"
+        }
+      ]
+    },
+    {
+      "patch": "9.10",
+      "raw": "Sky Smoke Visual cues have been added to the inside of the smoke before it expires. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "added to the inside of the smoke before it expires",
+          "stat": "effect",
+          "description": "added to the inside of the smoke before it expires",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.06",
+      "raw": "Orbital Strike AOE windup/activation audio integration have been updated from being positioned directly on the Agent when in the AOE to being slightly directional toward the origin of the AOE to allow you to know which direction to travel in, in order to escape. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.05",
+      "raw": "Stim Beacon Increased rate of fire to have consistent recoil control that matches the default rate of fire. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.03",
+      "raw": "Incendiary Improvement to spread more consistently and only apply damage in places that are consistent with the visuals Sky Smoke and Orbital Strike Can now ping and see additional icons on maps used for ability targeting Undocumented Incendiary Now damages map objects v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Can now ping and see additional icons on maps used for ability targeting Undocumented Incendiary Now",
+          "stat": "effect",
+          "description": "Can now ping and see additional icons on maps used for ability targeting Undocumented Incendiary Now",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "8.11",
+      "raw": "Incendiary Fixed an issue with VFX not appearing unless the player is observing the direction it is coming from v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.09",
+      "raw": "Sky Smoke Radius increased 410 >>> 415 UI targeting size updated so that outer edge properly reflects the size of the smoke v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Sky Smoke Radius increased",
+          "stat": "range",
+          "before": 410.0,
+          "before_unit": "",
+          "after": 415.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Sky Smoke Radius increased",
+          "stat": "range",
+          "before": 410.0,
+          "before_unit": "",
+          "after": 415.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "7.08",
+      "raw": "Sky Smoke Smokes play an audio and visual cue 1.5 seconds before they are about to fade. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.04",
+      "raw": "Orbital Strike Ultimate points increased 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Orbital Strike Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Orbital Strike Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.02",
+      "raw": "Orbital Strike Fixed issue where Orbital Strike did not damage the cocoon of ’s Annihilation. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.10",
+      "raw": "Sky Smoke and Orbital Strike Updated the size of targeting reticles so that they match their size before the update that shipped in patch 6.08. Removed the mouse cursor that was displayed Undocumented (6.08-7.04) Orbital Strike Now damages map objects v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Removed the mouse cursor that was displayed Undocumented (6",
+          "stat": "effect",
+          "description": "Removed the mouse cursor that was displayed Undocumented (6",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.08",
+      "raw": "Sky Smoke and Orbital Strike Updated targeting visuals to help players with precision placement on the map. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.0",
+      "raw": "Orbital Strike Now properly damages Harbor's Cove v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Now properly damages Harbor's Cove v",
+          "stat": "effect",
+          "description": "Now properly damages Harbor's Cove v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.12",
+      "raw": "Incendiary Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% The correct functionality is undocumented, instead officially being documented as affecting any non-player object (see Health#Abilities) Orbital Strike Now deals damage to Chamber's Rendezvous v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% ",
+          "stat": "effect",
+          "description": "Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% ",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Now deals damage to Chamber's Rendezvous v",
+          "stat": "effect",
+          "description": "Now deals damage to Chamber's Rendezvous v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.11",
+      "raw": "Sky Smoke Fixed a bug where Killjoy's Alarmbot and Chamber's Trademark were creating large white circles on the targeting map v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.10",
+      "raw": "Incendiary Fixed Incendiary dealing damage in chunks of 15 instead of 1 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.05",
+      "raw": "Stim Beacon Charges reduced 2 >>> 1 Cost increased 100 >>> 200 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Stim Beacon Charges reduced",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Stim Beacon Charges reduced",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.04",
+      "raw": "Fixed Yoru's Gatecrash icon showing up as a big white circle on Brimstone's targeting map Sky Smoke Deploy time decreased 2 >>> 1 second Deploy radius increased 5000 >>> 5500 Smoke height increased to match other Controllers Stim Beacon Now also applies a 15% speed boost in addition to RapidFire v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "s targeting map Sky Smoke Deploy time decreased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "second",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Deploy radius increased",
+          "stat": "range",
+          "before": 5000.0,
+          "before_unit": "",
+          "after": 5500.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "s targeting map Sky Smoke Deploy time decreased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "second",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Deploy radius increased",
+          "stat": "range",
+          "before": 5000.0,
+          "before_unit": "",
+          "after": 5500.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Now also applies a 15% speed boost in addition to RapidFire v",
+          "stat": "effect",
+          "description": "Now also applies a 15% speed boost in addition to RapidFire v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.03",
+      "raw": "Orbital Strike Now properly blocks gameplay visibility while active Can no longer see enemies on the minimap through the ultimate Abilities that require line of sight (flashes, Sova recon pulses) will no longer apply through the ultimate v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Now properly blocks gameplay visibility while active Can no longer see enemies on the minimap throug",
+          "stat": "effect",
+          "description": "Now properly blocks gameplay visibility while active Can no longer see enemies on the minimap throug",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Can no longer see enemies on the minimap through the ultimate Abilities that require line of sight (",
+          "stat": "effect",
+          "description": "Can no longer see enemies on the minimap through the ultimate Abilities that require line of sight (",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer apply through the ultimate v",
+          "stat": "effect",
+          "description": "no longer apply through the ultimate v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.05",
+      "raw": "Orbital Strike Now deals damage to the following: Killjoy's Nanoswarm Cypher's Trapwire Sage's Barrier Orb Sova's Recon Bolt KAY/O's ZERO/point v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now deals damage to the following: Killjoy's Nanoswarm Cypher's Trapwire Sage's Barrier Orb Sova's R",
+          "stat": "effect",
+          "description": "Now deals damage to the following: Killjoy's Nanoswarm Cypher's Trapwire Sage's Barrier Orb Sova's R",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "3.0",
+      "raw": "Incendiary Cost increased 200 >>> 250 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Incendiary Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Incendiary Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.08",
+      "raw": "Sky Smoke Fixed smokes from blocking flashes even when you are not fully inside them v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.04",
+      "raw": "Sky Smoke Fixed an issue where casting Sky Smoke right after picking up an Ultimate orb would result in ability charges lost, and smokes not deployed v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.03",
+      "raw": "Incendiary The audio of the lingering fire zone will be easier to hear when other actions and sounds occur nearby. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.0",
+      "raw": "Stim Beacon Will now quick cast (No equip time) Incendiary Cost decreased 300 >>> 200 credits Sky Smoke Cast range increased 4200 >>> 5000 Duration increased 14.25s >>> 19.25s No longer makes a sound that enemies can hear when confirming the location of his smokes v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Stim Beacon Will now quick cast (No equip time) Incendiary Cost decreased",
+          "stat": "duration",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Sky Smoke Cast range increased",
+          "stat": "range",
+          "before": 4200.0,
+          "before_unit": "",
+          "after": 5000.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration increased",
+          "stat": "duration",
+          "before": 14.25,
+          "before_unit": "s",
+          "after": 19.25,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Stim Beacon Will now quick cast (No equip time) Incendiary Cost decreased",
+          "stat": "duration",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Sky Smoke Cast range increased",
+          "stat": "range",
+          "before": 4200.0,
+          "before_unit": "",
+          "after": 5000.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration increased",
+          "stat": "duration",
+          "before": 14.25,
+          "before_unit": "s",
+          "after": 19.25,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Will now quick cast (No equip time) Incendiary Cost decreased 300 >>> 200 credits Sky Smoke Cast ran",
+          "stat": "effect",
+          "description": "Will now quick cast (No equip time) Incendiary Cost decreased 300 >>> 200 credits Sky Smoke Cast ran",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "No longer makes a sound that enemies can hear when confirming the location of his smokes v",
+          "stat": "effect",
+          "description": "No longer makes a sound that enemies can hear when confirming the location of his smokes v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.09",
+      "raw": "Stim Beacon Fire rate bonus increased from 10% >>> 15% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Stim Beacon Fire rate bonus increased from",
+          "stat": "other",
+          "before": 10.0,
+          "before_unit": "%",
+          "after": 15.0,
+          "after_unit": "%",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Stim Beacon Fire rate bonus increased from",
+          "stat": "other",
+          "before": 10.0,
+          "before_unit": "%",
+          "after": 15.0,
+          "after_unit": "%",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.04",
+      "raw": "Stim Beacon No longer Buffs enemies and no longer shows its effect radius to enemies Sky Smoke Fixed one-way smokes when the player’s camera was around the top of the smoke Fixed smokes on Haven spawning offset of where intended Orbital Strike Cost changed 6 >>> 7 Ult points v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "ed smokes on Haven spawning offset of where intended Orbital Strike Cost changed",
+          "stat": "cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "ed smokes on Haven spawning offset of where intended Orbital Strike Cost changed",
+          "stat": "cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "No longer Buffs enemies and no longer shows its effect radius to enemies Sky Smoke Fixed one-way smo",
+          "stat": "effect",
+          "description": "No longer Buffs enemies and no longer shows its effect radius to enemies Sky Smoke Fixed one-way smo",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "0.50",
+      "raw": "Incendiary Height required to jump out Incendiary increased 80 >>> 120 Damage tick speed increased (total damage per second unchanged) Cost increased 200 >>> 300 credits PC-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Incendiary Height required to jump out Incendiary increased",
+          "stat": "range",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 120.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage tick speed increased (total damage per second unchanged) Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Incendiary Height required to jump out Incendiary increased",
+          "stat": "range",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 120.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Damage tick speed increased (total damage per second unchanged) Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "12.02",
+      "raw": "Sky Smoke and Orbital Strike Fixed a bug for Coaches and Observers where its map UI would not render when swapping to his perspective. Fixed a bug for Coaches and Observers where Agents with an ability map UI would repeatedly play their equip animation when switching to their POV. Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.06",
+      "raw": "Sky Smoke and Orbital Strike Added Agent-specific cursor curve settings for map ability controls.",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Added Agent-specific cursor curve settings for map ability controls",
+          "stat": "effect",
+          "description": "Added Agent-specific cursor curve settings for map ability controls",
+          "direction": "buff"
+        }
+      ]
+    }
+  ]
+}

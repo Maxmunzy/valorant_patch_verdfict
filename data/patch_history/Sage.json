@@ -1,0 +1,1077 @@
+{
+  "agent": "Sage",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 37,
+    "balance_patches": 20,
+    "numeric_changes": 23,
+    "all_changes": 35
+  },
+  "current_stats": {
+    "C": {
+      "name": "Barrier Orb",
+      "creds": 300,
+      "charges": 1,
+      "function": "Barrier<br>[[Vision Blocker#Wall",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast length": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.35,
+          "unit": "seconds",
+          "raw": "1.35 seconds"
+        },
+        "Time taken to fortify": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds (Begins upon casting)"
+        },
+        "Size": {
+          "value": 4.0,
+          "unit": "segments2.6 x 1.5 meters per segmentTotal 10.4 x 1.5 meters",
+          "raw": "4 segments<br>2.6 x 1.5 meters per segment<br>Total 10.4 x 1.5 meters"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total 40 seconds (Includes deploy time)<br>Begins to decay after 35 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Slow Orb",
+      "creds": 200,
+      "charges": 2,
+      "function": "[[Crowd Control#Slow",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Slow amount": {
+          "value": 50.0,
+          "unit": "%",
+          "raw": "50%"
+        },
+        "Duration": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Healing Orb",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Sustain#Heal",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Healing": {
+          "value": 20.0,
+          "unit": "HP/sec, total 100 HP",
+          "raw": "20 HP/sec, total 100 HP (Heal)<br>10 HP/sec, total 50 HP (Self heal)"
+        },
+        "Duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Resurrection",
+      "creds": null,
+      "charges": null,
+      "function": "[[Sustain#Revive",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast distance": {
+          "value": 12.0,
+          "unit": "meters",
+          "raw": "12 meters"
+        },
+        "Windup time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Revive duration": {
+          "value": 1.3,
+          "unit": "seconds",
+          "raw": "1.3 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.05",
+      "raw": "Added crystal growths to Sage’s model and key art Healing Orb Updated Ally Targeting UI/UX with a new widget above the targeted allies head, and an additional highlight around the agent's model. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added crystal growths to Sage’s model and key art Healing Orb Updated Ally Targeting UI/UX with a ne",
+          "stat": "effect",
+          "description": "Added crystal growths to Sage’s model and key art Healing Orb Updated Ally Targeting UI/UX with a ne",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.01",
+      "raw": "Healing Orb Fixed a bug where the targeting UI was still visible on allies who broke Sage’s line of sight. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Healing Orb Updated targeting v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "Resurrection Fixed an issue where the indicator was snapping to allies out of Sage’s POV. Healing Orb Fixed a bug that caused Sage’s hands to flicker briefly when using it on an ally. Slow Orb Fixed a bug where it was making a popping sound when intersecting Cosmic Divide. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Healing Orb Fixed an issue that allowed it to target players who were decayed but fully healed underneath the decay v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Barrier Orb Cost reduced from 400 >>> 300 Fortification delay reduced from 3.3 sec >>> 2 sec Health of Barrier segments decreased from 800 >>> 600 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Cost reduced from",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "sec Health of Barrier segments decreased from",
+          "stat": "health",
+          "before": 800.0,
+          "before_unit": "",
+          "after": 600.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Cost reduced from",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "sec Health of Barrier segments decreased from",
+          "stat": "health",
+          "before": 800.0,
+          "before_unit": "",
+          "after": 600.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.04",
+      "raw": "Barrier Orb Range increased from 10m >>> 15m Resurrection Range increased from 6m >>> 12m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Range increased from",
+          "stat": "range",
+          "before": 10.0,
+          "before_unit": "m",
+          "after": 15.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Resurrection Range increased from",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 12.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Range increased from",
+          "stat": "range",
+          "before": 10.0,
+          "before_unit": "m",
+          "after": 15.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Resurrection Range increased from",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 12.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.02",
+      "raw": "Barrier Orb Can no longer be placed on some walls of the map, where it was possible if there was another agent supporting it. This is an undocumented change and is estimated to have appeared during this patch v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer be placed on some walls of the map, where it was possible if there was another agent s",
+          "stat": "effect",
+          "description": "Can no longer be placed on some walls of the map, where it was possible if there was another agent s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.05",
+      "raw": "Resurrection Fixed an issue where there was a single frame of vulnerability upon reviving a target v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.10",
+      "raw": "Healing Orb Self Heal 30HP >>> 50HP Heal time matched to ally heal at 5 seconds Slow Orb Now will additionally reduce the dash speed of enemies caught inside the slowing zone by 50%. Resurrection Ult Cost 8 >>> 7 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Healing Orb Self Heal",
+          "stat": "health",
+          "before": 30.0,
+          "before_unit": "hp",
+          "after": 50.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Resurrection Ult Cost",
+          "stat": "ult_cost",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Healing Orb Self Heal",
+          "stat": "health",
+          "before": 30.0,
+          "before_unit": "hp",
+          "after": 50.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Resurrection Ult Cost",
+          "stat": "ult_cost",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.07",
+      "raw": "Barrier Orb Placeable abilities like Cypher’s Spycam can no longer be placed in the space above a rising Barrier Orb v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "can no longer be placed in the space above a rising Barrier Orb v",
+          "stat": "effect",
+          "description": "can no longer be placed in the space above a rising Barrier Orb v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "9.03",
+      "raw": "Barrier Orb Placement preview now also shows up on the minimap v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "now also shows up on the minimap v",
+          "stat": "effect",
+          "description": "now also shows up on the minimap v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.01",
+      "raw": "Resurrection Fixed an issue regarding resurrection not being visible for Spectators and Observers. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.08",
+      "raw": "Slow Orb Fixed an issue where footsteps were not produced when in ADS and when running while slowed by Slow Orb. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.04",
+      "raw": "Barrier Orb Fixed a bug where bullets could pass through the corners of Barrier Orb. Resurrection Fixed a bug where if you were revived by Sage's Resurrection, you would be nudged slightly at the end of the animation. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.04",
+      "raw": "Barrier Orb Fixed an issue where Barrier Orb can break when being placed in between doors such as C Garage on Haven. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.0",
+      "raw": "Barrier Orb Fixed issue where Barrier Orb would sometimes rotate multiple times from a single button press when placing it. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.11",
+      "raw": "Barrier Orb Fixed an issue where when Sage rotated her Barrier Orb 90 degrees, she was blocked from placing the wall for .8 seconds. Now, Sage can place her wall immediately after rotating it 90 degrees. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.04",
+      "raw": "Barrier Orb No longer fortifies to max HP in cases where damage was received before fortification v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "No longer fortifies to max HP in cases where damage was received before fortification v",
+          "stat": "effect",
+          "description": "No longer fortifies to max HP in cases where damage was received before fortification v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.03",
+      "raw": "Adjusted hair height to fit within standardized vertical range v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.12",
+      "raw": "Barrier Orb Fortify delay increased 3.0s >>> 3.3s Healing Orb Ally heal total amount increased 60 HP >>> 100 HP Self heal total amount decreased 60 HP >>> 30 HP v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Fortify delay increased",
+          "stat": "delay",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 3.3,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Healing Orb Ally heal total amount increased",
+          "stat": "health",
+          "before": 60.0,
+          "before_unit": "hp",
+          "after": 100.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Self heal total amount decreased",
+          "stat": "health",
+          "before": 60.0,
+          "before_unit": "hp",
+          "after": 30.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Fortify delay increased",
+          "stat": "delay",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 3.3,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Healing Orb Ally heal total amount increased",
+          "stat": "health",
+          "before": 60.0,
+          "before_unit": "hp",
+          "after": 100.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Self heal total amount decreased",
+          "stat": "health",
+          "before": 60.0,
+          "before_unit": "hp",
+          "after": 30.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.09",
+      "raw": "Barrier Orb Fixed an issue where by walling herself into a corner, the wall would immediately break. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Barrier Orb Improved the system used to place Barrier Orb at targeted ground locations v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.03",
+      "raw": "Barrier Orb Fixed Barrier Orb being destroyed by Boom Bot, Owl Drone, or Fakeout if they are placed in a way that overlapped a segment of the barrier wall v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.01",
+      "raw": "Barrier Orb Can no longer be placed on some projectiles while they’re in the air or deployed on the ground v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer be placed on some projectiles while they’re in the air or deployed on the ground v",
+          "stat": "effect",
+          "description": "Can no longer be placed on some projectiles while they’re in the air or deployed on the ground v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.0",
+      "raw": "Barrier Orb Cost increased 300 >>> 400 Agents blocked by Barrier Orb when resurrected now break the wall to ensure they don’t get pushed inside map geo Slow Orb Cost increased 100 >>> 200 Resurrection Ultimate points required increased 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Cost increased",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "t get pushed inside map geo Slow Orb Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Resurrection Ultimate points required increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Cost increased",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "t get pushed inside map geo Slow Orb Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Resurrection Ultimate points required increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.07",
+      "raw": "Barrier Orb Fixed a bug where placing Killjoy's Turret next to Barrier Orb would sometimes break it v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.06",
+      "raw": "Barrier Orb Fixed issue where Cypher's Spycam broke Barrier Orb when placed close to it v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.03",
+      "raw": "Barrier Orb Killjoy's Lockdown can no longer be placed inside Barrier Orb in some instances If Barrier Orb is placed on top of Killjoy’s ult, the section of the wall covering the ult will now be destroyed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "can no longer be placed inside Barrier Orb in some instances If Barrier Orb is placed on top of Kill",
+          "stat": "effect",
+          "description": "can no longer be placed inside Barrier Orb in some instances If Barrier Orb is placed on top of Kill",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.0",
+      "raw": "Barrier Orb Fixed an issue where Omen could plant the Spike while elevated on Barrier Orb v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.14",
+      "raw": "Barrier Orb Can no longer be cast in Buy Phase Once fortified, Barrier no longer loses health over time. It now only starts to deteriorate a few seconds before it expires. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer be cast in Buy Phase Once fortified, Barrier no longer loses health over time",
+          "stat": "effect",
+          "description": "Can no longer be cast in Buy Phase Once fortified, Barrier no longer loses health over time",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.11",
+      "raw": "Barrier Orb Sage wall segments no longer break if a player dies on top of them v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "no longer break if a player dies on top of them v",
+          "stat": "effect",
+          "description": "no longer break if a player dies on top of them v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.07",
+      "raw": "Barrier Orb Initial wall HP reduced to 400 The wall will retain its max HP of 800 when it becomes fortified 3 seconds after it was summoned Cost reduced 400 >>> 300 Duration increased 30 >>> 40 seconds This is an undocumented change and is estimated to have appeared during this patch Slow Orb Size reduced 30% Healing Orb Heal reduced from 100 over 5 seconds >>> 60 over 5 seconds Self heal reduced from 100 over 5 seconds >>> 60 over 10 seconds v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "HP of 800 when it becomes fortified 3 seconds after it was summoned Cost reduced",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration increased",
+          "stat": "duration",
+          "before": 30.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Healing Orb Heal reduced from 100 over",
+          "stat": "health",
+          "before": 5.0,
+          "before_unit": "seconds",
+          "after": 60.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "over 5 seconds Self heal reduced from 100 over",
+          "stat": "health",
+          "before": 5.0,
+          "before_unit": "seconds",
+          "after": 60.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "HP of 800 when it becomes fortified 3 seconds after it was summoned Cost reduced",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration increased",
+          "stat": "duration",
+          "before": 30.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Healing Orb Heal reduced from 100 over",
+          "stat": "health",
+          "before": 5.0,
+          "before_unit": "seconds",
+          "after": 60.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "over 5 seconds Self heal reduced from 100 over",
+          "stat": "health",
+          "before": 5.0,
+          "before_unit": "seconds",
+          "after": 60.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.01",
+      "raw": "Barrier Orb Cast range reduced 20 >>> 10 meters v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Cast range reduced",
+          "stat": "range",
+          "before": 20.0,
+          "before_unit": "",
+          "after": 10.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Cast range reduced",
+          "stat": "range",
+          "before": 20.0,
+          "before_unit": "",
+          "after": 10.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.0",
+      "raw": "Barrier Orb Segment health reduced 1000 >>> 800 Duration reduced 40 >>> 30 seconds Healing Orb Cooldown increased 35 >>> 45 seconds v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Segment health reduced",
+          "stat": "health",
+          "before": 1000.0,
+          "before_unit": "",
+          "after": 800.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration reduced",
+          "stat": "duration",
+          "before": 40.0,
+          "before_unit": "",
+          "after": 30.0,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Healing Orb Cooldown increased",
+          "stat": "health",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 45.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Segment health reduced",
+          "stat": "health",
+          "before": 1000.0,
+          "before_unit": "",
+          "after": 800.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration reduced",
+          "stat": "duration",
+          "before": 40.0,
+          "before_unit": "",
+          "after": 30.0,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Healing Orb Cooldown increased",
+          "stat": "health",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 45.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "0.50",
+      "raw": "Barrier Orb Cost increased 300 >>> 400 credits Slow Orb Zone duration decreased 9 >>> 7 seconds Slowing amount decreased 65% >>> 50% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Cost increased",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Slow Orb Zone duration decreased",
+          "stat": "duration",
+          "before": 9.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Slowing amount decreased",
+          "stat": "other",
+          "before": 65.0,
+          "before_unit": "%",
+          "after": 50.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Orb Cost increased",
+          "stat": "cost",
+          "before": 300.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Slow Orb Zone duration decreased",
+          "stat": "duration",
+          "before": 9.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Slowing amount decreased",
+          "stat": "other",
+          "before": 65.0,
+          "before_unit": "%",
+          "after": 50.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "0.49",
+      "raw": "Barrier Orb Can no longer be placed on \"small\" pieces of geometry, it must be placed on the ground or on top of boxes Will only spawn a chunk of the barrier if it is supported by the ground This can mean it will sometimes only spawn 2 barrier chunks v0.47+ Slow Orb Now also slows the air speed of players in the zone. Players can now walk through the Slow Orb without making noise.",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now also slows the air speed of players in the zone",
+          "stat": "effect",
+          "description": "Now also slows the air speed of players in the zone",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "can now walk through the Slow Orb without making noise",
+          "stat": "effect",
+          "description": "can now walk through the Slow Orb without making noise",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer be placed on \"small\" pieces of geometry, it must be placed on the ground or on top of ",
+          "stat": "effect",
+          "description": "Can no longer be placed on \"small\" pieces of geometry, it must be placed on the ground or on top of ",
+          "direction": "nerf"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,841 @@
+{
+  "agent": "Gekko",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 24,
+    "balance_patches": 10,
+    "numeric_changes": 16,
+    "all_changes": 23
+  },
+  "current_stats": {
+    "C": {
+      "name": "Mosh Pit",
+      "creds": 250,
+      "charges": 1,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Unequip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Radii": {
+          "value": null,
+          "unit": "",
+          "raw": "Inner: 5.5 meters<br>Outer: 6.2 meters"
+        },
+        "Windup": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds"
+        },
+        "rowspan=2|Damage": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>'''DoT'''</u><br>1 per tick<br>Total 30 damage"
+        },
+        "<u>Explosion</u><br>Inner radius: 50 per tick<br>Outer radius: 25 per tick<br>Total 150/75 damage": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        },
+        "rowspan=2|Ticks/Tick rate": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>'''DoT'''</u><br>1 every 0.1 seconds<br>Total 30 ticks"
+        },
+        "<u>Explosion</u><br>1 every 0.1 seconds<br>Total 3 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>Game files"
+        }
+      }
+    },
+    "Q": {
+      "name": "Wingman",
+      "creds": 300,
+      "charges": 1,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Unequip time": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Run speed": {
+          "value": 6.3,
+          "unit": "meters/second",
+          "raw": "6.3 meters/second"
+        },
+        "Search duration": {
+          "value": 5.0,
+          "unit": "seconds",
+          "raw": "5 seconds"
+        },
+        "Max detection cone distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Detection cone angle": {
+          "value": 90.0,
+          "unit": "°",
+          "raw": "90°<br><small>(either side of the direction Wingman is looking in)</small>"
+        },
+        "Proximity to target needed to activate blast": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Blast windup": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Dizzy",
+      "creds": null,
+      "charges": 1,
+      "function": "Blind<br>[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Unequip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Activation windup": {
+          "value": 0.65,
+          "unit": "seconds",
+          "raw": "0.65 seconds"
+        },
+        "Blind windup on target acquisition": {
+          "value": 0.35,
+          "unit": "seconds",
+          "raw": "0.35 seconds"
+        },
+        "Effective active duration": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Max detection distance": {
+          "value": 45.0,
+          "unit": "meters",
+          "raw": "45 meters"
+        },
+        "Plasma explosion radius on target": {
+          "value": 2.5,
+          "unit": "meters",
+          "raw": "2.5 meters"
+        },
+        "Plasma blind duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 2 seconds</u><br>1 second at max potency<br>1 second to fade away"
+        }
+      }
+    },
+    "X": {
+      "name": "Thrash",
+      "creds": null,
+      "charges": null,
+      "function": "[[Intel#Controlled Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Deployment duration": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max vision radius": {
+          "value": 20.0,
+          "unit": "meters",
+          "raw": "20 meters"
+        },
+        "Speed": {
+          "value": 11.22,
+          "unit": "meters/second",
+          "raw": "11.22 meters/second"
+        },
+        "Search duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        },
+        "Lunge distance": {
+          "value": 13.0,
+          "unit": "meters",
+          "raw": "13 meters"
+        },
+        "Lunge duration": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Lunge radius": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        },
+        "Detain duration": {
+          "value": 6.0,
+          "unit": "seconds",
+          "raw": "6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Vision restoration duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.05",
+      "raw": "Thrash Fixed a bug where a floating gun may briefly appear when a suppression effect interrupts it v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.03",
+      "raw": "Globules Reclaim timer increased 15s >> 20s Mosh Pit is now reclaimable v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.02",
+      "raw": "Wingman Can now be concussed. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Can now be concussed",
+          "stat": "effect",
+          "description": "Can now be concussed",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.01",
+      "raw": "Dizzy Fixed a rare bug where she would sometimes aim at detected players incorrectly (and miss). Globules Fixed a bug where they were sometimes visible on the enemy minimap even when out of sight. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Mosh Pit Fixed an issue where throw animations would break if aiming straight down Wingman Fixed a bug where he could continue chasing players after they teleport away. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Wingman Fixed a bug where it did not play the intended animation when defusing the Spike Thrash Fixed a bug that caused Detain visual effects to show through thin walls and doors. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Globules Cooldown upon reclaim increased from 10s >>> 20s Wingman Health decreased from 80 >>> 60 Concuss duration decreased from 3s >>> 2.5s Thrash Health decreased from 200 >>> 180 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Globules Cooldown upon reclaim increased from",
+          "stat": "cooldown",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 20.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Wingman Health decreased from",
+          "stat": "health",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 60.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concuss duration decreased from",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Thrash Health decreased from",
+          "stat": "health",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 180.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Globules Cooldown upon reclaim increased from",
+          "stat": "cooldown",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 20.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Wingman Health decreased from",
+          "stat": "health",
+          "before": 80.0,
+          "before_unit": "",
+          "after": 60.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Concuss duration decreased from",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Thrash Health decreased from",
+          "stat": "health",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 180.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.05",
+      "raw": "Wingman Fixed a bug where \"Spike Down\" VO would play if he was destroyed right after planting the Spike. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.02",
+      "raw": "Dizzy Fixed a bug where other players would hear the incorrect audio cue when a nearby Gekko (allied or enemy) used Dizzy. Thrash Fixed a bug that caused Thrash’s hit indicator sound effect to not play for the enemy hit by Thrash. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.08",
+      "raw": "Thrash Fixed an issue where Gekko’s Thrash leap did not get slowed by Waylay’s Saturate debuff. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.06",
+      "raw": "Wingman Fixed an issue where the “Spike Down” VO would not play when Wingman was destroyed while carrying the Spike. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.00",
+      "raw": "Gameplay logic around ability effects themed as explosions has been updated. Explosions should behave more consistently in how they deal damage. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.09",
+      "raw": "Thrash Fixed a bug causing difficulty with some small jumps Thrash should now jump more similarly to a player v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.08",
+      "raw": "Globules Reduced time in world 20s >>> 15s Reclaim time increased 1s >>> 1.5s Dizzy Time active after being thrown and forming is reduced 1.5s >>> 1s. Dizzy’s targeting algorithm has been updated to be more reliable. Dizzy’s goop flash now also blinds the minimap of affected players. Wingman Increased the angle of the cone concuss area 45 degrees >>> 65 degrees. When Wingman turns into a globule after planting the Spike there are unique visuals. Thrash Ultimate points increased 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Globules Reduced time in world",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 15.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reclaim time increased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Dizzy Time active after being thrown and forming is reduced",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "inimap of affected players. Wingman Increased the angle of the cone concuss area",
+          "stat": "range",
+          "before": 45.0,
+          "before_unit": "degrees",
+          "after": 65.0,
+          "after_unit": "degrees",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "er planting the Spike there are unique visuals. Thrash Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Globules Reduced time in world",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 15.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reclaim time increased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Dizzy Time active after being thrown and forming is reduced",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "inimap of affected players. Wingman Increased the angle of the cone concuss area",
+          "stat": "range",
+          "before": 45.0,
+          "before_unit": "degrees",
+          "after": 65.0,
+          "after_unit": "degrees",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "er planting the Spike there are unique visuals. Thrash Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "now also blinds the minimap of affected players",
+          "stat": "effect",
+          "description": "now also blinds the minimap of affected players",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.06",
+      "raw": "Wingman Fixed an issue where Wingman could get stuck in a loop while attempting to chase an unreachable target. Undocumented Mosh Pit DoT damage now deals damage to map objects v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "now deals damage to map objects v",
+          "stat": "effect",
+          "description": "now deals damage to map objects v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "8.01",
+      "raw": "Thrash Fixed a bug where occasionally the explosion was blocked from affecting enemies due to corners of geometry. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.12",
+      "raw": "Globules Reduce reclaim channel time from 2s >>> 1s Thrash Fixed an issue causing kills with Mosh Pit to not be awarded while using Thrash Dizzy Pre-fire targeting delay decreased 0.5s >>> 0.35s Missile speed increased 7000 >>> 10000 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Globules Reduce reclaim channel time from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "it to not be awarded while using Thrash Dizzy Pre-fire targeting delay decreased",
+          "stat": "delay",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.35,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Missile speed increased",
+          "stat": "speed",
+          "before": 7000.0,
+          "before_unit": "",
+          "after": 10000.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Globules Reduce reclaim channel time from",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "it to not be awarded while using Thrash Dizzy Pre-fire targeting delay decreased",
+          "stat": "delay",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.35,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Missile speed increased",
+          "stat": "speed",
+          "before": 7000.0,
+          "before_unit": "",
+          "after": 10000.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "7.07",
+      "raw": "Dizzy Enemy detection range is now correctly reduced while inside of Viper’s Pit ability. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.05",
+      "raw": "Mosh Pit DoT damage per tick reduced 3 >>> 1 This is an undocumented change DoT damage from 30/sec >>> 10/sec v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Mosh Pit DoT damage per tick reduced",
+          "stat": "damage",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "This is an undocumented change DoT damage from",
+          "stat": "damage",
+          "before": 30.0,
+          "before_unit": "/sec",
+          "after": 10.0,
+          "after_unit": "/sec",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Mosh Pit DoT damage per tick reduced",
+          "stat": "damage",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "This is an undocumented change DoT damage from",
+          "stat": "damage",
+          "before": 30.0,
+          "before_unit": "/sec",
+          "after": 10.0,
+          "after_unit": "/sec",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.04",
+      "raw": "Mosh Pit The impacted area now does 30 damage per second before exploding The correct value is undocumented, instead officially being documented in the patch notes as dealing 10 damage per second Wingman HP reduced 100 >>> 80 Thrash Explosion VFX updated for clarity v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "documented in the patch notes as dealing 10 damage per second Wingman HP reduced",
+          "stat": "damage",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 80.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "documented in the patch notes as dealing 10 damage per second Wingman HP reduced",
+          "stat": "damage",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 80.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.08",
+      "raw": "Updated Gekko’s in-game portrait for better gameplay readability and quality consistency. Wingman Audio improvements to Wingman’s plant and defuse audio. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.06",
+      "raw": "Mosh Pit Damage to objects reduced 2.5x >>> 1x Wingman Wingman will now always die if he is last alive. Wingman can no longer concuss intangible players. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Mosh Pit Damage to objects reduced",
+          "stat": "damage",
+          "before": 2.5,
+          "before_unit": "x",
+          "after": 1.0,
+          "after_unit": "x",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Mosh Pit Damage to objects reduced",
+          "stat": "damage",
+          "before": 2.5,
+          "before_unit": "x",
+          "after": 1.0,
+          "after_unit": "x",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "will now always die if he is last alive",
+          "stat": "effect",
+          "description": "will now always die if he is last alive",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "can no longer concuss intangible players",
+          "stat": "effect",
+          "description": "can no longer concuss intangible players",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.05",
+      "raw": "Improved performance in Agent Select Globules Added VFX to when Gekko is reclaiming an orb, as well as when the globule reclaim is complete Improved visuals for enemy creature globules Fixed a bug where ally Gekko orbs were showing up as white outside of custom Replication. Mosh Pit Added audio variations for Mosh Pit's explosions Fixed a bug where damage from Mosh Pit was avoidable while crouch jumping in the pit. Fixed display name of \"Mosh Pit\" showing up as \"Mosh's Pit\". Wingman Plant and Defuse targeting has been improved in order to target higher locations. Fixed a bug where Wingman wasn't taking melee damage. Fixed a bug where Wingman wasn't able to defuse the Spike after using Swap Team command in a Custom game. Fixed a bug where Wingman Spike plant casting allowed him to run too f",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added VFX to when Gekko is reclaiming an orb, as well as when the globule reclaim is complete Improv",
+          "stat": "effect",
+          "description": "Added VFX to when Gekko is reclaiming an orb, as well as when the globule reclaim is complete Improv",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Added audio variations for Mosh Pit's explosions Fixed a bug where damage from Mosh Pit was avoidabl",
+          "stat": "effect",
+          "description": "Added audio variations for Mosh Pit's explosions Fixed a bug where damage from Mosh Pit was avoidabl",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "6.04",
+      "raw": "Added",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

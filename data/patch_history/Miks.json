@@ -1,0 +1,197 @@
+{
+  "agent": "Miks",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 2,
+    "balance_patches": 1,
+    "numeric_changes": 0,
+    "all_changes": 0
+  },
+  "current_stats": {
+    "C": {
+      "name": "M-pulse",
+      "creds": 250,
+      "charges": 2,
+      "function": "[[Crowd Control#Concuss",
+      "stats": {
+        "Equip time": {
+          "value": 0.71,
+          "unit": "seconds",
+          "raw": "0.71 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Radius": {
+          "value": 5.5,
+          "unit": "meters",
+          "raw": "5.5 meters"
+        },
+        "Pulses": {
+          "value": 3.0,
+          "unit": "",
+          "raw": "3"
+        },
+        "Pulse rate": {
+          "value": 0.5,
+          "unit": "pulses per second",
+          "raw": "0.5 pulses per second"
+        },
+        "Windup to first pulse": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Heal-over-time": {
+          "value": 6.67,
+          "unit": "HP per second",
+          "raw": "6.67 HP per second"
+        },
+        "Pulse heal": {
+          "value": 20.0,
+          "unit": "HP",
+          "raw": "20 HP"
+        },
+        "Max Concuss duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds<!--Estimated 1.4 s minimum-->"
+        }
+      }
+    },
+    "Q": {
+      "name": "Harmonize",
+      "creds": 200,
+      "charges": 1,
+      "function": "Empowerment",
+      "stats": {
+        "Equip time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Cast time": {
+          "value": 0.1,
+          "unit": "seconds",
+          "raw": "0.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Equip speed<br><nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed"
+        },
+        "Buff duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Waveform",
+      "creds": 100,
+      "charges": 2,
+      "function": "[[Vision Blocker#Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max cast range": {
+          "value": 55.5,
+          "unit": "meters",
+          "raw": "55.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 4.72,
+          "unit": "meters",
+          "raw": "4.72 meters"
+        },
+        "Duration": {
+          "value": 16.75,
+          "unit": "seconds",
+          "raw": "16.75 seconds (includes 0.5-second formation time and 0.5-second expiration time)<br>Expiration warning at 14.75 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Bassquake",
+      "creds": null,
+      "charges": null,
+      "function": "[[Crowd Control#Displacement",
+      "stats": {
+        "Equip time": {
+          "value": 1.0,
+          "unit": "seconds",
+          "raw": "1 seconds"
+        },
+        "Channel time": {
+          "value": 1.6,
+          "unit": "seconds",
+          "raw": "1.6 seconds"
+        },
+        "Unequip time": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        },
+        "Radius": {
+          "value": 40.0,
+          "unit": "meters",
+          "raw": "40 meters"
+        },
+        "Angle": {
+          "value": 60.0,
+          "unit": "°",
+          "raw": "60°"
+        },
+        "Knockback distance": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        },
+        "Debuff duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.06",
+      "raw": "Harmonize Fixed a bug where some of its 1P VFX were disappearing early. Fixed a bug where the targeting UI could overlap with an ally’s loadout. Waveform Fixed a bug where the ability placement UI would persist briefly in 3P after he placed a smoke. M-pulse Fixed a bug where it could be stuck in certain spots on the map and could not be destroyed. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.05",
+      "raw": "Added",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

@@ -3,7 +3,8 @@ predict_service.py
 PatchPredictor — FastAPI 서비스용 예측 래퍼
 
 predict_report.py의 로직을 클래스로 캡슐화.
-- step2_pipeline.pkl (model_a / model_b / feat_cols_a / feat_cols_b / label_b_cats)
+- step2_pipeline.pkl (model / feat_cols / label_cats)
+  label_cats: mild_buff / mild_nerf / stable / strong_buff / strong_nerf
 - step2_training_data.csv
 - Claude Haiku API (설명 생성, 지연 로드 + 인메모리 캐시)
 """
@@ -35,36 +36,40 @@ from anthropic import Anthropic
 
 # ─── 요원 메타 데이터 ─────────────────────────────────────────────────────────
 from agent_data import AGENT_DESIGN, _DEFAULT_DESIGN, AGENT_RELATIONS
-from feature_builder import compute_kit_score, get_kit_flags
+from feature_builder import compute_kit_score, get_kit_flags, AGENT_PR_BASELINE
 
 # ─── 상수 ────────────────────────────────────────────────────────────────────
 
-BUFF_CLASSES = {"buff_followup", "buff_pro", "buff_rank", "correction_buff"}
-NERF_CLASSES = {"nerf_followup", "nerf_pro", "nerf_rank", "correction_nerf"}
+BUFF_CLASSES = {"buff_followup", "buff_rank", "correction_buff", "mild_buff", "strong_buff"}
+NERF_CLASSES = {"nerf_followup", "nerf_rank", "correction_nerf", "mild_nerf", "strong_nerf"}
 
 PATCH_TYPE_EN = {
     "buff_rank":        "Buff (Rank)",
-    "buff_pro":         "Buff (Pro)",
     "buff_followup":    "Buff (Follow-up)",
     "correction_buff":  "Buff (Over-nerf Recovery)",
     "nerf_rank":        "Nerf (Rank)",
-    "nerf_pro":         "Nerf (Pro)",
     "nerf_followup":    "Nerf (Follow-up)",
     "correction_nerf":  "Nerf (Over-buff Correction)",
     "rework":           "Rework",
+    "mild_buff":        "Buff (Mild)",
+    "strong_buff":      "Buff (Strong)",
+    "mild_nerf":        "Nerf (Mild)",
+    "strong_nerf":      "Nerf (Strong)",
     "stable":           "Stable",
 }
 
 PATCH_TYPE_KO = {
     "buff_rank":        "버프 (랭크)",
-    "buff_pro":         "버프 (대회)",
     "buff_followup":    "버프 (추가)",
     "correction_buff":  "버프 (과너프 복구)",
     "nerf_rank":        "너프 (랭크)",
-    "nerf_pro":         "너프 (대회)",
     "nerf_followup":    "너프 (추가)",
     "correction_nerf":  "너프 (과버프 조정)",
     "rework":           "리워크",
+    "mild_buff":        "버프 (소폭)",
+    "strong_buff":      "버프 (강력)",
+    "mild_nerf":        "너프 (소폭)",
+    "strong_nerf":      "너프 (강력)",
     "stable":           "안정",
 }
 
@@ -90,8 +95,8 @@ AGENT_NAME_KO = {
     "Killjoy":   "킬조이",
     "Cypher":    "사이퍼",
     "Sage":      "세이지",
-    "Chamber":   "챔버",
-    "Deadlock":  "데드락",
+    "Chamber":   "체임버",
+    "Deadlock":  "데드록",
     "Vyse":      "바이스",
     "Veto":      "비토",
     # 척후대
@@ -145,7 +150,7 @@ AGENT_SKILLS_KO: dict[str, dict[str, str]] = {
     "Neon":      {"C": "추월 차선", "Q": "릴레이 볼트", "E": "고속 기어", "X": "오버드라이브"},
     "Sova":      {"C": "올빼미 드론", "Q": "충격 화살", "E": "정찰용 화살", "X": "사냥꾼의 분노"},
     "Reyna":     {"C": "눈총", "Q": "포식", "E": "무시", "X": "여제"},
-    "Raze":      {"C": "페인트 탄", "Q": "폭발 팩", "E": "폭발 봇", "X": "대미장식"},
+    "Raze":      {"C": "폭발 봇", "Q": "폭발 팩", "E": "페인트 탄", "X": "대미 장식"},
     "Chamber":   {"C": "트레이드마크", "Q": "헤드헌터", "E": "랑데부", "X": "역작"},
     "Killjoy":   {"C": "나노스웜", "Q": "알람봇", "E": "포탑", "X": "봉쇄"},
     "Sage":      {"C": "장벽 구슬", "Q": "둔화 구슬", "E": "회복 구슬", "X": "부활"},
@@ -168,6 +173,7 @@ AGENT_SKILLS_KO: dict[str, dict[str, str]] = {
     "Waylay":    {"C": "포화", "Q": "광속", "E": "굴절", "X": "초점 교차"},
     "Yoru":      {"C": "기만", "Q": "기습", "E": "관문 충돌", "X": "차원 표류"},
     "Miks":      {"C": "M-파동", "Q": "화음", "E": "웨이브폼", "X": "요동치는 베이스"},
+    "Veto":      {"C": "지름길", "Q": "목조르기", "E": "요격기", "X": "진화"},
 }
 
 # 현재 맵 풀에서 요원별 특화 맵 (map_pr >= 1.3 × 전체 평균)
@@ -206,26 +212,6 @@ def _agent_type(rank_pr: float, vct_pr: float) -> str:
     if rank_pr >= 5.0 and vct_pr < 5.0:
         return "rank_only"
     return "both_weak"
-
-
-def apply_domain_rules(row: dict | pd.Series, p_patch: float,
-                       p_buff_raw: float, p_nerf_raw: float):
-    _acts_raw  = row.get("_raw_acts_since_patch", None)
-    acts_since = int(_acts_raw) if _acts_raw is not None else int(row.get("acts_since_patch", 99) or 99)
-
-    # 패치 직후 (acts_since=0): 랭크/VCT 결과가 아직 없는 상태 → 거의 강제 stable
-    suppress = 0.15 if acts_since == 0 else 1.0
-    p_patch_new = min(1.0, p_patch * suppress)
-
-    # 방향은 모델 원본 출력 그대로 정규화
-    total = p_buff_raw + p_nerf_raw
-    if total > 0:
-        p_buff_norm = p_buff_raw / total
-        p_nerf_norm = p_nerf_raw / total
-    else:
-        p_buff_norm = p_nerf_norm = 0.5
-
-    return p_patch_new, p_buff_norm, p_nerf_norm
 
 
 # ─── 신호 추출 ────────────────────────────────────────────────────────────────
@@ -425,8 +411,8 @@ def extract_signals(row: dict | pd.Series, verdict: str, last_patch_ver: str | N
     elif "buff_rank" in verdict:
         signals.append(_sig(
             "analysis", "조용한 부진",
-            f"별도 패치 플래그 없이도 랭크 픽률 {rank_pr_pct:.1f}%, VCT 픽률 {vct_pr:.1f}%로 "
-            f"{acts_since}액트 이상 저픽 지속. 버프 필요성이 누적되는 상태.",
+            f"랭크 픽률 {rank_pr_pct:.1f}%, VCT 픽률 {vct_pr:.1f}%로 저픽 지속. "
+            f"버프 필요성이 누적되는 상태.",
             "warning"
         ))
     elif buff_miss:
@@ -442,22 +428,29 @@ def extract_signals(row: dict | pd.Series, verdict: str, last_patch_ver: str | N
             f"이전 너프 이후에도 지표가 높은 수준 유지. 추가 조정 필요.",
             "danger"
         ))
-    elif verdict == "stable":
+    elif "nerf" in verdict:
+        signals.append(_sig(
+            "analysis", "너프 신호",
+            f"랭크 픽률 {rank_pr_pct:.1f}%, VCT 픽률 {vct_pr:.1f}%로 상위 티어 선점 중.",
+            "danger"
+        ))
+    elif "buff" in verdict:
         if buff_hit:
-            signals.append(_sig("analysis", "버프 효과 확인", "최근 버프가 지표에 반영됨. 추가 조정 없이 안정 가능성 높음.", "positive"))
-        elif nerf_hit:
-            signals.append(_sig("analysis", "너프 효과 확인", "최근 너프 이후 지표가 안정 범위로 진입. 현 상태 수용 중.", "positive"))
+            signals.append(_sig("analysis", "버프 효과 확인", "최근 버프가 지표에 반영됨. 방향은 맞지만 추가 조정 여부를 지켜봐야 함.", "positive"))
         elif atype == "pro_anchor" and vct_pr >= 15:
             signals.append(_sig(
-                "analysis", "유틸 앵커",
-                f"VCT {vct_pr:.1f}% 픽이지만 승리 기여보다 팀 구성 필수 요소로 기용. "
-                f"픽률 높아도 너프 근거로 보기 어려움.",
-                "neutral"
+                "analysis", "유틸 앵커 부진",
+                f"VCT {vct_pr:.1f}% 픽이지만 랭크에서는 존재감 부족. 프로 전용 유틸리티 요원 특성상 버프 요구가 쌓이는 중.",
+                "warning"
             ))
         elif map_explains > 2 and not top_map_in:
             signals.append(_sig("analysis", "맵 풀 영향", "주력 맵이 현 대회 풀에 미포함 — 픽률 하락이 밸런스 문제가 아닐 수 있음.", "neutral"))
         else:
-            signals.append(_sig("analysis", "패치 신호 미약", "현재 지표가 패치를 유발할 임계치에 도달하지 않음.", "neutral"))
+            signals.append(_sig(
+                "analysis", "버프 신호",
+                f"랭크 픽률 {rank_pr_pct:.1f}%, VCT 픽률 {vct_pr:.1f}%로 현재 메타에서 외면받는 중.",
+                "warning"
+            ))
 
     # ── 5. 추가 컨텍스트 ─────────────────────────────────────────────
     if skill_ceil >= 0.7:
@@ -494,7 +487,7 @@ def extract_signals(row: dict | pd.Series, verdict: str, last_patch_ver: str | N
     # ── 6. 설계 정체성 ───────────────────────────────────────────────
     design = AGENT_DESIGN.get(agent, _DEFAULT_DESIGN)
     unique = design.get("unique_value", "")
-    if unique and verdict != "stable":
+    if unique:
         signals.append(_sig("identity", "설계 특성", unique, "neutral"))
 
     replaceability = float(design.get("replaceability", 0.5) or 0.5)
@@ -528,16 +521,17 @@ class PatchPredictor:
                  data_path: str = DATA_PATH,
                  cache_path: str = EXPLANATION_CACHE_PATH):
 
-        pipe           = joblib.load(pipeline_path)
-        self.model_a   = pipe["model_a"]
-        self.model_b   = pipe["model_b"]
-        self.feat_cols_a = pipe["feat_cols_a"]
-        self.feat_cols_b = pipe["feat_cols_b"]
-        self.label_b_cats = pipe["label_b_cats"]
+        pipe = joblib.load(pipeline_path)
 
-        self.buff_idx   = [i for i, l in enumerate(self.label_b_cats) if l in BUFF_CLASSES]
-        self.nerf_idx   = [i for i, l in enumerate(self.label_b_cats) if l in NERF_CLASSES]
-        self.rework_idx = [i for i, l in enumerate(self.label_b_cats) if l == "rework"]
+        # 2-Stage 파이프라인 (Stage A: stable vs patched / Stage B: buff vs nerf)
+        self.model_a      = pipe["model_a"]
+        self.model_b      = pipe["model_b"]
+        self.feat_cols_a  = pipe["feat_cols_a"]
+        self.feat_cols_b  = pipe["feat_cols_b"]
+        self.label_b_cats = pipe["label_b_cats"]  # ['buff', 'nerf']
+
+        self.buff_b_idx = self.label_b_cats.index("buff")
+        self.nerf_b_idx = self.label_b_cats.index("nerf")
 
         # 설명 캐시 로드
         self._cache_path = cache_path
@@ -567,138 +561,206 @@ class PatchPredictor:
         except Exception:
             pass
 
+        # patch_dates.json 로드 (크롤러가 자동 갱신)
+        self._patch_dates: dict[str, str] = {}
+        try:
+            import json as _json
+            with open("patch_dates.json", encoding="utf-8") as _f:
+                self._patch_dates = _json.load(_f)
+        except Exception:
+            pass
+
         # 데이터 로드 및 전처리
         raw_df = pd.read_csv(data_path)
         self._run_pipeline(raw_df)
 
     def _run_pipeline(self, raw_df: pd.DataFrame):
+        from agent_data import IDX_ACT
+
         df = raw_df.copy()
 
-        # 원본 컬럼 보존 (도메인 규칙용)
+        # ── 원본값 보존 (인코딩 전) ───────────────────────────────────────────
         raw_cols = ["last_direction", "acts_since_patch"]
         df_raw = df[["agent", "act_idx"] + [c for c in raw_cols if c in df.columns]].copy()
 
-        # OrdinalEncoder
+        # vct_wr_last: VCT 데이터 없을 때 NaN → 50%으로 대체 (train_step2.prepare()와 동일)
+        if "vct_wr_last" in df.columns:
+            df["vct_wr_last"] = df["vct_wr_last"].fillna(50.0)
+
+        # ── 카테고리 인코딩 ───────────────────────────────────────────────────
         oe = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
         for col in CAT_COLS:
             if col in df.columns:
                 df[col] = oe.fit_transform(df[[col]])
 
-        # 요원별 최신 액트
+        # ── 요원별 최신 액트만 추출 ───────────────────────────────────────────
         latest = df.loc[df.groupby("agent")["act_idx"].idxmax()].copy().reset_index(drop=True)
         latest_raw = df_raw.loc[df_raw.groupby("agent")["act_idx"].idxmax()].copy().reset_index(drop=True)
         latest = latest.merge(
             latest_raw.rename(columns={c: f"_raw_{c}" for c in raw_cols if c in df_raw.columns}),
             on=["agent", "act_idx"], how="left",
-        )
+        ).reset_index(drop=True)  # merge 후 index 재정렬 보장
 
+        # ── 모델 추론 (2-Stage) ───────────────────────────────────────────────
         X_a = latest[self.feat_cols_a].values.astype(np.float32)
         X_b = latest[self.feat_cols_b].values.astype(np.float32)
 
-        prob_patch = self.model_a.predict_proba(X_a)[:, 1].copy()
-        prob_b_all = self.model_b.predict_proba(X_b)
+        # Stage A: stable(0) vs patched(1)
+        prob_a = self.model_a.predict_proba(X_a)  # (N, 2)
+        # Stage B: buff vs nerf  (patched 행 조건부)
+        prob_b = self.model_b.predict_proba(X_b)  # (N, 2)
 
         results = []
-        for i, row in latest.iterrows():
-            p_raw      = float(prob_patch[i])
-            p_buff_raw = float(prob_b_all[i, self.buff_idx].sum())
-            p_nerf_raw = float(prob_b_all[i, self.nerf_idx].sum())
-            p_rework   = float(prob_b_all[i, self.rework_idx].sum()) if self.rework_idx else 0.0
+        for idx in range(len(latest)):
+            row = latest.iloc[idx]
 
-            p_adj, p_buff_norm, p_nerf_norm = apply_domain_rules(row, p_raw, p_buff_raw, p_nerf_raw)
+            # ── 패치 이력 원본값 파싱 ─────────────────────────────────────────
+            _acts_raw = row.get("_raw_acts_since_patch", None)
+            acts_since = (
+                int(float(_acts_raw))
+                if _acts_raw is not None
+                else int(float(row.get("acts_since_patch", 99) or 99))
+            )
+            _ld_raw = row.get("_raw_last_direction", None)
+            last_dir = str(_ld_raw).lower() if _ld_raw is not None else "none"
+            if last_dir in ("0", "0.0", "nan", "none", ""):
+                last_dir = "none"
 
-            p_stable = 1.0 - p_adj
-            p_buff   = p_adj * p_buff_norm
-            p_nerf   = p_adj * p_nerf_norm
+            # ── 2-Stage 합성 확률 ─────────────────────────────────────────────
+            # P(nerf) = P(patched) × P(nerf|patched)
+            # P(buff) = P(patched) × P(buff|patched)
+            p_patched  = float(prob_a[idx, 1])
+            p_buff_dir = p_patched * float(prob_b[idx, self.buff_b_idx])
+            p_nerf_dir = p_patched * float(prob_b[idx, self.nerf_b_idx])
+            _p_stable  = float(prob_a[idx, 0])
 
-            # 방향 선택: p_patch 임계값 0.28 기준 (stable 과잉 예측 보정)
-            if p_adj < 0.28:
+            # 패치 직후 7일 이내: 지표 충분히 안 쌓임 → 50% 쪽으로 수축
+            # patch_dates.json에 실제 배포일 있으면 날짜 기반, 없으면 acts_since=0 fallback
+            _days_since_patch = 999
+            _early_agent_name = str(row.get("agent", ""))
+            _early_act_name   = str(row.get("act", ""))
+            _early_patch_ver  = (
+                self._last_patch_ver.get(f"{_early_agent_name}|{_early_act_name}")
+                or None
+            )
+            if _early_patch_ver and _early_patch_ver in self._patch_dates:
+                from datetime import date as _date
+                try:
+                    _pd = _date.fromisoformat(self._patch_dates[_early_patch_ver])
+                    _days_since_patch = (_date.today() - _pd).days
+                except ValueError:
+                    pass
+            elif acts_since == 0:
+                # 날짜 정보 없음 → acts_since=0이면 보수적으로 수축
+                _days_since_patch = 0
+
+            if _days_since_patch <= 7:
+                p_nerf_dir = 0.5 + (p_nerf_dir - 0.5) * 0.25
+                p_buff_dir = 1.0 - p_nerf_dir
+
+            # 표시용 (0~100)  ─ 모델 원본 확률 그대로 표시
+            p_nerf = round(p_nerf_dir * 100, 1)
+            p_buff = round(p_buff_dir * 100, 1)
+            # p_patch = 방향 확신도 (50%에서 얼마나 멀어졌는지)
+            p_patch = round(max(p_nerf_dir, p_buff_dir) * 100, 1)
+
+            # ── Verdict 결정 (2-stage 임계값 기반) ───────────────────────────
+            if _p_stable > max(p_nerf_dir, p_buff_dir):
                 verdict = "stable"
-            elif p_rework * p_adj > 0.28 and p_rework * p_adj > p_buff and p_rework * p_adj > p_nerf:
-                verdict = "rework"
-            elif p_buff >= p_nerf:
-                best_buff = max(self.buff_idx, key=lambda x: prob_b_all[i, x])
-                verdict = self.label_b_cats[best_buff]
+            elif p_nerf_dir >= p_buff_dir:
+                verdict = "strong_nerf" if p_nerf_dir > 0.40 else "mild_nerf"
             else:
-                best_nerf = max(self.nerf_idx, key=lambda x: prob_b_all[i, x])
-                verdict = self.label_b_cats[best_nerf]
+                verdict = "strong_buff" if p_buff_dir > 0.25 else "mild_buff"
 
-            # 패치 이력 없는 신규 요원: 방향 마진 작으면 stable 강제 (Veto류 노이즈 방지)
-            _a_check = row.get("_raw_acts_since_patch", None)
-            _a_check = int(float(_a_check)) if _a_check is not None else int(float(row.get("acts_since_patch", 99) or 99))
-            if _a_check >= 99 and verdict != "stable":
-                if abs(p_buff - p_nerf) / max(p_adj, 0.01) < 0.12:
-                    verdict = "stable"
+            # ── 도메인 오버라이드 ──────────────────────────────────────────────
+            buff_miss = float(row.get("buff_miss_flag", 0) or 0)
+            nerf_miss = float(row.get("nerf_miss_flag", 0) or 0)
 
-            # 방향 혼동 보정
-            buff_miss_f = float(row.get("buff_miss_flag", 0) or 0)
-            nerf_miss_f = float(row.get("nerf_miss_flag", 0) or 0)
-            if buff_miss_f and "nerf" in verdict and "correction" not in verdict:
-                _vpr = float(row.get("vct_pr_last", 0) or 0)
-                _vwr = _vct_wr_safe(row)
-                if not (_vpr >= 25.0 and _vwr >= 48.0):  # 고픽 안정 요원은 버프 강제 안 함
-                    verdict = "buff_followup"
-            if nerf_miss_f and "buff" in verdict and "correction" not in verdict:
-                _rw = float(row.get("rank_wr_vs50", 0) or 0)
-                _vw = _vct_wr_safe(row)
-                overnerfed = _rw < 0 and _vw < 48.0
-                if overnerfed:
-                    verdict = "correction_buff"
-                else:
-                    verdict = "nerf_followup"
+            # 버프 미스 플래그: 모델이 너프라 해도, VCT가 확인 안 되면 여전히 버프 필요
+            if buff_miss and "nerf" in verdict and "correction" not in verdict:
+                vpr = float(row.get("vct_pr_last", 0) or 0)
+                vwr = _vct_wr_safe(row)
+                if not (vpr >= 25.0 and vwr >= 48.0):
+                    verdict = "mild_buff"
 
-            # 패치 이력 원본값 노출
-            _acts_r = row.get("_raw_acts_since_patch", None)
-            _acts   = int(float(_acts_r)) if _acts_r is not None else int(float(row.get("acts_since_patch", 99) or 99))
-            _ld_r   = row.get("_raw_last_direction", None)
-            _ld     = str(_ld_r).lower() if _ld_r is not None else "none"
-            if _ld in ("0", "0.0", "nan", "none", ""):
-                _ld = "none"
+            # 너프 미스 플래그: 모델이 버프라 해도, 버프 확신이 낮으면 너프 쪽으로
+            if nerf_miss and "buff" in verdict and "correction" not in verdict:
+                if p_buff <= 65.0:
+                    rw = float(row.get("rank_wr_vs50", 0) or 0)
+                    vw = _vct_wr_safe(row)
+                    if rw < 0 and vw < 48.0:
+                        verdict = "correction_buff"   # 과너프됐음
+                    else:
+                        verdict = "mild_nerf"
 
-            # VCT 데이터가 어느 액트 기준인지
-            from agent_data import IDX_ACT
-            _raw_vct_last = row.get("vct_last_act_idx", None)
+            # ── rework 방향 일치 가드 ────────────────────────────────────────────
+            # rework는 방향이 명확한 경우(p_buff or p_nerf > 70%) 서브타입으로 보정
+            if verdict == "rework":
+                if p_buff_dir >= 0.7:
+                    verdict = "mild_buff"
+                elif p_nerf_dir >= 0.7:
+                    verdict = "mild_nerf"
+
+            # ── 신규 요원 가드 ─────────────────────────────────────────────────
+            # acts_since=99: 출시 이후 한 번도 패치된 적 없는 신규 요원
+            # 데이터 부족 → 모델 예측 신뢰도 낮음, 낮은 픽률≠버프 필요
+            # → 방향 무관하게 stable 처리, 순위 최하단 배치
+            if acts_since >= 90:
+                verdict = "stable"
+
+            # ── VCT 메타 조회 ──────────────────────────────────────────────────
+            _raw_vct_last    = row.get("vct_last_act_idx", None)
             _vct_last_act_idx = int(float(_raw_vct_last)) if _raw_vct_last is not None else -1
-            _vct_act = row.get("vct_last_event_name") or IDX_ACT.get(_vct_last_act_idx, None)
-            _raw_lag = row.get("vct_data_lag", None)
-            _vct_data_lag = int(float(_raw_lag)) if _raw_lag is not None else 99
+            _vct_act          = row.get("vct_last_event_name") or IDX_ACT.get(_vct_last_act_idx, None)
+            _raw_lag          = row.get("vct_data_lag", None)
+            _vct_data_lag     = int(float(_raw_lag)) if _raw_lag is not None else 99
 
-            # 요원별 마지막 패치 버전 조회
-            # acts_since=0 → 현재 액트, acts_since=N → N액트 전 액트
-            _agent_name = str(row["agent"])
-            _cur_act_name_r = str(row.get("act", ""))
-            _cur_act_idx_r  = int(float(row.get("act_idx", -1) or -1))
-            _patch_act_idx_r = _cur_act_idx_r - _acts if _acts < 99 else None
-            _patch_act_name_r = IDX_ACT.get(_patch_act_idx_r, None) if _patch_act_idx_r is not None else None
-            _last_patch_ver: str | None = None
-            if _patch_act_name_r:
-                _last_patch_ver = self._last_patch_ver.get(f"{_agent_name}|{_patch_act_name_r}")
-            # 폴백: 현재 액트에서 패치 기록 조회
-            if not _last_patch_ver:
-                _last_patch_ver = self._last_patch_ver.get(f"{_agent_name}|{_cur_act_name_r}")
+            # ── 마지막 패치 버전 조회 ─────────────────────────────────────────
+            agent_name    = str(row["agent"])
+
+            # 정렬용 스코어: 모델 확률 그대로 사용 (도메인 룰 없음)
+            # 신규 요원은 최하단 배치
+            if acts_since >= 90:
+                urgency_score = 0.0
+            else:
+                urgency_score = max(p_nerf_dir, p_buff_dir)
+            cur_act_name  = str(row.get("act", ""))
+            cur_act_idx   = int(float(row.get("act_idx", -1) or -1))
+            patch_act_idx = cur_act_idx - acts_since if acts_since < 99 else None
+            patch_act_name = IDX_ACT.get(patch_act_idx) if patch_act_idx is not None else None
+
+            last_patch_ver: str | None = None
+            if patch_act_name:
+                last_patch_ver = self._last_patch_ver.get(f"{agent_name}|{patch_act_name}")
+            if not last_patch_ver:
+                last_patch_ver = self._last_patch_ver.get(f"{agent_name}|{cur_act_name}")
+
+            _vct_pr_post_val = row.get("vct_pr_post", None)
+            _vct_pr_display = float(_vct_pr_post_val) if _vct_pr_post_val is not None else float(row.get("vct_pr_last", 0) or 0)
 
             results.append({
-                "agent":              row["agent"],
-                "act":                row["act"],
-                "role":               AGENT_ROLE_KO.get(row["agent"], "알 수 없음"),
+                "agent":              agent_name,
+                "act":                cur_act_name,
+                "role":               AGENT_ROLE_KO.get(agent_name, "알 수 없음"),
                 "rank_pr":            round(float(row.get("rank_pr", 0) or 0) * 5, 1),
-                "vct_pr":             round(float(row.get("vct_pr_post") or row.get("vct_pr_last", 0) or 0), 1),
+                "vct_pr":             round(_vct_pr_display, 1),
                 "rank_wr":            round(float(row.get("rank_wr_vs50", 0) or 0), 2),
                 "vct_wr":             round(float(row.get("vct_wr_post") or _vct_wr_safe(row)), 1),
                 "vct_act":            _vct_act,
                 "vct_data_lag":       _vct_data_lag,
-                "last_patch_version": _last_patch_ver,
-                "last_patch_act":     _patch_act_name_r,
-                "p_patch":            round(p_adj * 100, 1),
-                "p_buff":             round(p_buff * 100, 1),
-                "p_nerf":             round(p_nerf * 100, 1),
-                "p_stable":           round(p_stable * 100, 1),
-                "acts_since_patch":   _acts,
-                "last_direction":     _ld,
+                "last_patch_version": last_patch_ver,
+                "last_patch_act":     patch_act_name,
+                "p_patch":            p_patch,
+                "p_buff":             p_buff,
+                "p_nerf":             p_nerf,
+                "urgency_score":      round(urgency_score, 4),
+                "acts_since_patch":   acts_since,
+                "days_since_patch":   _days_since_patch if _days_since_patch < 999 else None,
+                "last_direction":     last_dir,
                 "verdict":            verdict,
                 "verdict_ko":         PATCH_TYPE_KO.get(verdict, verdict),
                 "verdict_en":         PATCH_TYPE_EN.get(verdict, verdict),
-                "signals":            extract_signals(row, verdict, last_patch_ver=_last_patch_ver),
+                "signals":            extract_signals(row, verdict, last_patch_ver=last_patch_ver),
                 "_row":               row,
             })
 
@@ -708,9 +770,13 @@ class PatchPredictor:
     # ── Public API ────────────────────────────────────────────────────────────
 
     def get_all(self) -> list[dict]:
-        """p_patch 내림차순으로 모든 요원 예측 반환 (프론트용 경량 포맷)."""
+        """urgency_score(= max(p_nerf, p_buff)) 내림차순으로 모든 요원 반환.
+
+        표시값과 정렬 기준이 동일 — 높은 확률 = 높은 순위.
+        동 방향 내 순위는 VCT 초과 × 랭크 승률 기반 긴급도로 결정.
+        """
         out = []
-        for r in sorted(self._results, key=lambda x: x["p_patch"], reverse=True):
+        for r in sorted(self._results, key=lambda x: x["urgency_score"], reverse=True):
             out.append({k: v for k, v in r.items() if k != "_row"})
         return out
 
@@ -733,7 +799,11 @@ class PatchPredictor:
     def _get_explanation(self, r: dict) -> str:
         agent   = r["agent"]
         verdict = r["verdict"]
-        cache_key = f"{agent}::{verdict}"
+        # act + 핵심 지표 반올림을 키에 포함 → 액트 변경 또는 데이터 변화 시 자동 무효화
+        act          = r.get("act", "")
+        rank_pr_r    = round(r.get("rank_pr", 0), 1)
+        vct_pr_r     = round(r.get("vct_pr", 0), 1)
+        cache_key = f"{agent}::{verdict}::{act}::{rank_pr_r}::{vct_pr_r}"
 
         if cache_key in self._explanation_cache:
             return self._explanation_cache[cache_key]
@@ -752,6 +822,15 @@ class PatchPredictor:
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
             return self._template_explanation(r)
+
+        # 신규 요원: 패치 이력 없음 → 모델 예측 신뢰도 낮음
+        acts_since_r = int(r.get("acts_since_patch", 0) or 0)
+        if acts_since_r >= 90:
+            agent_ko_r = AGENT_NAME_KO.get(r["agent"], r["agent"])
+            return (
+                f"출시 이후 패치 이력이 없어 예측 신뢰도가 낮습니다. "
+                f"데이터가 충분히 쌓이면 {agent_ko_r}에 대한 정밀 분석이 가능해집니다."
+            )
 
         if self._anthropic is None:
             self._anthropic = Anthropic(api_key=api_key)
@@ -779,63 +858,37 @@ class PatchPredictor:
             for s in signals[:6]
         ) or "- 특별한 신호 없음"
 
-        direction    = "버프" if "buff" in verdict else "너프" if "nerf" in verdict else "안정"
-        counter      = "너프" if direction == "버프" else "버프" if direction == "너프" else "패치"
-        dir_pct      = p_buff if "buff" in verdict else p_nerf if "nerf" in verdict else (100 - p_patch)
-        counter_pct  = p_nerf if "buff" in verdict else p_buff if "nerf" in verdict else p_patch
+        direction    = "버프" if "buff" in verdict else "너프"
+        dir_pct      = p_buff if "buff" in verdict else p_nerf
+        counter_pct  = p_nerf if "buff" in verdict else p_buff
+
+        # 신호 강도: 방향 확률 기반 타이밍 힌트
+        if dir_pct >= 60:
+            signal_strength = "강함 — 이번 패치 조정 가능성 높음"
+        elif dir_pct >= 35:
+            signal_strength = "중간 — 이번 혹은 다음 패치 내 조정 예상"
+        else:
+            signal_strength = "약함 — 신호 누적 중, 당장보다 중장기적 조정 가능"
 
         # 데이터 해석 힌트: 어떤 수치가 어느 방향을 지지하는지
         rank_wr_actual = 50 + rank_wr
         nerf_evidence = []
         buff_evidence = []
-        # 너프 근거: 높은 픽률, 높은 승률 (rank_pr는 이미 ×5 변환된 "게임 등장 %" 기준)
         if rank_pr >= 40:  nerf_evidence.append(f"랭크 픽률 {rank_pr:.1f}%로 높음")
         if rank_wr > 1.5:  nerf_evidence.append(f"랭크 승률 {rank_wr_actual:.1f}%로 평균 이상")
         if vct_pr >= 25:   nerf_evidence.append(f"프로 대회 픽률 {vct_pr:.1f}%로 메타 핵심")
         if vct_wr >= 52:   nerf_evidence.append(f"프로 승률 {vct_wr:.1f}%로 높음")
-        # 버프 근거: 낮은 픽률, 낮은 승률
         if rank_pr < 20:   buff_evidence.append(f"랭크 픽률 {rank_pr:.1f}%로 낮음")
         if rank_wr < -1.5: buff_evidence.append(f"랭크 승률 {rank_wr_actual:.1f}%로 평균 이하")
         if vct_pr < 8:     buff_evidence.append(f"프로 대회 픽률 {vct_pr:.1f}%로 낮음")
         if vct_wr <= 47:   buff_evidence.append(f"프로 승률 {vct_wr:.1f}%로 낮음")
 
         if direction == "너프":
-            dir_evidence  = "、".join(nerf_evidence) or f"프로 대회 픽률 {vct_pr:.1f}%"
-            cnt_evidence  = "、".join(buff_evidence) or f"랭크 승률 {rank_wr_actual:.1f}%"
-            stable_note   = ""
-        elif direction == "버프":
-            dir_evidence  = "、".join(buff_evidence) or f"랭크 픽률 {rank_pr:.1f}%"
-            cnt_evidence  = "、".join(nerf_evidence) or f"프로 픽률 {vct_pr:.1f}%"
-            stable_note   = ""
+            dir_evidence = "、".join(nerf_evidence) or f"프로 대회 픽률 {vct_pr:.1f}%"
+            cnt_evidence = "、".join(buff_evidence) or f"랭크 승률 {rank_wr_actual:.1f}%"
         else:
-            # 안정 판정: 수치 + 패치가 없는 이유(stable_reason)를 함께 전달
-            stable_facts = []
-            if rank_pr < 15:   stable_facts.append(f"랭크 픽률 {rank_pr:.1f}%")
-            elif rank_pr >= 40: stable_facts.append(f"랭크 픽률 {rank_pr:.1f}% (높음)")
-            else:              stable_facts.append(f"랭크 픽률 {rank_pr:.1f}%")
-            stable_facts.append(f"랭크 승률 {rank_wr_actual:.1f}%")
-            if vct_pr >= 10:   stable_facts.append(f"프로 픽률 {vct_pr:.1f}%")
-            elif vct_pr < 3:   stable_facts.append(f"프로 픽률 {vct_pr:.1f}%")
-
-            # 안정 이유: 수치 약점이 아닌 "왜 패치가 없는지"를 명시
-            if rank_pr < 5 and vct_pr < 5:
-                stable_reason = "랭크·대회 픽률이 모두 너무 낮아 개발진 레이더 밖 상태"
-            elif rank_pr < 15 and vct_pr < 8:
-                stable_reason = "메타 존재감이 미미해 패치 우선순위에서 벗어남"
-            elif rank_pr >= 35 or vct_pr >= 25:
-                stable_reason = "수치가 높지만 패치 기준 임계치에는 미달"
-            else:
-                stable_reason = "랭크·대회 수치 모두 패치 기준 임계치에 미달"
-
-            dir_evidence  = "、".join(stable_facts) + f" / 안정 이유: {stable_reason}"
-            cnt_evidence  = "패치 압박 신호 없음"  # buff_evidence/nerf_evidence 금지 — AI 방향 혼동 유발
-            # 안정 판정 세부 유형: 픽률 낮음 vs 수치 균형
-            if rank_pr < 15 and vct_pr < 5:
-                stable_note = "\n- 안정 판정 이유: 픽률이 너무 낮아 개발진 레이더에 없는 상태 — '밸런스가 좋다', '조정 필요성이 낮다', '추가 조정이 필요한 상태' 같은 표현 쓰지 말 것"
-            elif buff_evidence:
-                stable_note = "\n- 안정 판정 이유: 수치는 낮지만 지금 당장 패치 압박은 없는 상태 — '버프가 필요하다', '추가 조정이 필요한 상태', '개선이 필요', '추가 조정이 필요했던 상황이지만', '조정이 필요한 상황이지만' 같은 표현 절대 금지. 수치가 낮다는 사실을 언급하되 패치 압박이 없다는 결론까지 자연스럽게 이어지게 쓸 것"
-            else:
-                stable_note = "\n- 안정 판정 이유: 수치가 패치 임계치에 도달하지 않아 안정적인 상태 — '추가 조정이 필요한 상태지만', '조정 압박이 있지만', '추가 조정이 필요했던 상황이지만', '패치 필요성이 없어 보입니다' 같은 표현 금지. 반드시 '당분간 패치 없을 것으로 보입니다' 류로 마무리"
+            dir_evidence = "、".join(buff_evidence) or f"랭크 픽률 {rank_pr:.1f}%"
+            cnt_evidence = "、".join(nerf_evidence) or f"프로 픽률 {vct_pr:.1f}%"
 
         # 맵 친화도
         map_affinity = AGENT_MAP_AFFINITY.get(agent, [])
@@ -845,45 +898,48 @@ class PatchPredictor:
         skills = AGENT_SKILLS_KO.get(agent, {})
         skill_line = f"- {agent_ko}의 한국어 공식 스킬 이름: {', '.join(skills.values())}" if skills else ""
 
-        prompt = f"""아래 데이터를 보고 {agent_ko}의 다음 패치 전망을 짧게 써주세요.
+        # 맵 친화도: 특화 맵 없는 경우 맵 언급 생략
+        map_line_prompt = (
+            f"- 현재 맵 풀 특화 맵: {', '.join(map_affinity)} (분석에 자연스럽게 녹여도 됨)"
+            if map_affinity else ""
+        )
 
-데이터:
+        prompt = f"""발로란트 프로씬 분석가 입장에서 {agent_ko}의 다음 패치 전망을 써주세요.
+
+제공 데이터 (이 수치만 사용, 없는 통계 절대 언급 금지):
 - 예측 방향: {direction}
+- 신호 강도: {signal_strength}
 - 주요 근거: {dir_evidence}
-- 참고 맥락 (방향은 바뀌지 않음, 뉘앙스 보정용): {cnt_evidence}
+- 참고 맥락 (뉘앙스 보정용, 방향 바뀌지 않음): {cnt_evidence}
 - 기타 신호: {signal_text}
 - 마지막 패치: {patch_ref}
-{map_line}
+{map_line_prompt}
 {skill_line}
 
-규칙:
-- 요원 이름은 "{agent_ko}"로만 표기, 영어 이름 금지
-- 2~3문장 (3문장 초과 금지), 자연스러운 구어체 — 논문·보고서 투 금지
-- 전체 글이 "예측 방향"과 일관된 방향으로 흘러야 함
-- 너프/버프 판정일 때 방향을 의심하는 표현 절대 금지: "명확하지 않습니다", "확신하기 어렵습니다", "필요성이 낮습니다", "압박이 크지 않습니다" 등
-- 안정 판정일 때 "추가 조정이 필요한 상태지만", "개선이 필요하지만" 같은 역접 표현 절대 금지{stable_note}
-- 안정 판정 = 버프도 너프도 모두 없다는 예측
-- 안정 판정 첫 문장 규칙: 반드시 "현재 상태가 균형 잡혀 있다 / 패치 압박이 없다 / 수치가 안정적이다" 방향으로 시작할 것. 너프·버프 신호처럼 읽힐 수 있는 수치(픽률 높음, 승률 낮음 등)를 첫 문장에 언급하는 것 금지
-- 안정 판정 글의 논리 흐름 필수: [현재 상태가 안정적임] → [패치 기준에 미달인 이유] → [조정 없을 것]. 이 순서를 지킬 것
-- "수치가 낮다 / 버프가 효과 없었다 / 대체 가능성이 높다" 같은 문장은 독립적으로 끝나면 안 됨. 반드시 "그래도 패치 기준엔 미달"이라는 이유로 자연스럽게 연결되어야 함
-- 안정 판정에서 약점 나열 후 바로 "패치 없을 것"으로 끝내는 구조 절대 금지 — 논리적 비약
-- 결론을 두 번 쓰지 말 것 — 마지막 문장 자체가 결론
-- 마지막 문장 필수 형식:
-  · 너프 → "너프될 가능성이 높습니다" / "조정이 들어올 것으로 보입니다" 류
-  · 버프 → "버프가 필요해 보입니다" / "버프가 들어올 것으로 보입니다" 류
-  · 안정 → "당분간 버프·너프 모두 없을 것으로 보입니다" / "조정 없이 현 상태가 유지될 것으로 보입니다" 류 (단순히 "패치 없을 것"만 쓰지 말 것)
-- 스킬 언급 시 반드시 위에 제공된 한국어 공식 스킬 이름 사용 (영어 스킬명 절대 금지)
-- 스킬 이름이 제공되지 않은 경우 스킬 이름을 직접 언급하지 말 것
-- 맵 특화 정보가 있으면 분석에 자연스럽게 녹여 쓸 것 (강요하지 말 것, 억지로 끼워 넣지 말 것)
-- 아래 표현 절대 금지:
-  × "킷" / "키트" / "특성상" / "구조적 우위·특성" / "근본적인" / "개편"
-  × 영어 스킬명 (예: Curtain Call, Neural Radiance, drone affinity 등)
-  × 마크다운(#, *, ** 등)
-- 패치 언급 시 반드시 "{patch_ref}" 표현 사용. V25A5·V25A6·V26A1·V26A2 같은 VxxAx·ExxAx 형식 액트 코드명 절대 금지
-- 확률 수치 금지, 마침표로 끝낼 것
-- 다른 요원 이름은 반드시 한국어 공식 이름 사용:
+글쓰기 지침:
+- 정확히 2~3문장. 초과 금지.
+- 발로란트 프로씬 현업 용어를 자연스럽게 섞어 쓸 것
+  (픽률/승률, 메타 픽, 유틸 효율, 인포 수집, 교전 개시, 사이드 밸런스,
+   랭겜/프로씬, 티어, 포스트플랜트, 로테이션 압박, 구성 강제, 팀파이트 기여, 임팩트 등)
+- 신호 강도에 맞게 타이밍 표현 조절:
+  · 강함 → "이번 패치에 조정이 들어올 것으로 보입니다" 류
+  · 중간 → "가까운 시일 내", "이번 혹은 다음 패치" 류
+  · 약함 → "당장은 아니더라도 중장기적으로 조정이 예상됩니다" 류
+- 숫자 나열로 시작하지 말 것 — 가장 인상적인 포인트로 자연스럽게 열 것
+- 분석가가 의견을 내는 톤 — 보고서 투 금지, 팬심 투 금지
+- 전체 흐름이 "{direction}" 방향과 일치해야 함 (방향 의심 표현 절대 금지)
+- 결론을 두 번 쓰지 말 것 — 마지막 문장이 방향을 담은 결론
+- 스킬 언급 시 위에 제공된 한국어 공식 스킬 이름만 사용 (영어명·설명형 표현 금지)
+- 스킬 이름이 제공되지 않은 경우 스킬 이름 직접 언급 금지
+- 맵 이름(브리즈·헤이번·어센트·바인드 등) 절대 언급 금지. 단, 위 데이터에 맵 특화 정보가 명시된 경우에만 허용.
+- 패치 언급 시 반드시 "{patch_ref}" 표현 사용. VxxAx·ExxAx 형식 액트 코드명 절대 금지
+- 요원 이름은 한국어 공식 이름만 사용 (영어 이름 금지):
   제트·레이나·레이즈·네온·피닉스·아이소·요루·웨이레이·브림스톤·바이퍼·오멘·아스트라·하버·클로브
-  소바·페이드·스카이·브리치·케이오·게코·킬조이·사이퍼·데드락·바이스·세이지·테호·베토·믹스·체임버"""
+  소바·페이드·스카이·브리치·케이오·게코·킬조이·사이퍼·데드락·바이스·세이지·테호·베토·믹스·체임버
+- 확률 수치 금지, 마침표로 끝낼 것. 마크다운 금지(#, *, ** 등 일절 사용 금지).
+- 금지 표현: 킷 / 키트 / 특성상 / 구조적 / 근본적인 / 개편 / 설계 의도 / 오버튠드 / 언더튠드
+- 제공된 데이터에 없는 과거 통계·역사적 수치·타 시즌 비교 절대 언급 금지
+- 스킬 메커니즘 설명(사이클·쿨다운·작동 방식 등) 금지 — 스킬 이름만 언급"""
 
         try:
             resp = self._anthropic.messages.create(
@@ -896,29 +952,23 @@ class PatchPredictor:
             return self._template_explanation(r)
 
     def _template_explanation(self, r: dict) -> str:
-        agent   = r["agent"]
-        verdict = r["verdict"]
-        p_patch = r["p_patch"]
-        rank_pr = r["rank_pr"]
-        vct_pr  = r["vct_pr"]
+        agent_ko = AGENT_NAME_KO.get(r["agent"], r["agent"])
+        verdict  = r["verdict"]
+        rank_pr  = r["rank_pr"]
+        vct_pr   = r["vct_pr"]
 
         if "nerf" in verdict:
             return (
-                f"{agent}는 현재 랭크 픽률 {rank_pr:.1f}%, VCT 픽률 {vct_pr:.1f}%로 "
-                f"메타를 압도하고 있습니다. 패치 확률 {p_patch:.0f}%로 너프가 예상됩니다."
+                f"{agent_ko}은(는) 현재 랭크 픽률 {rank_pr:.1f}%, VCT 픽률 {vct_pr:.1f}%로 "
+                f"메타 상단을 점유 중입니다. 너프 조정이 예상됩니다."
             )
         elif "buff" in verdict:
             return (
-                f"{agent}의 랭크 픽률은 {rank_pr:.1f}%, VCT 픽률은 {vct_pr:.1f}%에 불과합니다. "
-                f"패치 확률 {p_patch:.0f}%로 버프가 필요한 상황입니다."
+                f"{agent_ko}의 랭크 픽률 {rank_pr:.1f}%, VCT 픽률 {vct_pr:.1f}%로 "
+                f"현재 메타에서 외면받고 있습니다. 버프 조정이 필요한 상황입니다."
             )
-        elif verdict == "rework":
+        else:  # rework
             return (
-                f"{agent}는 랭크와 VCT 양쪽에서 모두 저픽 상태가 지속되고 있습니다. "
-                f"수치 조정만으로는 한계가 있어 리워크 가능성이 {p_patch:.0f}%로 예측됩니다."
-            )
-        else:
-            return (
-                f"{agent}는 현재 밸런스가 잘 잡혀 있습니다. "
-                f"랭크 픽률 {rank_pr:.1f}%, VCT 픽률 {vct_pr:.1f}%로 패치 필요성이 낮습니다."
+                f"{agent_ko}은(는) 랭크·VCT 양쪽에서 모두 저픽 상태가 지속되고 있습니다. "
+                f"수치 조정만으로는 한계가 있어 리워크 가능성이 있습니다."
             )

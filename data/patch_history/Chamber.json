@@ -1,0 +1,943 @@
+{
+  "agent": "Chamber",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 21,
+    "balance_patches": 7,
+    "numeric_changes": 23,
+    "all_changes": 26
+  },
+  "current_stats": {
+    "C": {
+      "name": "Trademark",
+      "creds": 200,
+      "charges": 1,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Max cast radius": {
+          "value": 12.0,
+          "unit": "meters",
+          "raw": "12 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Proximity radius to remain active": {
+          "value": 50.0,
+          "unit": "meters",
+          "raw": "50 meters"
+        },
+        "Search radius": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Recall duration": {
+          "value": 0.75,
+          "unit": "seconds",
+          "raw": "0.75 seconds"
+        },
+        "Windup time": {
+          "value": 0.9,
+          "unit": "seconds",
+          "raw": "0.9 seconds"
+        },
+        "Slow radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Slow duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Headhunter",
+      "creds": 100,
+      "charges": null,
+      "function": "[[Empowerment#Weapon Equip",
+      "stats": {
+        "Equip time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "Ammunition": {
+          "value": 8.0,
+          "unit": "rounds max",
+          "raw": "8 rounds max.<br><small>(4 rounds max. in [[Spike Rush]])</small><br>No reserve"
+        },
+        "Damage": {
+          "value": 159.0,
+          "unit": "Head55 Body46 Legs",
+          "raw": "159 Head<br>55 Body<br>46 Legs"
+        },
+        "Damage multipliers": {
+          "value": null,
+          "unit": "",
+          "raw": "Headshot: x2.9<Br>Leg shot: x0.85"
+        },
+        "Fire mode": {
+          "value": null,
+          "unit": "",
+          "raw": "Semi"
+        },
+        "Fire rate": {
+          "value": 4.0,
+          "unit": "per second1 every 0.25 seconds",
+          "raw": "4 per second<br>1 every 0.25 seconds"
+        },
+        "Wall penetration": {
+          "value": null,
+          "unit": "",
+          "raw": "High"
+        },
+        "ADS Zoom": {
+          "value": null,
+          "unit": "",
+          "raw": "x1.5"
+        },
+        "Unequip time<br><small>(out of ammo)</small>": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Rendezvous",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Mobility#Teleport",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max cast distance": {
+          "value": 8.5,
+          "unit": "meters",
+          "raw": "8.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Anchor radius": {
+          "value": 18.0,
+          "unit": "meters",
+          "raw": "18 meters"
+        },
+        "Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total duration: 1.3 seconds</u><br>0.1-second windup<br>1.2-second arrival at anchor"
+        },
+        "Audio cue radius": {
+          "value": 42.5,
+          "unit": "meters",
+          "raw": "42.5 meters"
+        },
+        "Recall time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Tour De Force",
+      "creds": null,
+      "charges": null,
+      "function": "[[Crowd Control#Slow",
+      "stats": {
+        "Initial summon time": {
+          "value": 2.3,
+          "unit": "seconds",
+          "raw": "2.3 seconds"
+        },
+        "Equip time": {
+          "value": 0.667,
+          "unit": "seconds",
+          "raw": "0.667 seconds"
+        },
+        "Ammunition": {
+          "value": 5.0,
+          "unit": "roundsNo reserve",
+          "raw": "5 rounds<br>No reserve"
+        },
+        "Damage": {
+          "value": 150.0,
+          "unit": "",
+          "raw": "150"
+        },
+        "Damage multipliers": {
+          "value": null,
+          "unit": "",
+          "raw": "Headshot: x1.7<br>Leg shot: x0.85"
+        },
+        "Fire mode": {
+          "value": null,
+          "unit": "",
+          "raw": "Semi"
+        },
+        "Fire rate": {
+          "value": 0.9,
+          "unit": "per second1 every 1.111 seconds",
+          "raw": "0.9 per second<br>1 every 1.111 seconds"
+        },
+        "Wall penetration": {
+          "value": null,
+          "unit": "",
+          "raw": "High"
+        },
+        "Slow radius": {
+          "value": 6.0,
+          "unit": "meters",
+          "raw": "6 meters"
+        },
+        "Slow duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "Unequip time<br><small>(out of ammo)</small>": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.04",
+      "raw": "Trademark Fixed a bug where it would play its reactivation SFX twice if he had Suppress expiring on him. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.01",
+      "raw": "Rendezvous Fixed a bug where its indicators would overlap on agents and make them difficult to see. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.11",
+      "raw": "Rendezvous Fixed a bug where the audio would end abruptly near the end of the teleport animation v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.07",
+      "raw": "Headhunter Fixed a bug where recoil would sometimes appear to recover quicker than intended. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.05",
+      "raw": "Trademark Fixed an issue where the in-world icon would not change color when aimed at. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.04",
+      "raw": "Trademark No longer has range restriction. (changed in v11.02) Fixed an issue where the minimap would still show the deactivation range of Chamber's Trademark while the ability was equipped. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "No longer has range restriction",
+          "stat": "effect",
+          "description": "No longer has range restriction",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.11",
+      "raw": "Trademark Fixed an issue where it didn't have team coloring applied on the minimap for observers. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "Fixed an issue where Chamber's watch and glasses could be seen while nearsighted. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.03",
+      "raw": "Trademark Now slows enemy dashes v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Now slows enemy dashes v",
+          "stat": "effect",
+          "description": "Now slows enemy dashes v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.05",
+      "raw": "Rendezvous Teleport radius increased from 13m >>> 18m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Rendezvous Teleport radius increased from",
+          "stat": "range",
+          "before": 13.0,
+          "before_unit": "m",
+          "after": 18.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Rendezvous Teleport radius increased from",
+          "stat": "range",
+          "before": 13.0,
+          "before_unit": "m",
+          "after": 18.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "8.07",
+      "raw": "Trademark Fixed an exploit where Chamber could place Trademark in unintended locations. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.03",
+      "raw": "Headhunter Price decreased 150 >>> 100 Tour De Force Firing rate increased 0.7 >>> 0.9 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Headhunter Price decreased",
+          "stat": "cost",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Tour De Force Firing rate increased",
+          "stat": "other",
+          "before": 0.7,
+          "before_unit": "",
+          "after": 0.9,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Headhunter Price decreased",
+          "stat": "cost",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Tour De Force Firing rate increased",
+          "stat": "other",
+          "before": 0.7,
+          "before_unit": "",
+          "after": 0.9,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "8.01",
+      "raw": "Tour De Force Fixed bullet tracers when penetrating through corners. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.02",
+      "raw": "Rendezvous Fixed Rendezvous not having the correct visuals at his departing location. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.0",
+      "raw": "Rendezvous Teleport will now be properly interrupted when suppressed mid-animation v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.11",
+      "raw": "Rendezvous Reduced weapon equip time after post-teleport lockout 0.7s >>> 0s Trademark Disable range increased 4000 >>> 5000 Trap arm speed reduced 4s >>> 2s Tour De Force Firing rate adjusted from 0.75/0.6 (Primary/Scoped) >>> 0.7 v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Rendezvous Reduced weapon equip time after post-teleport lockout",
+          "stat": "duration",
+          "before": 0.7,
+          "before_unit": "s",
+          "after": 0.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark Disable range increased",
+          "stat": "range",
+          "before": 4000.0,
+          "before_unit": "",
+          "after": 5000.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Trap arm speed reduced",
+          "stat": "speed",
+          "before": 4.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Rendezvous Reduced weapon equip time after post-teleport lockout",
+          "stat": "duration",
+          "before": 0.7,
+          "before_unit": "s",
+          "after": 0.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark Disable range increased",
+          "stat": "range",
+          "before": 4000.0,
+          "before_unit": "",
+          "after": 5000.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Trap arm speed reduced",
+          "stat": "speed",
+          "before": 4.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.07",
+      "raw": "Trademark Yellow indicator removed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.12",
+      "raw": "Trademark and Tour De Force slow duration decreased 6s >>> 4s Trademark Now has proximity radius restriction of 40m Initial Arm Time increased 2s >>> 4s Can now be recalled mid-round 30s cooldown on recall Recall animation takes 0.75 seconds Health increased 1 HP >>> 20 HP Headhunter Spread increased after 2nd bullet when spamming Rendezvous Chamber now places a single anchor that can be teleported to while inside its range Radius increased 7.5m >>> 13m Increased weapon equip time after teleporting 0.4s >>> 0.7s Health decreased 80 HP >>> 50 HP Tour De Force Fire rate decreased 1.2 >>> 0.75/0.6 (Primary/Scoped) v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark and Tour De Force slow duration decreased",
+          "stat": "duration",
+          "before": 6.0,
+          "before_unit": "s",
+          "after": 4.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark Now has proximity radius restriction of 40m Initial Arm Time increased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 4.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ound 30s cooldown on recall Recall animation takes 0.75 seconds Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " single anchor that can be teleported to while inside its range Radius increased",
+          "stat": "range",
+          "before": 7.5,
+          "before_unit": "m",
+          "after": 13.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Increased weapon equip time after teleporting",
+          "stat": "duration",
+          "before": 0.4,
+          "before_unit": "s",
+          "after": 0.7,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Health decreased",
+          "stat": "health",
+          "before": 80.0,
+          "before_unit": "hp",
+          "after": 50.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Tour De Force Fire rate decreased",
+          "stat": "other",
+          "before": 1.2,
+          "before_unit": "",
+          "after": 0.75,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark and Tour De Force slow duration decreased",
+          "stat": "duration",
+          "before": 6.0,
+          "before_unit": "s",
+          "after": 4.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark Now has proximity radius restriction of 40m Initial Arm Time increased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 4.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ound 30s cooldown on recall Recall animation takes 0.75 seconds Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " single anchor that can be teleported to while inside its range Radius increased",
+          "stat": "range",
+          "before": 7.5,
+          "before_unit": "m",
+          "after": 13.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Increased weapon equip time after teleporting",
+          "stat": "duration",
+          "before": 0.4,
+          "before_unit": "s",
+          "after": 0.7,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Health decreased",
+          "stat": "health",
+          "before": 80.0,
+          "before_unit": "hp",
+          "after": 50.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Tour De Force Fire rate decreased",
+          "stat": "other",
+          "before": 1.2,
+          "before_unit": "",
+          "after": 0.75,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Now has proximity radius restriction of 40m Initial Arm Time increased 2s >>> 4s Can now be recalled",
+          "stat": "effect",
+          "description": "Now has proximity radius restriction of 40m Initial Arm Time increased 2s >>> 4s Can now be recalled",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.03",
+      "raw": "Trademark Slow Duration decreased 9.5 >>> 6s Headhunter Bullet Cost increased 100 >>> 150 Rendezvous Base Cooldown increased 20s >>> 30s Recall Cooldown increased 20s >>> 30s Anchor radius decreased 10.5m >>> 7.5m Cooldown set to 45s whenever an anchor is destroyed Tour De Force Ultimate Points Required increased 7 >>> 8 Slow Duration decreased 9.5 >>> 6s Leg shot multiplier reduced 1.0 >>> 0.85 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark Slow Duration decreased",
+          "stat": "duration",
+          "before": 9.5,
+          "before_unit": "",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Headhunter Bullet Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Rendezvous Base Cooldown increased",
+          "stat": "cooldown",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 30.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Recall Cooldown increased",
+          "stat": "cooldown",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 30.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Anchor radius decreased",
+          "stat": "range",
+          "before": 10.5,
+          "before_unit": "m",
+          "after": 7.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "whenever an anchor is destroyed Tour De Force Ultimate Points Required increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Slow Duration decreased",
+          "stat": "duration",
+          "before": 9.5,
+          "before_unit": "",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Leg shot multiplier reduced",
+          "stat": "multiplier",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.85,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark Slow Duration decreased",
+          "stat": "duration",
+          "before": 9.5,
+          "before_unit": "",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Headhunter Bullet Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Rendezvous Base Cooldown increased",
+          "stat": "cooldown",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 30.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Recall Cooldown increased",
+          "stat": "cooldown",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 30.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Anchor radius decreased",
+          "stat": "range",
+          "before": 10.5,
+          "before_unit": "m",
+          "after": 7.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "whenever an anchor is destroyed Tour De Force Ultimate Points Required increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Slow Duration decreased",
+          "stat": "duration",
+          "before": 9.5,
+          "before_unit": "",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Leg shot multiplier reduced",
+          "stat": "multiplier",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.85,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.09",
+      "raw": "Trademark Cost increased 150 >>> 200 Charges reduced 2 >>> 1 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark Cost increased",
+          "stat": "cost",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Charges reduced",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Trademark Cost increased",
+          "stat": "cost",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Charges reduced",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.10",
+      "raw": "Added",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

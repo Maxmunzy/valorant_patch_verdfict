@@ -1,0 +1,704 @@
+{
+  "agent": "Fade",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 23,
+    "balance_patches": 9,
+    "numeric_changes": 12,
+    "all_changes": 18
+  },
+  "current_stats": {
+    "C": {
+      "name": "Prowler",
+      "creds": null,
+      "charges": 2,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Search duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        },
+        "Detection distance": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters (Agent)<br>10 meters (Terror Trail)"
+        },
+        "Travel speeds": {
+          "value": 10.0,
+          "unit": "meters/second",
+          "raw": "10 meters/second (Initial)<br>12 meters/second (Agent detected)<br>15 meters/second (Terror Trail detected)"
+        },
+        "Proximity needed to target to nearsight": {
+          "value": 2.5,
+          "unit": "meters",
+          "raw": "2.5 meters"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Nearsight duration": {
+          "value": 2.75,
+          "unit": "seconds",
+          "raw": "2.75 seconds"
+        },
+        "Nearsight vision radius": {
+          "value": 7.0,
+          "unit": "meters",
+          "raw": "7 meters"
+        }
+      }
+    },
+    "Q": {
+      "name": "Seize",
+      "creds": null,
+      "charges": null,
+      "function": "Cripple<br>[[Crowd Control#Tether",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Maximum air time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Windup": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Decay stats": {
+          "value": 75.0,
+          "unit": "HPHealth restored over 5 seconds",
+          "raw": "75 HP<br>Health restored over 5 seconds"
+        },
+        "Zone radius": {
+          "value": 6.58,
+          "unit": "meters",
+          "raw": "6.58 meters"
+        },
+        "Zone Duration": {
+          "value": 4.5,
+          "unit": "seconds",
+          "raw": "4.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Haunt",
+      "creds": null,
+      "charges": null,
+      "function": "Intel",
+      "stats": {
+        "Equip time": {
+          "value": 0.85,
+          "unit": "seconds",
+          "raw": "0.85 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Maximum air time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Windup": {
+          "value": 0.825,
+          "unit": "seconds",
+          "raw": "0.825 seconds"
+        },
+        "Radius": {
+          "value": 30.0,
+          "unit": "meters",
+          "raw": "30 meters"
+        },
+        "Eye duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Trail duration": {
+          "value": 12.0,
+          "unit": "seconds",
+          "raw": "12 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Nightfall",
+      "creds": null,
+      "charges": null,
+      "function": "Cripple<br>Intel",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Area size": {
+          "value": 40.0,
+          "unit": "-meter length20-meter width",
+          "raw": "40-meter length<br>20-meter width"
+        },
+        "Windup": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Unequip time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 0.355 secondsTotal 10 ticks",
+          "raw": "1 every 0.355 seconds<br>Total 10 ticks"
+        },
+        "Debuff duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        },
+        "Decay Stats": {
+          "value": 80.0,
+          "unit": "HP",
+          "raw": "80 HP"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.04",
+      "raw": "Nightfall Fixed a bug where its minimap indicator was slightly smaller than the actual ability. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.01",
+      "raw": "Prowler Fixed a bug where it was missing a VFX asset when viewed in Left Handed Mode. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Haunt and Seize Fixed an issue where throw animations would break if aiming straight down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Haunt Cooldown increased from 40s >>> 60s Haunt active duration decreased 2s >>> 1.5s Prowler Visibility in Nearsight increased from 5m >>> 7m Nightfall Deafen and Marked duration decreased from 12s >>> 8s Width decreased from 24m >>> 20m Decay now remains a consistent 80 damage over its duration instead of decreasing over time v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Haunt Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Haunt active duration decreased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Prowler Visibility in Nearsight increased from",
+          "stat": "other",
+          "before": 5.0,
+          "before_unit": "m",
+          "after": 7.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Nightfall Deafen and Marked duration decreased from",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 8.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Width decreased from",
+          "stat": "range",
+          "before": 24.0,
+          "before_unit": "m",
+          "after": 20.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Haunt Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Haunt active duration decreased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Prowler Visibility in Nearsight increased from",
+          "stat": "other",
+          "before": 5.0,
+          "before_unit": "m",
+          "after": 7.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Nightfall Deafen and Marked duration decreased from",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 8.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Width decreased from",
+          "stat": "range",
+          "before": 24.0,
+          "before_unit": "m",
+          "after": 20.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.11",
+      "raw": "Nightfall Fixed an issue where the visual indicator wouldn’t disappear for spectators if Fade dies with the ability equips. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.04",
+      "raw": "Nightfall Fixed an issue where Fade’s hands got stuck in place if she crouched while holding Nightfall out. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.09",
+      "raw": "Prowler Fixed a bug where players could outrun a Prowler during its bite Prowlers should now continue to track its target during the bite unless the target teleports outside its line of sight v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.04",
+      "raw": "Seize and Nightfall Art update for debuff VFX ***This was initially documented in v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.02",
+      "raw": "as part of a miscellaneous change affecting the Decay debuff overall but it was not active on these abilities until 8.04. The fix itself is [[undocumented]]. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.10",
+      "raw": "Prowler Fixed issues with it passing through certain objects. Team Deathmatch only: Prowler Cooldown decreased 44s >>> 36s Seize Cooldown decreased 51s >>> 48s v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "assing through certain objects. Team Deathmatch only: Prowler Cooldown decreased",
+          "stat": "cooldown",
+          "before": 44.0,
+          "before_unit": "s",
+          "after": 36.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Seize Cooldown decreased",
+          "stat": "cooldown",
+          "before": 51.0,
+          "before_unit": "s",
+          "after": 48.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "assing through certain objects. Team Deathmatch only: Prowler Cooldown decreased",
+          "stat": "cooldown",
+          "before": 44.0,
+          "before_unit": "s",
+          "after": 36.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Seize Cooldown decreased",
+          "stat": "cooldown",
+          "before": 51.0,
+          "before_unit": "s",
+          "after": 48.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "7.09",
+      "raw": "Prowler Adjusted collision so that they go over Trapwires placed at foot height and under Trapwires placed at head height. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.04",
+      "raw": "Prowler Time to re-equip gun takes slightly longer after using the ability v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.10",
+      "raw": "Updated Fade’s in-game portrait for better gameplay readability and quality consistency. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.0",
+      "raw": "Prowler Can no longer continue controlling Prowlers while suppressed Haunt Will no longer take damage from allied Hunter's Fury v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "Can no longer continue controlling Prowlers while suppressed Haunt Will no longer take damage from a",
+          "stat": "effect",
+          "description": "Can no longer continue controlling Prowlers while suppressed Haunt Will no longer take damage from a",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.12",
+      "raw": "Prowler Health decreased 100 HP >>> 60 HP Now immune to all allied damage Haunt Now immune to all allied damage v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Prowler Health decreased",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "hp",
+          "after": 60.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Prowler Health decreased",
+          "stat": "health",
+          "before": 100.0,
+          "before_unit": "hp",
+          "after": 60.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now immune to all allied damage Haunt Now immune to all allied damage v",
+          "stat": "effect",
+          "description": "Now immune to all allied damage Haunt Now immune to all allied damage v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.10",
+      "raw": "Prowler Duration reduced 3 >>> 2.5 s Delay on bite upon reaching target increased .4 >>> .6 s Nearsight duration reduced 3.5 >>> 2.75 s Prowlers now fizzle out and no longer debuff targets that teleport away before the prowler finished its bite animation Hitbox improvements Nightfall Cost increased 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Prowler Duration reduced",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Delay on bite upon reaching target increased",
+          "stat": "delay",
+          "before": 0.4,
+          "before_unit": "",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Nearsight duration reduced",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "",
+          "after": 2.75,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "prowler finished its bite animation Hitbox improvements Nightfall Cost increased",
+          "stat": "cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Prowler Duration reduced",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Delay on bite upon reaching target increased",
+          "stat": "delay",
+          "before": 0.4,
+          "before_unit": "",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Nearsight duration reduced",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "",
+          "after": 2.75,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "prowler finished its bite animation Hitbox improvements Nightfall Cost increased",
+          "stat": "cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "no longer debuff targets that teleport away before the prowler finished its bite animation Hitbox im",
+          "stat": "effect",
+          "description": "no longer debuff targets that teleport away before the prowler finished its bite animation Hitbox im",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.09",
+      "raw": "Can no longer reactive or if they are still airborne while Fade is suppressed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Can no longer reactive or if they are still airborne while Fade is suppressed v",
+          "stat": "effect",
+          "description": "Can no longer reactive or if they are still airborne while Fade is suppressed v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.01",
+      "raw": "Haunt Fixed issue causing Haunt to sometimes reveal enemies that were on the other side of a thin wall v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.0",
+      "raw": "Haunt Fixed a bug where revealed agents would sometimes briefly appear in an incorrect location on the minimap v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.09",
+      "raw": "Seize VFX change to the orb for a more dynamic presentation in 1p and Agent select Nightfall Decreased amount of flickering textures on diagonal walls when casting Added VFX for additional clarity and visual impact v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added VFX for additional clarity and visual impact v",
+          "stat": "effect",
+          "description": "Added VFX for additional clarity and visual impact v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.08",
+      "raw": "Added Console-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added Console-only[] v",
+          "stat": "effect",
+          "description": "Added Console-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.01",
+      "raw": "Haunt Fixed an issue where Haunt did not properly apply AimAssist to Revealed Targets. Nightfall Fixed an issue where AimAssist was incorrectly being applied when it was equipped.",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

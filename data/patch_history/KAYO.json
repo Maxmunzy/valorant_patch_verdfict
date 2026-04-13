@@ -1,0 +1,912 @@
+{
+  "agent": "KAYO",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 31,
+    "balance_patches": 14,
+    "numeric_changes": 16,
+    "all_changes": 27
+  },
+  "current_stats": {
+    "C": {
+      "name": "FRAG/ment",
+      "creds": 200,
+      "charges": 1,
+      "function": "Deterrent",
+      "stats": {
+        "Equip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Windup": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "rowspan=\"2\"|Radii": {
+          "value": 1.0,
+          "unit": "meter",
+          "raw": "1 meter (Inner)"
+        },
+        "4 meters (Outer)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|5.01}}"
+        },
+        "Damage": {
+          "value": 25.0,
+          "unit": "-60 per tickTotal 100-240",
+          "raw": "25-60 per tick<br>Total 100-240<br><small>(Minimum Outer radius damage to Inner radius damage)</small>"
+        },
+        "rowspan=\"2\"|Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 1 second",
+          "raw": "1 every 1 second"
+        },
+        "Total 4 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>[[Range#Target_Practice|Range's training bot]]"
+        },
+        "Duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "FLASH/drive",
+      "creds": 250,
+      "charges": 2,
+      "function": "[[Blind#Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Windup time on bounce": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds (Primary fire)<br><small/>(max windup time not affected)"
+        },
+        "Max windup time": {
+          "value": 1.6,
+          "unit": "seconds",
+          "raw": "1.6 seconds (Primary fire)<br>1 second (Alt fire)"
+        },
+        "Telegraph windup time": {
+          "value": 0.3,
+          "unit": "seconds",
+          "raw": "0.3 seconds"
+        },
+        "<!--rowspan=2|-->Max blind duration": {
+          "value": 2.25,
+          "unit": "seconds",
+          "raw": "2.25 seconds <!--(Primary fire)-->"
+        },
+        "1.5 seconds (Alt fire)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|10.06}}-->"
+        }
+      }
+    },
+    "E": {
+      "name": "ZERO/point",
+      "creds": null,
+      "charges": 1,
+      "function": "Intel<br>Limiter",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Radius": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters"
+        },
+        "Windup": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Suppression duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "NULL/cmd",
+      "creds": null,
+      "charges": null,
+      "function": "Empowerment<br>Limiter<br>[[Sustain#Revive",
+      "stats": {
+        "Windup time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Radius": {
+          "value": 42.5,
+          "unit": "meters",
+          "raw": "42.5 meters"
+        },
+        "Buffs": {
+          "value": null,
+          "unit": "",
+          "raw": "<nowiki>+</nowiki>10% Fire rate<br><nowiki>+</nowiki>10% Reload speed<br><nowiki>+</nowiki>10% Recovery speed<br>+10% Equip speed"
+        },
+        "Suppression duration": {
+          "value": 4.0,
+          "unit": "seconds",
+          "raw": "4 seconds"
+        },
+        "rowspan=\"2\" |Ticks/Tick Rate": {
+          "value": 1.0,
+          "unit": "every 3 seconds",
+          "raw": "1 every 3 seconds"
+        },
+        "5 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>In-game"
+        },
+        "Overloaded Duration": {
+          "value": 12.0,
+          "unit": "seconds",
+          "raw": "12 seconds"
+        },
+        "Downed Health": {
+          "value": 850.0,
+          "unit": "HP",
+          "raw": "850 HP"
+        },
+        "Downed Duration": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Stabilization duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        },
+        "Revive duration": {
+          "value": 1.55,
+          "unit": "seconds",
+          "raw": "1.55 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.00",
+      "raw": "FRAG/ment Fixed an issue where throw animations would break if aiming straight down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "NULL/cmd Fixed a bug where the killfeed wasn’t showing the proper headshot icon if KAY/O was the last player to die while active. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "ZERO/point Cooldown increased from 40s >>> 60s FLASH/drive Underhand maximum flash duration increased from 1.5s >>> 2.25s NULL/cmd Increased fire rate reduced from 15% >>> 10% Increased weapon draw speed by 10% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "ZERO/point Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "FLASH/drive Underhand maximum flash duration increased from",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "s",
+          "after": 2.25,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "NULL/cmd Increased fire rate reduced from",
+          "stat": "other",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "ZERO/point Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "FLASH/drive Underhand maximum flash duration increased from",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "s",
+          "after": 2.25,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "NULL/cmd Increased fire rate reduced from",
+          "stat": "other",
+          "before": 15.0,
+          "before_unit": "%",
+          "after": 10.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.04",
+      "raw": "(changed in v11.02) ZERO/point Fixed a bug where KAY/O’s ZERO/point revealed exact opponent locations with an audio cue. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.00",
+      "raw": "NULL/cmd Fixed an issue where KAYO’s ultimate sometimes did not apply the suppression visuals to opponents v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "NULL/cmd Fixed an issue where KAY/O’s revive SFX would persist after being killed while being resurrected by an ally during NULL/cmd. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.06",
+      "raw": "FLASH/drive Upon bouncing, flashes will now start a 0.8 second windup and then pop. This windup has unique audio and visuals when triggered. The bounce windup will not be triggered if it is already less than 0.8 seconds from popping, so it won’t increase the total max time from throw to pop. Underhand maximum flash duration 1.25s >>> 1.5s Increase VO callout range of KAY/O’s “flashing” voice line 20m >>> 50m Unequip time 0.85s >>> 0.6s A minimap indicator has been added to the flash for teammates only. ZERO/point Fixed an issue where the dagger trajectory could behave unexpectedly with packet loss. NULL/cmd Ally resurrection time 3s >>> 1.5s Fixed a rare issue where KAY/O could appear standing up when downed during NULL/cmd v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " increase the total max time from throw to pop. Underhand maximum flash duration",
+          "stat": "duration",
+          "before": 1.25,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "voice line",
+          "stat": "other",
+          "before": 20.0,
+          "before_unit": "m",
+          "after": 50.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip time",
+          "stat": "duration",
+          "before": 0.85,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "tory could behave unexpectedly with packet loss. NULL/cmd Ally resurrection time",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " increase the total max time from throw to pop. Underhand maximum flash duration",
+          "stat": "duration",
+          "before": 1.25,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "voice line",
+          "stat": "other",
+          "before": 20.0,
+          "before_unit": "m",
+          "after": 50.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip time",
+          "stat": "duration",
+          "before": 0.85,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "tory could behave unexpectedly with packet loss. NULL/cmd Ally resurrection time",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "added to the flash for teammates only",
+          "stat": "effect",
+          "description": "added to the flash for teammates only",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.05",
+      "raw": "NULL/cmd Increased rate of fire to have consistent recoil control that matches the default rate of fire. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.04",
+      "raw": "FLASH/drive Fixed an issue with FLASH/drive showing a second explosion if it is thrown behind a wall. Undocumented FRAG/ment Will now damage Ascent and Sunset doors v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.04",
+      "raw": "ZERO/point Fixed known cases where ZERO/point would sometimes report inaccurate information. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.12",
+      "raw": "NULL/cmd When KAY/O is downed, the red portrait will now show for everyone in the game. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.02",
+      "raw": "ZERO/point Fixed the Knife Handle collision staying in world after the Suppression explosion. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.10",
+      "raw": "ZERO/point Improved the hitbox on KAY/O's ZERO/point so shooting the handle of the knife destroys it. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.07",
+      "raw": "FRAG/ment Critical danger indicator added to FRAG/ment v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "added to FRAG/ment v",
+          "stat": "effect",
+          "description": "added to FRAG/ment v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "6.03",
+      "raw": "Fixed a bug where KAY/O would sometimes be able to move after being downed during NULL/cmd v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.02",
+      "raw": "Potentially fixed bug with KAY/O’s ZERO/point (E) not showing the correct enemies that it has suppressed v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.12",
+      "raw": "FRAG/ment Now deals damage to Fade's Prowler Damage modifier to non-players reduced 250% >>> 100% ZERO/point Health increased 1 HP >>> 20 HP Now immune to all allied damage Added voiceover that informs allies on exactly how many enemies have been suppressed NULL/cmd Ultimate points increased 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s Prowler Damage modifier to non-players reduced",
+          "stat": "damage",
+          "before": 250.0,
+          "before_unit": "%",
+          "after": 100.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "ZERO/point Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "exactly how many enemies have been suppressed NULL/cmd Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "s Prowler Damage modifier to non-players reduced",
+          "stat": "damage",
+          "before": 250.0,
+          "before_unit": "%",
+          "after": 100.0,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "ZERO/point Health increased",
+          "stat": "health",
+          "before": 1.0,
+          "before_unit": "hp",
+          "after": 20.0,
+          "after_unit": "hp",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "exactly how many enemies have been suppressed NULL/cmd Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "Now deals damage to Fade's Prowler Damage modifier to non-players reduced 250% >>> 100% ZERO/point H",
+          "stat": "effect",
+          "description": "Now deals damage to Fade's Prowler Damage modifier to non-players reduced 250% >>> 100% ZERO/point H",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Now immune to all allied damage Added voiceover that informs allies on exactly how many enemies have",
+          "stat": "effect",
+          "description": "Now immune to all allied damage Added voiceover that informs allies on exactly how many enemies have",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.08",
+      "raw": "ZERO/point The position indicator will no longer appear twice on the minimap in some cases v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "will no longer appear twice on the minimap in some cases v",
+          "stat": "effect",
+          "description": "will no longer appear twice on the minimap in some cases v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.07",
+      "raw": "FLASH/drive Overhand (left-click) flashbang max duration increased 2s>>>2.25s Underhand (right-click) flashbang max duration decreased 2s>>>1.25s Unequip Delay out of both flashes increased .6s >>> .85s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "FLASH/drive Overhand (left-click) flashbang max duration increased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 2.25,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Underhand (right-click) flashbang max duration decreased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.25,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip Delay out of both flashes increased",
+          "stat": "delay",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 0.85,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "FLASH/drive Overhand (left-click) flashbang max duration increased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 2.25,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Underhand (right-click) flashbang max duration decreased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 1.25,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Unequip Delay out of both flashes increased",
+          "stat": "delay",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 0.85,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.06",
+      "raw": "ZERO/point Fixed issue with ZERO/point sometimes incorrectly displaying enemies that were hit on UI v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.01",
+      "raw": "FRAG/ment Zone diameter reduced 10m >>> 8m Damage now applies without needing line of sight NULL/cmd Now, only allies will hear the full channel audio of reviving KAY/O, while downed Enemies will only hear a short audio cue when the revive has started, similar to ultimate orbs or the spike v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "FRAG/ment Zone diameter reduced",
+          "stat": "range",
+          "before": 10.0,
+          "before_unit": "m",
+          "after": 8.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "FRAG/ment Zone diameter reduced",
+          "stat": "range",
+          "before": 10.0,
+          "before_unit": "m",
+          "after": 8.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "now applies without needing line of sight NULL/cmd Now, only allies will hear the full channel audio",
+          "stat": "effect",
+          "description": "now applies without needing line of sight NULL/cmd Now, only allies will hear the full channel audio",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.11",
+      "raw": "NULL/cmd Fixed a bug where KAY/O was unable to be re-stabilized if he had already been resurrected by Sage v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "NULL/cmd Fixed a bug where Chamber's Tour De Force would inconsistently spawn slow zones when firing at KAY/O during NULL/cmd v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.06",
+      "raw": "FLASH/drive Duration of windup telegraph reduced 0.5s >>> 0.3s Duration of windup telegraph reduced on Right Click 1s >>> 0.3s The audio attached to the in-flight projectile has been removed NULL/cmd No longer stops pulsing after being downed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "FLASH/drive Duration of windup telegraph reduced",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.3,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration of windup telegraph reduced on Right Click",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 0.3,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "FLASH/drive Duration of windup telegraph reduced",
+          "stat": "duration",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 0.3,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration of windup telegraph reduced on Right Click",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 0.3,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "removed NULL/cmd No longer stops pulsing after being downed v",
+          "stat": "effect",
+          "description": "removed NULL/cmd No longer stops pulsing after being downed v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.05",
+      "raw": "NULL/cmd Waves will no longer destroy the glass on Ascent v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "will no longer destroy the glass on Ascent v",
+          "stat": "effect",
+          "description": "will no longer destroy the glass on Ascent v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.04",
+      "raw": "NULL/cmd KAY/O will no longer equip abilities that have no charges if they were equipped and used right after activating NULL/cmd v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "will no longer equip abilities that have no charges if they were equipped and used right after activ",
+          "stat": "effect",
+          "description": "will no longer equip abilities that have no charges if they were equipped and used right after activ",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.02",
+      "raw": "NULL/cmd Fixed KAY/O’s textures applying themselves to weapons when he is re-stabilized during NULL/cmd v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.01",
+      "raw": "NULL/cmd Can no longer be healed while downed Undocumented <sup/>Replication only ZERO/point Cooldown restock removed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "Can no longer be healed while downed Undocumented <sup/>Replication only ZERO/point Cooldown restock",
+          "stat": "effect",
+          "description": "Can no longer be healed while downed Undocumented <sup/>Replication only ZERO/point Cooldown restock",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.0",
+      "raw": "Added PC-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added PC-only[] v",
+          "stat": "effect",
+          "description": "Added PC-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.00",
+      "raw": "NULL/cmd Fixed a bug where KAY/O would make no sound upon dying while downed Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.05",
+      "raw": "Fixed an issue where KAY/O's Ability HUD was ordered incorrectly.",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

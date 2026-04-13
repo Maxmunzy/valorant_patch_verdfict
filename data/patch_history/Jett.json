@@ -1,0 +1,811 @@
+{
+  "agent": "Jett",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 28,
+    "balance_patches": 13,
+    "numeric_changes": 16,
+    "all_changes": 25
+  },
+  "current_stats": {
+    "C": {
+      "name": "Cloudburst",
+      "creds": 200,
+      "charges": 2,
+      "function": "[[Vision Blocker#Smoke",
+      "stats": {
+        "Unequip time": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        },
+        "Maximum travel time in air": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Radius": {
+          "value": 3.35,
+          "unit": "meters",
+          "raw": "3.35 meters"
+        },
+        "Duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds<br>(includes 0.6-second deployment time)"
+        }
+      }
+    },
+    "Q": {
+      "name": "Updraft",
+      "creds": 150,
+      "charges": null,
+      "function": "[[Mobility#Dash",
+      "stats": {
+        "Duration": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Dash distance": {
+          "value": 5.0,
+          "unit": "meters",
+          "raw": "5 meters"
+        }
+      }
+    },
+    "E": {
+      "name": "Tailwind",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Mobility#Dash",
+      "stats": {
+        "Windup": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Empowered Duration": {
+          "value": 7.5,
+          "unit": "seconds",
+          "raw": "7.5 seconds"
+        },
+        "Dash Duration": {
+          "value": 0.45,
+          "unit": "seconds",
+          "raw": "0.45 seconds"
+        },
+        "Base dash distance": {
+          "value": 11.0,
+          "unit": "meters",
+          "raw": "11 meters"
+        },
+        "Unequip time": {
+          "value": 0.2,
+          "unit": "seconds",
+          "raw": "0.2 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Blade Storm",
+      "creds": null,
+      "charges": null,
+      "function": "[[Empowerment#Weapon Equip",
+      "stats": {
+        "Initial windup time": {
+          "value": 1.02,
+          "unit": "seconds",
+          "raw": "1.02 seconds"
+        },
+        "Ammunition": {
+          "value": 5.0,
+          "unit": "blades",
+          "raw": "5 blades"
+        },
+        "Reequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Quick equip time": {
+          "value": 0.15,
+          "unit": "seconds",
+          "raw": "0.15 seconds"
+        },
+        "Damage": {
+          "value": 50.0,
+          "unit": "",
+          "raw": "50"
+        },
+        "Damage multipliers": {
+          "value": null,
+          "unit": "",
+          "raw": "Headshot: x3<Br>Leg shot: x0.85"
+        },
+        "'Single Fire' fire rate": {
+          "value": 6.0,
+          "unit": "per second1 every 0.167 seconds",
+          "raw": "6 per second<br>1 every 0.167 seconds"
+        },
+        "Unequip times<br><small>(out of ammo)</small>": {
+          "value": 0.167,
+          "unit": "seconds",
+          "raw": "0.167 seconds (Single fire)<br>0.45 seconds (Burst fire)"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.04",
+      "raw": "Drift Fixed a bug where its gliding SFX was audible from the other side of Astra’s Cosmic Divide. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Cloudburst Fixed an issue where throw animations would break if aiming straight down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.11",
+      "raw": "Fixed a bug where Jett could get stuck in midair near ledges/box corners v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.05",
+      "raw": "Tailwind Fixed a bug where the audio would continue into the next round. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.10",
+      "raw": "Drift Can no longer float while suppressed or detained. Tailwind Concuss now slows dashes by 50% v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "now slows dashes by 50% v",
+          "stat": "effect",
+          "description": "now slows dashes by 50% v",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "Can no longer float while suppressed or detained",
+          "stat": "effect",
+          "description": "Can no longer float while suppressed or detained",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.10",
+      "raw": "Blade Storm Third person animations while Blade Storm is equipped have been adjusted to help with combat clarity. v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.04",
+      "raw": "Tailwind Dash window decreased 12s >>> 7.5s Activation windup increased 0.75s >>> 1s Cloudburst Duration decreased 4.5s >>> 2.5s Time to re-equip gun takes slightly longer after using the ability. Updraft Charges decreased 2 >>> 1 Blade Storm Ultimate points increased 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Tailwind Dash window decreased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 7.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Activation windup increased",
+          "stat": "other",
+          "before": 0.75,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Cloudburst Duration decreased",
+          "stat": "duration",
+          "before": 4.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "uip gun takes slightly longer after using the ability. Updraft Charges decreased",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Blade Storm Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Tailwind Dash window decreased",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 7.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Activation windup increased",
+          "stat": "other",
+          "before": 0.75,
+          "before_unit": "s",
+          "after": 1.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Cloudburst Duration decreased",
+          "stat": "duration",
+          "before": 4.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "uip gun takes slightly longer after using the ability. Updraft Charges decreased",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Blade Storm Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.03",
+      "raw": "Adjusted hair height to fit within standardized vertical range v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.03",
+      "raw": "Blade Storm Blade Storm legshot multiplier reduced from 1.0 >>> 0.85 Tailwind Fixed a bug where switching weapons in the middle of the dash for Tailwind would cause the weapon pull out animation to take longer v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Blade Storm Blade Storm legshot multiplier reduced from",
+          "stat": "multiplier",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.85,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Blade Storm Blade Storm legshot multiplier reduced from",
+          "stat": "multiplier",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.85,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.0",
+      "raw": "Tailwind Fixed a bug where Jett could equip a weapon during the dash v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.11",
+      "raw": "Tailwind Fixed a bug where using Tailwind in specific locations could let Jett reach very faster than intended speeds (aka. “superdash”) v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.09",
+      "raw": "Fixed a bug where Tailwind would sometimes fail to cast when used immediately after curving Cloudburst Blade Storm Fixed a bug where the indicator would sometimes stay active after firing all kunai v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.08",
+      "raw": "Fixed a bug where Jett could find herself unable to use abilities or weapons when using Tailwind immediately after depleting Blade Storm's daggers Tailwind NEW EFFECT: On first cast, Jett consumes her Tailwind charge and after a .75 second delay, activates a 12-second window where she’s able to dash on next key press Charge can still be regained with 2 kills These changes also apply to Big Knife rounds in Escalation Blade Storm Ammo count added to HUD v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "NEW EFFECT: On first cast, Jett consumes her Tailwind charge and after a",
+          "stat": "effect",
+          "description": "NEW EFFECT: On first cast, Jett consumes her Tailwind charge and after a",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "added to HUD v",
+          "stat": "effect",
+          "description": "added to HUD v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "4.07",
+      "raw": "Blade Storm Can now be input-queued to equip after the current action v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Can now be input-queued to equip after the current action v",
+          "stat": "effect",
+          "description": "Can now be input-queued to equip after the current action v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "3.09",
+      "raw": "Updraft Fixed bug that displayed 1P visuals incorrectly [[Undocumented]] (v3.08) Updraft Cost increased 150 >>> 200 Reverted in a hotfix Tailwind Weapon equip time after casting increased Reverted in a hotfix v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "v3.08) Updraft Cost increased",
+          "stat": "cost",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "v3.08) Updraft Cost increased",
+          "stat": "cost",
+          "before": 150.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.07",
+      "raw": "Blade Storm Kunai will now recharge after killing a training dummy or defuse practice bot v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.06",
+      "raw": "Cloudburst Charges reduced 3 >>> 2 Blade Storm Right-click/Alternate Fire kills no longer recharge kunai Right-click/Alt. Fire damage differences from v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Cloudburst Charges reduced",
+          "stat": "charges",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Cloudburst Charges reduced",
+          "stat": "charges",
+          "before": 3.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "no longer recharge kunai Right-click/Alt",
+          "stat": "effect",
+          "description": "no longer recharge kunai Right-click/Alt",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.09",
+      "raw": "are reverted, damage and multipliers will once again mirror the left-click v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.0",
+      "raw": "Cloudburst Cost increased 100 >>> 200 Updraft Cost increased 100 >>> 150 Tailwind No longer breaks Cypher's Trapwires Blade Storm Ultimate points required increased 6 >>> 7 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Cloudburst Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Updraft Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "s Trapwires Blade Storm Ultimate points required increased",
+          "stat": "ult_cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Cloudburst Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Updraft Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "s Trapwires Blade Storm Ultimate points required increased",
+          "stat": "ult_cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "No longer breaks Cypher's Trapwires Blade Storm Ultimate points required increased 6 >>> 7 v",
+          "stat": "effect",
+          "description": "No longer breaks Cypher's Trapwires Blade Storm Ultimate points required increased 6 >>> 7 v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.01",
+      "raw": "Cloudburst Duration decreased 7 >>> 4.5 seconds Tailwind Can no longer trigger the defuse sound while dashing v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Cloudburst Duration decreased",
+          "stat": "duration",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 4.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Cloudburst Duration decreased",
+          "stat": "duration",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 4.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer trigger the defuse sound while dashing v",
+          "stat": "effect",
+          "description": "Can no longer trigger the defuse sound while dashing v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.11",
+      "raw": "Tailwind Can no longer use on ropes or ziplines v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Can no longer use on ropes or ziplines v",
+          "stat": "effect",
+          "description": "Can no longer use on ropes or ziplines v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.09",
+      "raw": "Blade Storm Time between consecutive Burst Fire use increased 0.33 seconds >>> 0.45 seconds Daggers thrown in Burst now have a damage falloff that begins at 12 meters and drops steadily at max falloff to 30 damage The correct value for damage dealt at max falloff is undocumented, instead officially being documented in the patch notes as dealing 35 damage at max falloff Headshot multiplier on Burst Fire reduced 3x >>> 2x v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Blade Storm Time between consecutive Burst Fire use increased",
+          "stat": "duration",
+          "before": 0.33,
+          "before_unit": "seconds",
+          "after": 0.45,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "es as dealing 35 damage at max falloff Headshot multiplier on Burst Fire reduced",
+          "stat": "multiplier",
+          "before": 3.0,
+          "before_unit": "x",
+          "after": 2.0,
+          "after_unit": "x",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Blade Storm Time between consecutive Burst Fire use increased",
+          "stat": "duration",
+          "before": 0.33,
+          "before_unit": "seconds",
+          "after": 0.45,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "es as dealing 35 damage at max falloff Headshot multiplier on Burst Fire reduced",
+          "stat": "multiplier",
+          "before": 3.0,
+          "before_unit": "x",
+          "after": 2.0,
+          "after_unit": "x",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.02",
+      "raw": "Blade Storm Now refreshes when used to kill Phoenix during Run it Back. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.0",
+      "raw": "Fixed a bug with Jett’s lower body popping out of place during her glide Cloudburst Duration increased 4 >>> 7 seconds Tailwind Automatically breaks Cypher's Trapwires after being briefly revealed v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "s lower body popping out of place during her glide Cloudburst Duration increased",
+          "stat": "duration",
+          "before": 4.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "s lower body popping out of place during her glide Cloudburst Duration increased",
+          "stat": "duration",
+          "before": 4.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "0.50",
+      "raw": "Updraft Cost reduced 200 >>> 100 credits Console-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Updraft Cost reduced",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "credits",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Updraft Cost reduced",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "credits",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.10",
+      "raw": "Blade Storm Fixed an issue where sensitivity is severely reduced when using Blade Storm until engaging Focus. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.0",
+      "raw": "Tailwind Fixed an issue with Jett's Tailwind",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

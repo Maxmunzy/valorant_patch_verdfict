@@ -1,0 +1,1380 @@
+{
+  "agent": "Yoru",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 40,
+    "balance_patches": 16,
+    "numeric_changes": 33,
+    "all_changes": 50
+  },
+  "current_stats": {
+    "C": {
+      "name": "Fakeout",
+      "creds": 200,
+      "charges": 1,
+      "function": "Decoy<br>[[Blind#Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Maximum image duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds"
+        },
+        "Flash angle": {
+          "value": 30.0,
+          "unit": "°",
+          "raw": "30°<br><small>(either side of the direction the image is looking in)</small>"
+        },
+        "Flash windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max flash duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Blindside",
+      "creds": 250,
+      "charges": 1,
+      "function": "[[Blind#Flash",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max travel time in air": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        },
+        "Windup time": {
+          "value": 0.6,
+          "unit": "seconds",
+          "raw": "0.6 seconds"
+        },
+        "Max flash duration": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "Gatecrash",
+      "creds": 150,
+      "charges": 2,
+      "function": "Decoy<br>[[Mobility#Teleport",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy length": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Unequip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Tether Duration": {
+          "value": 15.0,
+          "unit": "seconds",
+          "raw": "15 seconds"
+        },
+        "Detection radius": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Tether audio cue radius": {
+          "value": 12.5,
+          "unit": "meters",
+          "raw": "12.5 meters"
+        },
+        "Teleport duration": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 1.2 seconds</u><br>0.5-second windup<br>0.7-second arrival at tether location"
+        },
+        "Teleport audio cue radius": {
+          "value": 42.5,
+          "unit": "meters",
+          "raw": "42.5 meters"
+        },
+        "Fake decal duration": {
+          "value": 30.0,
+          "unit": "seconds",
+          "raw": "30 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Dimensional Drift",
+      "creds": null,
+      "charges": null,
+      "function": "[[Mobility#Intangibility",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Cast delay": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds"
+        },
+        "Detection radius": {
+          "value": 15.0,
+          "unit": "meters",
+          "raw": "15 meters<br><small>(footstep audio only)</small>"
+        },
+        "Unequip/Return time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.05",
+      "raw": "Gatecrash Duration beacon is active reduced 30s >> 15s Blindside Charges reduced from 2 >> 1. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.01",
+      "raw": "Dimensional Drift and Gatecrash Fixed a rare bug where Yoru could use and instantly cancel Dimensional Drift by casting Gatecrash right as the buy phase barrier dropped. Fakeout Fixed a bug where the clone could be pushed away by Veto’s Chokehold if Chokehold was on an elevated surface. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Dimensional Drift Fixed a bug where using it while attaching to an ascender would cause him to get stuck in an animation loop. v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.10",
+      "raw": "Fakeout Clone will now properly show suppression VFX when affected by suppression. Blindside Observers are now able to see it immediately instead of after it bounces. Will display the correct color VFX when there are two Yoru’s in the same match. Fixed bug where the audio was audible by enemies while stealthed. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "will now properly show suppression VFX when affected by suppression",
+          "stat": "effect",
+          "description": "will now properly show suppression VFX when affected by suppression",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "11.09",
+      "raw": "Fakeout Fixed a bug where it wasn’t being destroyed by abilities if it took lethal damage Fixed a bug where it didn’t collide with things in the game as if it were a player v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Gatecrash Health decreased from 60 >>> 20 Audio now plays from Yoru’s location when Yoru teleports or fakes it Fakeout Flash duration decreased from 3s >>> 2s Blindside Flash duration decreased from 1.75s >>> 1.5s Flash now follows the standard flash falloff curves as other Agents. Previously, the flashes that were slightly offscreen were more effective than intended Dimensional Drift Can no longer cast Blindside, or set up his Fakeout during Dimensional Drift. He can still cast the initial Gatecrash and reactivation, as well as reactivation of Fakeouts v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Gatecrash Health decreased from",
+          "stat": "health",
+          "before": 60.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "s location when Yoru teleports or fakes it Fakeout Flash duration decreased from",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Flash duration decreased from",
+          "stat": "duration",
+          "before": 1.75,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Gatecrash Health decreased from",
+          "stat": "health",
+          "before": 60.0,
+          "before_unit": "",
+          "after": 20.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "s location when Yoru teleports or fakes it Fakeout Flash duration decreased from",
+          "stat": "duration",
+          "before": 3.0,
+          "before_unit": "s",
+          "after": 2.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Flash duration decreased from",
+          "stat": "duration",
+          "before": 1.75,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "Q",
+          "context_label": "Can no longer cast Blindside, or set up his Fakeout during Dimensional Drift",
+          "stat": "effect",
+          "description": "Can no longer cast Blindside, or set up his Fakeout during Dimensional Drift",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.06",
+      "raw": "Dimensional Drift Fixed a bug where in very specific set of circumstances after turning invisible, he would reappear in his original location when the invisibility ends. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.05",
+      "raw": "Gatecrash Fixed an issue where the in-world icon would not change color when aimed at. Dimensional Drift Fixed a bug where in some cases after turning invisible, he would reappear in his original location when the invisibility ends. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.02",
+      "raw": "Gatecrash Fixed a bug that caused Yoru’s right hand to glow if an enemy Yoru equipped his Gatecrash within a certain range. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.10",
+      "raw": "Blindside Fixed an issue where the visual decals would linger on walls they bounced off of v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.08",
+      "raw": "Fakeout Reverted a bugfix that caused Yoru’s clone to slightly mismatch normal player movement when running into walls. Dimensional Drift Duration reduced 12s >>> 10s Point cost 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "rmal player movement when running into walls. Dimensional Drift Duration reduced",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 10.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Point cost",
+          "stat": "cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "rmal player movement when running into walls. Dimensional Drift Duration reduced",
+          "stat": "duration",
+          "before": 12.0,
+          "before_unit": "s",
+          "after": 10.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Point cost",
+          "stat": "cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.06",
+      "raw": "Fakeout Cost increase 100 >>> 200 credits v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Fakeout Cost increase",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Fakeout Cost increase",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "9.09",
+      "raw": "Dimensional Drift Fixed a bug where Yoru could pick up KAY/O with NULL/cmd active during Dimensional Drift Fixed a bug where Yoru would hold the Nocturnum scythe incorrectly after using Dimensional Drift v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.08",
+      "raw": "Fakeout Blind abilities like ’s Dizzy and ’s Arc Rose will now display the blind effect on Yoru’s Fakeout clone as if he was a real Agent. Vyse will play her Successful Blind celebration lines when blinding Yoru’s Fakeout clone. ’s Neural Theft will show the Yoru’s Fakeout clone. ’s Meddle will now show the decay effect on Yoru’s Fakeout clone. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.10",
+      "raw": "Fakeout Enemy agents will callout image on sight as if it is any other enemy agent, albeit using the generic \"Enemy spotted\" voiceline. This is an undocumented change v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.0",
+      "raw": "Gatecrash Teleport will now be properly interrupted when suppressed mid-animation v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.11",
+      "raw": "Fakeout Can now be visually affected when hit by Concuss abiltiies. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Can now be visually affected when hit by Concuss abiltiies",
+          "stat": "effect",
+          "description": "Can now be visually affected when hit by Concuss abiltiies",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "6.10",
+      "raw": "Fakeout Fixed an issue where Yoru’s Fakeout would min flash you if you were outside of its conal range of effect. Fixed a bug where Yoru’s Fakeout echo would sometimes not have a weapon equipped. The weapon that Yoru’s Fakeout echo equips should now use a more accurate weapons skin. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.08",
+      "raw": "Dimensional Drift Fixed an issue where Yoru couldn’t drop his weapon while using Dimensional Drift. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.03",
+      "raw": "Adjusted hair height to fit within standardized vertical range v",
+      "is_bugfix": false,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "6.02",
+      "raw": "Fakeout Fixed a bug where Fakeout could get stuck in mid-air in various locations v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.12",
+      "raw": "Fakeout Now immune to all allied damage Gatecrash Health decreased 100 HP >>> 60 HP Cost decreased 200 >>> 150 Now immune to all allied damage v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fakeout Now immune to all allied damage Gatecrash Health decreased",
+          "stat": "damage",
+          "before": 100.0,
+          "before_unit": "hp",
+          "after": 60.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost decreased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Fakeout Now immune to all allied damage Gatecrash Health decreased",
+          "stat": "damage",
+          "before": 100.0,
+          "before_unit": "hp",
+          "after": 60.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost decreased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 150.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Now immune to all allied damage Gatecrash Health decreased 100 HP >>> 60 HP Cost decreased 200 >>> 1",
+          "stat": "effect",
+          "description": "Now immune to all allied damage Gatecrash Health decreased 100 HP >>> 60 HP Cost decreased 200 >>> 1",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.09",
+      "raw": "Dimensional Drift Detain now properly interrupts Dimensional Drift if it hits during cast delay. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "now properly interrupts Dimensional Drift if it hits during cast delay",
+          "stat": "effect",
+          "description": "now properly interrupts Dimensional Drift if it hits during cast delay",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.07",
+      "raw": "Blindside Duration increased 1.5s >>> 1.75s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Duration increased",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "s",
+          "after": 1.75,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Duration increased",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "s",
+          "after": 1.75,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.04",
+      "raw": "Gatecrash Fixed a bug where Gatecrash would sometimes leave floor markers in incorrect locations v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "5.01",
+      "raw": "Dimensional Drift Increased duration of ultimate 10s >>> 12s Reduced unequip time 1.2s >>> 0.8s Fixed a bug where the invulnerability kicked in later than intended after it was cast v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Dimensional Drift Increased duration of ultimate",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 12.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reduced unequip time",
+          "stat": "duration",
+          "before": 1.2,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Dimensional Drift Increased duration of ultimate",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "s",
+          "after": 12.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Reduced unequip time",
+          "stat": "duration",
+          "before": 1.2,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.11",
+      "raw": "Dimensional Drift Fixed a bug where Yoru could use weapons earlier than intended when exiting Dimensional Drift Fixed a bug where the mask would flicker while running forward during Dimensional Drift v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.10",
+      "raw": "Progress/Charge bars moved to a consistent location and made a consistent size Gatecrash Voice lines relating to Gatecrash will now be heard globally by allies v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.08",
+      "raw": "Gatecrash Fixed a bug where Yoru could use Gatecrash to teleport out of bounds Dimensional Drift Fixed various exploits allowing Yoru to use weapons before fully decloaking at the end of Dimensional Drift v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.07",
+      "raw": "Dimensional Drift Fixed a bug where Yoru could use a weapon immediately after Dimensional Drift ended by exploiting an unwanted interaction with ropes [https://twitter.com/PlayVALORANT/status/1499170886150066178 v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Hotfix] Dimensional Drift Fixed issues with Dimensional Drift not acting as intended v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Fakeout - Reworked Charges reduced from 2 >>> 1 Decoy HP: 150 Decoy is now a full running version of Yoru and can only be sent running forward Right-click to place a stationary marker for the decoy Reactivate similarly to footsteps to create the decoy that runs forward Upon taking damage from an enemy gun, the decoy winds up, turns towards the enemy that shot it, and explodes after a short delay. Enemies within the cone are flashed Gatecrash Improved the system used to place Gatecrash at targeted ground locations Time it takes for teleport beacon to re-stealth has decreased 1.5 >>> 0.5 seconds Teleport beacon's in-game audio while traveling reduced 22.5m>>>12.5m Teleport beacon's speed has been increased 675 >>> 800 Charges increased from 1 >>> 2 Cost increased 0 >>> 200 Cooldown charge re",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Fakeout - Reworked Charges reduced from",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "d ground locations Time it takes for teleport beacon to re-stealth has decreased",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "",
+          "after": 0.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s in-game audio while traveling reduced",
+          "stat": "other",
+          "before": 22.5,
+          "before_unit": "m",
+          "after": 12.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s speed has been increased",
+          "stat": "speed",
+          "before": 675.0,
+          "before_unit": "",
+          "after": 800.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Charges increased from",
+          "stat": "charges",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 0.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "s to indicate location of the fake teleport Dimensional Drift Duration increased",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 10.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "preventing the invulnerability frame on cast Unequip delay time increased",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "",
+          "after": 1.2,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "points",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Fakeout - Reworked Charges reduced from",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "d ground locations Time it takes for teleport beacon to re-stealth has decreased",
+          "stat": "duration",
+          "before": 1.5,
+          "before_unit": "",
+          "after": 0.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s in-game audio while traveling reduced",
+          "stat": "other",
+          "before": 22.5,
+          "before_unit": "m",
+          "after": 12.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s speed has been increased",
+          "stat": "speed",
+          "before": 675.0,
+          "before_unit": "",
+          "after": 800.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Charges increased from",
+          "stat": "charges",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 2.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 0.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "s to indicate location of the fake teleport Dimensional Drift Duration increased",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 10.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "preventing the invulnerability frame on cast Unequip delay time increased",
+          "stat": "duration",
+          "before": 0.6,
+          "before_unit": "",
+          "after": 1.2,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 7.0,
+          "after_unit": "points",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "can now be faked by pressing F, while hovering over the beacon Fake teleport will play audio and por",
+          "stat": "effect",
+          "description": "can now be faked by pressing F, while hovering over the beacon Fake teleport will play audio and por",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "can now be heard within 15m of his location Yoru is now able to cast all utility out of his ultimate",
+          "stat": "effect",
+          "description": "can now be heard within 15m of his location Yoru is now able to cast all utility out of his ultimate",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "removed, switched back to 2-kill reset Gatecrash can now be faked by pressing F, while hovering over",
+          "stat": "effect",
+          "description": "removed, switched back to 2-kill reset Gatecrash can now be faked by pressing F, while hovering over",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer revealed to enemies Yoru's footsteps can now be heard within 15m of his location Yoru is n",
+          "stat": "effect",
+          "description": "no longer revealed to enemies Yoru's footsteps can now be heard within 15m of his location Yoru is n",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "rework",
+          "ability_slot": "C",
+          "context_label": "Reworked Charges reduced from 2 >>> 1 Decoy HP: 150 Decoy is now a full running version of Yoru and ",
+          "stat": "mechanic",
+          "description": "Reworked Charges reduced from 2 >>> 1 Decoy HP: 150 Decoy is now a full running version of Yoru and ",
+          "direction": "change"
+        }
+      ]
+    },
+    {
+      "patch": "3.0",
+      "raw": "Blindside Cost increased 200 >>> 250 Gatecrash Cooldown time increased 35 >>> 40 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Gatecrash Cooldown time increased",
+          "stat": "duration",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Cost increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 250.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Gatecrash Cooldown time increased",
+          "stat": "duration",
+          "before": 35.0,
+          "before_unit": "",
+          "after": 40.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "2.07",
+      "raw": "Yoru can no longer plant the Spike after using Gatecrash while Dimensional Drift is active v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "can no longer plant the Spike after using Gatecrash while Dimensional Drift is active v",
+          "stat": "effect",
+          "description": "can no longer plant the Spike after using Gatecrash while Dimensional Drift is active v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.06",
+      "raw": "Blindside Flash activation time decreased 0.8 seconds >>> 0.6 seconds Flash duration increased from 1.1 seconds >>> 1.5 seconds Gatecrash Gatecrash is no longer refreshed on kills and is instead replenished every 35 seconds Lifetime of the Gatecrash fragment increased 20 seconds >>> 30 seconds The range at which the Gatecrash fragment is revealed from stealth decreased 7m >>> 4m Visuals for visibility range added to the moving fragment Dimensional Drift Ult Points reduced 7 >>> 6 Yoru can now reactivate Gatecrash while in Dimensional Drift Time it takes to unequip out of Dimensional Drift decreased from 1.0 seconds >>> 0.6 seconds Fixed Yoru taking Decay damage while intangible v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Flash activation time decreased",
+          "stat": "duration",
+          "before": 0.8,
+          "before_unit": "seconds",
+          "after": 0.6,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Flash duration increased from",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "seconds",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "nstead replenished every 35 seconds Lifetime of the Gatecrash fragment increased",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "seconds",
+          "after": 30.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "The range at which the Gatecrash fragment is revealed from stealth decreased",
+          "stat": "range",
+          "before": 7.0,
+          "before_unit": "m",
+          "after": 4.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "sibility range added to the moving fragment Dimensional Drift Ult Points reduced",
+          "stat": "range",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 6.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "mensional Drift Time it takes to unequip out of Dimensional Drift decreased from",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "seconds",
+          "after": 0.6,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Flash activation time decreased",
+          "stat": "duration",
+          "before": 0.8,
+          "before_unit": "seconds",
+          "after": 0.6,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Flash duration increased from",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "seconds",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "nstead replenished every 35 seconds Lifetime of the Gatecrash fragment increased",
+          "stat": "duration",
+          "before": 20.0,
+          "before_unit": "seconds",
+          "after": 30.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "The range at which the Gatecrash fragment is revealed from stealth decreased",
+          "stat": "range",
+          "before": 7.0,
+          "before_unit": "m",
+          "after": 4.0,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "sibility range added to the moving fragment Dimensional Drift Ult Points reduced",
+          "stat": "range",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 6.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "mensional Drift Time it takes to unequip out of Dimensional Drift decreased from",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "seconds",
+          "after": 0.6,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "added to the moving fragment Dimensional Drift Ult Points reduced 7 >>> 6 Yoru can now reactivate Ga",
+          "stat": "effect",
+          "description": "added to the moving fragment Dimensional Drift Ult Points reduced 7 >>> 6 Yoru can now reactivate Ga",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "no longer refreshed on kills and is instead replenished every 35 seconds Lifetime of the Gatecrash f",
+          "stat": "effect",
+          "description": "no longer refreshed on kills and is instead replenished every 35 seconds Lifetime of the Gatecrash f",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.03",
+      "raw": "Fakeout Fakeout no longer has slightly different sounding footsteps than Yoru himself Fakeout no longer sometimes falls through the floor when the stationary version was placed Gatecrash Gatecrash now displays the range at which the tether can be seen by enemies while moving on the minimap The range that enemies are able to hear the audio of a Gatecrash teleport is now displayed on the minimap Fixed issue where teleporting to Gatecrash right as it expires caused Yoru to fall through the map to his death Dimensional Drift While in Dimensional Drift, Yoru's minimap is now visible Enemies within Yoru's vision range, while in Dimensional Drift, are now revealed to ally minimaps, as well Dimensional Drift can no longer body block enemies Fixed issue where Yoru was unable to equip a weapon or ab",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "no longer has slightly different sounding footsteps than Yoru himself Fakeout no longer sometimes fa",
+          "stat": "effect",
+          "description": "no longer has slightly different sounding footsteps than Yoru himself Fakeout no longer sometimes fa",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "can no longer body block enemies Fixed issue where Yoru was unable to equip a weapon or ability if h",
+          "stat": "effect",
+          "description": "can no longer body block enemies Fixed issue where Yoru was unable to equip a weapon or ability if h",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.02",
+      "raw": "Fakeout Throwing Fakeout through a teleporter no longer causes other projectiles thrown afterwards to play Agent audio instead of object audio Gatecrash Fixed Yoru getting stuck in various spots on maps when using Gatecrash v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "C",
+          "context_label": "no longer causes other projectiles thrown afterwards to play Agent audio instead of object audio Gat",
+          "stat": "effect",
+          "description": "no longer causes other projectiles thrown afterwards to play Agent audio instead of object audio Gat",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.0",
+      "raw": "Added Console-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added Console-only[] v",
+          "stat": "effect",
+          "description": "Added Console-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "10.04",
+      "raw": "Dimensional Drift Unequip delay decreased 1.2s >>> 0.8s (Standardizing to PC) Fakeout Max flash duration increased 2.0s >>> 3.0s (Standardizing to PC) Flash explosion delay increased: 0.6s >>> 0.8s Blindside Max Flash Duration increased from 1.25s >>> 1.75s (Standardizing to PC) Flash Explosion Delay: 0.7s >>> 0.6s (Standardizing to PC) v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Dimensional Drift Unequip delay decreased",
+          "stat": "delay",
+          "before": 1.2,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Standardizing to PC) Fakeout Max flash duration increased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 3.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Standardizing to PC) Flash explosion delay increased",
+          "stat": "delay",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Max Flash Duration increased from",
+          "stat": "duration",
+          "before": 1.25,
+          "before_unit": "s",
+          "after": 1.75,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Standardizing to PC) Flash Explosion Delay",
+          "stat": "delay",
+          "before": 0.7,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "X",
+          "context_label": "Dimensional Drift Unequip delay decreased",
+          "stat": "delay",
+          "before": 1.2,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Standardizing to PC) Fakeout Max flash duration increased",
+          "stat": "duration",
+          "before": 2.0,
+          "before_unit": "s",
+          "after": 3.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Standardizing to PC) Flash explosion delay increased",
+          "stat": "delay",
+          "before": 0.6,
+          "before_unit": "s",
+          "after": 0.8,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Blindside Max Flash Duration increased from",
+          "stat": "duration",
+          "before": 1.25,
+          "before_unit": "s",
+          "after": 1.75,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Standardizing to PC) Flash Explosion Delay",
+          "stat": "delay",
+          "before": 0.7,
+          "before_unit": "s",
+          "after": 0.6,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.01",
+      "raw": "Fakeout and Dimensional Drift Fixed an issue where AimAssist was incorrectly being applied when it was equipped.",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

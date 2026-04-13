@@ -10,6 +10,7 @@ Step 2 학습 데이터 빌더 — 진입점
   feature_builder.py — 피처 빌딩 함수군
 """
 
+import json
 import pandas as pd
 import numpy as np
 import warnings
@@ -29,6 +30,16 @@ def main():
     print("=" * 65 + "\n")
 
     # ── 데이터 로드 ──────────────────────────────────────────────────────────
+    # ── Phase 4: 스킬 절대 강도 피처용 ─────────────────────────────────────────
+    _skills_path = "data/agent_skills.json"
+    try:
+        with open(_skills_path, encoding="utf-8") as _f:
+            agent_skills_db = json.load(_f)
+        print(f"  agent_skills.json 로드: {len(agent_skills_db)}요원")
+    except FileNotFoundError:
+        agent_skills_db = None
+        print("  agent_skills.json 없음 — 스킬 피처 비활성")
+
     rank_v  = pd.read_csv("agent_act_history_all.csv")
     rank_m  = pd.read_csv("maxmunzy_diamond_plus.csv")
     vct_raw = pd.read_csv("vct_summary.csv")
@@ -105,9 +116,14 @@ def main():
         key = (row["agent"], int(row["act_idx"]))
         patch_lookup.setdefault(key, []).append(row)
 
-    # ── 레이블 & 피처 조립 ───────────────────────────────────────────────────
-    rows      = []
-    feat_cache = {}   # (agent, act_idx) → feat  (horizon=2,3 재사용)
+    # ── 레이블 & 피처 조립 (요원별 시간순 → 이전 레이블 캐리오버) ─────────────
+    rows = []
+
+    # 요원별 시간순 정렬 (캐리오버를 위해)
+    agent_acts = agent_acts.sort_values(["agent", "act_idx"])
+
+    # 요원별 이전 레이블 추적
+    prev_label_by_agent = {}
 
     for _, aa in agent_acts.iterrows():
         agent   = aa["agent"]
@@ -122,68 +138,35 @@ def main():
             map_versatility_dict=map_v_dict, pn_df=pn,
             skill_ceiling_proxy=SKILL_CEILING_PROXY,
             role_util_dict=role_util_dict,
+            agent_skills=agent_skills_db,
         )
-        feat_cache[(agent, act_idx)] = feat
 
         if patch_rows_list:
             patch_rows_df = pd.DataFrame(patch_rows_list)
             label, meta   = build_patch_label(agent, next_act_idx, patch_rows_df, step1, feat)
-            # nerf/buff 없는 패치(버그픽스 등) → 수치 기반 재판정
-            if label == "stable":
-                label = classify_stable_state(feat)
         else:
-            label = classify_stable_state(feat)
+            prev_label = prev_label_by_agent.get(agent)
+            label = classify_stable_state(feat, agent=agent, prev_label=prev_label)
             meta  = {
                 "label_direction": "none",
                 "label_skill":     "none",
                 "label_trigger":   "none",
                 "label_context":   "none",
-                "label_has_rework": 0,
             }
 
-        feat.update({"agent": agent, "act": act, "act_idx": act_idx,
-                     "label": label, "horizon": 1})
+        # 이전 레이블 갱신 (패치 행이면 패치 결과, 비패치면 classify 결과)
+        prev_label_by_agent[agent] = label
+
+        feat.update({"agent": agent, "act": act, "act_idx": act_idx, "label": label})
         feat.update(meta)
         rows.append(feat)
 
-    # ── horizon=2,3: 실제 nerf/buff 패치만 추가 (Stage B 데이터 확장) ────────
-    h23_count = 0
-    for (agent, act_idx), feat in feat_cache.items():
-        act = feat["act"]
-        for h in (2, 3):
-            target_act_idx  = act_idx + h
-            patch_rows_list = patch_lookup.get((agent, target_act_idx), [])
-            if not patch_rows_list:
-                continue
-            patch_rows_df = pd.DataFrame(patch_rows_list)
-            # 실제 nerf/buff 있는 경우만
-            nb = patch_rows_df[patch_rows_df["direction"].isin(["nerf", "buff"])]
-            if nb.empty:
-                continue
-            label, meta = build_patch_label(agent, target_act_idx, patch_rows_df, step1, feat)
-            if label in ("stable", "rework", "correction_nerf", "correction_buff"):
-                continue
-            row = dict(feat)
-            row.update({"agent": agent, "act": act, "act_idx": act_idx,
-                        "label": label, "horizon": h})
-            row.update(meta)
-            rows.append(row)
-            h23_count += 1
-
     df = pd.DataFrame(rows)
-    print(f"\n  생성: {len(df)}행 / {df.shape[1]}컬럼  (horizon=2,3 추가: {h23_count}행)")
+    print(f"\n  생성: {len(df)}행 / {df.shape[1]}컬럼")
 
     # ── 레이블 분포 ───────────────────────────────────────────────────────────
     print("\n[레이블 분포]")
     print(df["label"].value_counts().to_string())
-
-    print("\n[방향별 집계]")
-    df["label_group"] = df["label"].apply(lambda x:
-        "stable" if x == "stable" else
-        "rework" if x == "rework" else
-        x.split("_")[0]
-    )
-    print(df["label_group"].value_counts().to_string())
 
     # ── 저장 ──────────────────────────────────────────────────────────────────
     df.to_csv("step2_training_data.csv", index=False, encoding="utf-8-sig")
@@ -191,8 +174,7 @@ def main():
 
     print("\n[패치 케이스 샘플]")
     patched     = df[df["label"] != "stable"].sort_values(["agent", "act_idx"])
-    sample_cols = ["agent", "act", "rank_pr", "vct_pr_last", "vct_profile",
-                   "last_combined", "label"]
+    sample_cols = ["agent", "act", "rank_pr", "vct_pr_last", "vct_profile", "label"]
     print(patched[sample_cols].head(25).to_string(index=False))
 
     return df

@@ -1,0 +1,723 @@
+{
+  "agent": "Deadlock",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 19,
+    "balance_patches": 7,
+    "numeric_changes": 13,
+    "all_changes": 22
+  },
+  "current_stats": {
+    "C": {
+      "name": "Barrier Mesh",
+      "creds": 300,
+      "charges": 1,
+      "function": "Barrier",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.0,
+          "unit": "second",
+          "raw": "1 second"
+        },
+        "Time taken to fortify": {
+          "value": 3.0,
+          "unit": "seconds",
+          "raw": "3 seconds (Begins on impact with ground)"
+        },
+        "Barrier lengths": {
+          "value": 10.0,
+          "unit": "meters",
+          "raw": "10 meters"
+        },
+        "Duration": {
+          "value": null,
+          "unit": "",
+          "raw": "Total 30 seconds (Includes deploy time)<br>Begins to decay after 25 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Sonic Sensor",
+      "creds": 200,
+      "charges": 2,
+      "function": "[[Intel#Autonomous Deployable",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Max deploy distance": {
+          "value": 14.0,
+          "unit": "meters",
+          "raw": "14 meters"
+        },
+        "Max deploy height": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Deploy time": {
+          "value": 1.75,
+          "unit": "seconds",
+          "raw": "1.75 seconds"
+        },
+        "Area": {
+          "value": 9.0,
+          "unit": "-meter length8-meter width2-meter depth",
+          "raw": "9-meter length<br>8-meter width<br>2-meter depth"
+        },
+        "Windup": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Concuss duration": {
+          "value": 2.5,
+          "unit": "seconds",
+          "raw": "2.5 seconds"
+        }
+      }
+    },
+    "E": {
+      "name": "GravNet",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Crowd Control",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Windup": {
+          "value": 0.4,
+          "unit": "seconds",
+          "raw": "0.4 seconds"
+        },
+        "Radius": {
+          "value": 6.5,
+          "unit": "meters",
+          "raw": "6.5 meters"
+        },
+        "Slow amount": {
+          "value": 70.0,
+          "unit": "%",
+          "raw": "70%"
+        },
+        "Net removal channel time": {
+          "value": 1.5,
+          "unit": "seconds",
+          "raw": "1.5 seconds"
+        }
+      }
+    },
+    "X": {
+      "name": "Annihilation",
+      "creds": null,
+      "charges": null,
+      "function": "[[Crowd Control#Detain",
+      "stats": {
+        "Equip time": {
+          "value": 1.1,
+          "unit": "seconds",
+          "raw": "1.1 seconds"
+        },
+        "Reequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Max duration": {
+          "value": 10.0,
+          "unit": "seconds",
+          "raw": "10 seconds<br>(including Equip time)"
+        },
+        "Pulse radius": {
+          "value": 3.0,
+          "unit": "meters",
+          "raw": "3 meters"
+        },
+        "Pulse speed": {
+          "value": 82.5,
+          "unit": "meters/second",
+          "raw": "82.5 meters/second"
+        },
+        "Maximum pulse travel distance": {
+          "value": 40.0,
+          "unit": "meters",
+          "raw": "40 meters"
+        },
+        "Pulse radius at path end": {
+          "value": 6.5,
+          "unit": "meters",
+          "raw": "6.5 meters"
+        },
+        "Windup time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Self-knockback distance": {
+          "value": 1.5,
+          "unit": "meters",
+          "raw": "1.5 meters"
+        },
+        "Unequip time": {
+          "value": 0.25,
+          "unit": "seconds",
+          "raw": "0.25 seconds"
+        },
+        "Cocoon duration": {
+          "value": 7.0,
+          "unit": "seconds",
+          "raw": "7 seconds"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.00",
+      "raw": "GravNet and Barrier Mesh Fixed an issue where throw animations would break if aiming straight down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "GravNet Cooldown increased from 40s >>> 60s Barrier Mesh Cost reduced from 400 >>> 300 Health of smaller nodes decreased from 570 >>> 480 Sonic Sensor Concuss duration reduced 3.5s >>> 2.5s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "GravNet Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Mesh Cost reduced from",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Health of smaller nodes decreased from",
+          "stat": "health",
+          "before": 570.0,
+          "before_unit": "",
+          "after": 480.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Sonic Sensor Concuss duration reduced",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "GravNet Cooldown increased from",
+          "stat": "cooldown",
+          "before": 40.0,
+          "before_unit": "s",
+          "after": 60.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Mesh Cost reduced from",
+          "stat": "cost",
+          "before": 400.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Health of smaller nodes decreased from",
+          "stat": "health",
+          "before": 570.0,
+          "before_unit": "",
+          "after": 480.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Sonic Sensor Concuss duration reduced",
+          "stat": "duration",
+          "before": 3.5,
+          "before_unit": "s",
+          "after": 2.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "11.05",
+      "raw": "Sonic Sensor Fixed an issue where it was more difficult to place than intended. Annihilation Fixed a Spectator bug with deafen where audio processing was not cleaning up as expected after a spectated player was impacted by the ability. Fixed issue where use of it on Yoru's Fakeout clone would apply audio effects to the real Yoru. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.10",
+      "raw": "GravNet Fixed a bug where jumping could inconsistently dodge Deadlock’s net toss despite players being inside the affected area v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.08",
+      "raw": "Barrier Mesh Fixed an issue where Deadlock’s Barrier Mesh was not playing hit audio when shooting the center node. Fixed an issue where Deadlock’s Barrier Mesh could be used to boost players. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.07",
+      "raw": "GravNet Fixed an issue where Deadlock’s netted VFX could show through thin walls. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.06",
+      "raw": "Annihilation Fixed an issue where hit-confirm sounds on Deadlock’s cocoon target were abnormally loud. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "10.04",
+      "raw": "Barrier Mesh Changed to a non-signature ability. Cost: Free >>> 400 credits GravNet Changed to a signature ability with 40s cooldown Total Size decreased from 16m >>> 13m Radius decreased 8m >>> 6.5m Projectile audio loop has been updated to increase its gameplay clarity. When an enemy removes the net, the audio cue of the net breaking now plays for all players. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "avNet Changed to a signature ability with 40s cooldown Total Size decreased from",
+          "stat": "cooldown",
+          "before": 16.0,
+          "before_unit": "m",
+          "after": 13.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Radius decreased",
+          "stat": "range",
+          "before": 8.0,
+          "before_unit": "m",
+          "after": 6.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Mesh Changed to a non-signature ability. Cost",
+          "stat": "cost",
+          "before": 0,
+          "before_unit": "free",
+          "after": 400.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "avNet Changed to a signature ability with 40s cooldown Total Size decreased from",
+          "stat": "cooldown",
+          "before": 16.0,
+          "before_unit": "m",
+          "after": 13.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Radius decreased",
+          "stat": "range",
+          "before": 8.0,
+          "before_unit": "m",
+          "after": 6.5,
+          "after_unit": "m",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Barrier Mesh Changed to a non-signature ability. Cost",
+          "stat": "cost",
+          "before": 0,
+          "before_unit": "free",
+          "after": 400.0,
+          "after_unit": "credits",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "rework",
+          "ability_slot": "E",
+          "context_label": "Changed to a non-signature ability",
+          "stat": "mechanic",
+          "description": "Changed to a non-signature ability",
+          "direction": "change"
+        },
+        {
+          "change_type": "rework",
+          "ability_slot": "E",
+          "context_label": "Changed to a signature ability with 40s cooldown Total Size decreased from 16m >>> 13m Radius decrea",
+          "stat": "mechanic",
+          "description": "Changed to a signature ability with 40s cooldown Total Size decreased from 16m >>> 13m Radius decrea",
+          "direction": "change"
+        }
+      ]
+    },
+    {
+      "patch": "9.10",
+      "raw": "Annihilation Will now always kill the target when the timer expires and they are not freed from the nanowire cocoon Visuals for health on the cocoon have been updated to make their health states more clear Barrier Mesh Visuals for health on the Barrier Mesh have been updated to make their health states more clear v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "X",
+          "context_label": "Will now always kill the target when the timer expires and they are not freed from the nanowire coco",
+          "stat": "effect",
+          "description": "Will now always kill the target when the timer expires and they are not freed from the nanowire coco",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "9.09",
+      "raw": "Annihilation Fixed a bug where victims would sometimes get stuck at the top of ledges v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.06",
+      "raw": "Sonic Sensor Fixed an issue where Sonic Sensors could stay active if placed as Deadlock was killed. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.05",
+      "raw": "Sonic Sensor Fixed an issue where Sonic Sensor could not be placed on some map walls during the Buy Phase. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.0",
+      "raw": "Sonic Sensor Now recallable in round Pickup distance increased 12m >>> 27m Decreased time to concuss once triggered 1.0s >>> 0.5s Decreased time for enemies to destroy Sonic Sensor once triggered 0.65s >>> 0.5s Deadlock and her allies can now hear Sonic Sensor’s audio lightly when they are in its area of effect Barrier Mesh Increased the max length Barrier Mesh walls 6m >>> 10m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Sonic Sensor Now recallable in round Pickup distance increased",
+          "stat": "range",
+          "before": 12.0,
+          "before_unit": "m",
+          "after": 27.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Decreased time to concuss once triggered",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 0.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Decreased time for enemies to destroy Sonic Sensor once triggered",
+          "stat": "duration",
+          "before": 0.65,
+          "before_unit": "s",
+          "after": 0.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "e in its area of effect Barrier Mesh Increased the max length Barrier Mesh walls",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 10.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Sonic Sensor Now recallable in round Pickup distance increased",
+          "stat": "range",
+          "before": 12.0,
+          "before_unit": "m",
+          "after": 27.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Decreased time to concuss once triggered",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "s",
+          "after": 0.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "Q",
+          "context_label": "Decreased time for enemies to destroy Sonic Sensor once triggered",
+          "stat": "duration",
+          "before": 0.65,
+          "before_unit": "s",
+          "after": 0.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "e in its area of effect Barrier Mesh Increased the max length Barrier Mesh walls",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 10.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "Q",
+          "context_label": "can now hear Sonic Sensor’s audio lightly when they are in its area of effect Barrier Mesh Increased",
+          "stat": "effect",
+          "description": "can now hear Sonic Sensor’s audio lightly when they are in its area of effect Barrier Mesh Increased",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "7.10",
+      "raw": "GravNet Increased slow at AoE edge removed Anyone caught by GravNet will now be affected by increased gravity and a reduction in mobility Max duration increased 6 seconds >>> Indefinite Removal time increased 0.85s >>> 1.5s Radius increased 6m >>> 8m v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Indefinite Removal time increased",
+          "stat": "duration",
+          "before": 0.85,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Radius increased",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 8.0,
+          "after_unit": "m",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Indefinite Removal time increased",
+          "stat": "duration",
+          "before": 0.85,
+          "before_unit": "s",
+          "after": 1.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Radius increased",
+          "stat": "range",
+          "before": 6.0,
+          "before_unit": "m",
+          "after": 8.0,
+          "after_unit": "m",
+          "direction": "buff"
+        },
+        {
+          "change_type": "non_numeric",
+          "ability_slot": null,
+          "context_label": "will now be affected by increased gravity and a reduction in",
+          "stat": "mechanic",
+          "before": "mobility Max duration increased 6 seconds",
+          "after": "Indefinite Removal time increased 0.85s",
+          "direction": "change"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "removed Anyone caught by GravNet will now be affected by increased gravity and a reduction in mobili",
+          "stat": "effect",
+          "description": "removed Anyone caught by GravNet will now be affected by increased gravity and a reduction in mobili",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.08",
+      "raw": "Annihilation Can no longer open Bind’s automatic doors from outside the teleporter rooms. Can no longer open Breeze’s Mid Chute trapdoor from below. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "Can no longer open Bind’s automatic doors from outside the teleporter rooms",
+          "stat": "effect",
+          "description": "Can no longer open Bind’s automatic doors from outside the teleporter rooms",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "Can no longer open Breeze’s Mid Chute trapdoor from below",
+          "stat": "effect",
+          "description": "Can no longer open Breeze’s Mid Chute trapdoor from below",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "7.05",
+      "raw": "Sonic Sensor Fixed a bug where Deadlock’s Sonic Sensor would trigger when Gekko’s Wingman walks near it. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.02",
+      "raw": "Sonic Sensor Fixed Sonic Sensor not triggering when Wingman started defusing the Spike in its detection area under some circumstances. Barrier Mesh Fixed issues where damage-over-time area abilities were not damaging Barrier Mesh. Annihilation Fixed issue where players trapped by Annihilation were not properly killed when hit by the Spike explosion. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.0",
+      "raw": "Added PC-only[] v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Added PC-only[] v",
+          "stat": "effect",
+          "description": "Added PC-only[] v",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "12.00",
+      "raw": "Barrier Mesh Fixed a bug where the walls were sometimes invisible if placed when experiencing packet loss.",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

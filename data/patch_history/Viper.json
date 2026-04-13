@@ -1,0 +1,1465 @@
+{
+  "agent": "Viper",
+  "source": "valorant.fandom.com",
+  "stats": {
+    "total_patches": 42,
+    "balance_patches": 24,
+    "numeric_changes": 35,
+    "all_changes": 47
+  },
+  "current_stats": {
+    "C": {
+      "name": "Snake Bite",
+      "creds": 300,
+      "charges": 1,
+      "function": "Cripple<br>[[Deterrent#Molotov",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "rowspan=3|Damage": {
+          "value": 1.0,
+          "unit": "per tick",
+          "raw": "1 per tick"
+        },
+        "Total 76-79<br>(152-158 with Vulnerable)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}<sup/>[[Range#Target_Practice|Range's training bot]]<ref group=\"s\" name=\"b\"/>"
+        },
+        "x0.5 multiplier to objects": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|5.12}}"
+        },
+        "rowspan=2|Ticks/Tick rate": {
+          "value": 12.5,
+          "unit": "per second1 every 0.08 seconds",
+          "raw": "12.5 per second<br>1 every 0.08 seconds"
+        },
+        "Total 76-79 ticks": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}<sup/>[[Range#Target_Practice|Range's training bot]]{{#tag:ref|Values were tested using the Range's training bot, though it is inconsistent with confirmed values for tick rate and duration. It can be resolved assuming that the full zone duration includes a ~0.25-second period immediately upon detonation during which no damage is taken before the zone begins to spread.|group=\"s\"|name=\"b\"}}"
+        },
+        "Duration": {
+          "value": 6.5,
+          "unit": "seconds",
+          "raw": "6.5 seconds"
+        },
+        "Vulnerable duration": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds"
+        }
+      }
+    },
+    "Q": {
+      "name": "Poison Cloud",
+      "creds": 200,
+      "charges": 1,
+      "function": "[[Vision Blocker#Smoke",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Pickup distance (Buy phase only)": {
+          "value": 4.0,
+          "unit": "meters",
+          "raw": "4 meters"
+        },
+        "Windup time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 1.75 seconds</u><br>0.75-second windup (fuel consumed after this point)<br> 1 second for smoke to fully form"
+        },
+        "Radius": {
+          "value": 4.5,
+          "unit": "meters",
+          "raw": "4.5 meters"
+        },
+        "Deactivation time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "rowspan=\"2\"|Activation cooldowns": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds (Deactivation)"
+        },
+        "5 seconds (Activation)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|8.08}}"
+        }
+      }
+    },
+    "E": {
+      "name": "Toxic Screen",
+      "creds": null,
+      "charges": 1,
+      "function": "[[Vision Blocker#Wall",
+      "stats": {
+        "Equip time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "Unequip time": {
+          "value": 0.7,
+          "unit": "seconds",
+          "raw": "0.7 seconds"
+        },
+        "Total Emitters at max range": {
+          "value": 30.0,
+          "unit": "",
+          "raw": "30"
+        },
+        "Wall Dimensions": {
+          "value": 2.0,
+          "unit": "meters between emitters60 meters at max length4-meter height",
+          "raw": "2 meters between emitters<br>60 meters at max length<br>4-meter height"
+        },
+        "rowspan=\"2\"|Windup times": {
+          "value": 0.5,
+          "unit": "-second windup",
+          "raw": "0.5-second windup (fuel consumed after this point)"
+        },
+        "1.55 seconds for wall to fully form at max length": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Cross}}"
+        },
+        "Deactivation time": {
+          "value": 0.8,
+          "unit": "seconds",
+          "raw": "0.8 seconds"
+        },
+        "rowspan=\"2\"|Activation cooldowns": {
+          "value": 2.0,
+          "unit": "seconds",
+          "raw": "2 seconds (Deactivation)"
+        },
+        "5 seconds (Activation)": {
+          "value": null,
+          "unit": "",
+          "raw": "{{Tick}}<sup/>{{patchv|8.08}}"
+        }
+      }
+    },
+    "X": {
+      "name": "Viper's Pit",
+      "creds": null,
+      "charges": null,
+      "function": "Vision Blocker",
+      "stats": {
+        "Equip time": {
+          "value": 0.5,
+          "unit": "seconds",
+          "raw": "0.5 seconds"
+        },
+        "Max cast radius for cloud's center": {
+          "value": 7.25,
+          "unit": "meters",
+          "raw": "7.25 meters"
+        },
+        "Unequip time": {
+          "value": 1.35,
+          "unit": "seconds",
+          "raw": "1.35 seconds"
+        },
+        "Deploy time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 6 seconds</u><br>1-second channel time<br>5-second expansion time"
+        },
+        "Maximum radius": {
+          "value": 9.0,
+          "unit": "meters",
+          "raw": "9 meters"
+        },
+        "Vision radius": {
+          "value": 8.1,
+          "unit": "meters",
+          "raw": "8.1 meters"
+        },
+        "Integrity duration": {
+          "value": 8.0,
+          "unit": "seconds",
+          "raw": "8 seconds"
+        },
+        "Integrity regeneration rate": {
+          "value": 4.0,
+          "unit": "% per second",
+          "raw": "4% per second"
+        },
+        "Deactivation time": {
+          "value": null,
+          "unit": "",
+          "raw": "<u>Total 3.25 seconds</u><br>1-second holding deactivation command<br>0.5-second delay<br>1.75-second collapse time"
+        }
+      }
+    }
+  },
+  "patch_history": [
+    {
+      "patch": "12.06",
+      "raw": "Viper's Pit Chemical cloud has been updated to be more consistent in the way it spreads around map geometry. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.01",
+      "raw": "Viper's Pit Fixed a bug where it was only showing inconsistent VFX when an observer was on freecam within it. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "12.00",
+      "raw": "Poison Cloud Fixed an issue where throw animations would break if aiming straight down v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.09",
+      "raw": "Snake Bite Fixed a bug where the visual effects didn’t fade at the same time for allies and enemies Viper's Pit Fixed a bug that caused it to linger in front of you when unequipped without casting v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "11.08",
+      "raw": "Toxin Initial contact Decay reduced from 30 >>> 10 health v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Toxin Initial contact Decay reduced from",
+          "stat": "other",
+          "before": 30.0,
+          "before_unit": "",
+          "after": 10.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Toxin Initial contact Decay reduced from",
+          "stat": "other",
+          "before": 30.0,
+          "before_unit": "",
+          "after": 10.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.09",
+      "raw": "Viper's Pit Swiftplay only: Starting points 2 >>> 3 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Pit Swiftplay only: Starting points",
+          "stat": "ult_cost",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Pit Swiftplay only: Starting points",
+          "stat": "ult_cost",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 3.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "10.00",
+      "raw": "Poison Cloud Fixed an issue where shooting through Poison Cloud could cheat wall penetration if they were placed too close to level geometry v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.03",
+      "raw": "Snake Bite Improvement to spread more consistently and only apply damage in places that are consistent with the visuals Undocumented Snake Bite Now damages map objects v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "8.08",
+      "raw": "Fuel Minimum fuel needed to activate smoke increased 20% >>> 30% Max uptime on each individual smoke source reduced 13.5 >>> 12s Fuel drain increased from 1 every",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fuel Minimum fuel needed to activate smoke increased",
+          "stat": "other",
+          "before": 20.0,
+          "before_unit": "%",
+          "after": 30.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Max uptime on each individual smoke source reduced",
+          "stat": "duration",
+          "before": 13.5,
+          "before_unit": "",
+          "after": 12.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fuel Minimum fuel needed to activate smoke increased",
+          "stat": "other",
+          "before": 20.0,
+          "before_unit": "%",
+          "after": 30.0,
+          "after_unit": "%",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Max uptime on each individual smoke source reduced",
+          "stat": "duration",
+          "before": 13.5,
+          "before_unit": "",
+          "after": 12.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "0.135",
+      "raw": "to 1 every 0.12 s Fuel drain for both smokes being active increased from 1 every",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "0.09",
+      "raw": "to 1 every 0.08 s Snake Bite Charges reduced 2 >>> 1 Price increased 200 >>> 300 Duration increased 5.5 >>> 6.5s Poison Cloud Cooldown on re-activating smokes after putting them down reduced 5.5 >>> 5s Can now only be picked up during the Buy Phase Toxic Screen Cooldown on re-activating smokes after putting them down reduced 5.5 >>> 5s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "to 1 every 0.08 s Snake Bite Charges reduced",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Price increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration increased",
+          "stat": "duration",
+          "before": 5.5,
+          "before_unit": "",
+          "after": 6.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Poison Cloud Cooldown on re-activating smokes after putting them down reduced",
+          "stat": "cooldown",
+          "before": 5.5,
+          "before_unit": "",
+          "after": 5.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "se Toxic Screen Cooldown on re-activating smokes after putting them down reduced",
+          "stat": "cooldown",
+          "before": 5.5,
+          "before_unit": "",
+          "after": 5.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "to 1 every 0.08 s Snake Bite Charges reduced",
+          "stat": "charges",
+          "before": 2.0,
+          "before_unit": "",
+          "after": 1.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Price increased",
+          "stat": "cost",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 300.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Duration increased",
+          "stat": "duration",
+          "before": 5.5,
+          "before_unit": "",
+          "after": 6.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Poison Cloud Cooldown on re-activating smokes after putting them down reduced",
+          "stat": "cooldown",
+          "before": 5.5,
+          "before_unit": "",
+          "after": 5.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "se Toxic Screen Cooldown on re-activating smokes after putting them down reduced",
+          "stat": "cooldown",
+          "before": 5.5,
+          "before_unit": "",
+          "after": 5.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Can now only be picked up during the Buy Phase Toxic Screen Cooldown on re-activating smokes after p",
+          "stat": "effect",
+          "description": "Can now only be picked up during the Buy Phase Toxic Screen Cooldown on re-activating smokes after p",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "8.02",
+      "raw": "Toxin Art update for debuff VFX This is part of a miscellaneous change affecting the Decay debuff overall Poison Cloud Art update for grenade v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.10",
+      "raw": "Viper's Pit Fixed an issue where it did not correctly block vision for enemies on the minimap and megamap. v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "7.09",
+      "raw": "Fuel Max uptime on each individual smoke source reduced 15 >>> 13.5 s Fuel drain increased from 1 every",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fuel Max uptime on each individual smoke source reduced",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "",
+          "after": 13.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fuel Max uptime on each individual smoke source reduced",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "",
+          "after": 13.5,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "0.15",
+      "raw": "to 1 every 0.135 s Fuel drain for both smokes being active increased from 1 every",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "0.1",
+      "raw": "to 1 every 0.09 s This is an undocumented change Poison Cloud Cooldown on re-activating smokes after putting them down reduced 8 >>> 5.5s This was an undocumented change. Clarified in an [https://twitter.com/VALORANT/status/1775176418949009727 X (formerly Twitter) post]. Toxic Screen Cooldown on re-activating smokes after putting them down reduced 8 >>> 5.5s This was an undocumented change. Clarified in an [https://twitter.com/VALORANT/status/1775176418949009727 X (formerly Twitter) post]. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ge Poison Cloud Cooldown on re-activating smokes after putting them down reduced",
+          "stat": "cooldown",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 5.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Toxic Screen Cooldown on re-activating smokes after putting them down reduced",
+          "stat": "cooldown",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 5.5,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "ge Poison Cloud Cooldown on re-activating smokes after putting them down reduced",
+          "stat": "cooldown",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 5.5,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "Toxic Screen Cooldown on re-activating smokes after putting them down reduced",
+          "stat": "cooldown",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 5.5,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "7.04",
+      "raw": "Viper's Pit Ultimate points increased 8 >>> 9 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Pit Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 9.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Pit Ultimate points increased",
+          "stat": "ult_cost",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 9.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "6.11",
+      "raw": "Fuel Reduced regeneration per second 5% >>> 3.3% Regenerate to max fuel once empty 20s >>> 30s v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fuel Reduced regeneration per second",
+          "stat": "other",
+          "before": 5.0,
+          "before_unit": "%",
+          "after": 3.3,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Regenerate to max fuel once empty",
+          "stat": "other",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 30.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fuel Reduced regeneration per second",
+          "stat": "other",
+          "before": 5.0,
+          "before_unit": "%",
+          "after": 3.3,
+          "after_unit": "%",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Regenerate to max fuel once empty",
+          "stat": "other",
+          "before": 20.0,
+          "before_unit": "s",
+          "after": 30.0,
+          "after_unit": "s",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "6.0",
+      "raw": "Viper's Pit Can no longer be deactivated while suppressed v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "X",
+          "context_label": "Can no longer be deactivated while suppressed v",
+          "stat": "effect",
+          "description": "Can no longer be deactivated while suppressed v",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "5.12",
+      "raw": "Snake Bite Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% The correct functionality is undocumented, instead officially being documented as affecting any non-player object (see Health#Abilities) Viper's Pit Smoke integrity regen time 5 s >>> 25 s Max time out of smoke decreased 15 s >>> 8 s Ultimate points required 7 >>> 8 v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Pit Smoke integrity regen time",
+          "stat": "duration",
+          "before": 5.0,
+          "before_unit": "s",
+          "after": 25.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Max time out of smoke decreased",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "s",
+          "after": 8.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Ultimate points required",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Pit Smoke integrity regen time",
+          "stat": "duration",
+          "before": 5.0,
+          "before_unit": "s",
+          "after": 25.0,
+          "after_unit": "s",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Max time out of smoke decreased",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "s",
+          "after": 8.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Ultimate points required",
+          "stat": "ult_cost",
+          "before": 7.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "C",
+          "context_label": "Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% ",
+          "stat": "effect",
+          "description": "Now deals damage to all enemy objects Damage multiplier against specific enemy abilities set to 50% ",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "5.08",
+      "raw": "Toxic Screen Fixed a bug where Toxic Screen could have small gaps around ground level in specific map locations v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.11",
+      "raw": "Fixed a bug where Toxic Screen and Poison Cloud would sometimes disappear from the minimap v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "4.04",
+      "raw": "Removed delay on Toxic Screen and Poison Cloud disabling when Viper is suppressed Added a unique VO line that plays when Toxic Screen or Poison Cloud are disabled by suppress Toxic Screen and Poison Cloud emitters now have yellow lights to indicate when the abilities are on cooldown Fuel Fuel drain increased 50% when Toxic Screen and Poison Cloud are both active. Fuel bar now turns red when Viper does not have enough to activate her abilities. Toxic Screen Cooldown after deactivating increased 6 >>> 8 Cooldown timer now starts when her smoke starts dissipating instead of when the deactivation telegraph plays Cooldown displayed on HUD actually starts on deactivation telegraph but combines both the deactivation and cooldown durations Deactivation delay decreased 1 >>> .8 Fixed a bug where au",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "gh to activate her abilities. Toxic Screen Cooldown after deactivating increased",
+          "stat": "cooldown",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "mbines both the deactivation and cooldown durations Deactivation delay decreased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.8,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " activated right on round end Poison Cloud Cooldown after deactivating increased",
+          "stat": "cooldown",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "mbines both the deactivation and cooldown durations Deactivation delay decreased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.8,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Snake Bite Duration decreased",
+          "stat": "duration",
+          "before": 6.5,
+          "before_unit": "",
+          "after": 5.5,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "E",
+          "context_label": "gh to activate her abilities. Toxic Screen Cooldown after deactivating increased",
+          "stat": "cooldown",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "mbines both the deactivation and cooldown durations Deactivation delay decreased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.8,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " activated right on round end Poison Cloud Cooldown after deactivating increased",
+          "stat": "cooldown",
+          "before": 6.0,
+          "before_unit": "",
+          "after": 8.0,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "mbines both the deactivation and cooldown durations Deactivation delay decreased",
+          "stat": "duration",
+          "before": 1.0,
+          "before_unit": "",
+          "after": 0.8,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Snake Bite Duration decreased",
+          "stat": "duration",
+          "before": 6.5,
+          "before_unit": "",
+          "after": 5.5,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "Added a unique VO line that plays when Toxic Screen or Poison Cloud are disabled by suppress Toxic S",
+          "stat": "effect",
+          "description": "Added a unique VO line that plays when Toxic Screen or Poison Cloud are disabled by suppress Toxic S",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "Removed delay on Toxic Screen and Poison Cloud disabling when Viper is suppressed Added a unique VO ",
+          "stat": "effect",
+          "description": "Removed delay on Toxic Screen and Poison Cloud disabling when Viper is suppressed Added a unique VO ",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "4.03",
+      "raw": "Viper's Pit Fixed an exploit where, using specific line-ups, it was possible to see inside the pit without being affected by the nearsighted debuff Fixed a bug where the pit would sometimes fail to expand through doorways v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.07",
+      "raw": "Poison Cloud Updated the visuals for the dissolving effect seen within the smoke to better match the visuals seen from the outside, in an attempt to remove any type of peeker’s advantage when playing from within the smoke Toxic Screen Passing through the highest portion now correctly applies instant decay to high-flying Agents v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.05",
+      "raw": "Poison Cloud Fixed a bug where concurrent, overlapping ally and enemy Poison Clouds could cause the nearsight and decay to never remove v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.04",
+      "raw": "Fuel Fuel will no longer continue to drain after Toxic Screen or Poison Cloud go down if Viper is suppressed right as she activates them v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "will no longer continue to drain after Toxic Screen or Poison Cloud go down if Viper is suppressed r",
+          "stat": "effect",
+          "description": "will no longer continue to drain after Toxic Screen or Poison Cloud go down if Viper is suppressed r",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "3.03",
+      "raw": "Viper's Pit Reverted an accidentally shipped bug that caused Viper's Pit to start forming at the cursor placement point instead of around Viper v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "3.0",
+      "raw": "Snake Bite Duration reduced 8 >>> 6.5 Cost increased 100 >>> 200 Outer edges form faster to ensure it is lethal if an enemy sits in the entire duration v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Snake Bite Duration reduced",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 6.5,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Snake Bite Duration reduced",
+          "stat": "duration",
+          "before": 8.0,
+          "before_unit": "",
+          "after": 6.5,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Cost increased",
+          "stat": "cost",
+          "before": 100.0,
+          "before_unit": "",
+          "after": 200.0,
+          "after_unit": "",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.09",
+      "raw": "Toxin Decay inflicted on initial contact reduced 50 HP >>> 30 HP v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Toxin Decay inflicted on initial contact reduced",
+          "stat": "other",
+          "before": 50.0,
+          "before_unit": "hp",
+          "after": 30.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Toxin Decay inflicted on initial contact reduced",
+          "stat": "other",
+          "before": 50.0,
+          "before_unit": "hp",
+          "after": 30.0,
+          "after_unit": "hp",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "2.08",
+      "raw": "Poison Cloud Fixed Poison Cloud pickup distance being 200 instead of the intended 400 Toxic Screen Fixed Toxic Screen going longer than intended when it passed through the teleporter on Bind v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.07",
+      "raw": "Toxin Fixed a bug when calculating if damage taken while decayed should be lethal for players with armor Most noticeably, this was causing Marshal shots when the target was decayed 50 to reduce the enemy to 1 health instead of killing them v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "2.06",
+      "raw": "Fixed unintentional delay when deactivating Poison Cloud or Toxic Screen Toxin Now instantly inflicts 50 HP Decay on initial contact Decay over time decreased 15 HP/sec >>> 10 HP/sec HP regen delay once no longer affected by Toxin decreased 2.5 seconds >>> 1.5 seconds Snake Bite Equip time decreased 1.1 >>> .8 Poison Cloud Held charge is now temporary if gained from picking up a placed emitter and will not carry over to the next round Can now immediately be redeployed when picked up Pickup distance increased 200 >>> 400 If active when Viper dies, Poison Cloud now remains up for an additional 2 seconds, or until Viper runs out of fuel. Toxic Screen If active when Viper dies, Toxic Screen now remains up for an additional 2 seconds before deactivating Full blind distance from the wall increas",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " Now instantly inflicts 50 HP Decay on initial contact Decay over time decreased",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "hp/sec",
+          "after": 10.0,
+          "after_unit": "hp/sec",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "HP regen delay once no longer affected by Toxin decreased",
+          "stat": "health",
+          "before": 2.5,
+          "before_unit": "seconds",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Snake Bite Equip time decreased",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "",
+          "after": 0.8,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "round Can now immediately be redeployed when picked up Pickup distance increased",
+          "stat": "range",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": " Now instantly inflicts 50 HP Decay on initial contact Decay over time decreased",
+          "stat": "duration",
+          "before": 15.0,
+          "before_unit": "hp/sec",
+          "after": 10.0,
+          "after_unit": "hp/sec",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "HP regen delay once no longer affected by Toxin decreased",
+          "stat": "health",
+          "before": 2.5,
+          "before_unit": "seconds",
+          "after": 1.5,
+          "after_unit": "seconds",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Snake Bite Equip time decreased",
+          "stat": "duration",
+          "before": 1.1,
+          "before_unit": "",
+          "after": 0.8,
+          "after_unit": "",
+          "direction": "nerf"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "round Can now immediately be redeployed when picked up Pickup distance increased",
+          "stat": "range",
+          "before": 200.0,
+          "before_unit": "",
+          "after": 400.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Can now immediately be redeployed when picked up Pickup distance increased 200 >>> 400 If active whe",
+          "stat": "effect",
+          "description": "Can now immediately be redeployed when picked up Pickup distance increased 200 >>> 400 If active whe",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "no longer affected by Toxin decreased 2",
+          "stat": "effect",
+          "description": "no longer affected by Toxin decreased 2",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.09",
+      "raw": "Fuel Amount of fuel at round start increased 50 >>> 100 Snake Bite Vulnerable debuff now lingers for 2 seconds after leaving Snake Bite Viper's Pit Move speed doubled while casting Now fast equips weapon after casting Re-equip times vary per gun—but on average will reduce weapon down time by .4 seconds v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fuel Amount of fuel at round start increased",
+          "stat": "other",
+          "before": 50.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "Fuel Amount of fuel at round start increased",
+          "stat": "other",
+          "before": 50.0,
+          "before_unit": "",
+          "after": 100.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.07",
+      "raw": "Toxin Decay on all smoke abilities no longer affects allies Toxic Screen Toxic Screen can now be placed during the buy phase of rounds, through spawn barriers Toxic Screen now goes up faster along its full length, once it starts to form Viper’s Pit The area of Viper’s Pit is now shown on her team’s minimap when deployed. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": [
+        {
+          "change_type": "effect_added",
+          "ability_slot": "E",
+          "context_label": "can now be placed during the buy phase of rounds, through spawn barriers Toxic Screen now goes up fa",
+          "stat": "effect",
+          "description": "can now be placed during the buy phase of rounds, through spawn barriers Toxic Screen now goes up fa",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": "E",
+          "context_label": "no longer affects allies Toxic Screen Toxic Screen can now be placed during the buy phase of rounds,",
+          "stat": "effect",
+          "description": "no longer affects allies Toxic Screen Toxic Screen can now be placed during the buy phase of rounds,",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.05",
+      "raw": "Toxic Screen Fixed nearsight not applying properly when going through Toxic Screen v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "1.04",
+      "raw": "Fuel Having both Poison Cloud and Toxic Screen active does not consume additional fuel beyond the cost of having one active Toxin Enemy decay per second increased 10 >>> 15 After exiting Viper's smoke, enemy decay sustains for 2.5 seconds before starting to fade Viper's Pit Max time allowed outside the cloud before it collapses increased 5 >>> 15 seconds Can now hold the ability key to drop the ult early Enemies in Viper’s Pit now have their minimap obscured and do not provide minimap detection to their allies Increased the brightness of the red enemy glow at the edge of Viper's near-sight v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "fuel beyond the cost of having one active Toxin Enemy decay per second increased",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "",
+          "after": 15.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Pit Max time allowed outside the cloud before it collapses increased",
+          "stat": "duration",
+          "before": 5.0,
+          "before_unit": "",
+          "after": 15.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "fuel beyond the cost of having one active Toxin Enemy decay per second increased",
+          "stat": "duration",
+          "before": 10.0,
+          "before_unit": "",
+          "after": 15.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "numeric",
+          "ability_slot": null,
+          "context_label": "s Pit Max time allowed outside the cloud before it collapses increased",
+          "stat": "duration",
+          "before": 5.0,
+          "before_unit": "",
+          "after": 15.0,
+          "after_unit": "seconds",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_added",
+          "ability_slot": null,
+          "context_label": "Can now hold the ability key to drop the ult early Enemies in Viper’s Pit now have their minimap obs",
+          "stat": "effect",
+          "description": "Can now hold the ability key to drop the ult early Enemies in Viper’s Pit now have their minimap obs",
+          "direction": "buff"
+        }
+      ]
+    },
+    {
+      "patch": "1.02",
+      "raw": "Snake Bite Applies Vulnerable to enemies for a short time Total damage taken from Snake Bite is unchanged Poison Cloud Activation cooldown increased .5s >>> 6s Toxic Screen Now burns through walls, placing emitters at all valid locations (e.g., the ground) over its length v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "ge taken from Snake Bite is unchanged Poison Cloud Activation cooldown increased",
+          "stat": "cooldown",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "ge taken from Snake Bite is unchanged Poison Cloud Activation cooldown increased",
+          "stat": "cooldown",
+          "before": 0.5,
+          "before_unit": "s",
+          "after": 6.0,
+          "after_unit": "s",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "1.0",
+      "raw": "Poison Cloud Fixed the ability to activate Poison Cloud mid air if it has been picked up Toxic Screen Closed exploit where Nvidia Inspector could be used to see through Toxic Screen Fixed a bug that let players use Toxic Screen's emitter deployment as a projectile boost v",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "0.50",
+      "raw": "Snake Bite Radius increased 350 >>> 450 Height required to jump out of Snake Bite increased 80 >> 120 Damage tick speed increased (total damage per second unchanged) Poison Cloud No longer enters cooldown when picked up during the buy phase. v",
+      "is_bugfix": false,
+      "is_qol": false,
+      "numeric_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Snake Bite Radius increased",
+          "stat": "range",
+          "before": 350.0,
+          "before_unit": "",
+          "after": 450.0,
+          "after_unit": "",
+          "direction": "buff"
+        }
+      ],
+      "all_changes": [
+        {
+          "change_type": "numeric",
+          "ability_slot": "C",
+          "context_label": "Snake Bite Radius increased",
+          "stat": "range",
+          "before": 350.0,
+          "before_unit": "",
+          "after": 450.0,
+          "after_unit": "",
+          "direction": "buff"
+        },
+        {
+          "change_type": "effect_removed",
+          "ability_slot": null,
+          "context_label": "No longer enters cooldown when picked up during the buy phase",
+          "stat": "effect",
+          "description": "No longer enters cooldown when picked up during the buy phase",
+          "direction": "nerf"
+        }
+      ]
+    },
+    {
+      "patch": "0.49",
+      "raw": "Toxic Screen Updated the appearance of Toxic Screen on the minimap to show gaps in the wall Viper's Pit Fixed Viper being able to animation-cancel Viper’s Pit Console-only[] v",
+      "is_bugfix": true,
+      "is_qol": true,
+      "numeric_changes": [],
+      "all_changes": []
+    },
+    {
+      "patch": "9.01",
+      "raw": "Poison Cloud, Toxic Screen and Viper's Pit Fixed an issue where AimAssist was incorrectly being applied when it was equipped.",
+      "is_bugfix": true,
+      "is_qol": false,
+      "numeric_changes": [],
+      "all_changes": []
+    }
+  ]
+}

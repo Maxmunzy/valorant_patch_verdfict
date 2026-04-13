@@ -2,18 +2,109 @@
 label_builder.py
 (요원, 액트) 쌍의 패치 레이블 생성 함수군
 
-레이블 구조:
-  stable                          ← 패치 없음
-  nerf_{skill}_{trigger}          ← 일반 너프
-  nerf_{skill}_{trigger}_followup ← 1차 너프 효과 없어 추가 너프
-  correction_nerf                 ← 과버프 후 재조정
-  buff_{skill}_{trigger}          ← 일반 버프
-  buff_{skill}_{trigger}_followup ← 1차 버프 효과 없어 추가 버프
-  correction_buff                 ← 과너프 후 복구
-  rework                          ← 반복 DUAL_MISS → 수치 조정 한계
+5-class 레이블:
+  stable      — 지표가 평균 근처, 패치 없음
+  mild_nerf   — 비패치: 너프 신호 지속 중  /  패치: 첫 너프 + 보조 스킬
+  strong_nerf — 패치: followup/correction 너프 OR 핵심 스킬(E/X) 너프
+  mild_buff   — 비패치: 버프 신호 지속 중  /  패치: 첫 버프 + 보조 스킬
+  strong_buff — 패치: followup/correction 버프 OR 핵심 스킬(E/X) 버프 OR rework
+
+비패치 행 레이블 원칙:
+  - strong은 실제 패치 행에서만 부여 (비패치는 최대 mild)
+  - rank_pr_excess (요원별 베이스라인 대비 초과) 기준 → 제트 등 고베이스 요원 자연 처리
+  - 지속성 조건: rank_pr_slope >= -0.5 (신호가 유지되는 중, 이미 해소 중이면 stable)
+  - 랭크 + VCT 중 하나라도 명확한 방향 신호 있으면 mild 부여
 """
 
 from agent_data import SKILL_WEIGHT
+
+# 요원별 픽률 베이스라인 (feature_builder.AGENT_PR_BASELINE과 동기화)
+_PR_BASELINE: dict[str, float] = {
+    "Astra": 2.49, "Breach": 2.05, "Brimstone": 2.42, "Chamber": 9.51,
+    "Clove": 11.82, "Cypher": 5.36, "Deadlock": 1.82, "Fade": 5.46,
+    "Gekko": 3.05, "Harbor": 0.43, "Iso": 1.81, "Jett": 13.93,
+    "KAYO": 4.10, "Killjoy": 3.76, "Neon": 1.92, "Omen": 6.96,
+    "Phoenix": 1.83, "Raze": 7.27, "Reyna": 9.36, "Sage": 6.35,
+    "Skye": 4.57, "Sova": 6.39, "Tejo": 1.89, "Viper": 3.59,
+    "Vyse": 2.25, "Waylay": 2.00, "Yoru": 1.89,
+}
+_DEFAULT_BASELINE = 5.0
+
+
+def classify_stable_state(feat, agent=None, prev_label=None):
+    """
+    비패치 행 레이블 결정 — 최대 mild (strong은 실제 패치에서만)
+
+    너프 방향 조건 (하나라도 해당):
+      A) rank 신호: rank_pr_excess > NERF_PR_THRESH  AND  rank_wr_vs50 > 0
+      B) VCT 상대 신호: vct_pr_excess > NERF_VCT_THRESH
+      C) VCT 절대 지배: vct_pr > 35% (역대 평균 무관 — Viper/Omen 타입)
+
+    버프 방향 조건 (하나라도 해당):
+      A) rank 신호: rank_pr_excess < BUFF_PR_THRESH  AND  rank_wr_vs50 < BUFF_WR_THRESH
+      B) 픽률 극단: rank_pr_pct < FLOOR_THRESH
+
+    지속성 조건: rank_pr_slope >= -0.8
+
+    신호 캐리오버: 이전 액트에서 mild_nerf/mild_buff였고, 현재 지표가 여전히
+    이상(해소되지 않음)이면 이전 레이블 유지
+    """
+    rank_pr      = float(feat.get("rank_pr", 0) or 0)  # 원본 스케일 (1~17)
+    rank_wr      = float(feat.get("rank_wr", 50) or 50)
+    rank_wr_vs50 = rank_wr - 50.0
+    rank_pr_slope = float(feat.get("rank_pr_slope", 0) or 0)
+    rank_pr_avg3 = float(feat.get("rank_pr_avg3", rank_pr) or rank_pr)
+    vct_pr_last  = float(feat.get("vct_pr_last", 0) or 0)
+    vct_pr_avg   = float(feat.get("vct_pr_avg", 0) or 0)
+
+    # baseline도 원본 스케일 → ×5 없이 직접 비교
+    baseline = _PR_BASELINE.get(agent, _DEFAULT_BASELINE) if agent else _DEFAULT_BASELINE
+    rank_pr_excess = rank_pr - baseline           # 원본 스케일 비교
+    vct_pr_excess  = vct_pr_last - vct_pr_avg
+
+    # ── 임계값 (원본 스케일 기준: 1 ≈ 5%p) ─────────────────────────────��──────
+    NERF_PR_THRESH    =  1.5   # baseline 대비 ~7.5%p 초과
+    NERF_VCT_REL      = 10.0   # VCT 역대 평균보다 10%p 초과
+    NERF_VCT_ABS      = 35.0   # VCT 절대 지배 기준 (Viper/Omen 타입)
+    BUFF_PR_THRESH    = -0.5   # baseline 대비 ~2.5%p 미달
+    BUFF_WR_THRESH    = -0.5   # 승률 49.5% 미만
+    FLOOR_THRESH      =  1.0   # 픽률 ~5% 미만 (원본 스케일)
+    PERSIST_SLOPE     = -0.8   # 급하락 중이면 해소 간주
+
+    sustained = rank_pr_slope >= PERSIST_SLOPE
+
+    # ── 너프 신호 ──────────────────────────────────────────────────────────────
+    nerf_rank    = rank_pr_excess > NERF_PR_THRESH and rank_wr_vs50 > 0
+    nerf_vct_rel = vct_pr_excess > NERF_VCT_REL
+    nerf_vct_abs = vct_pr_last > NERF_VCT_ABS     # ★ 신규: VCT 절대 지배
+
+    if (nerf_rank or nerf_vct_rel or nerf_vct_abs) and sustained:
+        return "mild_nerf"
+
+    # ── 버프 신호 ──────────────────────────────────────────────────────────────
+    buff_rank  = rank_pr_excess < BUFF_PR_THRESH and rank_wr_vs50 < BUFF_WR_THRESH
+    buff_floor = rank_pr < FLOOR_THRESH
+
+    if (buff_rank or buff_floor) and sustained:
+        return "mild_buff"
+
+    # ── 신호 캐리오버: 이전 액트 신호가 해소되지 않았으면 유지 ─────────────────
+    # 해소 = 현재 독립적으로 봤을 때 신호가 하나도 안 잡히는 상태
+    if prev_label == "mild_nerf":
+        # 랭크 너프 신호 OR VCT 너프 신호 중 하나라도 남아있으면 유지
+        still_nerf_rank = rank_pr_excess > NERF_PR_THRESH and rank_wr_vs50 > 0
+        still_nerf_vct  = vct_pr_last > NERF_VCT_ABS or vct_pr_excess > NERF_VCT_REL
+        if still_nerf_rank or still_nerf_vct:
+            return "mild_nerf"
+
+    if prev_label == "mild_buff":
+        # 버프 신호가 남아있으면 유지
+        still_buff_rank = rank_pr_excess < BUFF_PR_THRESH and rank_wr_vs50 < BUFF_WR_THRESH
+        still_buff_floor = rank_pr < FLOOR_THRESH
+        if still_buff_rank or still_buff_floor:
+            return "mild_buff"
+
+    return "stable"
 
 
 def dominant_skill(patch_rows):
@@ -43,56 +134,6 @@ def dominant_trigger(patch_rows):
     if t == "role_invasion":  return "role_inv"
     if t == "skill_ceiling":  return "skill_ceil"
     return "rank"
-
-
-def classify_stable_state(feat):
-    """
-    패치 없는 행에 대한 레이블 결정.
-
-    핵심 원칙: 매 액트마다 현재 수치만으로 재판정.
-    acts_since / last_direction 같은 이력 조건 없음.
-    액트 = ~2개월 단위이므로 매 액트 독립 판정이 가장 단순하고 정확함.
-
-      nerf_followup  ← 랭크 or VCT 수치가 너프 기준 초과 상태인데 패치 없음
-      buff_followup  ← 랭크 수치가 버프 기준 미달 상태인데 패치 없음
-      stable_*       ← 수치가 임계치 안에 있어서 조정 불필요
-    """
-    rank_pr      = float(feat.get("rank_pr", 0) or 0)      # slots 단위 (×5 = %)
-    vct_pr       = float(feat.get("vct_pr_last", 0) or 0)  # % 단위
-    rank_wr_vs50 = float(feat.get("rank_wr_vs50", 0) or 0)
-    vct_profile  = feat.get("vct_profile", "")
-    map_hhi      = float(feat.get("map_hhi", 0.3) or 0.3)
-
-    rank_pr_pct = rank_pr * 5  # % 단위로 변환
-
-    # ── 1) 너프 기준 ──────────────────────────────────────────────────────────
-    # 신호 A — 랭크 지배: 픽률 높고 AND 승률 평균 이상
-    nerf_rank = rank_pr_pct >= 20.0 and rank_wr_vs50 >= 0.0
-    # 신호 B — 승률 극단: 픽률 무관하게 승률이 비정상적으로 높음
-    nerf_wr   = rank_wr_vs50 >= 2.5
-    # 신호 C — VCT 지배 + 맵 비종속: pro_dom 패턴 (맵 로테 영향 없는 요원)
-    nerf_vct  = vct_pr >= 40.0 and map_hhi <= 0.15 and rank_wr_vs50 >= -1.0
-    if nerf_rank or nerf_wr or nerf_vct:
-        return "nerf_followup"
-
-    # ── 2) 버프 기준 ──────────────────────────────────────────────────────────
-    # 신호 A — 랭크 부진: 픽률 낮고 AND 승률도 낮음
-    buff_rank = rank_pr_pct <= 12.0 and rank_wr_vs50 <= -1.5
-    # 신호 B — 승률 극단: 픽률 무관하게 승률이 비정상적으로 낮음
-    buff_wr   = rank_wr_vs50 <= -4.0
-    # 신호 C — 존재감 없음: 픽률이 사실상 0에 가까움
-    buff_pr   = rank_pr_pct <= 5.0
-    if buff_rank or buff_wr or buff_pr:
-        return "buff_followup"
-
-    # ── 3) stable 세분화 ──────────────────────────────────────────────────────
-    if rank_pr > 12 or vct_pr > 35 or rank_wr_vs50 > 3.0:
-        return "stable_strong"
-
-    if rank_pr < 3.0 and vct_pr < 3.0 and vct_profile not in ("pro_absent", "pro_unknown"):
-        return "stable_weak"
-
-    return "stable_balanced"
 
 
 def detect_context(agent, target_act_idx, step1_df):
@@ -153,9 +194,12 @@ def check_rework_needed(feat):
 
 def build_patch_label(agent, target_act_idx, patch_rows, step1_df, feat):
     """
-    단일 (요원, 다음 액트)에 해당하는 패치 레이블 생성
-    patch_rows: 해당 요원, 해당 액트의 실제 패치 행들
-    feat: 현재 액트 기준 피처 (rework 판정에 사용)
+    5-class 패치 레이블 생성
+
+    strong 기준:
+      - followup/correction (이전 패치 효과 없어 추가 조정)
+      - 핵심 스킬(E/X) 변경
+      - rework 필요 (랭크+VCT 모두 극단적으로 낮음)
     """
     nb = patch_rows[patch_rows["direction"].isin(["nerf", "buff"])]
     if nb.empty:
@@ -166,14 +210,16 @@ def build_patch_label(agent, target_act_idx, patch_rows, step1_df, feat):
     trigger   = dominant_trigger(nb)
     context   = detect_context(agent, target_act_idx, step1_df)
 
-    if check_rework_needed(feat):
-        label = "rework"
-    elif context == "correction":
-        label = f"correction_{direction}"
-    elif context == "followup":
-        label = f"{direction}_{skill}_{trigger}_followup"
+    is_strong = (
+        context in ("followup", "correction")
+        or skill in ("E", "X")
+        or check_rework_needed(feat)
+    )
+
+    if direction == "nerf":
+        label = "strong_nerf" if is_strong else "mild_nerf"
     else:
-        label = f"{direction}_{skill}_{trigger}"
+        label = "strong_buff" if is_strong else "mild_buff"
 
     meta = {
         "label_direction": direction,
