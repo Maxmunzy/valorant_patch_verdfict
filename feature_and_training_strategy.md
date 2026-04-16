@@ -1,11 +1,12 @@
 # 발로란트 패치 예측 모델 — 피처 및 학습 전략
 
-> 기준일: 2026-04-13
-> 학습 데이터: `step2_training_data.csv` (659행 / 29 요원 / E2A1 ~ V25A5)
-> V26A2(현재 진행 중)는 학습 제외 — 레이블 미확정
+> 기준일: 2026-04-16
+> 학습 데이터: `step2_training_data.csv` (659행 / 29 요원 / E2A1 ~ V26A2)
+> 현재 패치: 12.07 (밸런스 변경 없음) / 12.06 VCT 적용일: 4월 24일
 > 모델: 2-Stage Hierarchical Classification (양쪽 모두 XGBoost)
 > Stage A: stable vs patched — 50 피처 / train-only 1:1 undersampling
 > Stage B: buff vs nerf — 51 피처 / SMOTE oversampling
+> 패치 시뮬레이터: patch_simulator.py — 가상 패치 입력 → 메타 변화 예측 + AI 분석
 
 ---
 
@@ -296,6 +297,35 @@ rank_pr은 **원본 스케일** (1~17 범위)로 사용. 이전 버전에서 `ra
 
 ---
 
+## 패치 시뮬레이터 (patch_simulator.py)
+
+### 동작 흐름
+
+```
+가상 패치 입력 (요원, 스킬, 스탯, 변경값)
+    → 유사 과거 사례 검색 (impact_lookup)
+    → PR/WR 델타 추정
+    → 피처 수정 (rank_pr, rank_wr, vct_pr_last + 파생 피처 전체 재계산)
+    → 2-Stage 모델 재예측 (before/after)
+    → AI 분석 (Claude Haiku, 역할군별 비교)
+```
+
+### 피처 수정 시 주의
+
+- `rank_pr`는 ÷5 스케일. impact_lookup의 raw %를 ÷5로 변환 후 적용
+- VCT 픽률은 랭크 델타의 ×1.5 민감도 가정 (프로는 메타에 더 빠르게 반응)
+- 피처 수정 후 2D 사분면, excess, signal 피처 전체 재파생 (`_rederive_features`)
+
+### AI 분석 컨텍스트
+
+AgentPrediction에 `rank_pr`, `rank_wr`, `vct_pr` 필드 포함.
+- `rank_pr`: step2 데이터의 rank_pr × 5.0 (게임 등장률 %)
+- `rank_wr`: step2 데이터의 rank_wr (실제 승률)
+- `vct_pr`: step2 데이터의 vct_pr_last (VCT 픽률 %)
+- 프론트엔드 buildResultSummary에서 이 값들을 AI에게 전달하여 정확한 현재 상태 분석 가능
+
+---
+
 ## 피처 설계 원칙
 
 1. **2D 사분면 설계**: 픽률·승률을 독립 1D가 아닌 2D 평면으로 교차
@@ -306,3 +336,14 @@ rank_pr은 **원본 스케일** (1~17 범위)로 사용. 이전 버전에서 `ra
 6. **시계열 누출 방지**: Walk-forward temporal split, label leak 피처 제거
 7. **도메인 룰 전면 제거**: 모델이 직접 학습하도록 위임, 수동 보정 없음
 8. **신호 캐리오버**: 비패치 레이블은 이전 액트 신호가 해소되지 않으면 유지
+
+---
+
+## 자동 업데이트 파이프라인 (auto_update.py)
+
+1. **패치 감지**: playvalorant.com 패치노트 URL에 HEAD 요청 → 200이면 신규 패치
+2. **랭크 크롤링**: crawl_tracker.py 실행
+3. **VCT 크롤링**: crawl_current_vct.py 실행
+4. **빌드 + 리로드**: build_step2_data.py → predict_service 갱신
+
+로그: `logs/` 디렉토리에 패치별 기록
