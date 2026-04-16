@@ -21,10 +21,10 @@ function SectionLabel({
     <div className="flex items-center gap-3">
       <div style={{ width: "2px", height: "28px", background: accentColor }} className="shrink-0" />
       <div>
-        <div className="text-[9px] uppercase tracking-[0.25em]" style={{ color: `${accentColor}CC` }}>
+        <div className="text-[9px] font-valo tracking-[0.25em]" style={{ color: `${accentColor}CC` }}>
           {labelEn}
         </div>
-        <div className="text-lg font-black leading-tight" style={{ color: accentColor }}>
+        <div className="text-xl font-valo font-bold leading-tight" style={{ color: accentColor }}>
           {label}
         </div>
       </div>
@@ -49,6 +49,7 @@ export default async function Home() {
   // API 응답 순서 유지 (p_nerf/p_buff 내림차순)
   const nerfAll   = agents.filter((a) => a.verdict.includes("nerf"));
   const buffAll   = agents.filter((a) => a.verdict.includes("buff"));
+  const stableAll = agents.filter((a) => a.verdict === "stable");
 
   const nerfTop3  = nerfAll.slice(0, 3);
   const buffTop3  = buffAll.slice(0, 3);
@@ -71,12 +72,12 @@ export default async function Home() {
           />
           <div>
             <div
-              className="text-[9px] uppercase tracking-[0.3em] mb-2"
+              className="text-[9px] font-valo tracking-[0.3em] mb-2"
               style={{ color: "rgba(148,163,184,0.7)" }}
             >
               TACTICAL ANALYSIS // VALORANT PATCH PREDICTOR // XGBoost 2-Stage
             </div>
-            <h1 className="text-5xl sm:text-6xl font-black tracking-tight leading-[0.9] text-white">
+            <h1 className="font-valo text-5xl sm:text-6xl font-bold tracking-wide leading-[0.9] text-white">
               WHO&apos;S{" "}
               <span style={{ color: "#FF4655" }}>NEXT</span>
               <span style={{ color: "rgba(51,65,85,0.8)" }}>?</span>
@@ -85,7 +86,7 @@ export default async function Home() {
         </div>
 
         <p
-          className="text-sm leading-relaxed max-w-lg pl-6"
+          className="text-sm leading-relaxed max-w-none pl-2"
           style={{ color: "rgba(148,163,184,0.85)" }}
         >
           랭크·VCT 성적과 패치 이력을 ML 모델로 분석해 다음 패치 너프/버프 가능성을 예측합니다.
@@ -109,6 +110,23 @@ export default async function Home() {
               {tag}
             </span>
           ))}
+        </div>
+        <div className="pl-6 pt-2">
+          <Link
+            href="/simulator"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-black uppercase tracking-widest transition-all hover:brightness-125"
+            style={{
+              border: "1px solid rgba(167,139,250,0.5)",
+              color: "#A78BFA",
+              background: "rgba(167,139,250,0.08)",
+            }}
+          >
+            <span style={{ fontSize: "16px" }}>&#9881;</span>
+            패치 시뮬레이터
+            <span className="text-[9px] font-normal tracking-normal" style={{ color: "rgba(167,139,250,0.6)" }}>
+              스킬 수치를 바꿔보고 메타 변화를 예측
+            </span>
+          </Link>
         </div>
       </div>
 
@@ -194,10 +212,27 @@ export default async function Home() {
         </section>
       )}
 
+      {/* ── STABLE ──────────────────────────────────── */}
+      {stableAll.length > 0 && (
+        <section className="space-y-4">
+          <SectionLabel
+            label="STABLE"
+            labelEn="ST // STABLE"
+            accentColor="#64748B"
+            count={stableAll.length}
+          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start">
+            {stableAll.map((a) => (
+              <AgentCard key={a.agent} agent={a} size="sm" />
+            ))}
+          </div>
+        </section>
+      )}
+
       {agents.length > 0 && (
         <div
-          className="text-center text-[9px] uppercase tracking-widest"
-          style={{ color: "rgba(100,116,139,0.7)" }}
+          className="text-center text-[13px] uppercase tracking-widest"
+          style={{ color: "rgb(255, 255, 255)" }}
         >
           // {agents.length} AGENTS ANALYZED · 카드 클릭 시 상세 분석 //
         </div>

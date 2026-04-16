@@ -83,4 +83,8 @@ export const SIGNAL_TYPE_COLORS: Record<string, string> = {
   structural:"text-slate-500",
 };
 
-export const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000";
+// SSR(서버)에서는 직접 백엔드 호출, 브라우저에서는 /api 프록시 경유
+export const API_BASE =
+  typeof window === "undefined"
+    ? (process.env.BACKEND_URL ?? "http://localhost:8000")
+    : (process.env.NEXT_PUBLIC_API_BASE ?? "/api");

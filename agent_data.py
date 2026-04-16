@@ -70,7 +70,7 @@ PATCH_TO_ACT = {
     # V26A1: 2026-01-07 ~ 03-17
     "12.00":"V26A1","12.01":"V26A1","12.02":"V26A1","12.03":"V26A1","12.04":"V26A1",
     # V26A2: 2026-03-18 ~
-    "12.05":"V26A2","12.06":"V26A2",
+    "12.05":"V26A2","12.06":"V26A2","12.07":"V26A2",
 }
 
 # ─── VCT 이벤트 → 액트 매핑 ──────────────────────────────────────────────────
@@ -109,6 +109,55 @@ VCT_EVENT_ORDER = {v: i for i, v in enumerate(VCT_TO_ACT.keys())}
 
 SKILL_WEIGHT = {"E": 3.0, "C": 2.0, "Q": 1.0, "X": 2.5}
 
+# ─── 현재 맵 풀 (패치/시즌마다 업데이트) ─────────────────────────────────────
+CURRENT_MAP_POOL = ["바인드", "브리즈", "프랙처", "헤이번", "로터스", "펄", "스플릿"]
+
+# ─── 요원별 역대 평균 픽률 베이스라인 ────────────────────────────────────────
+# training_data.csv rank_pr_t-1 기준 — 이 이상으로 픽되면 성능 외 팬덤이 픽률을 지탱
+
+AGENT_PR_BASELINE: dict[str, float] = {
+    "Astra": 2.49, "Breach": 2.05, "Brimstone": 2.42, "Chamber": 9.51,
+    "Clove": 11.82, "Cypher": 5.36, "Deadlock": 1.82, "Fade": 5.46,
+    "Gekko": 3.05, "Harbor": 0.43, "Iso": 1.81, "Jett": 13.93,
+    "KAYO": 4.10, "Killjoy": 3.76, "Neon": 1.92, "Omen": 6.96,
+    "Phoenix": 1.83, "Raze": 7.27, "Reyna": 9.36, "Sage": 6.35,
+    "Skye": 4.57, "Sova": 6.39, "Tejo": 1.89, "Viper": 3.59,
+    "Vyse": 2.25, "Waylay": 2.00, "Yoru": 1.89,
+}
+
+# ─── 요원 한영 이름 매핑 ─────────────────────────────────────────────────────
+
+AGENT_NAME_KO: dict[str, str] = {
+    # 타격대
+    "Jett": "제트", "Reyna": "레이나", "Raze": "레이즈", "Neon": "네온",
+    "Phoenix": "피닉스", "Iso": "아이소", "Yoru": "요루", "Waylay": "웨이레이",
+    # 전략가
+    "Brimstone": "브림스톤", "Viper": "바이퍼", "Omen": "오멘", "Astra": "아스트라",
+    "Clove": "클로브", "Harbor": "하버", "Miks": "믹스",
+    # 감시자
+    "Killjoy": "킬조이", "Cypher": "사이퍼", "Sage": "세이지", "Chamber": "체임버",
+    "Deadlock": "데드록", "Vyse": "바이스", "Veto": "비토",
+    # 척후대
+    "Sova": "소바", "Skye": "스카이", "Fade": "페이드", "Breach": "브리치",
+    "KAYO": "케이오", "KAY/O": "케이오", "Gekko": "게코", "Tejo": "테호",
+}
+
+KO_TO_EN: dict[str, str] = {v: k for k, v in AGENT_NAME_KO.items() if k != "KAY/O"}
+KO_TO_EN["케이오"] = "KAYO"  # KAY/O 중복 제거
+
+AGENT_ROLE_KO: dict[str, str] = {
+    "Brimstone": "전략가", "Viper": "전략가", "Omen": "전략가",
+    "Astra": "전략가", "Harbor": "전략가", "Clove": "전략가", "Miks": "전략가",
+    "Killjoy": "감시자", "Cypher": "감시자", "Sage": "감시자",
+    "Chamber": "감시자", "Deadlock": "감시자", "Vyse": "감시자", "Veto": "감시자",
+    "Sova": "척후대", "Fade": "척후대", "Gekko": "척후대",
+    "Breach": "척후대", "Skye": "척후대", "KAYO": "척후대",
+    "KAY/O": "척후대", "Tejo": "척후대",
+    "Phoenix": "타격대", "Reyna": "타격대", "Raze": "타격대",
+    "Jett": "타격대", "Neon": "타격대", "Yoru": "타격대",
+    "Iso": "타격대", "Waylay": "타격대",
+}
+
 # ─── 요원 이름 정규화 ─────────────────────────────────────────────────────────
 
 AGENT_NAME_MAP = {
@@ -118,7 +167,14 @@ AGENT_NAME_MAP = {
 }
 
 def normalize_agent(name: str) -> str:
-    return AGENT_NAME_MAP.get(name, name)
+    """한국어/대소문자 무관 입력을 정규화된 영문명으로 변환."""
+    if name in KO_TO_EN:
+        return KO_TO_EN[name]
+    if name in AGENT_NAME_MAP:
+        return AGENT_NAME_MAP[name]
+    normalized = name.strip().title()
+    fixes = {"Kay/O": "KAYO", "Kayo": "KAYO"}
+    return fixes.get(normalized, normalized)
 
 # ─── 역할군 매핑 ──────────────────────────────────────────────────────────────
 
@@ -391,56 +447,56 @@ AGENT_DESIGN = {
     "Reyna": {
         "design_audience": "rank", "team_synergy": 0.0, "complexity": 0.2,
         "replaceability": 0.7, "role_niche": "solo_carry",
-        "unique_value": "킬 후 리셋으로 1인 눈덩이 교전 지배. 팀 유틸 전무.",
+        "unique_value": "눈총(시야차단) + 포식(킬 후 체력 회복) + 무시(킬 후 무적 이동). 궁극기 여제로 전 스킬 강화. 팀 유틸 없이 킬 의존도 극대화된 솔로 캐리 구조.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 8,
     },
     "Jett": {
         "design_audience": "both", "team_synergy": 0.3, "complexity": 0.8,
         "replaceability": 0.8, "role_niche": "mobility_duelist",
-        "unique_value": "초이동성 + 킬 리셋 돌진. 메타 이동기 캐리.",
+        "unique_value": "연막 폭발(짧은 연막) + 상승 기류(수직 이동) + 순풍(킬 리셋 대시). 궁극기 칼날 폭풍으로 정밀 원거리 사출. 타격대 중 최고 기동성 보유.",
         "agent_tier": "B", "op_synergy": True, "geo_synergy": "medium",
         "skill_ceiling": 5,
     },
     "Raze": {
         "design_audience": "both", "team_synergy": 0.2, "complexity": 0.5,
         "replaceability": 0.6, "role_niche": "explosive_duelist",
-        "unique_value": "폭발 광역피해 + 폭발팩 이동기. 클러치 교전 지배.",
+        "unique_value": "폭발 봇(자동 추적 폭발) + 폭발 팩(넉백 + 자체 이동) + 페인트 탄(수류탄 분산 폭발). 궁극기 대미 장식으로 광역 로켓 발사. 전 스킬이 직접 피해 가능.",
         "agent_tier": "A", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 8,
     },
     "Neon": {
         "design_audience": "both", "team_synergy": 0.3, "complexity": 0.7,
         "replaceability": 0.5, "role_niche": "speed_utility_duelist",
-        "unique_value": "추월차선 + 릴레이볼트(CC) + 고속기어(이동) 조합. 타격대 중 유틸 자급 능력 최상위.",
+        "unique_value": "추월 차선(양쪽 벽 연막) + 릴레이 볼트(반사 CC) + 고속 기어(스프린트+슬라이드). 궁극기 오버드라이브로 전기 빔 발사. 타격대 중 유틸 자급 능력 최상위.",
         "agent_tier": "S", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 9,
     },
     "Phoenix": {
         "design_audience": "both", "team_synergy": 0.3, "complexity": 0.4,
         "replaceability": 0.8, "role_niche": "fire_duelist",
-        "unique_value": "자가힐 섬광 + 리스폰 울트. 팀 유틸 희박.",
+        "unique_value": "불길(화염 벽 시야차단+자힐) + 뜨거운 손(화염 장판 자힐) + 커브볼(곡선 섬광). 궁극기 역습으로 사망 시 원위치 부활. 자가 회복 내장 타격대.",
         "agent_tier": "C", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 5,
     },
     "Iso": {
         "design_audience": "rank", "team_synergy": 0.1, "complexity": 0.5,
         "replaceability": 0.7, "role_niche": "solo_carry",
-        "unique_value": "1v1 결투장 + 실드. 솔로 특화 설계, 팀 기여 최소.",
+        "unique_value": "대비책(관통 불가 벽) + 약화(둔화 장판) + 구슬 보호막(킬 시 보호막 획득). 궁극기 청부 계약으로 적 1명을 격리 공간에서 1v1 강제. 솔로 교전 특화 구조.",
         "agent_tier": "C", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 4,
     },
     "Yoru": {
         "design_audience": "both", "team_synergy": 0.3, "complexity": 0.9,
         "replaceability": 0.5, "role_niche": "deception_flanker",
-        "unique_value": "텔포+분신 기만 전술. 감시자 설치물을 구조적으로 무력화.",
+        "unique_value": "기만(가짜 발소리 분신) + 기습(반사 섬광) + 관문 충돌(텔레포트 앵커). 궁극기 차원 표류로 무적 상태 정찰+위치 선점. 기만 전술로 감시자 설치물 구조적 무력화.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 9,
     },
     "Waylay": {
         "design_audience": "both", "team_synergy": 0.3, "complexity": 0.6,
         "replaceability": 0.5, "role_niche": "mobility_duelist",
-        "unique_value": "소닉 이동기 + 시야교란. 제트 니치를 팀 기여 포함으로 대체.",
+        "unique_value": "포화(광역 CC 탄막) + 광속(고속 직선 이동) + 굴절(빛 굴절 이동+시야교란). 궁극기 초점 교차로 광역 CC 발동. 이동기와 CC를 동시에 갖춘 타격대.",
         "agent_tier": "A", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 7,
     },
@@ -448,42 +504,42 @@ AGENT_DESIGN = {
     "Omen": {
         "design_audience": "both", "team_synergy": 0.6, "complexity": 0.5,
         "replaceability": 0.5, "role_niche": "smoke_teleport",
-        "unique_value": "S급 연막 + 이동기 콤보. 맵 전체 이동 울트.",
+        "unique_value": "어둠의 발자국(단거리 텔레포트) + 피해망상(관통 시야차단) + 어둠의 장막(원거리 연막). 궁극기 그림자 습격으로 맵 어디든 텔레포트. 연막+이동기 겸비 전략가.",
         "agent_tier": "A", "op_synergy": False, "geo_synergy": "high",
         "skill_ceiling": 5,
     },
     "Viper": {
         "design_audience": "pro",  "team_synergy": 0.9, "complexity": 0.9,
         "replaceability": 0.3, "role_niche": "zone_control_smoke",
-        "unique_value": "맵 구역 완전 봉쇄. 독 데미지+연막 이중 압박. 팀 조율 없이 가치 없음.",
+        "unique_value": "뱀 이빨(독 장판 피해+둔화) + 독성 연기(재사용 연막 구체) + 독성 장막(긴 벽형 연막). 궁극기 독사의 구덩이로 대규모 독 구역 생성. 독 피해와 연막을 동시 운용하는 구역 봉쇄 전략가.",
         "agent_tier": "S", "op_synergy": False, "geo_synergy": "high",
         "skill_ceiling": 7,
     },
     "Brimstone": {
         "design_audience": "both", "team_synergy": 0.7, "complexity": 0.4,
         "replaceability": 0.6, "role_niche": "smoke_support",
-        "unique_value": "원격 연막 3개 + 자극제 버프. 직관적 전략가.",
+        "unique_value": "자극제 신호기(팀 사격속도 버프) + 소이탄(화염 장판) + 공중 연막(최대 3개 원격 연막). 궁극기 궤도 일격으로 광역 레이저 폭격. 직관적 연막 운용+팀 버프 전략가.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 3,
     },
     "Astra": {
         "design_audience": "pro",  "team_synergy": 1.0, "complexity": 1.0,
         "replaceability": 0.4, "role_niche": "global_cc_smoke",
-        "unique_value": "맵 전체 CC + 연막 배치. 팀 조율 극대화 시 최강. 솔로 가치 없음.",
+        "unique_value": "중력의 샘(흡인 CC) + 신성 파동(기절 CC) + 성운(별 연막). 궁극기 우주 장벽으로 맵 관통 거대 벽 생성. 맵 전체에 별을 배치해 연막·CC를 원격 전환하는 글로벌 전략가.",
         "agent_tier": "A", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 10,
     },
     "Clove": {
         "design_audience": "both", "team_synergy": 0.5, "complexity": 0.4,
         "replaceability": 0.5, "role_niche": "smoke_revive",
-        "unique_value": "사망 후 행동 가능한 연막 운용. 독특한 생존 메커니즘.",
+        "unique_value": "활력 회복(킬 어시 시 체력 회복) + 간섭(감쇠 장판) + 계략(사망 후에도 사용 가능한 연막). 궁극기 아직 안 죽었어로 사망 후 일시 부활. 사망 후에도 행동 가능한 유일한 전략가.",
         "agent_tier": "A", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 2,
     },
     "Harbor": {
         "design_audience": "both", "team_synergy": 0.8, "complexity": 0.6,
         "replaceability": 0.7, "role_niche": "water_smoke",
-        "unique_value": "물 연막 + 광역 기절. 하지만 연막 경쟁에서 바이퍼/오멘에 열세.",
+        "unique_value": "폭풍 쇄도(구체 보호막 연막) + 만조(조종 가능 벽형 연막) + 해만(전방 물 벽). 궁극기 심판으로 광역 기절 발동. 물 기반 연막+CC 전략가.",
         "agent_tier": "C", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 3,
     },
@@ -491,49 +547,49 @@ AGENT_DESIGN = {
     "Sova": {
         "design_audience": "pro",  "team_synergy": 0.8, "complexity": 0.9,
         "replaceability": 0.2, "role_niche": "global_info",
-        "unique_value": "맵 전체 정보 획득. 드론+화살 조합 반복 가능. 대체 불가 정보원.",
+        "unique_value": "올빼미 드론(조종 정찰 드론) + 충격 화살(반사 피해 화살) + 정찰용 화살(반사 소나 정보). 궁극기 사냥꾼의 분노로 벽 관통 에너지 발사. 화살 반사각 활용 맵 전역 정보 획득 척후대.",
         "agent_tier": "S", "op_synergy": False, "geo_synergy": "high",
         "skill_ceiling": 9,
     },
     "Skye": {
         "design_audience": "pro",  "team_synergy": 0.9, "complexity": 0.7,
         "replaceability": 0.4, "role_niche": "info_heal",
-        "unique_value": "정보 + 팀 힐 + 섬광 삼박자. 팀 지속력 핵심.",
+        "unique_value": "재생(팀 범위 힐) + 정찰자(조종 정찰 생물) + 인도하는 빛(조종 섬광). 궁극기 추적자로 적 위치 자동 추적. 정보+힐+섬광 삼박자 척후대.",
         "agent_tier": "A", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 6,
     },
     "Fade": {
         "design_audience": "both", "team_synergy": 0.7, "complexity": 0.6,
         "replaceability": 0.5, "role_niche": "info_cc",
-        "unique_value": "정보 + CC 콤보. 까마귀 정보 + 야경 광역 CC.",
+        "unique_value": "추적귀(투척 정찰 눈) + 포박(범위 속박+감쇠) + 귀체(자동 추적 정찰 생물). 궁극기 황혼으로 광역 시야차단+귀체 추적. 정보와 CC를 동시 제공하는 척후대.",
         "agent_tier": "A", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 4,
     },
     "Breach": {
         "design_audience": "pro",  "team_synergy": 1.0, "complexity": 0.8,
         "replaceability": 0.3, "role_niche": "wall_cc",
-        "unique_value": "벽 통과 S급 CC 3개. 팀 조율 시 가장 강력한 교전 개시.",
+        "unique_value": "여진(벽 관통 폭발) + 섬광 폭발(벽 관통 섬광) + 균열(벽 관통 기절). 궁극기 지진 강타로 전방 광역 넉업. 전 스킬 벽 관통 CC 특화 척후대.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 5,
     },
     "KAYO": {
         "design_audience": "both", "team_synergy": 0.8, "complexity": 0.5,
         "replaceability": 0.5, "role_niche": "suppress_initiator",
-        "unique_value": "적 스킬 무력화 + 섬광 + 팀 소생. 구성 파괴 전문.",
+        "unique_value": "파편/탄(화염 수류탄) + 플래시/드라이브(섬광) + 제로/포인트(적 스킬 억제 나이프). 궁극기 무력화/명령으로 광역 스킬 억제+팀 소생. 적 스킬 무력화 전문 척후대.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 6,
     },
     "Gekko": {
         "design_audience": "both", "team_synergy": 0.6, "complexity": 0.3,
         "replaceability": 0.5, "role_niche": "cc_initiator",
-        "unique_value": "스킬 회수+재사용 CC 삼총사. 설치 보조 내장. 팀 기여 높음.",
+        "unique_value": "폭파봇 지옥(광역 장판) + 지원봇(자동 설치+섬광 생물) + 기절봇(투척 시야방해). 궁극기 요동봇으로 적 속박. 전 스킬 회수 후 재사용 가능한 척후대.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 3,
     },
     "Tejo": {
         "design_audience": "both", "team_synergy": 0.6, "complexity": 0.5,
         "replaceability": 0.5, "role_niche": "info_bombardment",
-        "unique_value": "정밀 드론 + 광역 정밀 폭격. 정보와 피해 동시 제공.",
+        "unique_value": "잠입 드론(은신 정찰 드론) + 특별 배송(지연 폭발탄) + 유도 일제 사격(다중 유도 미사일). 궁극기 아마겟돈으로 대규모 정밀 폭격. 정보 수집과 화력 투사를 동시 수행하는 척후대.",
         "agent_tier": "A", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 3,
     },
@@ -541,42 +597,42 @@ AGENT_DESIGN = {
     "Cypher": {
         "design_audience": "both", "team_synergy": 0.6, "complexity": 0.7,
         "replaceability": 0.6, "role_niche": "info_sentinel",
-        "unique_value": "지역 정보 독점. 하지만 요루 텔포에 설치물 전체 무력화.",
+        "unique_value": "함정(트립와이어 감지) + 사이버 감옥(시야차단 우리) + 스파이캠(원격 감시 카메라). 궁극기 신경 절도로 적 시체에서 전원 위치 공개. 설치물 기반 정보 독점 감시자.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "high",
         "skill_ceiling": 4,
     },
     "Killjoy": {
         "design_audience": "both", "team_synergy": 0.5, "complexity": 0.5,
         "replaceability": 0.7, "role_niche": "area_denial_sentinel",
-        "unique_value": "사이트 지역 지배 설치물 세트. Q/E/C 모두 B급으로 킷 가치 낮음.",
+        "unique_value": "나노스웜(은닉 폭발 장판) + 알람봇(자동 감지+취약 부여) + 포탑(자동 사격 포탑). 궁극기 봉쇄로 광역 무장 해제. 사이트 설치물 세트로 지역 지배하는 감시자.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "high",
         "skill_ceiling": 3,
     },
     "Sage": {
         "design_audience": "both", "team_synergy": 0.9, "complexity": 0.3,
         "replaceability": 0.8, "role_niche": "heal_revive",
-        "unique_value": "팀힐 + 부활. C급 스킬 위주 킷 → 수치 조정만으론 메타 진입 어려움.",
+        "unique_value": "장벽 구슬(얼음 벽 설치) + 둔화 구슬(바닥 둔화 장판) + 회복 구슬(아군 체력 회복). 궁극기 부활로 사망한 아군 되살리기. 힐+부활 보유한 유일한 감시자.",
         "agent_tier": "C", "op_synergy": False, "geo_synergy": "low",
         "skill_ceiling": 1,
     },
     "Chamber": {
         "design_audience": "both", "team_synergy": 0.3, "complexity": 0.7,
         "replaceability": 0.6, "role_niche": "anchor_sniper",
-        "unique_value": "텔포 앵커 + 저격 특화. 너프 이후 생존력 저하로 고전.",
+        "unique_value": "트레이드마크(자동 감지 함정) + 헤드헌터(정밀 권총) + 랑데부(텔레포트 앵커 2점). 궁극기 역작으로 킬 시 둔화 필드 생성 저격총 사용. 텔레포트+저격 특화 감시자.",
         "agent_tier": "B", "op_synergy": True, "geo_synergy": "medium",
         "skill_ceiling": 8,
     },
     "Deadlock": {
         "design_audience": "pro",  "team_synergy": 0.7, "complexity": 0.7,
         "replaceability": 0.5, "role_niche": "cc_sentinel",
-        "unique_value": "CC 중심 감시자. 팀 조율 시 봉쇄력 높음.",
+        "unique_value": "장벽망(통로 차단 그물) + 음향 센서(소리 감지 기절) + 중력그물(투척 속박 그물). 궁극기 소멸로 나노와이어에 적 포박 후 처형. CC 중심 통로 봉쇄 감시자.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 2,
     },
     "Vyse": {
         "design_audience": "both", "team_synergy": 0.6, "complexity": 0.6,
         "replaceability": 0.4, "role_niche": "cc_sentinel",
-        "unique_value": "S급 광역 CC 울트 + 식물 설치물. 특정 맵에서 킬조이 완벽 대체.",
+        "unique_value": "면도날 덩굴(바닥 피해 덩굴) + 가지치기(벽 관통 CC) + 아크 장미(자동 감지 설치물). 궁극기 강철 정원으로 광역 무장 해제+스킬 억제. 설치물+광역 CC 감시자.",
         "agent_tier": "A", "op_synergy": False, "geo_synergy": "high",
         "skill_ceiling": 5,
     },
@@ -584,14 +640,14 @@ AGENT_DESIGN = {
     "Veto": {
         "design_audience": "pro",  "team_synergy": 0.7, "complexity": 0.7,
         "replaceability": 0.4, "role_niche": "counter_sentinel",
-        "unique_value": "투사체 파괴 + 팀 이동경로 생성. 적 스킬 차단에 특화된 감시자.",
+        "unique_value": "지름길(팀 이동 통로 생성) + 목조르기(구역 진입 차단 함정) + 요격기(적 투사체 파괴 설치물). 궁극기 진화로 자체 강화. 적 스킬 차단에 특화된 감시자.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "medium",
         "skill_ceiling": 7,
     },
     "Miks": {
         "design_audience": "both", "team_synergy": 0.7, "complexity": 0.6,
         "replaceability": 0.5, "role_niche": "support_initiator",
-        "unique_value": "음파 CC + 팀 버프 + 음파 연막. 지원형 척후대.",
+        "unique_value": "M-파동(음파 CC+아군 힐) + 화음(자체 버프) + 웨이브폼(음파 연막). 궁극기 요동치는 베이스로 광역 음파 CC. 힐+연막+CC를 겸비한 지원형 척후대.",
         "agent_tier": "B", "op_synergy": False, "geo_synergy": "high",
         "skill_ceiling": 6,
     },
@@ -668,3 +724,78 @@ AGENT_RELATIONS = {
         ],
     },
 }
+
+# ─── 크롤러 공용 상수 (vstats.gg) ────────────────────────────────────────────
+
+VSTATS_AGENTS = [
+    {"name": "Astra",     "uuid": "41fb69c1-4189-7b37-f117-bcaf1e96f1bf"},
+    {"name": "Breach",    "uuid": "5f8d3a7f-467b-97f3-062c-13acf203c006"},
+    {"name": "Brimstone", "uuid": "9f0d8ba9-4140-b941-57d3-a7ad57c6b417"},
+    {"name": "Chamber",   "uuid": "22697a3d-45bf-8dd7-4fec-84a9e28c69d7"},
+    {"name": "Clove",     "uuid": "1dbf2edd-4729-0984-3115-daa5eed44993"},
+    {"name": "Cypher",    "uuid": "117ed9e3-49f3-6512-3ccf-0cada7e3823b"},
+    {"name": "Deadlock",  "uuid": "cc8b64c8-4b25-4ff9-6e7f-37b4da43d235"},
+    {"name": "Fade",      "uuid": "dade69b4-4f5a-8528-247b-219e5a1facd6"},
+    {"name": "Gekko",     "uuid": "e370fa57-4757-3604-3648-499e1f642d3f"},
+    {"name": "Harbor",    "uuid": "95b78ed7-4637-86d9-7e41-71ba8c293152"},
+    {"name": "Iso",       "uuid": "efba5359-4016-a1e5-7626-b1ae76895940"},
+    {"name": "Jett",      "uuid": "add6443a-41bd-e414-f6ad-e58d267f4e95"},
+    {"name": "KAYO",      "uuid": "601dbbe7-43ce-be57-2a40-4abd24953621"},
+    {"name": "Killjoy",   "uuid": "1e58de9c-4950-5125-93e9-a0aee9f98746"},
+    {"name": "Miks",      "uuid": "92eeef5d-43b5-1d4a-8d03-b3927a09034b"},
+    {"name": "Neon",      "uuid": "bb2a4828-46eb-8cd1-e765-15848195d751"},
+    {"name": "Omen",      "uuid": "8e253930-4c05-31dd-1b6c-968525494517"},
+    {"name": "Phoenix",   "uuid": "eb93336a-449b-9c1b-0a54-a891f7921d69"},
+    {"name": "Raze",      "uuid": "f94c3b30-42be-e959-889c-5aa313dba261"},
+    {"name": "Reyna",     "uuid": "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc"},
+    {"name": "Sage",      "uuid": "569fdd95-4d10-43ab-ca70-79becc718b46"},
+    {"name": "Skye",      "uuid": "6f2a04ca-43e0-be17-7f36-b3908627744d"},
+    {"name": "Sova",      "uuid": "320b2a48-4d9b-a075-30f1-1f93a9b638fa"},
+    {"name": "Tejo",      "uuid": "df1cb487-4902-002e-5c17-d28e83e78588"},
+    {"name": "Veto",      "uuid": "0e38b510-41a8-5780-5e8f-568b2a4f2d6c"},
+    {"name": "Viper",     "uuid": "707eab51-4836-f488-046a-cda6bf494859"},
+    {"name": "Vyse",      "uuid": "b444168c-4e35-8076-db47-ef9bf368f384"},
+    {"name": "Waylay",    "uuid": "7c8a4701-4de6-9355-b254-e09bc2a34b72"},
+    {"name": "Yoru",      "uuid": "7f94d92c-4234-0a36-9646-3a87eb8b5c89"},
+]
+VSTATS_AGENT_UUID_MAP = {a["uuid"]: a["name"] for a in VSTATS_AGENTS}
+
+CRAWL_ACTS = [
+    {"name": "E6A3",  "uuid": "2de5423b-4aad-02ad-8d9b-c0a931958861"},
+    {"name": "E7A1",  "uuid": "0981a882-4e7d-371a-70c4-c3b4f46c504a"},
+    {"name": "E7A2",  "uuid": "22d10d66-4d2a-a340-6c54-408c7bd53807"},
+    {"name": "E7A3",  "uuid": "4401f9fd-4170-2e4c-4bc3-f3b4d7d150d1"},
+    {"name": "E8A1",  "uuid": "ec876e6c-43e8-fa63-ffc1-2e8d4db25525"},
+    {"name": "E8A2",  "uuid": "4539cac3-47ae-90e5-3d01-b3812ca3274e"},
+    {"name": "E8A3",  "uuid": "52ca6698-41c1-e7de-4008-8994d2221209"},
+    {"name": "E9A1",  "uuid": "292f58db-4c17-89a7-b1c0-ba988f0e9d98"},
+    {"name": "E9A2",  "uuid": "03dfd004-45d4-ebfd-ab0a-948ce780dac4"},
+    {"name": "E9A3",  "uuid": "dcde7346-4085-de4f-c463-2489ed47983b"},
+    {"name": "V25A1", "uuid": "476b0893-4c2e-abd6-c5fe-708facff0772"},
+    {"name": "V25A2", "uuid": "16118998-4705-5813-86dd-0292a2439d90"},
+    {"name": "V25A3", "uuid": "aef237a0-494d-3a14-a1c8-ec8de84e309c"},
+    {"name": "V25A4", "uuid": "ac12e9b3-47e6-9599-8fa1-0bb473e5efc7"},
+    {"name": "V25A5", "uuid": "5adc33fa-4f30-2899-f131-6fba64c5dd3a"},
+    {"name": "V25A6", "uuid": "4c4b8cff-43eb-13d3-8f14-96b783c90cd2"},
+    {"name": "V26A1", "uuid": "3ea2b318-423b-cf86-25da-7cbb0eefbe2d"},
+    {"name": "V26A2", "uuid": "9d85c932-4820-c060-09c3-668636d4df1b"},
+]
+
+VSTATS_MAPS = [
+    {"name": "ALL",      "id": "ALL"},
+    {"name": "Abyss",    "id": "Infinity"},
+    {"name": "Ascent",   "id": "Ascent"},
+    {"name": "Bind",     "id": "Duality"},
+    {"name": "Breeze",   "id": "Foxtrot"},
+    {"name": "Corrode",  "id": "Rook"},
+    {"name": "Fracture", "id": "Canyon"},
+    {"name": "Haven",    "id": "Triad"},
+    {"name": "Icebox",   "id": "Port"},
+    {"name": "Lotus",    "id": "Jam"},
+    {"name": "Pearl",    "id": "Pitt"},
+    {"name": "Split",    "id": "Bonsai"},
+    {"name": "Sunset",   "id": "Juliett"},
+]
+
+DIAMOND_PLUS_R = {19, 22, 25, 27}  # Diamond, Ascendant, Immortal, Radiant
+DIAMOND_R = 19                      # Diamond 단일 티어

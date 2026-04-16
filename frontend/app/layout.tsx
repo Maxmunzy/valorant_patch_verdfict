@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Noto_Sans_KR, Oswald } from "next/font/google";
 import "./globals.css";
 
-const mono = JetBrains_Mono({
+const body = Noto_Sans_KR({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-body",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "700", "900"],
+});
+
+const heading = Oswald({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -16,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className={`antialiased ${mono.variable}`}>
+    <html lang="ko" className={`antialiased ${body.variable} ${heading.variable}`}>
       <body className="min-h-screen" style={{ background: "#080c14" }}>
 
         {/* Top accent line */}
@@ -36,12 +43,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 className="w-2 h-2 rotate-45 shrink-0"
                 style={{ background: "#FF4655", boxShadow: "0 0 8px 2px rgba(255,70,85,0.55)" }}
               />
-              <div className="flex items-center gap-1.5">
-                <span className="text-[11px] font-black tracking-[0.22em] uppercase" style={{ color: "#FF4655" }}>
+              <div className="flex items-center gap-1.5 font-valo">
+                <span className="text-[13px] font-bold tracking-[0.15em]" style={{ color: "#FF4655" }}>
                   PATCH
                 </span>
-                <span className="text-slate-700 text-[11px]">/</span>
-                <span className="text-[11px] font-black tracking-[0.22em] uppercase text-white">VERDICT</span>
+                <span className="text-slate-700 text-[13px]">/</span>
+                <span className="text-[13px] font-bold tracking-[0.15em] text-white">VERDICT</span>
               </div>
               {/* Live badge */}
               <div
@@ -59,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex items-center gap-3">
               <span className="text-[9px] uppercase tracking-widest text-slate-700 hidden sm:block">SYS:ACT</span>
               <span
-                className="text-[10px] font-mono text-slate-400 px-2 py-0.5"
+                className="text-[10px] font-num font-bold text-slate-400 px-2 py-0.5"
                 style={{ border: "1px solid rgba(30,41,59,0.8)", background: "rgba(13,18,32,0.6)" }}
               >
                 V26A2

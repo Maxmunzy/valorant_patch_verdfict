@@ -30,34 +30,38 @@ API_RELOAD  = "http://localhost:8000/reload"
 # V26A2에 매핑된 현재 대회 목록
 # 대회가 완전히 끝나면 이 리스트에서 제거해도 되지만
 # 매일 돌려도 결과가 같으니 그냥 두면 됨
+#
+# 12.06 패치(웨이레이 추가) → VCT 적용일: 2026-04-24
+# 4/24 이전 경기 = 12.05 기준, 4/24 이후 경기 = 12.06 기준
+# patch_after는 현재 대회의 "기준 패치"로, 4/24 이후 12.06으로 변경 필요
 CURRENT_TOURNAMENTS = [
     {
         "event_id":    2863,
         "slug":        "vct-2026-emea-stage-1",
         "name":        "VCT EMEA Stage 1 2026",
         "year":        2026,
-        "patch_after": "12.05",
+        "patch_after": "12.05",  # 4/24부터 "12.06"으로 변경
     },
     {
         "event_id":    2775,
         "slug":        "vct-2026-pacific-stage-1",
         "name":        "VCT Pacific Stage 1 2026",
         "year":        2026,
-        "patch_after": "12.05",
+        "patch_after": "12.05",  # 4/24부터 "12.06"으로 변경
     },
     {
         "event_id":    2860,
         "slug":        "vct-2026-americas-stage-1",
         "name":        "VCT Americas Stage 1 2026",
         "year":        2026,
-        "patch_after": "12.05",
+        "patch_after": "12.05",  # 4/24부터 "12.06"으로 변경
     },
     {
         "event_id":    2864,
         "slug":        "vct-2026-cn-stage-1",
         "name":        "VCT CN Stage 1 2026",
         "year":        2026,
-        "patch_after": "12.05",
+        "patch_after": "12.05",  # 4/24부터 "12.06"으로 변경
     },
 ]
 

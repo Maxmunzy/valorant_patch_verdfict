@@ -78,12 +78,12 @@ export default async function CategoryPage({
         style={{ borderLeft: `2px solid ${cfg.accentColor}` }}
       >
         <div
-          className="text-[9px] uppercase tracking-[0.25em] mb-0.5"
+          className="text-[9px] font-valo uppercase tracking-[0.25em] mb-0.5"
           style={{ color: "rgba(71,85,105,0.7)" }}
         >
           {cfg.labelEn} // ANALYSIS
         </div>
-        <h1 className="text-3xl font-black" style={{ color: cfg.accentColor }}>
+        <h1 className="text-3xl font-valo font-black" style={{ color: cfg.accentColor }}>
           {cfg.label}
         </h1>
         <div className="flex items-center gap-3 mt-1 flex-wrap">

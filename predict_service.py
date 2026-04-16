@@ -32,11 +32,10 @@ import joblib
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import OrdinalEncoder
-from anthropic import Anthropic
 
 # ─── 요원 메타 데이터 ─────────────────────────────────────────────────────────
 from agent_data import AGENT_DESIGN, _DEFAULT_DESIGN, AGENT_RELATIONS
-from feature_builder import compute_kit_score, get_kit_flags, AGENT_PR_BASELINE
+from feature_builder import compute_kit_score, get_kit_flags
 
 # ─── 상수 ────────────────────────────────────────────────────────────────────
 
@@ -73,56 +72,7 @@ PATCH_TYPE_KO = {
     "stable":           "안정",
 }
 
-AGENT_NAME_KO = {
-    # 타격대
-    "Jett":      "제트",
-    "Reyna":     "레이나",
-    "Raze":      "레이즈",
-    "Neon":      "네온",
-    "Phoenix":   "피닉스",
-    "Iso":       "아이소",
-    "Yoru":      "요루",
-    "Waylay":    "웨이레이",
-    # 전략가
-    "Brimstone": "브림스톤",
-    "Viper":     "바이퍼",
-    "Omen":      "오멘",
-    "Astra":     "아스트라",
-    "Clove":     "클로브",
-    "Harbor":    "하버",
-    "Miks":      "믹스",
-    # 감시자
-    "Killjoy":   "킬조이",
-    "Cypher":    "사이퍼",
-    "Sage":      "세이지",
-    "Chamber":   "체임버",
-    "Deadlock":  "데드록",
-    "Vyse":      "바이스",
-    "Veto":      "비토",
-    # 척후대
-    "Sova":      "소바",
-    "Skye":      "스카이",
-    "Fade":      "페이드",
-    "Breach":    "브리치",
-    "KAYO":      "케이오",
-    "KAY/O":     "케이오",
-    "Gekko":     "게코",
-    "Tejo":      "테호",
-}
-
-AGENT_ROLE_KO = {
-    "Brimstone": "전략가", "Viper": "전략가", "Omen": "전략가",
-    "Astra": "전략가", "Harbor": "전략가", "Clove": "전략가",
-    "Killjoy": "감시자", "Cypher": "감시자", "Sage": "감시자",
-    "Chamber": "감시자", "Deadlock": "감시자", "Vyse": "감시자",
-    "Sova": "척후대", "Fade": "척후대", "Gekko": "척후대",
-    "Breach": "척후대", "Skye": "척후대", "KAYO": "척후대",
-    "KAY/O": "척후대", "Tejo": "척후대",
-    "Phoenix": "타격대", "Reyna": "타격대", "Raze": "타격대",
-    "Jett": "타격대", "Neon": "타격대", "Yoru": "타격대",
-    "Iso": "타격대", "Waylay": "타격대",
-    "Veto": "감시자", "Miks": "전략가",
-}
+from agent_data import AGENT_NAME_KO, AGENT_ROLE_KO
 
 def _vct_wr_safe(row, default: float = 50.0) -> float:
     """vct_wr_last는 0.0이 유효한 값 — `or` 패턴 금지, None 체크로 처리"""
@@ -140,60 +90,6 @@ PIPELINE_PATH  = "step2_pipeline.pkl"
 DATA_PATH      = "step2_training_data.csv"
 EXPLANATION_CACHE_PATH = "explanation_cache.json"
 
-# ─── 맵 풀 & 요원 스킬 한국 공식명 ──────────────────────────────────────────
-CURRENT_MAP_POOL = ["바인드", "브리즈", "프랙처", "헤이번", "로터스", "펄", "스플릿"]
-
-# 한국 공식 스킬명: {에이전트: {슬롯: "한국어 이름"}} (주요 스킬만 기재)
-AGENT_SKILLS_KO: dict[str, dict[str, str]] = {
-    "Jett":      {"C": "연막 폭발", "Q": "상승기류", "E": "순풍", "X": "칼날 폭풍"},
-    "Viper":     {"C": "뱀 이빨", "E": "독성 장막", "Q": "독성 연기", "X": "독사의 구덩이"},
-    "Neon":      {"C": "추월 차선", "Q": "릴레이 볼트", "E": "고속 기어", "X": "오버드라이브"},
-    "Sova":      {"C": "올빼미 드론", "Q": "충격 화살", "E": "정찰용 화살", "X": "사냥꾼의 분노"},
-    "Reyna":     {"C": "눈총", "Q": "포식", "E": "무시", "X": "여제"},
-    "Raze":      {"C": "폭발 봇", "Q": "폭발 팩", "E": "페인트 탄", "X": "대미 장식"},
-    "Chamber":   {"C": "트레이드마크", "Q": "헤드헌터", "E": "랑데부", "X": "역작"},
-    "Killjoy":   {"C": "나노스웜", "Q": "알람봇", "E": "포탑", "X": "봉쇄"},
-    "Sage":      {"C": "장벽 구슬", "Q": "둔화 구슬", "E": "회복 구슬", "X": "부활"},
-    "Omen":      {"C": "어둠의 발자국", "Q": "피해망상", "E": "어둠의 장막", "X": "그림자 습격"},
-    "Skye":      {"C": "재생", "Q": "정찰자", "E": "인도하는 빛", "X": "추적자"},
-    "Fade":      {"C": "추적귀", "Q": "포박", "E": "귀체", "X": "황혼"},
-    "Breach":    {"C": "여진", "Q": "섬광 폭발", "E": "균열", "X": "지진 강타"},
-    "KAYO":      {"C": "파편/탄", "Q": "플래시/드라이브", "E": "제로/포인트", "X": "무력화/명령"},
-    "Gekko":     {"C": "폭파봇 지옥", "Q": "지원봇", "E": "기절봇", "X": "요동봇"},
-    "Astra":     {"C": "중력의 샘", "Q": "신성 파동", "E": "성운", "X": "우주 장벽"},
-    "Brimstone": {"C": "자극제 신호기", "Q": "소이탄", "E": "공중 연막", "X": "궤도 일격"},
-    "Harbor":    {"C": "폭풍 쇄도", "Q": "만조", "E": "해만", "X": "심판"},
-    "Clove":     {"C": "활력 회복", "Q": "간섭", "E": "계략", "X": "아직 안 죽었어"},
-    "Tejo":      {"C": "잠입 드론", "Q": "특별 배송", "E": "유도 일제 사격", "X": "아마겟돈"},
-    "Iso":       {"C": "대비책", "Q": "약화", "E": "구슬 보호막", "X": "청부 계약"},
-    "Deadlock":  {"C": "장벽망", "Q": "음향 센서", "E": "중력그물", "X": "소멸"},
-    "Vyse":      {"C": "면도날 덩굴", "Q": "가지치기", "E": "아크 장미", "X": "강철 정원"},
-    "Cypher":    {"C": "함정", "Q": "사이버 감옥", "E": "스파이캠", "X": "신경 절도"},
-    "Phoenix":   {"C": "불길", "Q": "뜨거운 손", "E": "커브볼", "X": "역습"},
-    "Waylay":    {"C": "포화", "Q": "광속", "E": "굴절", "X": "초점 교차"},
-    "Yoru":      {"C": "기만", "Q": "기습", "E": "관문 충돌", "X": "차원 표류"},
-    "Miks":      {"C": "M-파동", "Q": "화음", "E": "웨이브폼", "X": "요동치는 베이스"},
-    "Veto":      {"C": "지름길", "Q": "목조르기", "E": "요격기", "X": "진화"},
-}
-
-# 현재 맵 풀에서 요원별 특화 맵 (map_pr >= 1.3 × 전체 평균)
-# all_agents_map_stats.csv V26A2 기반 사전 계산 값
-AGENT_MAP_AFFINITY: dict[str, list[str]] = {
-    "Breach":    ["프랙처", "로터스"],
-    "Brimstone": ["프랙처", "바인드"],
-    "Chamber":   ["브리즈"],
-    "Cypher":    ["스플릿", "바인드"],
-    "Fade":      ["펄", "로터스"],
-    "Killjoy":   ["헤이번", "프랙처", "펄"],
-    "Omen":      ["헤이번", "로터스", "스플릿"],
-    "Phoenix":   ["헤이번", "펄"],
-    "Raze":      ["바인드", "로터스", "스플릿"],
-    "Sage":      ["스플릿"],
-    "Skye":      ["바인드", "스플릿"],
-    "Sova":      ["브리즈", "헤이번"],
-    "Viper":     ["브리즈"],
-    "Yoru":      ["브리즈"],
-}
 
 # ─── 도메인 규칙 ──────────────────────────────────────────────────────────────
 
@@ -533,15 +429,9 @@ class PatchPredictor:
         self.buff_b_idx = self.label_b_cats.index("buff")
         self.nerf_b_idx = self.label_b_cats.index("nerf")
 
-        # 설명 캐시 로드
-        self._cache_path = cache_path
-        if os.path.exists(cache_path):
-            with open(cache_path, encoding="utf-8") as f:
-                self._explanation_cache: dict[str, str] = json.load(f)
-        else:
-            self._explanation_cache = {}
-
-        self._anthropic: Anthropic | None = None
+        # 설명 생성기 (explanation_service.py로 분리)
+        from explanation_service import ExplanationGenerator
+        self._explainer = ExplanationGenerator(cache_path)
 
         # 패치노트에서 요원별 마지막 패치 버전 조회용 룩업 구성
         # (agent, act_name) → 마지막 패치 버전 문자열
@@ -786,189 +676,10 @@ class PatchPredictor:
         if r is None:
             return None
         result = {k: v for k, v in r.items() if k != "_row"}
-        result["explanation"] = self._get_explanation(r)
+        result["explanation"] = self._explainer.get(r)
         return result
 
     def reload(self):
         """데이터/모델 재로드 (핫 리로드용)."""
         import importlib, predict_service as _self_mod
         importlib.reload(_self_mod)
-
-    # ── 설명 생성 ─────────────────────────────────────────────────────────────
-
-    def _get_explanation(self, r: dict) -> str:
-        agent   = r["agent"]
-        verdict = r["verdict"]
-        # act + 핵심 지표 반올림을 키에 포함 → 액트 변경 또는 데이터 변화 시 자동 무효화
-        act          = r.get("act", "")
-        rank_pr_r    = round(r.get("rank_pr", 0), 1)
-        vct_pr_r     = round(r.get("vct_pr", 0), 1)
-        cache_key = f"{agent}::{verdict}::{act}::{rank_pr_r}::{vct_pr_r}"
-
-        if cache_key in self._explanation_cache:
-            return self._explanation_cache[cache_key]
-
-        explanation = self._generate_explanation(r)
-        self._explanation_cache[cache_key] = explanation
-        try:
-            with open(self._cache_path, "w", encoding="utf-8") as f:
-                json.dump(self._explanation_cache, f, ensure_ascii=False, indent=2)
-        except Exception:
-            pass
-        return explanation
-
-    def _generate_explanation(self, r: dict) -> str:
-        """Claude Haiku로 양면 분석 스타일의 설명 생성. 실패 시 템플릿 폴백."""
-        api_key = os.getenv("ANTHROPIC_API_KEY")
-        if not api_key:
-            return self._template_explanation(r)
-
-        # 신규 요원: 패치 이력 없음 → 모델 예측 신뢰도 낮음
-        acts_since_r = int(r.get("acts_since_patch", 0) or 0)
-        if acts_since_r >= 90:
-            agent_ko_r = AGENT_NAME_KO.get(r["agent"], r["agent"])
-            return (
-                f"출시 이후 패치 이력이 없어 예측 신뢰도가 낮습니다. "
-                f"데이터가 충분히 쌓이면 {agent_ko_r}에 대한 정밀 분석이 가능해집니다."
-            )
-
-        if self._anthropic is None:
-            self._anthropic = Anthropic(api_key=api_key)
-
-        agent        = r["agent"]
-        agent_ko     = AGENT_NAME_KO.get(agent, agent)
-        verdict      = r["verdict"]
-        p_patch      = r["p_patch"]
-        p_buff       = r["p_buff"]
-        p_nerf       = r["p_nerf"]
-        rank_pr      = r["rank_pr"]
-        vct_pr       = r["vct_pr"]
-        rank_wr      = r["rank_wr"]
-        vct_wr       = r["vct_wr"]
-        signals      = r.get("signals", [])
-        patch_ver    = r.get("last_patch_version") or ""
-        patch_ref    = f"{patch_ver} 패치" if patch_ver else "최근 패치"
-
-        import re as _re
-        def _strip_act_codes(s: str) -> str:
-            # VxxAx / ExxAx 패턴 제거 (예: V26A1, E9A3)
-            return _re.sub(r'\b[VE]\d+A\d+\b', '', s).strip()
-        signal_text = "\n".join(
-            f"- {_strip_act_codes(s['label'])}: {_strip_act_codes(s['text'])}"
-            for s in signals[:6]
-        ) or "- 특별한 신호 없음"
-
-        direction    = "버프" if "buff" in verdict else "너프"
-        dir_pct      = p_buff if "buff" in verdict else p_nerf
-        counter_pct  = p_nerf if "buff" in verdict else p_buff
-
-        # 신호 강도: 방향 확률 기반 타이밍 힌트
-        if dir_pct >= 60:
-            signal_strength = "강함 — 이번 패치 조정 가능성 높음"
-        elif dir_pct >= 35:
-            signal_strength = "중간 — 이번 혹은 다음 패치 내 조정 예상"
-        else:
-            signal_strength = "약함 — 신호 누적 중, 당장보다 중장기적 조정 가능"
-
-        # 데이터 해석 힌트: 어떤 수치가 어느 방향을 지지하는지
-        rank_wr_actual = 50 + rank_wr
-        nerf_evidence = []
-        buff_evidence = []
-        if rank_pr >= 40:  nerf_evidence.append(f"랭크 픽률 {rank_pr:.1f}%로 높음")
-        if rank_wr > 1.5:  nerf_evidence.append(f"랭크 승률 {rank_wr_actual:.1f}%로 평균 이상")
-        if vct_pr >= 25:   nerf_evidence.append(f"프로 대회 픽률 {vct_pr:.1f}%로 메타 핵심")
-        if vct_wr >= 52:   nerf_evidence.append(f"프로 승률 {vct_wr:.1f}%로 높음")
-        if rank_pr < 20:   buff_evidence.append(f"랭크 픽률 {rank_pr:.1f}%로 낮음")
-        if rank_wr < -1.5: buff_evidence.append(f"랭크 승률 {rank_wr_actual:.1f}%로 평균 이하")
-        if vct_pr < 8:     buff_evidence.append(f"프로 대회 픽률 {vct_pr:.1f}%로 낮음")
-        if vct_wr <= 47:   buff_evidence.append(f"프로 승률 {vct_wr:.1f}%로 낮음")
-
-        if direction == "너프":
-            dir_evidence = "、".join(nerf_evidence) or f"프로 대회 픽률 {vct_pr:.1f}%"
-            cnt_evidence = "、".join(buff_evidence) or f"랭크 승률 {rank_wr_actual:.1f}%"
-        else:
-            dir_evidence = "、".join(buff_evidence) or f"랭크 픽률 {rank_pr:.1f}%"
-            cnt_evidence = "、".join(nerf_evidence) or f"프로 픽률 {vct_pr:.1f}%"
-
-        # 맵 친화도
-        map_affinity = AGENT_MAP_AFFINITY.get(agent, [])
-        map_line = f"- 현재 맵 풀 ({', '.join(CURRENT_MAP_POOL)}) 중 특화 맵: {', '.join(map_affinity)}" if map_affinity else f"- 현재 맵 풀: {', '.join(CURRENT_MAP_POOL)} (특화 맵 없음)"
-
-        # 스킬 이름 힌트
-        skills = AGENT_SKILLS_KO.get(agent, {})
-        skill_line = f"- {agent_ko}의 한국어 공식 스킬 이름: {', '.join(skills.values())}" if skills else ""
-
-        # 맵 친화도: 특화 맵 없는 경우 맵 언급 생략
-        map_line_prompt = (
-            f"- 현재 맵 풀 특화 맵: {', '.join(map_affinity)} (분석에 자연스럽게 녹여도 됨)"
-            if map_affinity else ""
-        )
-
-        prompt = f"""발로란트 프로씬 분석가 입장에서 {agent_ko}의 다음 패치 전망을 써주세요.
-
-제공 데이터 (이 수치만 사용, 없는 통계 절대 언급 금지):
-- 예측 방향: {direction}
-- 신호 강도: {signal_strength}
-- 주요 근거: {dir_evidence}
-- 참고 맥락 (뉘앙스 보정용, 방향 바뀌지 않음): {cnt_evidence}
-- 기타 신호: {signal_text}
-- 마지막 패치: {patch_ref}
-{map_line_prompt}
-{skill_line}
-
-글쓰기 지침:
-- 정확히 2~3문장. 초과 금지.
-- 발로란트 프로씬 현업 용어를 자연스럽게 섞어 쓸 것
-  (픽률/승률, 메타 픽, 유틸 효율, 인포 수집, 교전 개시, 사이드 밸런스,
-   랭겜/프로씬, 티어, 포스트플랜트, 로테이션 압박, 구성 강제, 팀파이트 기여, 임팩트 등)
-- 신호 강도에 맞게 타이밍 표현 조절:
-  · 강함 → "이번 패치에 조정이 들어올 것으로 보입니다" 류
-  · 중간 → "가까운 시일 내", "이번 혹은 다음 패치" 류
-  · 약함 → "당장은 아니더라도 중장기적으로 조정이 예상됩니다" 류
-- 숫자 나열로 시작하지 말 것 — 가장 인상적인 포인트로 자연스럽게 열 것
-- 분석가가 의견을 내는 톤 — 보고서 투 금지, 팬심 투 금지
-- 전체 흐름이 "{direction}" 방향과 일치해야 함 (방향 의심 표현 절대 금지)
-- 결론을 두 번 쓰지 말 것 — 마지막 문장이 방향을 담은 결론
-- 스킬 언급 시 위에 제공된 한국어 공식 스킬 이름만 사용 (영어명·설명형 표현 금지)
-- 스킬 이름이 제공되지 않은 경우 스킬 이름 직접 언급 금지
-- 맵 이름(브리즈·헤이번·어센트·바인드 등) 절대 언급 금지. 단, 위 데이터에 맵 특화 정보가 명시된 경우에만 허용.
-- 패치 언급 시 반드시 "{patch_ref}" 표현 사용. VxxAx·ExxAx 형식 액트 코드명 절대 금지
-- 요원 이름은 한국어 공식 이름만 사용 (영어 이름 금지):
-  제트·레이나·레이즈·네온·피닉스·아이소·요루·웨이레이·브림스톤·바이퍼·오멘·아스트라·하버·클로브
-  소바·페이드·스카이·브리치·케이오·게코·킬조이·사이퍼·데드락·바이스·세이지·테호·베토·믹스·체임버
-- 확률 수치 금지, 마침표로 끝낼 것. 마크다운 금지(#, *, ** 등 일절 사용 금지).
-- 금지 표현: 킷 / 키트 / 특성상 / 구조적 / 근본적인 / 개편 / 설계 의도 / 오버튠드 / 언더튠드
-- 제공된 데이터에 없는 과거 통계·역사적 수치·타 시즌 비교 절대 언급 금지
-- 스킬 메커니즘 설명(사이클·쿨다운·작동 방식 등) 금지 — 스킬 이름만 언급"""
-
-        try:
-            resp = self._anthropic.messages.create(
-                model="claude-haiku-4-5-20251001",
-                max_tokens=500,
-                messages=[{"role": "user", "content": prompt}],
-            )
-            return resp.content[0].text.strip()
-        except Exception:
-            return self._template_explanation(r)
-
-    def _template_explanation(self, r: dict) -> str:
-        agent_ko = AGENT_NAME_KO.get(r["agent"], r["agent"])
-        verdict  = r["verdict"]
-        rank_pr  = r["rank_pr"]
-        vct_pr   = r["vct_pr"]
-
-        if "nerf" in verdict:
-            return (
-                f"{agent_ko}은(는) 현재 랭크 픽률 {rank_pr:.1f}%, VCT 픽률 {vct_pr:.1f}%로 "
-                f"메타 상단을 점유 중입니다. 너프 조정이 예상됩니다."
-            )
-        elif "buff" in verdict:
-            return (
-                f"{agent_ko}의 랭크 픽률 {rank_pr:.1f}%, VCT 픽률 {vct_pr:.1f}%로 "
-                f"현재 메타에서 외면받고 있습니다. 버프 조정이 필요한 상황입니다."
-            )
-        else:  # rework
-            return (
-                f"{agent_ko}은(는) 랭크·VCT 양쪽에서 모두 저픽 상태가 지속되고 있습니다. "
-                f"수치 조정만으로는 한계가 있어 리워크 가능성이 있습니다."
-            )

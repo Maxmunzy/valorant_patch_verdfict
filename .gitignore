@@ -45,12 +45,10 @@ catboost_info/
 agent_act_history/
 vct_data/
 
-# 구버전/일회성 스크립트
-others_act_history.py
-santiago_yoru.py
-yoru_*.csv
-yoru_*.png
-rival_*.csv
+# 정리된 폴더
+_legacy/
+_scripts/
+_outputs/
 
 # 학습 데이터 (빌드로 재생성 가능)
 step2_training_data.csv
@@ -82,11 +80,6 @@ build_log.txt
 vct_santiago_2026_clean.csv
 patch_notes_raw.csv
 
-# 구버전 구분 스크립트
-classify_trigger_keyword.py
-classify_trigger_type.py
-check_labels.py
-
 # 구버전 단일 요원 테스트 데이터
 data/jett_patch_history.json
 
@@ -96,3 +89,9 @@ start.bat
 # frontend 빌드 산출물
 frontend/.next/
 frontend/node_modules/
+
+# 자동 갱신 로그
+logs/
+
+# 백업 파일
+data/agent_skills_backup.json

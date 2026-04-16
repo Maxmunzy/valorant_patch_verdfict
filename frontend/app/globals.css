@@ -12,9 +12,24 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-mono, 'JetBrains Mono', 'Courier New', monospace);
+  font-family: var(--font-body, 'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif);
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.01em;
+  word-break: keep-all;      /* 한글 단어 중간 줄바꿈 방지 */
+  overflow-wrap: break-word;  /* 긴 영단어/URL은 넘치지 않게 */
+}
+
+/* 발로란트 스타일 제목 — Oswald condensed bold */
+.font-valo {
+  font-family: var(--font-heading, 'Oswald', Impact, sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 수치 표시용 tabular figures */
+.font-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
 }
 
 /* Red-tinted dot grid */

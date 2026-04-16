@@ -73,7 +73,7 @@ function GaugeBar({
         >
           {label}
         </span>
-        <span className="text-xs font-bold" style={{ color }}>
+        <span className="text-xs font-num font-bold" style={{ color }}>
           {value.toFixed(0)}%
         </span>
       </div>
@@ -191,7 +191,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
               >
                 AGENT PROFILE // {data.role}
               </div>
-              <h1 className="text-4xl font-black text-white tracking-tight leading-none">
+              <h1 className="text-4xl font-valo font-black text-white tracking-tight leading-none">
                 {data.agent}
               </h1>
               <div className="text-xs mt-1" style={{ color: "#94a3b8" }}>
@@ -206,7 +206,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
           {/* Main probability display */}
           <div>
             <div className="flex items-baseline gap-3 mb-3">
-              <span className="text-6xl font-black leading-none" style={{ color: accentColor }}>
+              <span className="text-6xl font-valo font-black leading-none" style={{ color: accentColor }}>
                 {displayPct.toFixed(0)}%
               </span>
               <div className="space-y-0.5">
@@ -292,7 +292,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
                 className="text-2xl font-black"
                 style={{ color: data.rank_pr >= 20 ? "#FF4655" : data.rank_pr >= 10 ? "#e2e8f0" : "#64748B" }}
               >
-                {data.rank_pr.toFixed(1)}%
+                <span className="font-num">{data.rank_pr.toFixed(1)}%</span>
               </div>
               <div className="text-[11px] mt-0.5" style={{ color: "#64748b" }}>
                 {data.rank_pr >= 20 ? "↑ HIGH" : data.rank_pr >= 10 ? "MID" : "↓ LOW"}
@@ -316,7 +316,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
                 className="text-2xl font-black"
                 style={{ color: data.rank_wr > 2 ? "#FF4655" : data.rank_wr < -2 ? "#4FC3F7" : "#e2e8f0" }}
               >
-                {(50 + data.rank_wr).toFixed(1)}%
+                <span className="font-num">{(50 + data.rank_wr).toFixed(1)}%</span>
               </div>
               <div className="text-[11px] mt-0.5" style={{ color: "#64748b" }}>
                 {data.rank_wr > 2 ? "↑ STRONG" : data.rank_wr < -2 ? "↓ WEAK" : "AVG"}
@@ -370,7 +370,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
                 className="text-2xl font-black"
                 style={{ color: data.vct_pr >= 30 ? "#FF4655" : data.vct_pr >= 10 ? "#e2e8f0" : "#64748B" }}
               >
-                {data.vct_pr.toFixed(1)}%
+                <span className="font-num">{data.vct_pr.toFixed(1)}%</span>
               </div>
               <div className="text-[11px] mt-0.5" style={{ color: "#64748b" }}>
                 {data.vct_pr >= 30 ? "META CORE" : data.vct_pr >= 10 ? "ACTIVE" : "NICHE"}
@@ -388,7 +388,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
                     : "#e2e8f0",
                 }}
               >
-                {data.vct_pr < 5 ? "—" : `${data.vct_wr.toFixed(1)}%`}
+                <span className="font-num">{data.vct_pr < 5 ? "—" : `${data.vct_wr.toFixed(1)}%`}</span>
               </div>
               <div className="text-[11px] mt-0.5" style={{ color: "#64748b" }}>
                 {data.vct_pr < 5

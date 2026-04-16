@@ -92,7 +92,7 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
         {/* Rank badge */}
         {rank !== undefined && (
           <div
-            className="absolute top-3 right-3 text-[10px] font-black px-1.5 py-0.5 leading-none"
+            className="absolute top-3 right-3 text-[10px] font-valo font-black px-1.5 py-0.5 leading-none"
             style={{ zIndex: 15, color: accentColor, border: `1px solid ${accentColor}60`, background: `${accentColor}18` }}
           >
             #{rank}
@@ -123,13 +123,13 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
           </div>
 
           <div className="space-y-2 pt-4">
-            <div className="text-5xl font-black leading-none" style={{ color: accentColor }}>
+            <div className="text-5xl font-valo font-black leading-none" style={{ color: accentColor }}>
               {displayPct.toFixed(0)}%
             </div>
-            <div className="text-white text-xl font-bold tracking-tight leading-none mt-1">
+            <div className="text-white text-xl font-valo font-bold tracking-tight leading-none mt-1">
               {a.agent}
             </div>
-            <div className="text-xs uppercase tracking-wide" style={{ color: "rgba(148,163,184,0.85)" }}>
+            <div className="text-xs font-num uppercase tracking-wide" style={{ color: "rgba(148,163,184,0.85)" }}>
               RANK {a.rank_pr.toFixed(1)}% PIK · {(50 + a.rank_wr).toFixed(1)}% WR · VCT {a.vct_pr.toFixed(1)}%
             </div>
 
@@ -140,7 +140,7 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
               <div className="flex-1">
                 <GaugeBar value={displayPct} color={accentColor} />
               </div>
-              <span className="text-[11px] font-bold w-8 text-right" style={{ color: accentColor }}>
+              <span className="text-[11px] font-num font-bold w-8 text-right" style={{ color: accentColor }}>
                 {displayPct.toFixed(0)}%
               </span>
             </div>
@@ -205,13 +205,13 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
         </div>
 
         <div>
-          <div className="text-3xl font-black leading-none" style={{ color: accentColor }}>
+          <div className="text-3xl font-valo font-black leading-none" style={{ color: accentColor }}>
             {displayPct.toFixed(0)}%
           </div>
-          <div className="text-white text-base font-bold tracking-tight mt-1">
+          <div className="text-white text-base font-valo font-bold tracking-tight mt-1">
             {a.agent}
           </div>
-          <div className="text-[11px] mt-0.5" style={{ color: "rgba(148,163,184,0.8)" }}>
+          <div className="text-[11px] font-num mt-0.5" style={{ color: "rgba(148,163,184,0.8)" }}>
             {a.rank_pr.toFixed(1)}% PIK · {(50 + a.rank_wr).toFixed(1)}% WR
           </div>
         </div>
