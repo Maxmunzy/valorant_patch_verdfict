@@ -250,20 +250,30 @@ def pipeline(
     else:
         log.info("\n[3/4] VCT 크롤 건너뜀")
 
-    # ── 4. 빌드 + 재로드 ───────────────────────────────────────────────────
+    # ── 4. 빌드 + 모델 재학습 + 재로드 ─────────────────────────────────────
     if data_changed:
-        log.info("\n[4/4] Step2 데이터 빌드 + API 재로드...")
+        log.info("\n[4/5] Step2 데이터 빌드...")
         if not dry_run:
             build_ok = run_script("build_step2_data.py", timeout=120)
             if build_ok:
                 steps_done.append("빌드")
+        else:
+            log.info("  [DRY RUN] build_step2_data.py")
+            build_ok = True
+
+        # ── 5. 모델 재학습 (저장된 HPO 재사용 → --fast) ─────────────────
+        log.info("\n[5/5] 모델 재학습 (--fast) + API 재로드...")
+        if not dry_run and build_ok:
+            train_ok = run_script("train_step2.py", ["--fast"], timeout=1800)
+            if train_ok:
+                steps_done.append("모델 재학습")
                 clear_explanation_cache()
                 reload_api()
                 steps_done.append("API 재로드")
         else:
-            log.info("  [DRY RUN] build_step2_data.py + /reload")
+            log.info("  [DRY RUN] train_step2.py --fast + /reload")
     else:
-        log.info("\n[4/4] 데이터 변경 없음 — 빌드 건너뜀")
+        log.info("\n[4-5] 데이터 변경 없음 — 빌드/학습 건너뜀")
 
     # ── 완료 ────────────────────────────────────────────────────────────────
     log.info("\n" + "=" * 60)
