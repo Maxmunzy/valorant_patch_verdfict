@@ -221,9 +221,11 @@ class AgentPrediction:
     p_buff: float
     p_stable: float
     verdict: str
-    rank_pr: float = 0.0   # 랭크 픽률 (÷5 스케일)
-    rank_wr: float = 50.0   # 랭크 승률
-    vct_pr: float = 0.0    # VCT 픽률
+    rank_pr: float = 0.0      # 랭크 픽률 (게임 등장률 %)
+    rank_wr: float = 50.0      # 랭크 승률
+    vct_pr: float = 0.0       # VCT 픽률
+    vct_wr: float = 50.0       # VCT 승률
+    vct_data_lag: int = 0     # VCT 데이터 지연 (액트 수)
 
 
 @dataclass
@@ -271,6 +273,8 @@ class SimulationResult:
                         "rank_pr": round(before_p.rank_pr, 1),
                         "rank_wr": round(before_p.rank_wr, 1),
                         "vct_pr": round(before_p.vct_pr, 1),
+                        "vct_wr": round(before_p.vct_wr, 1),
+                        "vct_data_lag": before_p.vct_data_lag,
                     },
                     "after": {
                         "p_nerf": round(after_p.p_nerf, 1),
@@ -696,6 +700,8 @@ class PatchSimulator:
             _rp = float(row["rank_pr"]) * 5.0 if "rank_pr" in df.columns and pd.notna(row.get("rank_pr")) else 0.0
             _rw = float(row["rank_wr"]) if "rank_wr" in df.columns and pd.notna(row.get("rank_wr")) else 50.0
             _vp = float(row["vct_pr_last"]) if "vct_pr_last" in df.columns and pd.notna(row.get("vct_pr_last")) else 0.0
+            _vw = float(row["vct_wr_last"]) if "vct_wr_last" in df.columns and pd.notna(row.get("vct_wr_last")) else 50.0
+            _vl = int(row["vct_data_lag"]) if "vct_data_lag" in df.columns and pd.notna(row.get("vct_data_lag")) else 0
 
             results.append(AgentPrediction(
                 agent=agent,
@@ -706,6 +712,8 @@ class PatchSimulator:
                 rank_pr=round(_rp, 1),
                 rank_wr=round(_rw, 1),
                 vct_pr=round(_vp, 1),
+                vct_wr=round(_vw, 1),
+                vct_data_lag=_vl,
             ))
         return results
 

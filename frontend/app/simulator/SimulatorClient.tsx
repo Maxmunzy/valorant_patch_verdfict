@@ -411,7 +411,17 @@ function buildResultSummary(r: SimResult): string {
   const lines: string[] = [];
   for (const imp of r.impact) {
     const b = imp.before as Record<string, unknown>;
-    lines.push(`${imp.agent} 현재 상태: 랭크 픽률 ${b.rank_pr ?? "?"}%, 랭크 승률 ${b.rank_wr ?? "?"}%, VCT 픽률 ${b.vct_pr ?? "?"}%, 현재 판정 ${imp.before.verdict}(너프${imp.before.p_nerf}%/버프${imp.before.p_buff}%)`);
+    const vctPr = Number(b.vct_pr ?? 0);
+    const vctWr = Number(b.vct_wr ?? 50);
+    const vctLag = Number(b.vct_data_lag ?? 0);
+
+    // 표본 신뢰도 경고
+    const warnings: string[] = [];
+    if (vctPr < 5) warnings.push(`⚠ VCT 픽률 ${vctPr}%로 표본 부족 — VCT 승률 ${vctWr}%는 신뢰 불가`);
+    if (vctLag >= 2) warnings.push(`⚠ VCT 데이터 ${vctLag}액트 전 — 최근 VCT 경기에서 거의 안 쓰임`);
+
+    lines.push(`${imp.agent} 현재 상태: 랭크 픽률 ${b.rank_pr ?? "?"}%, 랭크 승률 ${b.rank_wr ?? "?"}%, VCT 픽률 ${vctPr}%, 현재 판정 ${imp.before.verdict}(너프${imp.before.p_nerf}%/버프${imp.before.p_buff}%)`);
+    warnings.forEach((w) => lines.push(`  ${w}`));
     lines.push(`  시뮬 결과: 예상 PR변화 ${imp.applied_pr_delta >= 0 ? "+" : ""}${imp.applied_pr_delta.toFixed(2)}%p, WR변화 ${imp.applied_wr_delta >= 0 ? "+" : ""}${imp.applied_wr_delta.toFixed(2)}%p`);
     lines.push(`  판정 변화: ${imp.before.verdict} → ${imp.after.verdict}(너프${imp.after.p_nerf}%/버프${imp.after.p_buff}%)`);
   }
