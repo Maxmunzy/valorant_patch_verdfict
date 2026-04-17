@@ -2,6 +2,8 @@
 
 [한국어 README](README_KR.md)
 
+**Live Demo**: https://mystified-devotedly-algorithm.ngrok-free.dev
+
 ## Overview
 
 > **Predict who gets patched next, and simulate how any patch changes the meta.**
@@ -37,7 +39,7 @@ Input: Agent + Act features (ranked stats, VCT stats, patch history, design trai
 Each stage uses its own optimized feature set.
 Severity (mild/strong) comes from patch context and skill importance.
 
-### Current Performance (2026-04-13)
+### Current Performance (2026-04-16)
 
 | Metric | Value |
 |---|---|
@@ -49,27 +51,26 @@ Severity (mild/strong) comes from patch context and skill importance.
 
 ---
 
-## Latest Predictions (V26A2)
+## Latest Predictions (V26A2 / Patch 12.07)
 
 ### Nerf Ranking
 
 | # | Agent | p_nerf | Rank PR | VCT PR |
 |---|---|---|---|---|
-| 1 | Neon | 76.1% | 22.2% | 77.2% |
-| 2 | Waylay | 75.0% | 37.0% | 44.2% |
-| 3 | Omen | 67.3% | 16.9% | 46.5% |
-| 4 | Viper | 64.1% | 6.4% | 50.4% |
-| 5 | Sova | 53.2% | 32.4% | 24.4% |
+| 1 | Neon | 79.5% | 22.3% | 43.0% |
+| 2 | Waylay | 70.7% | 36.6% | 44.8% |
+| 3 | Viper | 48.3% | 6.4% | 55.6% |
+| 4 | Omen | 43.2% | 16.9% | 47.7% |
 
 ### Buff Ranking
 
 | # | Agent | p_buff | Rank PR | VCT PR |
 |---|---|---|---|---|
-| 1 | KAYO | 78.6% | 4.6% | 7.0% |
-| 2 | Gekko | 66.8% | 4.9% | 1.2% |
-| 3 | Miks | 64.0% | 5.3% | 1.7% |
-| 4 | Yoru | 63.6% | 3.1% | 1.8% |
-| 5 | Vyse | 54.6% | 5.1% | 7.0% |
+| 1 | KAYO | 72.6% | 4.6% | 8.5% |
+| 2 | Yoru | 62.2% | 3.1% | 1.8% |
+| 3 | Gekko | 57.1% | 4.9% | 2.0% |
+| 4 | Vyse | 53.2% | 5.1% | 5.1% |
+| 5 | Breach | 50.4% | 8.0% | 6.2% |
 
 ---
 
@@ -183,17 +184,21 @@ This prevents flickering between stable/nerf for agents under sustained pressure
 
 ```
 valorant_patch_verdict/
+  main.py                  # FastAPI server
+  predict_service.py       # Prediction API wrapper
+  explanation_service.py   # AI analysis (Claude Haiku, role-aware prompts)
+  patch_simulator.py       # Patch simulator (virtual patch -> meta delta)
+  auto_update.py           # Auto-update pipeline (detect -> crawl -> reload)
   build_step2_data.py      # Training data builder
   label_builder.py         # 5-class labeling logic
   feature_builder.py       # Feature engineering (2D quadrants, signals)
   train_step2.py           # Model training pipeline (HPO, CV, SHAP)
-  predict_service.py       # Prediction API wrapper
-  predict_report.py        # CLI prediction report
-  main.py                  # FastAPI server
+  agent_data.py            # Agent design data, skill weights, skill ceiling
   crawl_patch_notes.py     # Patch note crawler
-  agent_data.py            # Agent design data, skill weights
-  data/                    # Raw data (ranked stats, VCT, patch notes)
-  frontend/                # Next.js + Tailwind CSS frontend
+  crawl_current_vct.py     # VCT tournament data crawler
+  crawl_tracker.py         # Ranked stats crawler (vstats.gg)
+  data/                    # Raw data + per-agent patch history
+  frontend/                # Next.js + Tailwind CSS frontend (simulator included)
   step2_training_data.csv  # Built training data
   step2_pipeline.pkl       # Trained model artifact
 ```
@@ -212,43 +217,28 @@ python train_step2.py
 # Fast mode (reuse saved hyperparams)
 python train_step2.py --fast
 
-# Force HPO re-run
-python train_step2.py --hpo
-
-# Crawl patch notes + update patch_dates.json
-python crawl_patch_notes.py
-
-# Start server
+# Start server (API + frontend)
 python main.py
+
+# Auto-update: detect new patch -> crawl -> refresh predictions
+python auto_update.py
 ```
 
 ---
 
 ## Roadmap
 
-### Phase 1 — Skill Stats DB (Complete)
-- `agent_skills.json`: 29 agents, 851 stats (initial values per skill)
-- `patch_history.json`: all stat changes since E2A1, current values computed
+### Completed
 
-### Ongoing — Patch Prediction Accuracy
-The core of this project. Stage A (patch or not) BA is 0.66, Stage B (direction) BA is 0.78. Stage A has the most room for improvement. Accuracy naturally improves as more acts of data accumulate, but active feature experiments and labeling refinements continue.
+- **Phase 1 — Skill Stats DB**: `agent_skills.json` (29 agents, 851 stats) + `patch_history/*.json` with computed current values
+- **Phase 2 — Patch Impact Model**: Similar-case retrieval over 136 historical patches estimates pick/win rate deltas
+- **Phase 3 — Patch Simulator**: Virtual patch input -> meta delta prediction -> AI analysis with role-aware comparisons and current-state context
+- **Auto-Update Pipeline**: Detect new patch -> crawl ranked + VCT -> rebuild -> reload predictions
 
-### Phase 2 — Patch Impact Model (Next)
-- Regression model: given a patch (skill, change type, magnitude), predict pick/win rate delta
-- 136 real patch cases as training data
-- Input: `[skill_weight, change_type, magnitude, pre_rank_pr, pre_rank_wr, vct_pr]`
-- Output: `[delta_rank_pr, delta_rank_wr]`
+### In Progress
 
-### Phase 3 — Patch Simulator
-- User inputs a hypothetical patch (e.g. "Jett E cooldown 12s -> 8s")
-- System parses input, computes magnitude, runs impact model
-- Applies predicted deltas to current meta, re-runs patch pressure model
-- Outputs: new nerf/buff rankings + AI interpretation
-
-### Phase 4 — Model Enhancement
-- Agent current stats as absolute strength features
-- Similar historical patch case retrieval
-- Expanded dataset for better strong-class recall
+- **Patch Prediction Accuracy**: Stage A BA 0.66, Stage B BA 0.78. Stage A has the most room for improvement. Accuracy improves as more acts accumulate
+- **Model Enhancement**: Skill ceiling features added; absolute strength features under experiment
 
 ---
 
@@ -262,6 +252,7 @@ The core of this project. Stage A (patch or not) BA is 0.66, Stage B (direction)
 | ML | XGBoost, scikit-learn |
 | HPO | Optuna (TPE Sampler) |
 | Feature Importance | SHAP |
-| AI Analysis | Claude Haiku (claude-haiku-4-5-20251001) |
-| Frontend | Next.js, Tailwind CSS |
+| AI Analysis | Claude Haiku (role-aware prompts, current-state context) |
+| Frontend | Next.js, Tailwind CSS, Oswald + Noto Sans KR |
 | API | FastAPI |
+| Deployment | ngrok tunnel (single-domain, API proxy rewrites) |
