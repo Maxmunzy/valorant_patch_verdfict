@@ -51,26 +51,27 @@ Severity (mild/strong) comes from patch context and skill importance.
 
 ---
 
-## Latest Predictions (V26A2 / Patch 12.07)
+## Latest Predictions (V26A2 / Patch 12.07, retrained 2026-04-17)
 
 ### Nerf Ranking
 
 | # | Agent | p_nerf | Rank PR | VCT PR |
 |---|---|---|---|---|
-| 1 | Neon | 79.5% | 22.3% | 43.0% |
-| 2 | Waylay | 70.7% | 36.6% | 44.8% |
-| 3 | Viper | 48.3% | 6.4% | 55.6% |
-| 4 | Omen | 43.2% | 16.9% | 47.7% |
+| 1 | Neon | 77.1% | 22.3% | 43.8% |
+| 2 | Waylay | 75.2% | 36.3% | 44.2% |
+| 3 | Omen | 72.0% | 16.9% | 48.1% |
+| 4 | Viper | 60.4% | 6.4% | 55.4% |
+| 5 | Sova | 48.6% | 32.4% | 40.5% |
 
 ### Buff Ranking
 
 | # | Agent | p_buff | Rank PR | VCT PR |
 |---|---|---|---|---|
-| 1 | KAYO | 72.6% | 4.6% | 8.5% |
-| 2 | Yoru | 62.2% | 3.1% | 1.8% |
-| 3 | Gekko | 57.1% | 4.9% | 2.0% |
-| 4 | Vyse | 53.2% | 5.1% | 5.1% |
-| 5 | Breach | 50.4% | 8.0% | 6.2% |
+| 1 | KAYO | 79.7% | 4.6% | 8.5% |
+| 2 | Gekko | 66.6% | 4.9% | 2.0% |
+| 3 | Yoru | 63.6% | 3.1% | 1.8% |
+| 4 | Breach | 53.5% | 8.0% | 6.2% |
+| 5 | Vyse | 51.5% | 5.1% | 5.6% |
 
 ---
 
