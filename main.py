@@ -58,7 +58,19 @@ app.add_middleware(
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "model_loaded": predictor is not None}
+    """서버 상태 + 외부 의존성(API 키, 모델) 점검.
+
+    API 키 값 자체는 절대 노출하지 않고 존재 여부만 노출한다.
+    Railway 환경변수 누락·캐시 오염 진단용.
+    """
+    import os
+    api_key = os.getenv("ANTHROPIC_API_KEY", "")
+    return {
+        "status": "ok",
+        "model_loaded": predictor is not None,
+        "anthropic_key_present": bool(api_key),
+        "anthropic_key_length": len(api_key),  # 존재 여부 이중 확인용 (값 자체는 X)
+    }
 
 
 @app.get("/predict")

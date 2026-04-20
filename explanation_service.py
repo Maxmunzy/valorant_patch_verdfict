@@ -57,41 +57,54 @@ class ExplanationGenerator:
         self._anthropic: Anthropic | None = None
 
     def get(self, r: dict) -> str:
-        """캐시 확인 후 설명 반환. 캐시 미스 시 생성."""
+        """캐시 확인 후 설명 반환. 캐시 미스 시 생성.
+
+        중요: 템플릿 폴백(API 실패)은 캐시에 저장하지 않는다.
+        폴백을 캐시하면 한 번 실패한 뒤 계속 폴백이 유지되는 문제가 발생한다.
+        """
         agent   = r["agent"]
         verdict = r["verdict"]
         act     = r.get("act", "")
         rank_pr_r = round(r.get("rank_pr", 0), 1)
         vct_pr_r  = round(r.get("vct_pr", 0), 1)
-        # v2: 이전 버전에 캐시된 템플릿 폴백(라벨 용어 문제 + stable 오문구) 무효화
-        cache_key = f"v2::{agent}::{verdict}::{act}::{rank_pr_r}::{vct_pr_r}"
+        # v3: 템플릿 폴백이 캐시에 박힌 이전 상태를 무효화
+        cache_key = f"v3::{agent}::{verdict}::{act}::{rank_pr_r}::{vct_pr_r}"
 
         if cache_key in self._cache:
             return self._cache[cache_key]
 
-        explanation = self._generate(r)
-        self._cache[cache_key] = explanation
-        try:
-            with open(self._cache_path, "w", encoding="utf-8") as f:
-                json.dump(self._cache, f, ensure_ascii=False, indent=2)
-        except Exception:
-            pass
+        explanation, from_api = self._generate(r)
+        # API 성공 결과만 캐시. 폴백은 매 요청마다 재시도해서 API 복구되면 즉시 반영
+        if from_api:
+            self._cache[cache_key] = explanation
+            try:
+                with open(self._cache_path, "w", encoding="utf-8") as f:
+                    json.dump(self._cache, f, ensure_ascii=False, indent=2)
+            except Exception:
+                pass
         return explanation
 
-    def _generate(self, r: dict) -> str:
-        """Claude Haiku로 양면 분석 스타일의 설명 생성. 실패 시 템플릿 폴백."""
+    def _generate(self, r: dict) -> tuple[str, bool]:
+        """Claude Haiku로 양면 분석 스타일의 설명 생성.
+
+        Returns:
+            (text, from_api): text는 생성된 설명, from_api는 Claude API 성공 여부.
+            from_api=False면 템플릿 폴백이 반환된 것.
+        """
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
-            return self._template(r)
+            logger.warning("[explanation] ANTHROPIC_API_KEY 미설정 — 템플릿 폴백")
+            return self._template(r), False
 
         # 신규 요원: 패치 이력 없음 → 모델 예측 신뢰도 낮음
+        # 이 응답은 결정론적이므로 from_api=True 로 취급해도 캐시 부작용 없음
         acts_since_r = int(r.get("acts_since_patch", 0) or 0)
         if acts_since_r >= 90:
             agent_ko_r = AGENT_NAME_KO.get(r["agent"], r["agent"])
             return (
                 f"출시 이후 패치 이력이 없어 예측 신뢰도가 낮습니다. "
                 f"데이터가 충분히 쌓이면 {agent_ko_r}에 대한 정밀 분석이 가능해집니다."
-            )
+            ), True
 
         if self._anthropic is None:
             self._anthropic = Anthropic(api_key=api_key)
@@ -220,10 +233,10 @@ class ExplanationGenerator:
                 max_tokens=500,
                 messages=[{"role": "user", "content": prompt}],
             )
-            return resp.content[0].text.strip()
+            return resp.content[0].text.strip(), True
         except Exception as e:
             logger.exception(f"[explanation] Anthropic API 실패 (agent={agent}): {e}")
-            return self._template(r)
+            return self._template(r), False
 
     def _template(self, r: dict) -> str:
         """API 실패 시 사용하는 간단 템플릿 폴백."""
