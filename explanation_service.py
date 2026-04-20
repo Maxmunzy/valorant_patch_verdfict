@@ -17,6 +17,39 @@ from agent_data import AGENT_NAME_KO, AGENT_KIT, CURRENT_MAP_POOL
 
 logger = logging.getLogger(__name__)
 
+
+# ─── 오표기 자동 교정 ────────────────────────────────────────────────────────
+# Haiku가 프롬프트의 금지 규칙을 무시하고 자주 흘리는 오표기를 응답 후처리로 강제 교정.
+# 프롬프트 방어 + 후처리 방어 2중 레이어.
+_TYPO_CORRECTIONS: list[tuple[str, str]] = [
+    # Riot Games 오표기 → 라이엇
+    ("라이옷", "라이엇"),
+    ("라이웃", "라이엇"),
+    ("라이어트", "라이엇"),
+    ("라이엇게임즈", "라이엇"),
+    # 킬조이 오표기
+    ("켈조이", "킬조이"),
+    ("킬죠이", "킬조이"),
+    # 케이오 오표기 (KAYO의 한국어 공식명은 "케이오")
+    ("카요", "케이오"),
+    ("케이오오", "케이오"),
+    # 웨이레이 오표기
+    ("웨이래이", "웨이레이"),
+    # 모델 라벨 누출
+    ("strong_nerf", "강한 너프 대상"),
+    ("strong_buff", "강한 버프 대상"),
+    ("mild_nerf", "너프 대상"),
+    ("mild_buff", "버프 대상"),
+]
+
+
+def _correct_common_typos(text: str) -> str:
+    """AI 응답의 자주 발생하는 오표기를 사전 기반으로 교정."""
+    for wrong, right in _TYPO_CORRECTIONS:
+        if wrong in text:
+            text = text.replace(wrong, right)
+    return text
+
 # ─── 스킬 한국어 공식 이름 (agent_data.AGENT_KIT에서 자동 생성) ─────────────
 AGENT_SKILLS_KO: dict[str, dict[str, str]] = {
     agent: {slot: info["ko"] for slot, info in kit.items()}
@@ -233,7 +266,8 @@ class ExplanationGenerator:
                 max_tokens=500,
                 messages=[{"role": "user", "content": prompt}],
             )
-            return resp.content[0].text.strip(), True
+            # 후처리: 라이옷/켈조이/카요 등 자주 나오는 오표기 강제 교정
+            return _correct_common_typos(resp.content[0].text.strip()), True
         except Exception as e:
             logger.exception(f"[explanation] Anthropic API 실패 (agent={agent}): {e}")
             return self._template(r), False
@@ -276,13 +310,65 @@ class ExplanationGenerator:
 
 # ─── 시뮬레이터 AI 분석 ──────────────────────────────────────────────────────
 
-def generate_sim_analysis(changes_desc: str, result_summary: str) -> str:
-    """패치 시뮬레이션 결과에 대한 AI 분석 생성. 크레딧 부족 등 에러 시 한국어 메시지 반환."""
+# 세부 역할군별 한국어 요원 리스트. 시스템 프롬프트에서 경쟁 구도 판단의 기준이 된다.
+# Haiku가 시스템 프롬프트의 역할군 분류를 무시하고 다른 역할군 요원을 끌어오는 현상 방지용.
+SUB_ROLE_AGENTS_KO: dict[str, list[str]] = {
+    "1선 타격대":  ["제트", "레이즈", "네온", "웨이레이"],
+    "2선 타격대":  ["레이나", "피닉스", "요루", "아이소"],
+    "척후대":      ["소바", "페이드", "스카이", "브리치", "케이오", "게코", "테호"],
+    "전략가":      ["브림스톤", "바이퍼", "오멘", "아스트라", "하버", "클로브", "믹스"],
+    "감시자":      ["킬조이", "사이퍼", "데드락", "바이스", "세이지", "체임버"],
+}
+
+
+def _competitors_line(agent_en: str) -> str:
+    """해당 요원의 세부 역할군 + 경쟁 요원 리스트를 프롬프트용 한 줄 문자열로 반환.
+
+    반환 예:
+        "케이오(척후대) — 경쟁 요원: 소바, 페이드, 스카이, 브리치, 게코, 테호"
+    매칭 실패 시 빈 문자열.
+    """
+    agent_ko = AGENT_NAME_KO.get(agent_en, agent_en)
+    for role, members in SUB_ROLE_AGENTS_KO.items():
+        if agent_ko in members:
+            others = [m for m in members if m != agent_ko]
+            return f"{agent_ko}({role}) — 경쟁 요원: {', '.join(others)}"
+    return ""
+
+
+def generate_sim_analysis(changes_desc: str, result_summary: str, target_agents: list[str] | None = None) -> str:
+    """패치 시뮬레이션 결과에 대한 AI 분석 생성. 크레딧 부족 등 에러 시 한국어 메시지 반환.
+
+    Args:
+        changes_desc: 변경사항 요약 (프론트에서 정리)
+        result_summary: 모델 예측 결과 요약 (프론트에서 정리)
+        target_agents: 변경된 요원들의 영어 이름 리스트. 각 요원의 세부 역할군·경쟁자를
+            프롬프트에 직접 주입해 Haiku의 역할군 오분류를 차단한다.
+    """
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
         return "API 키가 설정되지 않아 AI 분석을 생성할 수 없습니다."
 
-    system = """너는 발로란트 프로씬 전문 분석가다. 역할군 분류를 정확히 지켜야 한다.
+    # 대상 요원별 경쟁자 힌트 — Haiku가 시스템 프롬프트 분류를 무시할 때의 방어선
+    competitor_hint = ""
+    if target_agents:
+        lines = [_competitors_line(a) for a in target_agents]
+        lines = [l for l in lines if l]  # 빈 줄 제거
+        if lines:
+            competitor_hint = (
+                "\n\n대상 요원 경쟁 구도 (반드시 이 리스트 내에서만 경쟁자 언급):\n"
+                + "\n".join(f"- {l}" for l in lines)
+                + "\n위 리스트 밖의 요원 이름을 언급하면 안 된다. "
+                  "예: 케이오의 경쟁자로 킬조이·사이퍼(감시자) 절대 금지."
+            )
+
+    system = """너는 발로란트 프로씬 전문 분석가다. 역할군 분류와 고유명사 표기를 정확히 지켜야 한다.
+
+고유명사 표기 (오타 절대 금지 — 이 표기만 사용):
+- Riot Games → "라이엇" (절대: 라이옷, 라이웃, 라이어트 금지)
+- KAYO → "케이오" (절대: 카요 금지)
+- Killjoy → "킬조이" (절대: 켈조이, 킬죠이 금지)
+- Waylay → "웨이레이" (절대: 웨이래이 금지)
 
 역할군별 요원 (절대 틀리면 안 됨):
 - 1선 타격대: 제트, 레이즈, 네온, 웨이레이
@@ -294,6 +380,7 @@ def generate_sim_analysis(changes_desc: str, result_summary: str) -> str:
 경쟁 요원은 반드시 같은 세부 역할군 내에서만 언급.
 예: 아이소(2선 타격대)의 경쟁 상대 = 레이나, 피닉스, 요루. 절대 제트(1선)나 킬조이(감시자)가 아님.
 예: 제트(1선 타격대)의 경쟁 상대 = 레이즈, 네온, 웨이레이. 절대 레이나(2선)가 아님.
+예: 케이오(척후대)의 경쟁 상대 = 소바, 페이드, 스카이, 브리치, 게코, 테호. 절대 킬조이·사이퍼(감시자)가 아님.
 
 VCT 패치 적용 지연 (중요):
 - 현재 날짜: 2026년 4월 17일
@@ -322,7 +409,7 @@ VCT 패치 적용 지연 (중요):
 {changes_desc}
 
 모델 예측 결과:
-{result_summary}
+{result_summary}{competitor_hint}
 
 작성 규칙:
 - 3~4문장. 간결하게.
@@ -349,7 +436,8 @@ VCT 패치 적용 지연 (중요):
             system=system,
             messages=[{"role": "user", "content": prompt}],
         )
-        return resp.content[0].text.strip()
+        # 후처리: 라이옷/켈조이/카요 등 오표기 + 모델 내부 라벨 누출 강제 교정
+        return _correct_common_typos(resp.content[0].text.strip())
     except Exception as e:
         err = str(e)
         if "credit" in err.lower() or "balance" in err.lower() or "billing" in err.lower():

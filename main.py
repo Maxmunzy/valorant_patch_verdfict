@@ -164,7 +164,15 @@ def simulate_analyze(req: SimAnalyzeRequest):
         f"- {c.agent} [{c.skill}] {c.stat}: {c.old_value} → {c.new_value}"
         for c in req.changes
     )
-    analysis = generate_sim_analysis(changes_desc, req.result_summary)
+    # 변경된 요원 리스트를 정규화해 전달 → 프롬프트에 경쟁자 힌트 주입용
+    target_agents = []
+    seen = set()
+    for c in req.changes:
+        normalized = normalize_agent(c.agent)
+        if normalized not in seen:
+            seen.add(normalized)
+            target_agents.append(normalized)
+    analysis = generate_sim_analysis(changes_desc, req.result_summary, target_agents=target_agents)
     return {"analysis": analysis}
 
 
