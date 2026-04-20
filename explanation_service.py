@@ -100,8 +100,10 @@ class ExplanationGenerator:
         act     = r.get("act", "")
         rank_pr_r = round(r.get("rank_pr", 0), 1)
         vct_pr_r  = round(r.get("vct_pr", 0), 1)
-        # v3: 템플릿 폴백이 캐시에 박힌 이전 상태를 무효화
-        cache_key = f"v3::{agent}::{verdict}::{act}::{rank_pr_r}::{vct_pr_r}"
+        last_patch = r.get("last_patch_version") or ""
+        # v4: last_patch_version을 키에 포함 — 패치 필터 수정시 옛 AI 분석 텍스트가
+        #     캐시에 박혀 "12.06 패치 이후" 같은 잘못된 문구가 계속 나오던 버그 수정
+        cache_key = f"v4::{agent}::{verdict}::{act}::{rank_pr_r}::{vct_pr_r}::{last_patch}"
 
         if cache_key in self._cache:
             return self._cache[cache_key]

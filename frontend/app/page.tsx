@@ -6,7 +6,8 @@ import CollapseSection from "@/components/CollapseSection";
 import { getAllPredictions, AgentPrediction } from "@/lib/api";
 import { agentPortrait } from "@/lib/agents";
 
-export const revalidate = 300;
+// 60초 ISR — 배포/데이터 변경 후 체감 반영 시간 단축
+export const revalidate = 60;
 
 function SectionLabel({
   label,

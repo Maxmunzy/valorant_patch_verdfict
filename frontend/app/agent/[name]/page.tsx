@@ -2,7 +2,9 @@ import { getAgentPrediction } from "@/lib/api";
 import { notFound } from "next/navigation";
 import AgentDetailClient, { AgentDetailData } from "@/components/AgentDetailClient";
 
-export const revalidate = 300;
+// 60초 ISR — 배포/데이터 변경 후 체감 반영 시간 단축.
+// (backend에 explanation_cache가 있어 비용 증가는 미미)
+export const revalidate = 60;
 
 export default async function AgentDetailPage({
   params,

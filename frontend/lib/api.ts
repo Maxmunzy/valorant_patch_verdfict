@@ -35,7 +35,7 @@ export interface AgentPrediction {
 }
 
 export async function getAllPredictions(): Promise<AgentPrediction[]> {
-  const res = await fetch(`${API_BASE}/predict`, { next: { revalidate: 300 } });
+  const res = await fetch(`${API_BASE}/predict`, { next: { revalidate: 60 } });
   if (!res.ok) throw new Error("Failed to fetch predictions");
   const json = await res.json();
   return json.data as AgentPrediction[];
