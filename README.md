@@ -139,6 +139,67 @@ This prevents flickering between stable/nerf for agents under sustained pressure
 | `mild_buff` | Buff signal present (below baseline + losing) |
 | `strong_buff` | Actual patch: followup/correction, core skill buff, or rework |
 
+### Roots of the Label System — 5 trigger_types
+
+The original design classified Riot's patch motivations into 5 triggers. Patch note dev comments (`change_reason`) were parsed by Claude API to attach a trigger to every historical change, and this taxonomy became the basis of the current 5-class label system.
+
+| trigger_type | Meaning | Distribution (596) | Example |
+|---|---|---|---|
+| `rank_stat` | Rank pick/win-rate driven adjustment | 372 (62%) | Reyna Q — curbing ranked pubstomp |
+| `role_invasion` | Crossing role-class boundaries | 104 (17%) | Killjoy leaning too offensive for a Sentinel |
+| `skill_ceiling` | Over-effective only at pro level | 65 (11%) | Skye Q — self-flash "became too optimal" |
+| `pro_dominance` | Absolute dominance in VCT | 50 (8%) | 45 nerfs vs 5 buffs — nerf-only |
+| `map_anchor` | Overly strong on specific maps | 5 (1%) | Sample too small |
+
+**Why we moved from triggers to 5-class labels:** `trigger_type` classifies *why* a patch happened, not *whether the next patch will happen*. At prediction time we can't directly observe "Viper is in a pro_dominance state" — we only see VCT pick rate 40%. So triggers were reduced to **observable feature proxies**:
+
+- `pro_dominance` → `vct_pr_last`, `vct_pr_peak_all` + VCT 35% absolute threshold
+- `role_invasion` → `tier_gap` (kit design tier vs field results), `kit_x_rank_pr`
+- `skill_ceiling` → `skill_ceiling_x_vct_pr`
+- `rank_stat` → `rank_pr_excess`, `rank_wr`, `wr_buff_signal`
+
+The trigger taxonomy is used during **label construction**, not as model input. Triggers are the *rationale for labeling*, not features.
+
+### Post-hoc Verdict → Pre-prediction Pipeline
+
+The core structure is a 2-stage system: **"build training data from a post-hoc verdict engine that judges success/failure of past patches, then predict the next patch from it."**
+
+```
+┌── Stage 1: Post-hoc verdict ──────────────────────────┐
+│  Riot patch notes  →  Claude API  →  trigger_type    │
+│  (change_reason)      (classify)     (5 types)       │
+│         ↓                                             │
+│  Measure actual metric deltas after the patch        │
+│         ↓                                             │
+│  combined_verdict:  HIT / MISS / OVERSHOOT /         │
+│                     DUAL_MISS / UNDERSHOOT           │
+│  (nerfed but metrics didn't move? MISS.              │
+│   nerfed and metrics crashed? OVERSHOOT.)            │
+└───────────────────────────────────────────────────────┘
+                       ↓
+       verdict history → followup / correction context
+                       ↓
+┌── Stage 2: Pre-prediction (whosnxt.app) ─────────────┐
+│  Current-act metrics + trigger-derived features      │
+│         ↓                                             │
+│  Training labels: stable / mild_nerf / strong_nerf / │
+│                   mild_buff / strong_buff            │
+│  (strong = actual patch act, mild = signal-only act) │
+│         ↓                                             │
+│  Stage A (patched?) → Stage B (buff/nerf?)          │
+│         ↓                                             │
+│  Next-act p_nerf / p_buff / p_stable probabilities   │
+└───────────────────────────────────────────────────────┘
+```
+
+In short:
+1. **Post-hoc verdict** judges each past patch — "did this patch actually work?"
+2. **Verdict history** determines the next patch's context (MISS → followup, OVERSHOOT → correction, else → first)
+3. **Current metrics + trigger-based features + context** produce 5-class labels (stable / mild / strong × buff / nerf)
+4. Those labels become the **XGBoost target**, training the model to predict the next patch
+
+The "post-hoc verdict engine" acts as a **training-data factory**, and the pre-prediction model runs on top of it.
+
 ### Training Pipeline
 
 - **Stage A**: Walk-forward temporal CV, train-only 1:1 undersampling (stable majority reduced to match patched count)
@@ -255,6 +316,45 @@ Required env vars:
 
 - **Patch Prediction Accuracy**: Stage A BA 0.66, Stage B BA 0.78. Stage A has the most room for improvement. Accuracy improves as more acts accumulate
 - **Model Enhancement**: Skill ceiling features added; absolute strength features under experiment
+
+---
+
+## Current Limitations
+
+Honest weaknesses worth calling out.
+
+### New-agent data sparsity
+
+Agents released in 2026 (Veto, Miks) have **no patch history.** Features the model relies on — `acts_since_patch`, `last_direction`, `n_nerf_patches` — are mostly null, and rank/VCT metrics alone aren't enough to predict reliably.
+
+**Handling**: `predict_service.py` forces `stable` for any agent with `acts_since_patch >= 90` and pins them to the bottom of the ranking. On the detail page they show "insufficient patch history, low prediction confidence" and AI analysis is skipped. They graduate to normal prediction after 2–3 acts of data accumulate.
+
+### Claude API role and limits
+
+Claude is used in two places — the **training pipeline** and **runtime explanations**.
+
+| Location | Model | Role | Failure mode |
+|---|---|---|---|
+| Training data generation | Claude Sonnet | Classify patch-note `change_reason` into 5 `trigger_type`s | Retry · log review · manual correction |
+| Runtime agent explanation | Claude Haiku 4.5 | Narrate prediction rationale in an analytical tone | Fall back to 5-class static template (3 tiers by pick-rate band) |
+| Simulator AI analysis | Claude Haiku 4.5 | Explain virtual-patch outcomes (role-aware comparisons) | Surface the error directly |
+
+**Limits:**
+- Training-stage trigger classification is run once and frozen to `patch_notes_classified.csv` — needs re-running for every new patch.
+- Runtime Haiku has tight prompt-length and terminology constraints, with long anti-hallucination rules attached.
+- Cache poisoning risk: failed API calls can cache templates, so `cache_key` includes a version prefix (`v2::`) to invalidate stale entries.
+
+### VCT data lag
+
+As of 2026-04-20, VCT Stage 1 2026 is in progress, and **12.06 balance changes apply to VCT starting April 24**. So the VCT pick/win rates shown in the frontend don't yet reflect 12.06 nerfs. Recently nerfed agents like Waylay may appear inflated in VCT metrics.
+
+**Handling**: AI analysis prompts embed this lag as explicit context ("12.06 nerfs apply to VCT starting April 24"). The data table also exposes `vct_data_lag` as a feature so the model can down-weight stale VCT signals.
+
+### Inherent domain limits
+
+- **Riot's qualitative calls are unpredictable** — "this kit feels unfun" leaves no data trail
+- **Reworks are the hardest to predict** — almost no pre-signal, announced as event-driven patches
+- **2-stage error propagation** — if Stage A is wrong, Stage B never runs, and there's no recovery
 
 ---
 
