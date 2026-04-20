@@ -629,24 +629,23 @@ class PatchPredictor:
             patch_act_idx = cur_act_idx - acts_since if acts_since < 99 else None
             patch_act_name = IDX_ACT.get(patch_act_idx) if patch_act_idx is not None else None
 
+            # 현재 액트부터 역순으로 walk → 진짜 마지막 밸런스 패치 탐색.
+            # (acts_since 기반 patch_act_name은 예전 필터링 이전 데이터로 계산된 경우가 있어
+            #  낡은 액트를 가리킬 수 있음 → backward walk를 1순위로 사용)
             last_patch_ver: str | None = None
-            if patch_act_name:
-                last_patch_ver = self._last_patch_ver.get(f"{agent_name}|{patch_act_name}")
-            if not last_patch_ver:
-                last_patch_ver = self._last_patch_ver.get(f"{agent_name}|{cur_act_name}")
-            # 위 둘이 비어있으면(현재/타겟 액트에 실제 밸런스 패치가 없음 — 버그픽스나 rework만 있었던 경우)
-            # 과거 액트로 거슬러 올라가 진짜 마지막 밸런스 패치를 찾는다.
-            if not last_patch_ver and cur_act_idx >= 0:
-                for _prev_idx in range(cur_act_idx - 1, -1, -1):
-                    _prev_act = IDX_ACT.get(_prev_idx)
-                    if not _prev_act:
+            if cur_act_idx >= 0:
+                for _idx in range(cur_act_idx, -1, -1):
+                    _act = IDX_ACT.get(_idx)
+                    if not _act:
                         continue
-                    _cand = self._last_patch_ver.get(f"{agent_name}|{_prev_act}")
+                    _cand = self._last_patch_ver.get(f"{agent_name}|{_act}")
                     if _cand:
                         last_patch_ver = _cand
-                        # patch_act_name도 실제 발견된 액트로 보정 (UI 라벨에 반영)
-                        patch_act_name = _prev_act
+                        patch_act_name = _act  # UI 라벨용으로 실제 액트 반영
                         break
+            # Fallback: 혹시 walk로 못 찾았을 때만 acts_since 기반 조회
+            if not last_patch_ver and patch_act_name:
+                last_patch_ver = self._last_patch_ver.get(f"{agent_name}|{patch_act_name}")
 
             _vct_pr_post_val = row.get("vct_pr_post", None)
             _vct_pr_display = float(_vct_pr_post_val) if _vct_pr_post_val is not None else float(row.get("vct_pr_last", 0) or 0)
