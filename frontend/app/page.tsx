@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import AgentCard from "@/components/AgentCard";
+import AgentExplorer from "@/components/AgentExplorer";
 import TrustBlock from "@/components/TrustBlock";
-import CollapseSection from "@/components/CollapseSection";
 import { getAllPredictions, AgentPrediction } from "@/lib/api";
 import { agentPortrait } from "@/lib/agents";
 
@@ -52,12 +52,9 @@ export default async function Home() {
   // API 응답 순서 유지 (p_nerf/p_buff 내림차순)
   const nerfAll   = agents.filter((a) => a.verdict.includes("nerf"));
   const buffAll   = agents.filter((a) => a.verdict.includes("buff"));
-  const stableAll = agents.filter((a) => a.verdict === "stable");
 
   const nerfTop3  = nerfAll.slice(0, 3);
   const buffTop3  = buffAll.slice(0, 3);
-  const nerfRest  = nerfAll.slice(3);
-  const buffRest  = buffAll.slice(3);
 
   return (
     <div className="min-h-[80vh] flex flex-col py-12 space-y-12">
@@ -180,83 +177,8 @@ export default async function Home() {
         </section>
       )}
 
-      {/* ── NERF REST (기본 접힘) ──────────────────────── */}
-      {nerfRest.length > 0 && (
-        <section>
-          <CollapseSection
-            defaultOpen={false}
-            storageKey="home:nerf-rest"
-            header={
-              <div
-                className="text-[9px] uppercase tracking-[0.25em] flex items-center gap-2"
-                style={{ color: "rgba(100,116,139,0.9)" }}
-              >
-                <div className="w-4 h-px" style={{ background: "rgba(255,70,85,0.6)" }} />
-                NERF TARGETS · REMAINING
-                <span style={{ color: "rgba(71,85,105,0.9)" }}>({nerfRest.length})</span>
-                <div className="flex-1 h-px" style={{ background: "rgba(30,41,59,0.6)" }} />
-              </div>
-            }
-          >
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start pt-3">
-              {nerfRest.map((a) => (
-                <AgentCard key={a.agent} agent={a} size="sm" />
-              ))}
-            </div>
-          </CollapseSection>
-        </section>
-      )}
-
-      {/* ── BUFF REST (기본 접힘) ──────────────────────── */}
-      {buffRest.length > 0 && (
-        <section>
-          <CollapseSection
-            defaultOpen={false}
-            storageKey="home:buff-rest"
-            header={
-              <div
-                className="text-[9px] uppercase tracking-[0.25em] flex items-center gap-2"
-                style={{ color: "rgba(100,116,139,0.9)" }}
-              >
-                <div className="w-4 h-px" style={{ background: "rgba(79,195,247,0.6)" }} />
-                BUFF CANDIDATES · REMAINING
-                <span style={{ color: "rgba(71,85,105,0.9)" }}>({buffRest.length})</span>
-                <div className="flex-1 h-px" style={{ background: "rgba(30,41,59,0.6)" }} />
-              </div>
-            }
-          >
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start pt-3">
-              {buffRest.map((a) => (
-                <AgentCard key={a.agent} agent={a} size="sm" />
-              ))}
-            </div>
-          </CollapseSection>
-        </section>
-      )}
-
-      {/* ── STABLE (기본 접힘) ──────────────────────────── */}
-      {stableAll.length > 0 && (
-        <section>
-          <CollapseSection
-            defaultOpen={false}
-            storageKey="home:stable"
-            header={
-              <SectionLabel
-                label="STABLE"
-                labelEn="ST // STABLE"
-                accentColor="#64748B"
-                count={stableAll.length}
-              />
-            }
-          >
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start pt-4">
-              {stableAll.map((a) => (
-                <AgentCard key={a.agent} agent={a} size="sm" />
-              ))}
-            </div>
-          </CollapseSection>
-        </section>
-      )}
+      {/* ── AGENT EXPLORER (검색 · 역할 필터 · 정렬) ──── */}
+      {agents.length > 0 && <AgentExplorer agents={agents} />}
 
       {agents.length > 0 && (
         <div

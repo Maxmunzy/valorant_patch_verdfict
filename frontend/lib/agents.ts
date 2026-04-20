@@ -43,3 +43,29 @@ export function agentIcon(name: string): string {
   if (!uuid) return "";
   return `https://media.valorant-api.com/agents/${uuid}/displayicon.png`;
 }
+
+// 요원 검색시 한영 입력 모두 허용하기 위한 한글명 매핑
+export const AGENT_NAME_KO: Record<string, string> = {
+  Jett: "제트", Reyna: "레이나", Raze: "레이즈", Neon: "네온",
+  Phoenix: "피닉스", Iso: "아이소", Yoru: "요루", Waylay: "웨이레이",
+  Brimstone: "브림스톤", Viper: "바이퍼", Omen: "오멘", Astra: "아스트라",
+  Clove: "클로브", Harbor: "하버", Miks: "믹스",
+  Killjoy: "킬조이", Cypher: "사이퍼", Sage: "세이지", Chamber: "체임버",
+  Deadlock: "데드록", Vyse: "바이스", Veto: "비토",
+  Sova: "소바", Skye: "스카이", Fade: "페이드", Breach: "브리치",
+  KAYO: "케이오", Gekko: "게코", Tejo: "테호",
+};
+
+// 역할 검색/필터용 고정 순서
+export const ROLE_ORDER: string[] = ["타격대", "감시자", "척후대", "전략가"];
+
+/** 검색 매칭 — 영문/한글/대소문자 무관 */
+export function matchesQuery(agent: string, query: string): boolean {
+  if (!query) return true;
+  const q = query.trim().toLowerCase();
+  if (!q) return true;
+  if (agent.toLowerCase().includes(q)) return true;
+  const ko = AGENT_NAME_KO[agent];
+  if (ko && ko.includes(query.trim())) return true;
+  return false;
+}
