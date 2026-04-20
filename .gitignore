@@ -28,6 +28,7 @@ train_output.txt
 
 # 이미지 출력물
 *.png
+!frontend/app/icon.png
 
 # 로그·텍스트 산출물
 decisions_log.txt
