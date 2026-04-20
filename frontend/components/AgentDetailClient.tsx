@@ -30,8 +30,29 @@ export interface AgentDetailData {
   last_patch_version: string | null;
   last_patch_act: string | null;
   signals: { type: string; label: string; text: string; tag?: string }[];
+  badges?: string[];
+  sample_confidence?: "high" | "mid" | "low";
   explanation?: string;
 }
+
+const DETAIL_BADGE_COLOR: Record<string, { border: string; fg: string; bg: string }> = {
+  "VCT 핵심":     { border: "rgba(239,68,68,0.4)",   fg: "#FCA5A5", bg: "rgba(239,68,68,0.08)" },
+  "VCT 주력":     { border: "rgba(239,68,68,0.3)",   fg: "#FCA5A5", bg: "rgba(239,68,68,0.05)" },
+  "너프 MISS":    { border: "rgba(245,158,11,0.4)",  fg: "#FCD34D", bg: "rgba(245,158,11,0.08)" },
+  "버프 MISS":    { border: "rgba(245,158,11,0.4)",  fg: "#FCD34D", bg: "rgba(245,158,11,0.08)" },
+  "과버프 판정":  { border: "rgba(249,115,22,0.4)",  fg: "#FDBA74", bg: "rgba(249,115,22,0.08)" },
+  "과너프 판정":  { border: "rgba(129,140,248,0.4)", fg: "#C7D2FE", bg: "rgba(129,140,248,0.08)" },
+  "장기 하락":    { border: "rgba(148,163,184,0.4)", fg: "#CBD5E1", bg: "rgba(148,163,184,0.06)" },
+  "고점 요원":    { border: "rgba(167,139,250,0.4)", fg: "#DDD6FE", bg: "rgba(167,139,250,0.06)" },
+  "표본 부족":    { border: "rgba(100,116,139,0.4)", fg: "#94A3B8", bg: "rgba(100,116,139,0.08)" },
+};
+const DETAIL_BADGE_DEFAULT = { border: "rgba(71,85,105,0.4)", fg: "#94A3B8", bg: "rgba(30,41,59,0.3)" };
+
+const CONF_TIER: Record<string, { dot: string; label: string; desc: string }> = {
+  high: { dot: "#10B981", label: "HIGH",     desc: "표본 충분 · 최근 데이터" },
+  mid:  { dot: "#F59E0B", label: "MID",      desc: "표본 보통 · 수치 참고용" },
+  low:  { dot: "#64748B", label: "LOW",      desc: "표본 부족 — 수치 해석 주의" },
+};
 
 const VERDICT_COLOR: Record<string, string> = {
   nerf_rank:       "#FF4655",
@@ -258,6 +279,23 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
               <div className="text-xs mt-1" style={{ color: "#94a3b8" }}>
                 {patchLabel}
               </div>
+              {/* 배지: 핵심 신호를 한눈에 */}
+              {data.badges && data.badges.length > 0 && (
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {data.badges.map((b) => {
+                    const c = DETAIL_BADGE_COLOR[b] ?? DETAIL_BADGE_DEFAULT;
+                    return (
+                      <span
+                        key={b}
+                        className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 whitespace-nowrap"
+                        style={{ border: `1px solid ${c.border}`, color: c.fg, background: c.bg }}
+                      >
+                        {b}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
             </div>
             <div className="shrink-0">
               <PredBadge verdict={data.verdict} />
@@ -434,7 +472,35 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
             ) : (
               <span style={{ color: "#475569" }}>// NO DATA</span>
             )}
+            {/* 신뢰도 tier 뱃지 */}
+            {data.sample_confidence && CONF_TIER[data.sample_confidence] && (() => {
+              const t = CONF_TIER[data.sample_confidence];
+              return (
+                <span
+                  className="ml-auto inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] tracking-widest"
+                  style={{ border: `1px solid ${t.dot}55`, background: `${t.dot}10`, color: t.dot }}
+                  title={t.desc}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: t.dot, boxShadow: `0 0 4px ${t.dot}80` }} />
+                  CONF {t.label}
+                </span>
+              );
+            })()}
           </div>
+          {/* LOW 신뢰도일 때만 해석 가이드 문구 */}
+          {data.sample_confidence === "low" && (
+            <div
+              className="mb-3 text-[11px] leading-snug px-2 py-1.5"
+              style={{
+                color: "rgba(148,163,184,0.75)",
+                border: "1px solid rgba(100,116,139,0.35)",
+                background: "rgba(100,116,139,0.06)",
+              }}
+            >
+              <span style={{ color: "#CBD5E1" }}>표본 부족</span> —
+              프로 픽률이 낮거나 데이터가 현재보다 오래된 상태. 숫자 크기보다 {data.last_patch_version ? "패치 이후 추세" : "전반적 방향"}을 먼저 보세요.
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <div className="text-xs uppercase tracking-widest mb-1" style={{ color: "#64748b" }}>PICK RATE</div>

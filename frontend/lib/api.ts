@@ -29,6 +29,8 @@ export interface AgentPrediction {
   verdict_en: string;
   urgency_score: number;
   signals: Signal[];
+  badges?: string[];
+  sample_confidence?: "high" | "mid" | "low";
   explanation?: string;
 }
 

@@ -665,6 +665,45 @@ class PatchPredictor:
             _vct_pr_post_val = row.get("vct_pr_post", None)
             _vct_pr_display = float(_vct_pr_post_val) if _vct_pr_post_val is not None else float(row.get("vct_pr_last", 0) or 0)
 
+            # ── 카드용 짧은 배지 & 표본 신뢰도 ───────────────────────────────────
+            # 우선순위 정렬된 최대 3개 배지로 홈 카드 정보 밀도 향상
+            _badges: list[str] = []
+            _buff_miss = float(row.get("buff_miss_flag", 0) or 0)
+            _nerf_miss = float(row.get("nerf_miss_flag", 0) or 0)
+            _skill_ceil = float(row.get("skill_ceiling_score", 0.5) or 0.5)
+            _rank_peak_pct = float(row.get("rank_pr_peak", 0) or 0) * 5
+            _rank_vs_peak = float(row.get("rank_pr_vs_peak", 1) or 1)
+            if "correction_nerf" in verdict:
+                _badges.append("과버프 판정")
+            elif "correction_buff" in verdict:
+                _badges.append("과너프 판정")
+            if _nerf_miss and "nerf" in verdict:
+                _badges.append("너프 MISS")
+            if _buff_miss and "buff" in verdict:
+                _badges.append("버프 MISS")
+            if _vct_pr_display >= 25:
+                _badges.append("VCT 핵심")
+            elif _vct_pr_display >= 15:
+                _badges.append("VCT 주력")
+            if _rank_peak_pct >= 15 and _rank_vs_peak < 0.4 and "buff" in verdict:
+                _badges.append("장기 하락")
+            if _skill_ceil >= 0.7:
+                _badges.append("고점 요원")
+            if _vct_pr_display > 0 and _vct_pr_display < 5:
+                _badges.append("표본 부족")
+            _badges = _badges[:3]  # 카드에 최대 3개
+
+            # 표본 신뢰도 layer — 숫자 오독 방지용
+            #   high : VCT 픽률 ≥ 10, lag ≤ 1
+            #   mid  : VCT 픽률 ≥ 5, lag ≤ 2
+            #   low  : 그 외 (표본 부족 / 오래된 데이터)
+            if _vct_pr_display >= 10 and _vct_data_lag <= 1:
+                _conf = "high"
+            elif _vct_pr_display >= 5 and _vct_data_lag <= 2:
+                _conf = "mid"
+            else:
+                _conf = "low"
+
             results.append({
                 "agent":              agent_name,
                 "act":                cur_act_name,
@@ -688,6 +727,8 @@ class PatchPredictor:
                 "verdict_ko":         PATCH_TYPE_KO.get(verdict, verdict),
                 "verdict_en":         PATCH_TYPE_EN.get(verdict, verdict),
                 "signals":            extract_signals(row, verdict, last_patch_ver=last_patch_ver),
+                "badges":             _badges,
+                "sample_confidence":  _conf,
                 "_row":               row,
             })
 

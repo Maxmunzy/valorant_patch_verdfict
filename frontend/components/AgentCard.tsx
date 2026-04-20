@@ -20,6 +20,54 @@ const VERDICT_COLOR: Record<string, string> = {
   stable:          "#64748B",
 };
 
+// 카드 배지 색상 매핑 — 의미별로 시각 위계를 다르게
+const BADGE_COLOR: Record<string, { border: string; fg: string; bg: string }> = {
+  "VCT 핵심":     { border: "rgba(239,68,68,0.4)",   fg: "#FCA5A5", bg: "rgba(239,68,68,0.08)" },
+  "VCT 주력":     { border: "rgba(239,68,68,0.3)",   fg: "#FCA5A5", bg: "rgba(239,68,68,0.05)" },
+  "너프 MISS":    { border: "rgba(245,158,11,0.4)",  fg: "#FCD34D", bg: "rgba(245,158,11,0.08)" },
+  "버프 MISS":    { border: "rgba(245,158,11,0.4)",  fg: "#FCD34D", bg: "rgba(245,158,11,0.08)" },
+  "과버프 판정":  { border: "rgba(249,115,22,0.4)",  fg: "#FDBA74", bg: "rgba(249,115,22,0.08)" },
+  "과너프 판정":  { border: "rgba(129,140,248,0.4)", fg: "#C7D2FE", bg: "rgba(129,140,248,0.08)" },
+  "장기 하락":    { border: "rgba(148,163,184,0.4)", fg: "#CBD5E1", bg: "rgba(148,163,184,0.06)" },
+  "고점 요원":    { border: "rgba(167,139,250,0.4)", fg: "#DDD6FE", bg: "rgba(167,139,250,0.06)" },
+  "표본 부족":    { border: "rgba(100,116,139,0.4)", fg: "#94A3B8", bg: "rgba(100,116,139,0.08)" },
+};
+const BADGE_DEFAULT = { border: "rgba(71,85,105,0.4)", fg: "#94A3B8", bg: "rgba(30,41,59,0.3)" };
+
+// 샘플 신뢰도 점 색상
+const CONF_COLOR: Record<string, { dot: string; label: string }> = {
+  high: { dot: "#10B981", label: "HIGH" },
+  mid:  { dot: "#F59E0B", label: "MID" },
+  low:  { dot: "#64748B", label: "LOW" },
+};
+
+function BadgeChip({ label, size = "md" }: { label: string; size?: "sm" | "md" }) {
+  const c = BADGE_COLOR[label] ?? BADGE_DEFAULT;
+  const pad = size === "sm" ? "px-1 py-px" : "px-1.5 py-0.5";
+  const txt = size === "sm" ? "text-[8px]" : "text-[9px]";
+  return (
+    <span
+      className={`${pad} ${txt} font-bold uppercase tracking-wider whitespace-nowrap`}
+      style={{ border: `1px solid ${c.border}`, color: c.fg, background: c.bg }}
+    >
+      {label}
+    </span>
+  );
+}
+
+function ConfDot({ level, size = "sm" }: { level?: "high" | "mid" | "low"; size?: "sm" | "xs" }) {
+  if (!level) return null;
+  const c = CONF_COLOR[level];
+  if (!c) return null;
+  const dim = size === "xs" ? "w-1 h-1" : "w-1.5 h-1.5";
+  return (
+    <span className="inline-flex items-center gap-1">
+      <span className={`${dim} rounded-full shrink-0`} style={{ background: c.dot, boxShadow: `0 0 4px ${c.dot}60` }} />
+      <span className="text-[8px] tracking-widest" style={{ color: c.dot, opacity: 0.9 }}>{c.label}</span>
+    </span>
+  );
+}
+
 function GaugeBar({ value, color }: { value: number; color: string }) {
   return (
     <div className="h-0.5 relative" style={{ background: "rgba(30,41,59,0.8)" }}>
@@ -129,9 +177,23 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
             <div className="text-white text-xl font-valo font-bold tracking-tight leading-none mt-1">
               {a.agent}
             </div>
-            <div className="text-xs font-num uppercase tracking-wide" style={{ color: "rgba(148,163,184,0.85)" }}>
-              RANK {a.rank_pr.toFixed(1)}% PIK · {(50 + a.rank_wr).toFixed(1)}% WR · VCT {a.vct_pr.toFixed(1)}%
+            <div className="flex items-center gap-2 text-xs font-num uppercase tracking-wide flex-wrap" style={{ color: "rgba(148,163,184,0.85)" }}>
+              <span>RANK {a.rank_pr.toFixed(1)}% · {(50 + a.rank_wr).toFixed(1)}% WR</span>
+              <span style={{ color: "rgba(71,85,105,0.8)" }}>·</span>
+              <span className="inline-flex items-center gap-1.5">
+                VCT {a.vct_pr.toFixed(1)}%
+                <ConfDot level={a.sample_confidence} />
+              </span>
             </div>
+
+            {/* 배지 (최대 3개) */}
+            {a.badges && a.badges.length > 0 && (
+              <div className="flex flex-wrap gap-1 pt-1">
+                {a.badges.map((b) => (
+                  <BadgeChip key={b} label={b} size="md" />
+                ))}
+              </div>
+            )}
 
             <div className="flex items-center gap-2.5 pt-1">
               <span className="text-[10px] uppercase tracking-widest w-12 shrink-0" style={{ color: "rgba(148,163,184,0.7)" }}>
@@ -211,10 +273,25 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
           <div className="text-white text-base font-valo font-bold tracking-tight mt-1">
             {a.agent}
           </div>
-          <div className="text-[11px] font-num mt-0.5" style={{ color: "rgba(148,163,184,0.8)" }}>
-            {a.rank_pr.toFixed(1)}% PIK · {(50 + a.rank_wr).toFixed(1)}% WR
+          <div className="flex items-center gap-1.5 text-[11px] font-num mt-0.5 flex-wrap" style={{ color: "rgba(148,163,184,0.8)" }}>
+            <span>{a.rank_pr.toFixed(1)}% · {(50 + a.rank_wr).toFixed(1)}% WR</span>
+            {a.sample_confidence && (
+              <>
+                <span style={{ color: "rgba(71,85,105,0.7)" }}>·</span>
+                <ConfDot level={a.sample_confidence} size="xs" />
+              </>
+            )}
           </div>
         </div>
+
+        {/* 배지 (SM은 최대 2개) */}
+        {a.badges && a.badges.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {a.badges.slice(0, 2).map((b) => (
+              <BadgeChip key={b} label={b} size="sm" />
+            ))}
+          </div>
+        )}
 
         <GaugeBar value={displayPct} color={accentColor} />
 
