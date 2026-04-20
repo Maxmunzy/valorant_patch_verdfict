@@ -2,7 +2,7 @@
 
 [한국어 README](README_KR.md)
 
-**Live Demo**: https://mystified-devotedly-algorithm.ngrok-free.dev
+**Live Demo**: [whosnxt.app](https://whosnxt.app) · API: [api.whosnxt.app](https://api.whosnxt.app/health)
 
 ## Overview
 
@@ -208,7 +208,10 @@ valorant_patch_verdict/
 
 ## Run
 
+Backend (FastAPI) and frontend (Next.js) run as separate processes.
+
 ```bash
+# ── Backend ────────────────────────────────
 # Build training data
 python build_step2_data.py
 
@@ -218,12 +221,24 @@ python train_step2.py
 # Fast mode (reuse saved hyperparams)
 python train_step2.py --fast
 
-# Start server (API + frontend)
+# Start API server (port 8000)
 python main.py
 
 # Auto-update: detect new patch -> crawl -> refresh predictions
 python auto_update.py
 ```
+
+```bash
+# ── Frontend ───────────────────────────────
+cd frontend
+npm install
+npm run dev        # dev server (port 3000)
+npm run build      # production build
+```
+
+Required env vars:
+- Backend: `ANTHROPIC_API_KEY` (for AI analysis)
+- Frontend: `BACKEND_URL` (server-side fetch target, defaults to `http://localhost:8000`)
 
 ---
 
@@ -254,6 +269,6 @@ python auto_update.py
 | HPO | Optuna (TPE Sampler) |
 | Feature Importance | SHAP |
 | AI Analysis | Claude Haiku (role-aware prompts, current-state context) |
-| Frontend | Next.js, Tailwind CSS, Oswald + Noto Sans KR |
+| Frontend | Next.js 16 (App Router), Tailwind CSS, Oswald + Noto Sans KR |
 | API | FastAPI |
-| Deployment | ngrok tunnel (single-domain, API proxy rewrites) |
+| Deployment | Frontend: Vercel · Backend: Railway · DNS: Cloudflare (whosnxt.app / api.whosnxt.app) |
