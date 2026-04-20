@@ -1,15 +1,12 @@
+# Production runtime dependencies (Railway deployment)
+# For local dev/training/crawling, install requirements-dev.txt instead
+
 fastapi
-uvicorn
+uvicorn[standard]
 pandas
 numpy
 scikit-learn
 xgboost
-optuna
 joblib
 anthropic
-requests
-beautifulsoup4
 python-dotenv
-shap
-playwright
-playwright-stealth

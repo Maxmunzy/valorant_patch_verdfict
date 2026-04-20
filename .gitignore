@@ -6,8 +6,9 @@ __pycache__/
 *.pyc
 *.pyo
 
-# 학습된 모델 파일 (용량 큼)
+# 학습된 모델 파일 (step2_pipeline은 배포용으로 커밋)
 *.pkl
+!step2_pipeline.pkl
 
 # Claude 설정
 .claude/
@@ -50,18 +51,17 @@ _legacy/
 _scripts/
 _outputs/
 
-# 학습 데이터 (빌드로 재생성 가능)
-step2_training_data.csv
+# 학습 데이터 (step2는 런타임 피처 생성에 필요하므로 커밋)
+# step2_training_data.csv는 빌드로 재생성 가능하지만 배포 환경에서 빌드 안 하므로 포함
 oof_predictions.csv
 
 # 크롤링 원본 (가공본만 추적)
 abilities_raw.csv
 abilities_by_agent_act.csv
 
-# 임팩트 모델 (아직 실험 단계)
+# 임팩트 모델 (impact_lookup은 시뮬레이터 런타임용으로 커밋)
 impact_model_features.json
 impact_model_stats.json
-impact_lookup.json
 
 # 크롤링 임시/원본 텍스트
 data/tmp/

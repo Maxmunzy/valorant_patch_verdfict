@@ -1,0 +1,14 @@
+# Full development dependencies (training, crawling, analysis)
+# Production deployments should use requirements.txt (slim version)
+
+-r requirements.txt
+
+# Training / HPO
+optuna
+shap
+
+# Crawling
+requests
+beautifulsoup4
+playwright
+playwright-stealth
