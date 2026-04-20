@@ -437,9 +437,19 @@ class PatchPredictor:
         # (agent, act_name) → 마지막 패치 버전 문자열
         self._last_patch_ver: dict[str, str] = {}
         try:
+            import re as _re
             from agent_data import PATCH_TO_ACT
             _pn = pd.read_csv("patch_notes_classified.csv")
             _pn["_act"] = _pn["patch"].astype(str).map(PATCH_TO_ACT)
+            # 크로스패치 인트로 텍스트 감지용 정규식
+            # 예: "Patch Notes 12.03 Modes updates, Gekko changes..." 이 12.06 행에 붙어있으면 노이즈
+            _xpatch_re = _re.compile(r"Patch Notes\s+(\d+\.\d+)", _re.IGNORECASE)
+            def _norm_patch(p: str) -> str:
+                try:
+                    _a, _b = str(p).split(".")
+                    return f"{int(_a)}.{int(_b)}"
+                except Exception:
+                    return str(p)
             for _, _r in _pn.iterrows():
                 _ag  = str(_r.get("agent", ""))
                 _act = str(_r.get("_act", ""))
@@ -447,12 +457,17 @@ class PatchPredictor:
                 _ct  = str(_r.get("change_type", "")).strip().lower()
                 _dir = str(_r.get("direction", "")).strip().lower()
                 _hb  = int(_r.get("has_bugfix", 0) or 0)
+                _desc = str(_r.get("description", ""))
                 # 노이즈 필터 ── 실제 밸런스 패치만 last_patch로 인정
                 #   · change_type=rework: 다른 패치의 인트로 텍스트가 파서 오염된 행
                 #   · has_bugfix=1 & direction=neutral: VFX/SFX/UI 버그픽스 (밸런스 영향 없음)
+                #   · description이 다른 패치 번호를 참조: 인트로 블러브가 잘못 섞인 크로스패치 노이즈
                 if _ct == "rework":
                     continue
                 if _hb == 1 and _dir == "neutral":
+                    continue
+                _m = _xpatch_re.search(_desc)
+                if _m and _norm_patch(_m.group(1)) != _norm_patch(_p):
                     continue
                 if _ag and _act and _p and _act != "nan" and _p != "nan":
                     key = f"{_ag}|{_act}"
