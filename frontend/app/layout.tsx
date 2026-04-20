@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR, Oswald } from "next/font/google";
 import "./globals.css";
+import Disclaimer from "@/components/Disclaimer";
 
 const body = Noto_Sans_KR({
   subsets: ["latin"],
@@ -75,9 +76,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 pb-8">
           {children}
         </main>
+
+        <Disclaimer />
 
       </body>
     </html>

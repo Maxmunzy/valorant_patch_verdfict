@@ -90,6 +90,67 @@ function GaugeBar({
   );
 }
 
+// 긴 AI 설명 문단을 문장 단위 근거 블록으로 분해
+function ExplanationBlocks({ text, accentColor }: { text: string; accentColor: string }) {
+  // 마침표 / 물음표 / 느낌표 뒤에서 분리. 약어 피해를 막기 위해 뒤 공백 강제.
+  const raw = text
+    .split(/(?<=[.!?。])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  // 2문장 이하면 굳이 블록 분해 의미 없음 → 원문 그대로
+  if (raw.length <= 1) {
+    return (
+      <p className="text-base leading-relaxed" style={{ color: "#e2e8f0" }}>
+        {text}
+      </p>
+    );
+  }
+
+  const [summary, ...reasons] = raw;
+
+  return (
+    <div className="space-y-3">
+      {/* 요지 */}
+      <div
+        className="p-3 text-[15px] leading-relaxed font-medium"
+        style={{
+          background: `${accentColor}08`,
+          borderLeft: `2px solid ${accentColor}`,
+          color: "#f1f5f9",
+        }}
+      >
+        {summary}
+      </div>
+
+      {/* 근거 */}
+      {reasons.length > 0 && (
+        <ul className="space-y-2">
+          {reasons.map((r, i) => (
+            <li
+              key={i}
+              className="flex gap-3 p-2.5 text-sm leading-relaxed"
+              style={{ border: "1px solid rgba(30,41,59,0.6)", background: "rgba(8,12,20,0.5)" }}
+            >
+              <span
+                className="shrink-0 text-[10px] font-num font-black w-5 h-5 flex items-center justify-center"
+                style={{
+                  border: `1px solid ${accentColor}40`,
+                  color: accentColor,
+                  background: `${accentColor}10`,
+                }}
+              >
+                {i + 1}
+              </span>
+              <span style={{ color: "#cbd5e1" }}>{r}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 // Framer Motion variants
 const container = {
   hidden: { opacity: 0 },
@@ -228,7 +289,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
         </div>
       </motion.div>
 
-      {/* ── AI ANALYSIS (바로 아래) ───────────────────────── */}
+      {/* ── AI ANALYSIS (요지 + 근거 블록으로 분해) ─────── */}
       {data.explanation && (
         <motion.div variants={fadeUp}>
           <div
@@ -239,7 +300,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
               className="absolute top-0 left-0 right-0 h-px"
               style={{ background: `linear-gradient(90deg, ${accentColor}35, transparent)` }}
             />
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-3">
               <span
                 className="text-[8px] font-black px-1.5 py-px"
                 style={{ border: `1px solid ${accentColor}50`, color: accentColor, background: `${accentColor}10` }}
@@ -253,9 +314,8 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
                 TACTICAL ANALYSIS
               </span>
             </div>
-            <p className="text-base leading-relaxed" style={{ color: "#e2e8f0" }}>
-              {data.explanation}
-            </p>
+
+            <ExplanationBlocks text={data.explanation} accentColor={accentColor} />
           </div>
         </motion.div>
       )}

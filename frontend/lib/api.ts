@@ -123,7 +123,8 @@ export interface SimResult {
 }
 
 export async function getAgentSkills(): Promise<AgentSkills> {
-  const res = await fetch(`${API_BASE}/agent-skills`);
+  // 스킬 메타는 거의 변하지 않음 → 1시간 revalidate
+  const res = await fetch(`${API_BASE}/agent-skills`, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error("Failed to fetch agent skills");
   return res.json() as Promise<AgentSkills>;
 }

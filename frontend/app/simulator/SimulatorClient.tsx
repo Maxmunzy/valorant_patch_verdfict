@@ -214,9 +214,14 @@ interface PendingChange {
 }
 
 // ─── 메인 ──────────────────────────────────────────────────────────────────────
-export default function SimulatorClient() {
-  const [skills, setSkills] = useState<AgentSkills | null>(null);
-  const [loading, setLoading] = useState(true);
+export default function SimulatorClient({
+  initialSkills = null,
+}: {
+  initialSkills?: AgentSkills | null;
+}) {
+  const [skills, setSkills] = useState<AgentSkills | null>(initialSkills);
+  // 서버에서 미리 받아왔으면 로딩 불필요
+  const [loading, setLoading] = useState(initialSkills === null);
   const [selectedAgent, setSelectedAgent] = useState<string | null>(null);
   const [changes, setChanges] = useState<PendingChange[]>([]);
   const [simulating, setSimulating] = useState(false);
@@ -225,8 +230,9 @@ export default function SimulatorClient() {
   const [analyzingAI, setAnalyzingAI] = useState(false);
 
   useEffect(() => {
+    if (skills !== null) return; // 서버 프리페치 성공 → 재요청 불필요
     getAgentSkills().then(setSkills).catch(console.error).finally(() => setLoading(false));
-  }, []);
+  }, [skills]);
 
   const addChange = useCallback(
     (agent: string, skill: string, stat: string, statLabel: string, oldVal: number, newVal: number) => {
@@ -271,9 +277,33 @@ export default function SimulatorClient() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-[10px] uppercase tracking-widest text-slate-600 animate-pulse">
-          스킬 데이터 로딩 중...
+      <div className="py-8 space-y-8 animate-pulse">
+        {/* 헤더 스켈레톤 */}
+        <div className="space-y-4">
+          <div className="h-3 w-24 bg-slate-800/60" />
+          <div className="pl-4" style={{ borderLeft: "2px solid rgba(167,139,250,0.35)" }}>
+            <div className="h-2.5 w-40 bg-slate-800/60 mb-2" />
+            <div className="h-8 w-48 bg-slate-800/80 mb-2" />
+            <div className="h-3 w-72 bg-slate-800/50" />
+          </div>
+        </div>
+
+        {/* 역할군 탭 스켈레톤 */}
+        <div className="flex gap-2">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-8 w-20 bg-slate-800/50" />
+          ))}
+        </div>
+
+        {/* 요원 그리드 스켈레톤 */}
+        <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-2">
+          {Array.from({ length: 18 }).map((_, i) => (
+            <div key={i} className="aspect-square bg-slate-800/40 border border-slate-800/60" />
+          ))}
+        </div>
+
+        <div className="text-center text-[10px] uppercase tracking-widest text-slate-600">
+          SIM DATA STREAM // 스킬 데이터 초기화 중...
         </div>
       </div>
     );

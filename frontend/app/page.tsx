@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import AgentCard from "@/components/AgentCard";
+import TrustBlock from "@/components/TrustBlock";
+import CollapseSection from "@/components/CollapseSection";
 import { getAllPredictions, AgentPrediction } from "@/lib/api";
 import { agentPortrait } from "@/lib/agents";
 
@@ -128,6 +130,9 @@ export default async function Home() {
             </span>
           </Link>
         </div>
+
+        {/* ── 데이터 출처 / 갱신 / 확률 의미 신뢰 블록 ───────── */}
+        <TrustBlock />
       </div>
 
       {/* ── NERF TOP 3 ──────────────────────────────── */}
@@ -212,20 +217,26 @@ export default async function Home() {
         </section>
       )}
 
-      {/* ── STABLE ──────────────────────────────────── */}
+      {/* ── STABLE (기본 접힘) ──────────────────────────── */}
       {stableAll.length > 0 && (
-        <section className="space-y-4">
-          <SectionLabel
-            label="STABLE"
-            labelEn="ST // STABLE"
-            accentColor="#64748B"
-            count={stableAll.length}
-          />
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start">
-            {stableAll.map((a) => (
-              <AgentCard key={a.agent} agent={a} size="sm" />
-            ))}
-          </div>
+        <section>
+          <CollapseSection
+            defaultOpen={false}
+            header={
+              <SectionLabel
+                label="STABLE"
+                labelEn="ST // STABLE"
+                accentColor="#64748B"
+                count={stableAll.length}
+              />
+            }
+          >
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start pt-4">
+              {stableAll.map((a) => (
+                <AgentCard key={a.agent} agent={a} size="sm" />
+              ))}
+            </div>
+          </CollapseSection>
         </section>
       )}
 
