@@ -16,8 +16,8 @@ export default function TrustBlock() {
     },
     {
       label: "PROBABILITY",
-      value: "다음 패치에 조정될 확률",
-      hint: "이미 적용된 결과가 아닌, 앞으로의 예측치",
+      value: "패치 가능성 스코어",
+      hint: "실제 확률이 아닌 상대적 위험도 — 높을수록 조정 대상에 가까움",
     },
   ];
 

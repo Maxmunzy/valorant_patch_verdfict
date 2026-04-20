@@ -4,6 +4,7 @@
  */
 
 const UPDATES: { date: string; note: string }[] = [
+  { date: "2026.04.20", note: "확률 해석 경고 · 홈 정보 밀도 축소 · 시뮬레이터 샘플 시나리오" },
   { date: "2026.04.20", note: "AI 분석 라벨 용어 정돈 · stable 폴백 문구 개선" },
   { date: "2026.04.18", note: "커스텀 도메인 whosnxt.app 연결 · 프로덕션 배포" },
   { date: "2026.04.15", note: "패치 시뮬레이터 AI 분석 추가" },

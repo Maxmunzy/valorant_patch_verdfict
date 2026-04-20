@@ -213,6 +213,48 @@ interface PendingChange {
   new_value: number;
 }
 
+// ─── 프리셋 ────────────────────────────────────────────────────────────────────
+// 대표적인 너프/버프 케이스를 원클릭으로 체험할 수 있게 미리 만들어둔 시나리오.
+// 모두 agent_skills.json의 실제 스탯 값을 기준으로 한다.
+const PRESETS: {
+  title: string;
+  tag: "너프" | "버프";
+  color: string;
+  desc: string;
+  changes: PendingChange[];
+}[] = [
+  {
+    title: "네온 궁극기 너프",
+    tag: "너프",
+    color: "#FF4655",
+    desc: "Overdrive 연사 속도 20 → 15 (DPS 25% 감소)",
+    changes: [{
+      agent: "Neon", skill: "X", stat: "Fire rate", statLabel: "Fire rate",
+      old_value: 20, new_value: 15,
+    }],
+  },
+  {
+    title: "카요 Q 플래시 가격 인하",
+    tag: "버프",
+    color: "#4FC3F7",
+    desc: "FLASH/drive 250 → 150크레딧 (라운드 경제 완화)",
+    changes: [{
+      agent: "KAYO", skill: "Q", stat: "creds", statLabel: "creds",
+      old_value: 250, new_value: 150,
+    }],
+  },
+  {
+    title: "오멘 연막 지속시간 너프",
+    tag: "너프",
+    color: "#FF4655",
+    desc: "Dark Cover 15s → 10s (VCT 고정픽 견제)",
+    changes: [{
+      agent: "Omen", skill: "E", stat: "Duration", statLabel: "Duration",
+      old_value: 15, new_value: 10,
+    }],
+  },
+];
+
 // ─── 메인 ──────────────────────────────────────────────────────────────────────
 export default function SimulatorClient({
   initialSkills = null,
@@ -324,6 +366,97 @@ export default function SimulatorClient({
           <p className="text-sm mt-1" style={{ color: "#94A3B8" }}>
             요원의 스킬 수치를 변경하고 메타에 미치는 영향을 예측합니다
           </p>
+        </div>
+      </div>
+
+      {/* ── 사용 가이드 (3스텝) ─────────────────────── */}
+      <div
+        className="p-4 sm:p-5 space-y-3"
+        style={{
+          background: "rgba(167,139,250,0.04)",
+          border: "1px solid rgba(167,139,250,0.18)",
+        }}
+      >
+        <div className="flex items-center gap-2">
+          <span
+            className="text-[9px] font-black px-1.5 py-px uppercase tracking-widest"
+            style={{ color: "#A78BFA", border: "1px solid rgba(167,139,250,0.4)", background: "rgba(167,139,250,0.08)" }}
+          >
+            GUIDE
+          </span>
+          <span className="text-xs uppercase tracking-widest" style={{ color: "rgba(167,139,250,0.75)" }}>
+            처음이신가요? 3단계로 끝납니다
+          </span>
+        </div>
+        <ol className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[12px]" style={{ color: "#cbd5e1" }}>
+          {[
+            { n: "1", label: "요원 선택", hint: "아래에서 조정하고 싶은 요원 클릭" },
+            { n: "2", label: "수치 변경", hint: "C/Q/E/X 스킬 값을 원하는 대로 수정" },
+            { n: "3", label: "시뮬 실행", hint: "메타 변화 + AI 분석 결과 확인" },
+          ].map((s) => (
+            <li
+              key={s.n}
+              className="flex items-start gap-2 p-2"
+              style={{ background: "rgba(13,18,32,0.5)", border: "1px solid rgba(30,41,59,0.7)" }}
+            >
+              <span
+                className="shrink-0 w-5 h-5 flex items-center justify-center text-[11px] font-num font-black"
+                style={{
+                  color: "#A78BFA",
+                  border: "1px solid rgba(167,139,250,0.35)",
+                  background: "rgba(167,139,250,0.08)",
+                }}
+              >
+                {s.n}
+              </span>
+              <div className="min-w-0">
+                <div className="font-semibold leading-tight" style={{ color: "#e2e8f0" }}>{s.label}</div>
+                <div className="text-[11px] mt-0.5 leading-snug" style={{ color: "rgba(148,163,184,0.7)" }}>{s.hint}</div>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        {/* 프리셋: 원클릭 체험용 */}
+        <div className="pt-2">
+          <div className="text-[10px] uppercase tracking-widest mb-2" style={{ color: "rgba(167,139,250,0.6)" }}>
+            ⚡ 샘플 시나리오 · 클릭해서 바로 체험
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {PRESETS.map((p) => (
+              <button
+                key={p.title}
+                type="button"
+                onClick={() => {
+                  // 프리셋 적용: 기존 changes 초기화하고 프리셋의 changes로 교체
+                  setChanges(p.changes);
+                  // 해당 요원을 자동 선택해서 편집기에 보여줌
+                  setSelectedAgent(p.changes[0].agent);
+                  // 이전 결과는 초기화
+                  setResult(null);
+                  setAnalysis(null);
+                }}
+                className="text-left p-3 group transition-all hover:brightness-110"
+                style={{
+                  background: "rgba(13,18,32,0.7)",
+                  border: `1px solid ${p.color}30`,
+                }}
+              >
+                <div className="flex items-center gap-1.5 mb-1">
+                  <span
+                    className="text-[9px] font-black px-1.5 py-px uppercase tracking-wider"
+                    style={{ color: p.color, border: `1px solid ${p.color}50`, background: `${p.color}10` }}
+                  >
+                    {p.tag}
+                  </span>
+                  <span className="text-[13px] font-bold" style={{ color: "#e2e8f0" }}>{p.title}</span>
+                </div>
+                <div className="text-[11px] leading-snug" style={{ color: "rgba(148,163,184,0.75)" }}>
+                  {p.desc}
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

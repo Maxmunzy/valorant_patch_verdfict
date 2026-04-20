@@ -104,9 +104,9 @@ export default async function Home() {
               key={tag}
               className="text-[9px] px-2 py-1 uppercase tracking-wider"
               style={{
-                border: "1px solid rgba(51,65,85,0.9)",
-                color: "rgba(148,163,184,0.75)",
-                background: "rgba(13,18,32,0.6)",
+                border: "1px solid rgba(51,65,85,0.55)",
+                color: "rgba(148,163,184,0.55)",
+                background: "rgba(13,18,32,0.4)",
               }}
             >
               {tag}
@@ -179,41 +179,55 @@ export default async function Home() {
         </section>
       )}
 
-      {/* ── NERF REST ───────────────────────────────── */}
+      {/* ── NERF REST (기본 접힘) ──────────────────────── */}
       {nerfRest.length > 0 && (
-        <section className="space-y-4">
-          <div
-            className="text-[9px] uppercase tracking-[0.25em] flex items-center gap-2"
-            style={{ color: "rgba(100,116,139,0.9)" }}
+        <section>
+          <CollapseSection
+            defaultOpen={false}
+            header={
+              <div
+                className="text-[9px] uppercase tracking-[0.25em] flex items-center gap-2"
+                style={{ color: "rgba(100,116,139,0.9)" }}
+              >
+                <div className="w-4 h-px" style={{ background: "rgba(255,70,85,0.6)" }} />
+                NERF TARGETS · REMAINING
+                <span style={{ color: "rgba(71,85,105,0.9)" }}>({nerfRest.length})</span>
+                <div className="flex-1 h-px" style={{ background: "rgba(30,41,59,0.6)" }} />
+              </div>
+            }
           >
-            <div className="w-4 h-px" style={{ background: "rgba(255,70,85,0.6)" }} />
-            NERF TARGETS · REMAINING
-            <div className="flex-1 h-px" style={{ background: "rgba(30,41,59,0.6)" }} />
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start">
-            {nerfRest.map((a) => (
-              <AgentCard key={a.agent} agent={a} size="sm" />
-            ))}
-          </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start pt-3">
+              {nerfRest.map((a) => (
+                <AgentCard key={a.agent} agent={a} size="sm" />
+              ))}
+            </div>
+          </CollapseSection>
         </section>
       )}
 
-      {/* ── BUFF REST ───────────────────────────────── */}
+      {/* ── BUFF REST (기본 접힘) ──────────────────────── */}
       {buffRest.length > 0 && (
-        <section className="space-y-4">
-          <div
-            className="text-[9px] uppercase tracking-[0.25em] flex items-center gap-2"
-            style={{ color: "rgba(100,116,139,0.9)" }}
+        <section>
+          <CollapseSection
+            defaultOpen={false}
+            header={
+              <div
+                className="text-[9px] uppercase tracking-[0.25em] flex items-center gap-2"
+                style={{ color: "rgba(100,116,139,0.9)" }}
+              >
+                <div className="w-4 h-px" style={{ background: "rgba(79,195,247,0.6)" }} />
+                BUFF CANDIDATES · REMAINING
+                <span style={{ color: "rgba(71,85,105,0.9)" }}>({buffRest.length})</span>
+                <div className="flex-1 h-px" style={{ background: "rgba(30,41,59,0.6)" }} />
+              </div>
+            }
           >
-            <div className="w-4 h-px" style={{ background: "rgba(79,195,247,0.6)" }} />
-            BUFF CANDIDATES · REMAINING
-            <div className="flex-1 h-px" style={{ background: "rgba(30,41,59,0.6)" }} />
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start">
-            {buffRest.map((a) => (
-              <AgentCard key={a.agent} agent={a} size="sm" />
-            ))}
-          </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 items-start pt-3">
+              {buffRest.map((a) => (
+                <AgentCard key={a.agent} agent={a} size="sm" />
+              ))}
+            </div>
+          </CollapseSection>
         </section>
       )}
 

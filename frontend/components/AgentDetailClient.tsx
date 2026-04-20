@@ -266,7 +266,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
 
           {/* Main probability display */}
           <div>
-            <div className="flex items-baseline gap-3 mb-3">
+            <div className="flex items-baseline gap-3 mb-1.5">
               <span className="text-6xl font-valo font-black leading-none" style={{ color: accentColor }}>
                 {displayPct.toFixed(0)}%
               </span>
@@ -278,6 +278,18 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
                   전체 패치 확률 {data.p_patch.toFixed(0)}%
                 </div>
               </div>
+            </div>
+            {/* 확률 오해 방지 경고 */}
+            <div
+              className="mb-3 text-[10px] leading-snug px-2 py-1.5"
+              style={{
+                color: "rgba(148,163,184,0.7)",
+                border: "1px solid rgba(71,85,105,0.4)",
+                background: "rgba(13,18,32,0.5)",
+              }}
+            >
+              <span style={{ color: "rgba(148,163,184,0.85)" }}>※</span>{" "}
+              실제 확률이 아닌 <span style={{ color: "#cbd5e1", fontWeight: 600 }}>상대적 위험도 점수</span>입니다. 숫자가 높을수록 조정 대상에 가까움.
             </div>
 
             {/* Probability gauge bars */}
