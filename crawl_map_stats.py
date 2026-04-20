@@ -39,10 +39,12 @@ import pandas as pd
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 from playwright_stealth import Stealth
+from agent_data import VSTATS_MAPS as MAPS
 
 # ─── 상수 ───────────────────────────────────────────────────
 YORU_UUID = "7f94d92c-4234-0a36-9646-3a87eb8b5c89"
 
+# V25+ 액트만 사용하는 서브셋 (CRAWL_ACTS의 부분집합)
 ACTS = [
     {"name": "V25A1", "uuid": "476b0893-4c2e-abd6-c5fe-708facff0772"},
     {"name": "V25A2", "uuid": "16118998-4705-5813-86dd-0292a2439d90"},
@@ -52,22 +54,6 @@ ACTS = [
     {"name": "V25A6", "uuid": "4c4b8cff-43eb-13d3-8f14-96b783c90cd2"},
     {"name": "V26A1", "uuid": "3ea2b318-423b-cf86-25da-7cbb0eefbe2d"},
     {"name": "V26A2", "uuid": "9d85c932-4820-c060-09c3-668636d4df1b"},
-]
-
-MAPS = [
-    {"name": "ALL",      "id": "ALL"},
-    {"name": "Abyss",    "id": "Infinity"},
-    {"name": "Ascent",   "id": "Ascent"},
-    {"name": "Bind",     "id": "Duality"},
-    {"name": "Breeze",   "id": "Foxtrot"},
-    {"name": "Corrode",  "id": "Rook"},
-    {"name": "Fracture", "id": "Canyon"},
-    {"name": "Haven",    "id": "Triad"},
-    {"name": "Icebox",   "id": "Port"},
-    {"name": "Lotus",    "id": "Jam"},
-    {"name": "Pearl",    "id": "Pitt"},
-    {"name": "Split",    "id": "Bonsai"},
-    {"name": "Sunset",   "id": "Juliett"},
 ]
 
 # r 필드 기반 티어 정의

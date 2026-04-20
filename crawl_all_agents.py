@@ -24,65 +24,7 @@ from pathlib import Path
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 from playwright_stealth import Stealth
-
-
-# ─── 전체 요원 UUID ──────────────────────────────────────────────────────────
-# vstats.gg 내부 UUID (브라우저 네트워크 캡처 기준)
-
-AGENTS = [
-    {"name": "Astra",     "uuid": "41fb69c1-4189-7b37-f117-bcaf1e96f1bf"},
-    {"name": "Breach",    "uuid": "5f8d3a7f-467b-97f3-062c-13acf203c006"},
-    {"name": "Brimstone", "uuid": "9f0d8ba9-4140-b941-57d3-a7ad57c6b417"},
-    {"name": "Chamber",   "uuid": "22697a3d-45bf-8dd7-4fec-84a9e28c69d7"},
-    {"name": "Clove",     "uuid": "1dbf2edd-4729-0984-3115-daa5eed44993"},
-    {"name": "Cypher",    "uuid": "117ed9e3-49f3-6512-3ccf-0cada7e3823b"},
-    {"name": "Deadlock",  "uuid": "cc8b64c8-4b25-4ff9-6e7f-37b4da43d235"},
-    {"name": "Fade",      "uuid": "dade69b4-4f5a-8528-247b-219e5a1facd6"},
-    {"name": "Gekko",     "uuid": "e370fa57-4757-3604-3648-499e1f642d3f"},
-    {"name": "Harbor",    "uuid": "95b78ed7-4637-86d9-7e41-71ba8c293152"},
-    {"name": "Iso",       "uuid": "efba5359-4016-a1e5-7626-b1ae76895940"},
-    {"name": "Jett",      "uuid": "add6443a-41bd-e414-f6ad-e58d267f4e95"},
-    {"name": "KAYO",      "uuid": "601dbbe7-43ce-be57-2a40-4abd24953621"},
-    {"name": "Killjoy",   "uuid": "1e58de9c-4950-5125-93e9-a0aee9f98746"},
-    {"name": "Neon",      "uuid": "bb2a4828-46eb-8cd1-e765-15848195d751"},
-    {"name": "Omen",      "uuid": "8e253930-4c05-31dd-1b6c-968525494517"},
-    {"name": "Phoenix",   "uuid": "eb93336a-449b-9c1b-0a54-a891f7921d69"},
-    {"name": "Raze",      "uuid": "f94c3b30-42be-e959-889c-5aa313dba261"},
-    {"name": "Reyna",     "uuid": "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc"},
-    {"name": "Sage",      "uuid": "569fdd95-4d10-43ab-ca70-79becc718b46"},
-    {"name": "Skye",      "uuid": "6f2a04ca-43e0-be17-7f36-b3908627744d"},
-    {"name": "Sova",      "uuid": "320b2a48-4d9b-a075-30f1-1f93a9b638fa"},
-    {"name": "Tejo",      "uuid": "df1cb487-4902-002e-5c17-d28e83e78588"},
-    {"name": "Viper",     "uuid": "707eab51-4836-f488-046a-cda6bf494859"},
-    {"name": "Vyse",      "uuid": "b444168c-4e35-8076-db47-ef9bf368f384"},
-    {"name": "Veto",      "uuid": "0e38b510-41a8-5780-5e8f-568b2a4f2d6c"},
-    {"name": "Waylay",    "uuid": "7c8a4701-4de6-9355-b254-e09bc2a34b72"},
-    {"name": "Yoru",      "uuid": "7f94d92c-4234-0a36-9646-3a87eb8b5c89"},
-    {"name": "Miks",      "uuid": "92eeef5d-43b5-1d4a-8d03-b3927a09034b"},
-]
-
-ACTS = [
-    {"name": "E6A3",  "uuid": "2de5423b-4aad-02ad-8d9b-c0a931958861"},
-    {"name": "E7A1",  "uuid": "0981a882-4e7d-371a-70c4-c3b4f46c504a"},
-    {"name": "E7A2",  "uuid": "22d10d66-4d2a-a340-6c54-408c7bd53807"},
-    {"name": "E7A3",  "uuid": "4401f9fd-4170-2e4c-4bc3-f3b4d7d150d1"},
-    {"name": "E8A1",  "uuid": "ec876e6c-43e8-fa63-ffc1-2e8d4db25525"},
-    {"name": "E8A2",  "uuid": "4539cac3-47ae-90e5-3d01-b3812ca3274e"},
-    {"name": "E8A3",  "uuid": "52ca6698-41c1-e7de-4008-8994d2221209"},
-    {"name": "E9A1",  "uuid": "292f58db-4c17-89a7-b1c0-ba988f0e9d98"},
-    {"name": "E9A2",  "uuid": "03dfd004-45d4-ebfd-ab0a-948ce780dac4"},
-    {"name": "E9A3",  "uuid": "dcde7346-4085-de4f-c463-2489ed47983b"},
-    {"name": "V25A1", "uuid": "476b0893-4c2e-abd6-c5fe-708facff0772"},
-    {"name": "V25A2", "uuid": "16118998-4705-5813-86dd-0292a2439d90"},
-    {"name": "V25A3", "uuid": "aef237a0-494d-3a14-a1c8-ec8de84e309c"},
-    {"name": "V25A4", "uuid": "ac12e9b3-47e6-9599-8fa1-0bb473e5efc7"},
-    {"name": "V25A5", "uuid": "5adc33fa-4f30-2899-f131-6fba64c5dd3a"},
-    {"name": "V25A6", "uuid": "4c4b8cff-43eb-13d3-8f14-96b783c90cd2"},
-    {"name": "V26A1", "uuid": "3ea2b318-423b-cf86-25da-7cbb0eefbe2d"},
-    {"name": "V26A2", "uuid": "9d85c932-4820-c060-09c3-668636d4df1b"},
-]
-
-DIAMOND_PLUS_R  = {19, 22, 25, 27}
+from agent_data import VSTATS_AGENTS as AGENTS, CRAWL_ACTS as ACTS, DIAMOND_PLUS_R
 STATS_URL       = "https://www.vstats.gg/statistics/{act_uuid}/ALL/ALL/agent.json.gz"
 OUT_DIR         = Path("agent_act_history")
 

@@ -19,33 +19,10 @@ import pandas as pd
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 from playwright_stealth import Stealth
+from agent_data import CRAWL_ACTS as ACTS, DIAMOND_PLUS_R
 
 # ─── 설정 ─────────────────────────────────────────────────
 YORU_UUID = "7f94d92c-4234-0a36-9646-3a87eb8b5c89"
-
-# 다이아+ 티어 r값
-DIAMOND_PLUS_R = {19, 22, 25, 27}  # Diamond, Immortal, Immortal+, Radiant
-
-ACTS = [
-    {"name": "E6A3",  "uuid": "2de5423b-4aad-02ad-8d9b-c0a931958861"},
-    {"name": "E7A1",  "uuid": "0981a882-4e7d-371a-70c4-c3b4f46c504a"},
-    {"name": "E7A2",  "uuid": "22d10d66-4d2a-a340-6c54-408c7bd53807"},
-    {"name": "E7A3",  "uuid": "4401f9fd-4170-2e4c-4bc3-f3b4d7d150d1"},
-    {"name": "E8A1",  "uuid": "ec876e6c-43e8-fa63-ffc1-2e8d4db25525"},
-    {"name": "E8A2",  "uuid": "4539cac3-47ae-90e5-3d01-b3812ca3274e"},
-    {"name": "E8A3",  "uuid": "52ca6698-41c1-e7de-4008-8994d2221209"},
-    {"name": "E9A1",  "uuid": "292f58db-4c17-89a7-b1c0-ba988f0e9d98"},
-    {"name": "E9A2",  "uuid": "03dfd004-45d4-ebfd-ab0a-948ce780dac4"},
-    {"name": "E9A3",  "uuid": "dcde7346-4085-de4f-c463-2489ed47983b"},
-    {"name": "V25A1", "uuid": "476b0893-4c2e-abd6-c5fe-708facff0772"},
-    {"name": "V25A2", "uuid": "16118998-4705-5813-86dd-0292a2439d90"},
-    {"name": "V25A3", "uuid": "aef237a0-494d-3a14-a1c8-ec8de84e309c"},
-    {"name": "V25A4", "uuid": "ac12e9b3-47e6-9599-8fa1-0bb473e5efc7"},
-    {"name": "V25A5", "uuid": "5adc33fa-4f30-2899-f131-6fba64c5dd3a"},
-    {"name": "V25A6", "uuid": "4c4b8cff-43eb-13d3-8f14-96b783c90cd2"},
-    {"name": "V26A1", "uuid": "3ea2b318-423b-cf86-25da-7cbb0eefbe2d"},
-    {"name": "V26A2", "uuid": "9d85c932-4820-c060-09c3-668636d4df1b"},
-]
 
 STATS_URL = "https://www.vstats.gg/statistics/{act_uuid}/ALL/ALL/agent.json.gz"
 

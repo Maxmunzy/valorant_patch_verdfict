@@ -16,37 +16,7 @@ from agent_data import (
 )
 from label_builder import dominant_trigger
 
-# 요원별 역대 평균 픽률 (training_data.csv rank_pr_t-1 기준)
-# 팬덤/인기도 베이스라인: 이 이상으로 픽되면 성능 외 팬덤이 픽률을 지탱한다는 신호
-AGENT_PR_BASELINE: dict[str, float] = {
-    "Astra":     2.49,
-    "Breach":    2.05,
-    "Brimstone": 2.42,
-    "Chamber":   9.51,
-    "Clove":    11.82,
-    "Cypher":    5.36,
-    "Deadlock":  1.82,
-    "Fade":      5.46,
-    "Gekko":     3.05,
-    "Harbor":    0.43,
-    "Iso":       1.81,
-    "Jett":     13.93,
-    "KAYO":      4.10,
-    "Killjoy":   3.76,
-    "Neon":      1.92,
-    "Omen":      6.96,
-    "Phoenix":   1.83,
-    "Raze":      7.27,
-    "Reyna":     9.36,
-    "Sage":      6.35,
-    "Skye":      4.57,
-    "Sova":      6.39,
-    "Tejo":      1.89,
-    "Viper":     3.59,
-    "Vyse":      2.25,
-    "Waylay":    2.00,   # 신규 요원, 베이스라인 미확정 → 평균값 사용
-    "Yoru":      1.89,
-}
+from agent_data import AGENT_PR_BASELINE
 
 # 상대 픽률 비교에 사용할 유틸 타입 목록 (랭크 전용 피처)
 _UTIL_RATIO_TYPES = ["smoke", "cc", "info", "mobility", "heal", "revive", "flash", "blind"]

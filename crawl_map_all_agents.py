@@ -17,74 +17,12 @@ from datetime import datetime
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from playwright_stealth import Stealth
-
-# ─── 요원 UUID → 이름 매핑 ───────────────────────────────────
-AGENTS = {
-    "41fb69c1-4189-7b37-f117-bcaf1e96f1bf": "Astra",
-    "5f8d3a7f-467b-97f3-062c-13acf203c006": "Breach",
-    "9f0d8ba9-4140-b941-57d3-a7ad57c6b417": "Brimstone",
-    "22697a3d-45bf-8dd7-4fec-84a9e28c69d7": "Chamber",
-    "1dbf2edd-4729-0984-3115-daa5eed44993": "Clove",
-    "117ed9e3-49f3-6512-3ccf-0cada7e3823b": "Cypher",
-    "cc8b64c8-4b25-4ff9-6e7f-37b4da43d235": "Deadlock",
-    "dade69b4-4f5a-8528-247b-219e5a1facd6": "Fade",
-    "e370fa57-4757-3604-3648-499e1f642d3f": "Gekko",
-    "95b78ed7-4637-86d9-7e41-71ba8c293152": "Harbor",
-    "efba5359-4016-a1e5-7626-b1ae76895940": "Iso",
-    "add6443a-41bd-e414-f6ad-e58d267f4e95": "Jett",
-    "601dbbe7-43ce-be57-2a40-4abd24953621": "Kayo",
-    "1e58de9c-4950-5125-93e9-a0aee9f98746": "Killjoy",
-    "bb2a4828-46eb-8cd1-e765-15848195d751": "Neon",
-    "8e253930-4c05-31dd-1b6c-968525494517": "Omen",
-    "eb93336a-449b-9c1b-0a54-a891f7921d69": "Phoenix",
-    "f94c3b30-42be-e959-889c-5aa313dba261": "Raze",
-    "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc": "Reyna",
-    "569fdd95-4d10-43ab-ca70-79becc718b46": "Sage",
-    "6f2a04ca-43e0-be17-7f36-b3908627744d": "Skye",
-    "320b2a48-4d9b-a075-30f1-1f93a9b638fa": "Sova",
-    "df1cb487-4902-002e-5c17-d28e83e78588": "Tejo",
-    "707eab51-4836-f488-046a-cda6bf494859": "Viper",
-    "b444168c-4e35-8076-db47-ef9bf368f384": "Vyse",
-    "7c8a4701-4de6-9355-b254-e09bc2a34b72": "Waylay",
-    "7f94d92c-4234-0a36-9646-3a87eb8b5c89": "Yoru",
-}
-
-ACTS = [
-    {"name": "E6A3",  "uuid": "2de5423b-4aad-02ad-8d9b-c0a931958861"},
-    {"name": "E7A1",  "uuid": "0981a882-4e7d-371a-70c4-c3b4f46c504a"},
-    {"name": "E7A2",  "uuid": "22d10d66-4d2a-a340-6c54-408c7bd53807"},
-    {"name": "E7A3",  "uuid": "4401f9fd-4170-2e4c-4bc3-f3b4d7d150d1"},
-    {"name": "E8A1",  "uuid": "ec876e6c-43e8-fa63-ffc1-2e8d4db25525"},
-    {"name": "E8A2",  "uuid": "4539cac3-47ae-90e5-3d01-b3812ca3274e"},
-    {"name": "E8A3",  "uuid": "52ca6698-41c1-e7de-4008-8994d2221209"},
-    {"name": "E9A1",  "uuid": "292f58db-4c17-89a7-b1c0-ba988f0e9d98"},
-    {"name": "E9A2",  "uuid": "03dfd004-45d4-ebfd-ab0a-948ce780dac4"},
-    {"name": "E9A3",  "uuid": "dcde7346-4085-de4f-c463-2489ed47983b"},
-    {"name": "V25A1", "uuid": "476b0893-4c2e-abd6-c5fe-708facff0772"},
-    {"name": "V25A2", "uuid": "16118998-4705-5813-86dd-0292a2439d90"},
-    {"name": "V25A3", "uuid": "aef237a0-494d-3a14-a1c8-ec8de84e309c"},
-    {"name": "V25A4", "uuid": "ac12e9b3-47e6-9599-8fa1-0bb473e5efc7"},
-    {"name": "V25A5", "uuid": "5adc33fa-4f30-2899-f131-6fba64c5dd3a"},
-    {"name": "V25A6", "uuid": "4c4b8cff-43eb-13d3-8f14-96b783c90cd2"},
-    {"name": "V26A1", "uuid": "3ea2b318-423b-cf86-25da-7cbb0eefbe2d"},
-    {"name": "V26A2", "uuid": "9d85c932-4820-c060-09c3-668636d4df1b"},
-]
-
-MAPS = [
-    {"name": "ALL",      "id": "ALL"},
-    {"name": "Abyss",    "id": "Infinity"},
-    {"name": "Ascent",   "id": "Ascent"},
-    {"name": "Bind",     "id": "Duality"},
-    {"name": "Breeze",   "id": "Foxtrot"},
-    {"name": "Corrode",  "id": "Rook"},
-    {"name": "Fracture", "id": "Canyon"},
-    {"name": "Haven",    "id": "Triad"},
-    {"name": "Icebox",   "id": "Port"},
-    {"name": "Lotus",    "id": "Jam"},
-    {"name": "Pearl",    "id": "Pitt"},
-    {"name": "Split",    "id": "Bonsai"},
-    {"name": "Sunset",   "id": "Juliett"},
-]
+from agent_data import (
+    VSTATS_AGENT_UUID_MAP as AGENTS,
+    CRAWL_ACTS as ACTS,
+    VSTATS_MAPS as MAPS,
+    DIAMOND_R,
+)
 
 # 현재 맵풀 로테이션 (패치 시점별로 업데이트 필요)
 # 패치 → 해당 시점 맵풀
@@ -110,8 +48,6 @@ MAP_ROTATION = {
 }
 
 BASE_URL = "https://www.vstats.gg/statistics/{act_uuid}/ALL/{map_id}/agent.json.gz"
-
-DIAMOND_R = 19  # Diamond 티어 r값 (대표 티어)
 
 
 def fetch_map_act(page, act_uuid, map_id):

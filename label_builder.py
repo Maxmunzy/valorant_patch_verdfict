@@ -16,18 +16,8 @@ label_builder.py
   - 랭크 + VCT 중 하나라도 명확한 방향 신호 있으면 mild 부여
 """
 
-from agent_data import SKILL_WEIGHT
+from agent_data import SKILL_WEIGHT, AGENT_PR_BASELINE as _PR_BASELINE
 
-# 요원별 픽률 베이스라인 (feature_builder.AGENT_PR_BASELINE과 동기화)
-_PR_BASELINE: dict[str, float] = {
-    "Astra": 2.49, "Breach": 2.05, "Brimstone": 2.42, "Chamber": 9.51,
-    "Clove": 11.82, "Cypher": 5.36, "Deadlock": 1.82, "Fade": 5.46,
-    "Gekko": 3.05, "Harbor": 0.43, "Iso": 1.81, "Jett": 13.93,
-    "KAYO": 4.10, "Killjoy": 3.76, "Neon": 1.92, "Omen": 6.96,
-    "Phoenix": 1.83, "Raze": 7.27, "Reyna": 9.36, "Sage": 6.35,
-    "Skye": 4.57, "Sova": 6.39, "Tejo": 1.89, "Viper": 3.59,
-    "Vyse": 2.25, "Waylay": 2.00, "Yoru": 1.89,
-}
 _DEFAULT_BASELINE = 5.0
 
 
