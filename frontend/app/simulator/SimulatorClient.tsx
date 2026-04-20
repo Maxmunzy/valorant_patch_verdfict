@@ -227,7 +227,7 @@ const PRESETS: {
     title: "네온 궁극기 너프",
     tag: "너프",
     color: "#FF4655",
-    desc: "Overdrive 연사 속도 20 → 15 (DPS 25% 감소)",
+    desc: "오버드라이브 연사 속도 20 → 15 (DPS 25% 감소)",
     changes: [{
       agent: "Neon", skill: "X", stat: "Fire rate", statLabel: "Fire rate",
       old_value: 20, new_value: 15,
@@ -237,7 +237,7 @@ const PRESETS: {
     title: "카요 Q 플래시 가격 인하",
     tag: "버프",
     color: "#4FC3F7",
-    desc: "FLASH/drive 250 → 150크레딧 (라운드 경제 완화)",
+    desc: "플래시/드라이브 250 → 150크레딧 (라운드 경제 완화)",
     changes: [{
       agent: "KAYO", skill: "Q", stat: "creds", statLabel: "creds",
       old_value: 250, new_value: 150,
@@ -247,7 +247,7 @@ const PRESETS: {
     title: "오멘 연막 지속시간 너프",
     tag: "너프",
     color: "#FF4655",
-    desc: "Dark Cover 15s → 10s (VCT 고정픽 견제)",
+    desc: "어둠의 장막 15s → 10s (VCT 고정픽 견제)",
     changes: [{
       agent: "Omen", skill: "E", stat: "Duration", statLabel: "Duration",
       old_value: 15, new_value: 10,
