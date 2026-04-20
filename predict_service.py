@@ -441,9 +441,19 @@ class PatchPredictor:
             _pn = pd.read_csv("patch_notes_classified.csv")
             _pn["_act"] = _pn["patch"].astype(str).map(PATCH_TO_ACT)
             for _, _r in _pn.iterrows():
-                _ag = str(_r.get("agent", ""))
+                _ag  = str(_r.get("agent", ""))
                 _act = str(_r.get("_act", ""))
                 _p   = str(_r.get("patch", ""))
+                _ct  = str(_r.get("change_type", "")).strip().lower()
+                _dir = str(_r.get("direction", "")).strip().lower()
+                _hb  = int(_r.get("has_bugfix", 0) or 0)
+                # 노이즈 필터 ── 실제 밸런스 패치만 last_patch로 인정
+                #   · change_type=rework: 다른 패치의 인트로 텍스트가 파서 오염된 행
+                #   · has_bugfix=1 & direction=neutral: VFX/SFX/UI 버그픽스 (밸런스 영향 없음)
+                if _ct == "rework":
+                    continue
+                if _hb == 1 and _dir == "neutral":
+                    continue
                 if _ag and _act and _p and _act != "nan" and _p != "nan":
                     key = f"{_ag}|{_act}"
                     # 같은 액트 내 최신 패치 버전 보존 (버전 비교 대신 덮어쓰기; CSV가 시간순 정렬됨)
@@ -624,6 +634,19 @@ class PatchPredictor:
                 last_patch_ver = self._last_patch_ver.get(f"{agent_name}|{patch_act_name}")
             if not last_patch_ver:
                 last_patch_ver = self._last_patch_ver.get(f"{agent_name}|{cur_act_name}")
+            # 위 둘이 비어있으면(현재/타겟 액트에 실제 밸런스 패치가 없음 — 버그픽스나 rework만 있었던 경우)
+            # 과거 액트로 거슬러 올라가 진짜 마지막 밸런스 패치를 찾는다.
+            if not last_patch_ver and cur_act_idx >= 0:
+                for _prev_idx in range(cur_act_idx - 1, -1, -1):
+                    _prev_act = IDX_ACT.get(_prev_idx)
+                    if not _prev_act:
+                        continue
+                    _cand = self._last_patch_ver.get(f"{agent_name}|{_prev_act}")
+                    if _cand:
+                        last_patch_ver = _cand
+                        # patch_act_name도 실제 발견된 액트로 보정 (UI 라벨에 반영)
+                        patch_act_name = _prev_act
+                        break
 
             _vct_pr_post_val = row.get("vct_pr_post", None)
             _vct_pr_display = float(_vct_pr_post_val) if _vct_pr_post_val is not None else float(row.get("vct_pr_last", 0) or 0)

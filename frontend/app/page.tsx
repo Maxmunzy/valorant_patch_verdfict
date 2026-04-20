@@ -184,6 +184,7 @@ export default async function Home() {
         <section>
           <CollapseSection
             defaultOpen={false}
+            storageKey="home:nerf-rest"
             header={
               <div
                 className="text-[9px] uppercase tracking-[0.25em] flex items-center gap-2"
@@ -210,6 +211,7 @@ export default async function Home() {
         <section>
           <CollapseSection
             defaultOpen={false}
+            storageKey="home:buff-rest"
             header={
               <div
                 className="text-[9px] uppercase tracking-[0.25em] flex items-center gap-2"
@@ -236,6 +238,7 @@ export default async function Home() {
         <section>
           <CollapseSection
             defaultOpen={false}
+            storageKey="home:stable"
             header={
               <SectionLabel
                 label="STABLE"
