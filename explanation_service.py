@@ -63,7 +63,8 @@ class ExplanationGenerator:
         act     = r.get("act", "")
         rank_pr_r = round(r.get("rank_pr", 0), 1)
         vct_pr_r  = round(r.get("vct_pr", 0), 1)
-        cache_key = f"{agent}::{verdict}::{act}::{rank_pr_r}::{vct_pr_r}"
+        # v2: 이전 버전에 캐시된 템플릿 폴백(라벨 용어 문제 + stable 오문구) 무효화
+        cache_key = f"v2::{agent}::{verdict}::{act}::{rank_pr_r}::{vct_pr_r}"
 
         if cache_key in self._cache:
             return self._cache[cache_key]
@@ -210,7 +211,8 @@ class ExplanationGenerator:
 - Riot Games는 반드시 "라이엇"으로 표기. "라이옷", "라이웃", "라이어트" 등 변형 표기 절대 금지
 - 금지 표현: 킷 / 키트 / 특성상 / 구조적 / 근본적인 / 개편 / 설계 의도 / 오버튠드 / 언더튠드 / 랭겜 / 라이옷 / 라이웃
 - 제공된 데이터에 없는 과거 통계·역사적 수치·타 시즌 비교 절대 언급 금지
-- 스킬 메커니즘 설명(사이클·쿨다운·작동 방식 등) 금지 — 스킬 이름만 언급"""
+- 스킬 메커니즘 설명(사이클·쿨다운·작동 방식 등) 금지 — 스킬 이름만 언급
+- 모델 라벨 노출 금지: "strong_nerf", "nerf", "buff", "strong_buff" 같은 영어 라벨은 우리 XGBoost 모델의 내부 라벨이며, 라이엇의 판정이 아니다. 이 단어를 그대로 쓰지 말고 "너프 대상", "상향 필요", "모델상 강한 너프 분류" 등 한국어로 풀어서 서술할 것. 주어는 "우리 모델" 또는 "예측 모델" — "라이엇의 판정" 식 표현 절대 금지."""
 
         try:
             resp = self._anthropic.messages.create(
@@ -219,7 +221,8 @@ class ExplanationGenerator:
                 messages=[{"role": "user", "content": prompt}],
             )
             return resp.content[0].text.strip()
-        except Exception:
+        except Exception as e:
+            logger.exception(f"[explanation] Anthropic API 실패 (agent={agent}): {e}")
             return self._template(r)
 
     def _template(self, r: dict) -> str:
@@ -240,10 +243,22 @@ class ExplanationGenerator:
                 f"현재 메타에서 외면받고 있습니다. 버프 조정이 필요한 상황입니다."
             )
         else:
-            return (
-                f"{agent_ko}은(는) 랭크·VCT 양쪽에서 모두 저픽 상태가 지속되고 있습니다. "
-                f"수치 조정만으로는 한계가 있어 리워크 가능성이 있습니다."
-            )
+            # stable: 픽률 기반 세분화
+            if vct_pr >= 20 or rank_pr >= 25:
+                return (
+                    f"{agent_ko}은(는) 랭크 {rank_pr:.1f}% · VCT {vct_pr:.1f}% 픽률로 "
+                    f"메타 상위권에 안착한 상태입니다. 당장 큰 조정은 없을 전망이지만 신호는 누적 중입니다."
+                )
+            elif vct_pr >= 8 or rank_pr >= 10:
+                return (
+                    f"{agent_ko}은(는) 랭크 {rank_pr:.1f}% · VCT {vct_pr:.1f}% 픽률로 "
+                    f"균형 잡힌 구간에 있습니다. 이번 패치에서 큰 조정은 없을 것으로 보입니다."
+                )
+            else:
+                return (
+                    f"{agent_ko}은(는) 랭크·VCT 양쪽에서 저픽 상태가 지속되고 있습니다. "
+                    f"수치 조정만으로는 한계가 있어 중장기적 리워크 가능성도 있습니다."
+                )
 
 
 # ─── 시뮬레이터 AI 분석 ──────────────────────────────────────────────────────
@@ -274,6 +289,17 @@ VCT 패치 적용 지연 (중요):
 - 따라서 현재 VCT 경기에서 웨이레이는 아직 너프 전 버전으로 플레이 중
 - "12.06 패치 이후 프로씬에서도..." 같은 표현 금지 (프로씬엔 아직 미적용)
 - 웨이레이 VCT 픽률이 높은 건 12.06 너프가 반영되지 않은 상태 기준임을 반드시 명시
+
+모델 예측 라벨 표기 (반드시 준수):
+- "strong_nerf", "nerf", "buff", "strong_buff"는 우리 XGBoost 모델이 출력하는 내부 라벨이며, 라이엇의 판정이 아니다.
+- 이 영어 라벨을 절대 그대로 노출하지 말 것. "라이엇의 strong_nerf 판정" 같은 표현 금지.
+- 한국어로 풀어서 서술할 것:
+  · strong_nerf → "우리 모델상 강한 너프 대상으로 분류" / "너프 필요도 매우 높음"
+  · nerf → "너프 대상으로 분류" / "조정 압력이 있음"
+  · buff → "버프 대상으로 분류" / "상향이 필요한 상태"
+  · strong_buff → "강한 버프가 필요한 상태" / "대규모 상향 대상"
+- 신뢰도 수치는 "모델 신뢰도 N%" 또는 "N% 확률로" 식으로 표현.
+- 주어는 반드시 "우리 모델", "예측 모델", "모델상" 등으로 명시 — "라이엇이 판정" 식 표현 절대 금지.
 
 요원 이름은 한국어 공식명만 사용. "라이엇"으로 표기."""
 
