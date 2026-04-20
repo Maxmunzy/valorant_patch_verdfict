@@ -1,0 +1,41 @@
+name: Deploy Backend to Railway
+
+# 백엔드 관련 파일 변경시 자동 배포 (Railway GitHub webhook 우회)
+# frontend/** 는 Vercel이 자체 연동으로 처리하므로 제외
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.py'
+      - 'requirements.txt'
+      - 'runtime.txt'
+      - 'Procfile'
+      - 'data/**'
+      - '**.csv'
+      - '**.pkl'
+      - '**.joblib'
+      - 'patch_dates.json'
+      - '.github/workflows/deploy-railway.yml'
+  workflow_dispatch: # 수동 트리거 허용 (Actions 탭에서 "Run workflow" 버튼)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway up --service whosnxt-api --ci
