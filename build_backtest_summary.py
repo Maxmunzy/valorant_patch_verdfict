@@ -176,6 +176,41 @@ def main():
     )
     big_hits = big_hits[:6]
 
+    # ── 요원별 적중률 Top / Worst ────────────────────────────────────────
+    # 예측 n >= 3 요원만 대상 (통계 노이즈 방지)
+    agent_agg = (df.groupby("agent")
+                   .agg(n=("act", "size"),
+                        hits=("hit_dir", "sum"),
+                        hit_rate=("hit_dir", "mean"))
+                   .reset_index())
+    agent_agg = agent_agg[agent_agg["n"] >= 3]
+
+    # 적중률 높은 순 (동률이면 n 많은 순)
+    best = agent_agg.sort_values(["hit_rate", "n"], ascending=[False, False]).head(5)
+    top_agents_hit = [
+        {
+            "agent":   r["agent"],
+            "n":       int(r["n"]),
+            "hits":    int(r["hits"]),
+            "misses":  int(r["n"] - r["hits"]),
+            "hitRate": _round(r["hit_rate"]),
+        }
+        for _, r in best.iterrows()
+    ]
+
+    # 적중률 낮은 순 (동률이면 n 많은 순 — 여러 번 틀린 쪽이 더 의미 있음)
+    worst = agent_agg.sort_values(["hit_rate", "n"], ascending=[True, False]).head(5)
+    top_agents_miss = [
+        {
+            "agent":   r["agent"],
+            "n":       int(r["n"]),
+            "hits":    int(r["hits"]),
+            "misses":  int(r["n"] - r["hits"]),
+            "hitRate": _round(r["hit_rate"]),
+        }
+        for _, r in worst.iterrows()
+    ]
+
     # ── 전체 예측 목록 (프론트 테이블용) ─────────────────────────────────
     predictions = []
     for _, row in df.iterrows():
@@ -230,6 +265,10 @@ def main():
             "leadHits":  lead_hits,
             "bigHits":   big_hits,
             "bigMisses": big_misses,
+        },
+        "topAgents": {
+            "hits":   top_agents_hit,
+            "misses": top_agents_miss,
         },
         "predictions": predictions,
     }

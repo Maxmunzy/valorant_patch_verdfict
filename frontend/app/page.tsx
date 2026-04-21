@@ -1,12 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 import AgentCard from "@/components/AgentCard";
 import AgentExplorer from "@/components/AgentExplorer";
 import TrustBlock from "@/components/TrustBlock";
 import ModelAccuracyBanner from "@/components/ModelAccuracyBanner";
+import TldrHero from "@/components/TldrHero";
 import { getAllPredictions, AgentPrediction } from "@/lib/api";
 import { getBacktestSummary } from "@/lib/backtest";
-import { agentPortrait } from "@/lib/agents";
 
 // 60초 ISR — 배포/데이터 변경 후 체감 반영 시간 단축
 export const revalidate = 60;
@@ -136,6 +135,12 @@ export default async function Home() {
         {/* ── 백테스트 적중률 배너 (클릭 시 /backtest) ───────── */}
         <ModelAccuracyBanner data={backtest} />
       </div>
+
+      {/* ── TL;DR: 이번 액트 1순위 너프/버프 (첫 5초용 헤드라인) ── */}
+      <TldrHero
+        topNerf={nerfAll[0] ?? null}
+        topBuff={buffAll[0] ?? null}
+      />
 
       {/* ── NERF TOP 3 ──────────────────────────────── */}
       {nerfTop3.length > 0 && (

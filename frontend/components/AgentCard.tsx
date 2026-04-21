@@ -7,6 +7,7 @@ import PredBadge from "./PredBadge";
 import VctSparkline from "./VctSparkline";
 import { AgentPrediction } from "@/lib/api";
 import { agentPortrait } from "@/lib/agents";
+import { buildShareHeadline } from "@/lib/headline";
 
 const VERDICT_COLOR: Record<string, string> = {
   nerf_rank:       "#FF4655",
@@ -213,6 +214,28 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
                 ))}
               </div>
             )}
+
+            {/* 공유용 한 줄 훅 — 스크린샷/공유 시 "왜 너프/버프인지" 바로 읽힘 */}
+            <div
+              className="text-[11px] leading-snug pt-1.5 pr-1"
+              style={{ color: "rgba(226,232,240,0.82)" }}
+            >
+              {buildShareHeadline({
+                agent: a.agent,
+                verdict: a.verdict,
+                verdict_ko: a.verdict_ko,
+                p_nerf: a.p_nerf,
+                p_buff: a.p_buff,
+                p_patch: a.p_patch,
+                rank_pr: a.rank_pr,
+                rank_wr: a.rank_wr,
+                vct_pr: a.vct_pr,
+                vct_current_event: a.vct_current_event,
+                vct_trend_ratio: a.vct_trend_ratio ?? null,
+                sample_confidence: a.sample_confidence,
+                last_direction: a.last_direction,
+              })}
+            </div>
 
             <div className="flex items-center gap-2.5 pt-1">
               <span className="text-[10px] uppercase tracking-widest w-12 shrink-0" style={{ color: "rgba(148,163,184,0.7)" }}>

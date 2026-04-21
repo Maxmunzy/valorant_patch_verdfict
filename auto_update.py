@@ -51,37 +51,56 @@ log = logging.getLogger(__name__)
 
 # ─── 유틸 ──────────────────────────────────────────────────────────────────────
 def run_script(script: str, args: list[str] | None = None, timeout: int = 600) -> bool:
-    """서브프로세스로 Python 스크립트 실행. 성공 여부 반환."""
-    cmd = [sys.executable, str(BASE_DIR / script)] + (args or [])
+    """서브프로세스로 Python 스크립트 실행 — stdout을 실시간으로 스트리밍.
+
+    Selenium/Playwright 기반 크롤러는 수 분 걸리므로, 진행상황이 보여야
+    멈춘 것으로 오해하지 않는다. `-u` 플래그로 자식 쪽도 unbuffered.
+    """
+    cmd = [sys.executable, "-u", str(BASE_DIR / script)] + (args or [])
     log.info(f"실행: {' '.join(cmd)}")
 
     env = {**__import__("os").environ, "PYTHONIOENCODING": "utf-8"}
+    start = time.time()
     try:
-        result = subprocess.run(
+        proc = subprocess.Popen(
             cmd,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
             text=True,
             encoding="utf-8",
             errors="replace",
-            timeout=timeout,
+            bufsize=1,   # 라인 버퍼
             cwd=str(BASE_DIR),
             env=env,
         )
-        if result.returncode == 0:
-            log.info(f"  ✓ {script} 성공")
-            if result.stdout:
-                # 마지막 5줄만 로그
-                for line in result.stdout.strip().split("\n")[-5:]:
-                    log.info(f"    {line}")
+
+        assert proc.stdout is not None
+        for line in proc.stdout:
+            line = line.rstrip()
+            if not line:
+                continue
+            # 자식 stdout을 부모 로그에 실시간 프리픽스 표시
+            log.info(f"    │ {line}")
+
+            if time.time() - start > timeout:
+                proc.kill()
+                log.error(f"  ✗ {script} 타임아웃 ({timeout}초)")
+                return False
+
+        proc.wait(timeout=10)
+        elapsed = time.time() - start
+
+        if proc.returncode == 0:
+            log.info(f"  ✓ {script} 성공 ({elapsed:.1f}s)")
             return True
         else:
-            log.error(f"  ✗ {script} 실패 (exit={result.returncode})")
-            if result.stderr:
-                for line in result.stderr.strip().split("\n")[-10:]:
-                    log.error(f"    {line}")
+            log.error(f"  ✗ {script} 실패 (exit={proc.returncode}, {elapsed:.1f}s)")
             return False
     except subprocess.TimeoutExpired:
         log.error(f"  ✗ {script} 타임아웃 ({timeout}초)")
+        return False
+    except Exception as e:
+        log.error(f"  ✗ {script} 예외: {e}")
         return False
 
 
@@ -113,33 +132,74 @@ def clear_explanation_cache():
 
 
 # ─── 새 패치 감지 ──────────────────────────────────────────────────────────────
-def detect_new_patches() -> list[str]:
-    """playvalorant.com에서 새 패치 노트가 있는지 HEAD 요청으로 확인.
+def _crawler_known_versions() -> set[str]:
+    """crawl_patch_notes.py의 PATCHES 리스트에 등록된 버전 집합.
 
-    patch_dates.json에 없는 패치 버전을 반환.
+    크롤러가 처리할 수 있는 버전만 "새 패치"로 감지해야
+    0개 수집 → 매 실행마다 재시도 루프에 빠지지 않는다.
     """
-    known = set()
+    try:
+        text = (BASE_DIR / "crawl_patch_notes.py").read_text(encoding="utf-8")
+        import re as _re
+        return set(_re.findall(r'"version":\s*"([^"]+)"', text))
+    except Exception:
+        return set()
+
+
+def _csv_known_versions() -> set[str]:
+    """patch_notes_raw.csv에 이미 수집된 패치 버전 집합."""
+    if not PATCH_NOTES_RAW.exists():
+        return set()
+    try:
+        import pandas as pd
+        raw = pd.read_csv(PATCH_NOTES_RAW, encoding="utf-8-sig")
+        return set(raw["patch"].astype(str).unique())
+    except Exception:
+        return set()
+
+
+def detect_new_patches() -> list[str]:
+    """playvalorant.com에서 새 패치 노트 감지 + 크롤러 등록 여부 검증.
+
+    반환 기준:
+      1) playvalorant.com에 URL이 존재 (HEAD 200)
+      2) crawl_patch_notes.py의 PATCHES 리스트에 등록되어 있음
+      3) patch_notes_raw.csv에 아직 수집 안 됨
+    """
+    csv_known     = _csv_known_versions()
+    crawler_known = _crawler_known_versions()
+
+    all_known = csv_known | set()
     if PATCH_DATES_PATH.exists():
         with open(PATCH_DATES_PATH, encoding="utf-8") as f:
-            known = set(json.load(f).keys())
+            all_known |= set(json.load(f).keys())
 
-    # 현재 최신 패치 번호에서 +1, +2까지 체크
-    if known:
-        versions = sorted(known, key=lambda v: [int(x) for x in v.split(".")])
-        latest = versions[-1]
-        major, minor = latest.split(".")
-        candidates = [
-            f"{major}.{int(minor) + 1:02d}",
-            f"{major}.{int(minor) + 2:02d}",
-        ]
-    else:
-        log.warning("patch_dates.json이 비어 있음 — 패치 감지 건너뜀")
+    if not all_known:
+        log.warning("알려진 패치가 없음 — 패치 감지 건너뜀")
         return []
 
-    new_patches = []
+    versions = sorted(all_known, key=lambda v: [int(x) for x in v.split(".")])
+    latest = versions[-1]
+    major, minor = latest.split(".")
+    candidates = [
+        f"{major}.{int(minor) + 1:02d}",
+        f"{major}.{int(minor) + 2:02d}",
+    ]
+
+    new_patches: list[str] = []
     import urllib.request
 
     for ver in candidates:
+        # 이미 CSV에 수집됐으면 스킵
+        if ver in csv_known:
+            log.info(f"  {ver}: 이미 CSV에 있음 — 스킵")
+            continue
+
+        # 크롤러 PATCHES 리스트에 없으면 스킵 (등록해도 파싱 실패함)
+        if crawler_known and ver not in crawler_known:
+            log.info(f"  {ver}: crawl_patch_notes.py PATCHES에 미등록 — 수동 추가 필요")
+            continue
+
         slug = f"valorant-patch-notes-{ver.replace('.', '-')}"
         url = PATCH_NOTES_URL.format(slug=slug)
         try:
@@ -209,10 +269,19 @@ def pipeline(
             for ver in new_patches:
                 log.info(f"  패치 {ver} 크롤 시작")
                 if not dry_run:
+                    before = _csv_known_versions()
                     ok = run_script("crawl_patch_notes.py", ["--patch", ver], timeout=300)
-                    if ok:
+                    after = _csv_known_versions()
+                    newly_added = after - before
+                    if ok and ver in newly_added:
                         data_changed = True
                         steps_done.append(f"패치 {ver} 크롤")
+                    elif ok:
+                        # exit 0이지만 실제 추가 없음 — 다음 실행 때 무한 재시도 방지
+                        log.warning(
+                            f"  ⚠ {ver} 크롤은 성공했지만 CSV에 추가된 행 없음. "
+                            f"URL은 존재하지만 파서가 못 읽는 상태 — crawl_patch_notes.py 업데이트 필요."
+                        )
                 else:
                     log.info(f"  [DRY RUN] crawl_patch_notes.py --patch {ver}")
 

@@ -48,6 +48,14 @@ export interface BacktestStoryRow {
   kind: "nerf_hit" | "buff_hit" | "nerf_false_positive" | "buff_false_positive";
 }
 
+export interface BacktestAgentRow {
+  agent: string;
+  n: number;
+  hits: number;
+  misses: number;
+  hitRate: number;
+}
+
 export interface BacktestPrediction {
   agent: string;
   act: string;
@@ -89,6 +97,10 @@ export interface BacktestSummary {
     leadHits: BacktestLeadHit[];
     bigHits: BacktestStoryRow[];
     bigMisses: BacktestStoryRow[];
+  };
+  topAgents?: {
+    hits: BacktestAgentRow[];
+    misses: BacktestAgentRow[];
   };
   predictions: BacktestPrediction[];
 }

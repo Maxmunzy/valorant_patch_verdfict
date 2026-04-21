@@ -7,6 +7,7 @@ import PredBadge from "./PredBadge";
 import VctTimeline from "./VctTimeline";
 import { agentPortrait } from "@/lib/agents";
 import { SIGNAL_TYPE_ICON } from "@/lib/constants";
+import { buildShareHeadline } from "@/lib/headline";
 
 // Extended type for agent detail (includes fields not in the base interface)
 export interface VctEventEntry {
@@ -299,6 +300,31 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
               </h1>
               <div className="text-xs mt-1" style={{ color: "#94a3b8" }}>
                 {patchLabel}
+              </div>
+              {/* 공유용 한 줄 훅 — 스샷 한 장으로 트위터/디스코드에 붙이면 그대로 콘텐츠 */}
+              <div
+                className="mt-3 px-3 py-2 text-[13px] sm:text-sm leading-snug font-medium"
+                style={{
+                  border: `1px solid ${accentColor}40`,
+                  background: `linear-gradient(90deg, ${accentColor}15, transparent)`,
+                  color: "rgba(240,248,255,0.95)",
+                }}
+              >
+                {buildShareHeadline({
+                  agent: data.agent,
+                  verdict: data.verdict,
+                  verdict_ko: data.verdict_ko,
+                  p_nerf: data.p_nerf,
+                  p_buff: data.p_buff,
+                  p_patch: data.p_patch,
+                  rank_pr: data.rank_pr,
+                  rank_wr: data.rank_wr,
+                  vct_pr: data.vct_pr,
+                  vct_current_event: data.vct_current_event,
+                  vct_trend_ratio: data.vct_trend_ratio ?? null,
+                  sample_confidence: data.sample_confidence,
+                  last_direction: data.last_direction,
+                })}
               </div>
               {/* 배지: 핵심 신호를 한눈에 */}
               {data.badges && data.badges.length > 0 && (
