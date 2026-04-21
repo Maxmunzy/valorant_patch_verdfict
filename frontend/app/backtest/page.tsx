@@ -270,7 +270,7 @@ export default async function BacktestPage() {
                 style={{ border: "1px solid rgba(74,222,128,0.35)", background: "rgba(16,185,129,0.06)" }}
               >
                 <div className="flex items-baseline justify-between">
-                  <span className="font-valo uppercase tracking-wider text-2xl" style={{ color: "#e2e8f0" }}>
+                  <span className="text-2xl font-extrabold tracking-tight" style={{ color: "#e2e8f0" }}>
                     {s.agent}
                   </span>
                   <span className="text-[12px] font-mono font-bold" style={{ color: "rgba(74,222,128,0.95)" }}>
@@ -613,7 +613,7 @@ function StoryBlock({
             >
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-valo uppercase tracking-wider text-xl" style={{ color: "#e2e8f0" }}>
+                  <span className="text-xl font-extrabold tracking-tight" style={{ color: "#e2e8f0" }}>
                     {s.agent}
                   </span>
                   <span className="text-[12px] font-mono font-bold" style={{ color: "rgba(148,163,184,0.9)" }}>
@@ -777,7 +777,7 @@ function TopAgentsCard({
                 {i + 1}
               </span>
               <div className="flex items-center gap-2 min-w-0">
-                <span className="font-valo uppercase text-base font-bold truncate" style={{ color: "#e2e8f0" }}>
+                <span className="text-base font-extrabold tracking-tight truncate" style={{ color: "#e2e8f0" }}>
                   {r.agent}
                 </span>
                 <span className="text-[11px] font-mono" style={{ color: "rgba(148,163,184,0.75)" }}>

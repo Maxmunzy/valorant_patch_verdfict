@@ -611,7 +611,7 @@ function SkillEditor({
       <div className="flex items-center gap-4">
         {agentIcon(agent) && <Image src={agentIcon(agent)} alt={agent} width={48} height={48} className="rounded-full" />}
         <div>
-          <div className="text-2xl font-valo font-black text-white">{agent}</div>
+          <div className="text-2xl font-extrabold tracking-tight text-white">{agent}</div>
           <div className="text-xs uppercase tracking-widest" style={{ color: ROLE_COLOR[roleKo] ?? "#64748B" }}>
             {roleKo}
           </div>
@@ -770,7 +770,7 @@ function SimulationResults({ result, analysis, analyzingAI }: { result: SimResul
                   {agentIcon(imp.agent) && <Image src={agentIcon(imp.agent)} alt={imp.agent} width={44} height={44} className="rounded-full" />}
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-base font-valo font-bold text-white">{imp.agent}</span>
+                      <span className="text-base font-extrabold tracking-tight text-white">{imp.agent}</span>
                       <span className="text-[10px] font-bold px-1.5 py-0.5" style={{ color: confColor, border: `1px solid ${confColor}40` }}>
                         신뢰도 {confLabel}
                       </span>

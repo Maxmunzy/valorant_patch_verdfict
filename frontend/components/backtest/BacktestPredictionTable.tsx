@@ -219,7 +219,7 @@ export default function BacktestPredictionTable({
                   <td className="px-4 py-2.5 font-mono whitespace-nowrap" style={{ color: "rgba(203,213,225,0.95)" }}>
                     {r.act}
                   </td>
-                  <td className="px-4 py-2.5 font-valo uppercase font-bold whitespace-nowrap" style={{ color: "#e2e8f0" }}>
+                  <td className="px-4 py-2.5 font-extrabold tracking-tight whitespace-nowrap" style={{ color: "#e2e8f0" }}>
                     {r.agent}
                   </td>
                   <td className="px-4 py-2.5">

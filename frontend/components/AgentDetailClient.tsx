@@ -295,7 +295,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
               >
                 AGENT PROFILE // {data.role}
               </div>
-              <h1 className="text-4xl font-valo font-black text-white tracking-tight leading-none">
+              <h1 className="text-4xl font-extrabold text-white tracking-tight leading-none">
                 {data.agent}
               </h1>
               <div className="text-xs mt-1" style={{ color: "#94a3b8" }}>
