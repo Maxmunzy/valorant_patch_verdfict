@@ -7,12 +7,30 @@ export interface Signal {
   tag?: string;
 }
 
+export interface VctEvent {
+  event: string;         // "Stage 1 2026"
+  year: number;
+  pr: number;            // picks-weighted across regions
+  wr: number;
+  picks: number;
+  total_maps: number;
+  patch_after: string | null;
+  act_idx: number;
+}
+
 export interface AgentPrediction {
   agent: string;
   act: string;
   role: string;
   rank_pr: number;
-  vct_pr: number;
+  vct_pr: number;                           // display-primary (current event > post > last)
+  vct_pr_post?: number;                     // 패치 이후 누적 (참고용)
+  vct_pr_current?: number;                  // 현재 진행 중인 대회만
+  vct_pr_previous?: number;                 // 직전 대회
+  vct_current_event?: string | null;        // "Stage 1 2026"
+  vct_previous_event?: string | null;       // "Masters Santiago 2026"
+  vct_trend_ratio?: number;                 // current / previous (>=1.5 = 상승세)
+  vct_event_history?: VctEvent[];           // 최근 최대 8개 대회
   rank_wr: number;
   vct_wr: number;
   p_patch: number;

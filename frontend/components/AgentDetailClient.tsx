@@ -4,16 +4,35 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import PredBadge from "./PredBadge";
+import VctTimeline from "./VctTimeline";
 import { agentPortrait } from "@/lib/agents";
 import { SIGNAL_TYPE_ICON } from "@/lib/constants";
 
 // Extended type for agent detail (includes fields not in the base interface)
+export interface VctEventEntry {
+  event: string;
+  year: number;
+  pr: number;
+  wr: number;
+  picks: number;
+  total_maps: number;
+  patch_after: string | null;
+  act_idx: number;
+}
+
 export interface AgentDetailData {
   agent: string;
   act: string;
   role: string;
   rank_pr: number;
   vct_pr: number;
+  vct_pr_post?: number;
+  vct_pr_current?: number;
+  vct_pr_previous?: number;
+  vct_current_event?: string | null;
+  vct_previous_event?: string | null;
+  vct_trend_ratio?: number;
+  vct_event_history?: VctEventEntry[];
   rank_wr: number;
   vct_wr: number;
   p_patch: number;
@@ -29,6 +48,7 @@ export interface AgentDetailData {
   verdict_en: string;
   last_patch_version: string | null;
   last_patch_act: string | null;
+  last_patch_act_idx?: number | null;
   signals: { type: string; label: string; text: string; tag?: string }[];
   badges?: string[];
   sample_confidence?: "high" | "mid" | "low";
@@ -38,6 +58,7 @@ export interface AgentDetailData {
 const DETAIL_BADGE_COLOR: Record<string, { border: string; fg: string; bg: string }> = {
   "VCT 핵심":     { border: "rgba(239,68,68,0.4)",   fg: "#FCA5A5", bg: "rgba(239,68,68,0.08)" },
   "VCT 주력":     { border: "rgba(239,68,68,0.3)",   fg: "#FCA5A5", bg: "rgba(239,68,68,0.05)" },
+  "대회 상승":    { border: "rgba(52,211,153,0.45)", fg: "#6EE7B7", bg: "rgba(52,211,153,0.08)" },
   "너프 MISS":    { border: "rgba(245,158,11,0.4)",  fg: "#FCD34D", bg: "rgba(245,158,11,0.08)" },
   "버프 MISS":    { border: "rgba(245,158,11,0.4)",  fg: "#FCD34D", bg: "rgba(245,158,11,0.08)" },
   "과버프 판정":  { border: "rgba(249,115,22,0.4)",  fg: "#FDBA74", bg: "rgba(249,115,22,0.08)" },
@@ -459,7 +480,20 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
             style={{ color: "#64748b" }}
           >
             VCT PRO
-            {data.vct_act ? (
+            {data.vct_current_event ? (
+              <>
+                <span style={{ color: "#475569" }}>// {data.vct_current_event}</span>
+                {data.vct_trend_ratio && data.vct_trend_ratio >= 1.5 && (
+                  <span style={{ color: "#6EE7B7" }}>↑ {data.vct_trend_ratio.toFixed(1)}×</span>
+                )}
+                {data.vct_trend_ratio && data.vct_trend_ratio <= 0.67 && data.vct_pr_previous && data.vct_pr_previous >= 5 && (
+                  <span style={{ color: "rgba(252,165,165,0.9)" }}>↓ {data.vct_trend_ratio.toFixed(2)}×</span>
+                )}
+                {data.vct_data_lag > 2 && (
+                  <span style={{ color: "rgba(180,120,0,0.8)" }}>[LAG:{data.vct_data_lag}A]</span>
+                )}
+              </>
+            ) : data.vct_act ? (
               <>
                 <span style={{ color: "#475569" }}>
                   {data.last_patch_version ? `// ${data.last_patch_version} 이후 누적` : "// 누적"}
@@ -537,6 +571,39 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
               </div>
             </div>
           </div>
+
+          {/* ── VCT TIMELINE ─────────────────────────────── */}
+          {data.vct_event_history && data.vct_event_history.length >= 2 && (
+            <div className="mt-5 pt-4" style={{ borderTop: "1px solid rgba(30,41,59,0.8)" }}>
+              <div
+                className="text-[10px] uppercase tracking-widest mb-2 flex items-center gap-2"
+                style={{ color: "#64748b" }}
+              >
+                <div className="w-3 h-px" style={{ background: accentColor }} />
+                대회별 픽률 추이
+                <span style={{ color: "#475569" }}>// LAST {data.vct_event_history.length} EVENTS · 4-REGION 합산</span>
+              </div>
+              <VctTimeline
+                events={data.vct_event_history}
+                postAvg={data.vct_pr_post}
+                lastPatchActIdx={data.last_patch_act_idx ?? null}
+                lastPatchVersion={data.last_patch_version ?? null}
+                accentColor={accentColor}
+              />
+              {/* 누적 대비 비교 힌트 */}
+              {data.vct_pr_post !== undefined &&
+                data.vct_pr_current !== undefined &&
+                Math.abs((data.vct_pr_current ?? 0) - (data.vct_pr_post ?? 0)) >= 3 && (
+                  <div className="mt-2 text-[10px]" style={{ color: "rgba(148,163,184,0.75)" }}>
+                    <span style={{ color: "rgba(148,163,184,0.6)" }}>※</span>{" "}
+                    {data.vct_current_event ?? "현재 대회"} 픽률({(data.vct_pr_current ?? 0).toFixed(1)}%)이
+                    {" "}
+                    {data.last_patch_version ? `${data.last_patch_version} 이후 누적 평균` : "누적 평균"}({(data.vct_pr_post ?? 0).toFixed(1)}%)
+                    {(data.vct_pr_current ?? 0) > (data.vct_pr_post ?? 0) ? "보다 높음 — 상승세" : "보다 낮음 — 하락세"}.
+                  </div>
+                )}
+            </div>
+          )}
         </div>
       </motion.div>
 

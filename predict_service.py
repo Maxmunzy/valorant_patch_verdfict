@@ -124,8 +124,14 @@ def extract_signals(row: dict | pd.Series, verdict: str, last_patch_ver: str | N
     rank_pr_rel_meta = float(row.get("rank_pr_rel_meta", 1.0) or 1.0)
     # 표시용: % of games (rank_pr는 "전체 픽 슬롯 점유율"이므로 ×5 = 게임당 등장 비율)
     rank_pr_pct  = round(rank_pr * 5, 1)
-    # 표시용: 패치 이후 누적 집계 우선, 없으면 최근 대회
-    vct_pr       = float(row.get("vct_pr_post") or row.get("vct_pr_last", 0) or 0)
+    # 표시용 VCT 픽률 — 현재 대회 > 패치 이후 누적 > 마지막 액트 순 fallback.
+    # 현재 대회 sample(>=3 picks) 있으면 그걸로 — Stage 1 상승/하락 신호 반영.
+    _cur_ev_pr    = row.get("vct_pr_current_event", None)
+    _cur_ev_picks = int(row.get("vct_current_event_picks", 0) or 0)
+    if _cur_ev_pr is not None and _cur_ev_picks >= 3:
+        vct_pr   = float(_cur_ev_pr)
+    else:
+        vct_pr   = float(row.get("vct_pr_post") or row.get("vct_pr_last", 0) or 0)
     rank_wr      = float(row.get("rank_wr_vs50", 0) or 0)
     rank_pr_peak = float(row.get("rank_pr_peak", 0) or 0)
     rank_pr_peak_pct = round(rank_pr_peak * 5, 1)
@@ -648,6 +654,7 @@ class PatchPredictor:
             # (acts_since 기반 patch_act_name은 예전 필터링 이전 데이터로 계산된 경우가 있어
             #  낡은 액트를 가리킬 수 있음 → backward walk를 1순위로 사용)
             last_patch_ver: str | None = None
+            patch_act_idx_final: int | None = None
             if cur_act_idx >= 0:
                 for _idx in range(cur_act_idx, -1, -1):
                     _act = IDX_ACT.get(_idx)
@@ -657,13 +664,39 @@ class PatchPredictor:
                     if _cand:
                         last_patch_ver = _cand
                         patch_act_name = _act  # UI 라벨용으로 실제 액트 반영
+                        patch_act_idx_final = _idx
                         break
             # Fallback: 혹시 walk로 못 찾았을 때만 acts_since 기반 조회
             if not last_patch_ver and patch_act_name:
                 last_patch_ver = self._last_patch_ver.get(f"{agent_name}|{patch_act_name}")
 
+            # ── 카드 표시 VCT 픽률 — 현재 진행 중인 대회 기준 ───────────────────
+            # 3차 묶음: "패치 이후 누적"이 오래된 패치일수록 희석돼 Stage 1 신호 못 잡음.
+            # 1순위: 현재 대회(vct_pr_current_event), 2순위: 누적(vct_pr_post), 3순위: 마지막 액트(vct_pr_last)
+            _vct_pr_cur_val  = row.get("vct_pr_current_event", None)
             _vct_pr_post_val = row.get("vct_pr_post", None)
-            _vct_pr_display = float(_vct_pr_post_val) if _vct_pr_post_val is not None else float(row.get("vct_pr_last", 0) or 0)
+            _vct_pr_last_val = row.get("vct_pr_last", 0) or 0
+            _vct_pr_prev_val = row.get("vct_pr_previous_event", 0) or 0
+            _trend_ratio     = float(row.get("vct_pr_trend_ratio", 1.0) or 1.0)
+            _cur_event_name  = str(row.get("vct_current_event_name", "") or "")
+            _prev_event_name = str(row.get("vct_previous_event_name", "") or "")
+            _cur_picks       = int(row.get("vct_current_event_picks", 0) or 0)
+            # 현재 대회 데이터가 충분하면(≥3 픽) 현재 대회 사용, 아니면 누적으로 fallback
+            if _vct_pr_cur_val is not None and _cur_picks >= 3:
+                _vct_pr_display = float(_vct_pr_cur_val)
+            elif _vct_pr_post_val is not None:
+                _vct_pr_display = float(_vct_pr_post_val)
+            else:
+                _vct_pr_display = float(_vct_pr_last_val)
+
+            _vct_wr_cur_val  = row.get("vct_wr_current_event", None)
+            if _vct_wr_cur_val is not None and _cur_picks >= 3:
+                try:
+                    _vct_wr_display = float(_vct_wr_cur_val)
+                except (TypeError, ValueError):
+                    _vct_wr_display = float(row.get("vct_wr_post") or _vct_wr_safe(row))
+            else:
+                _vct_wr_display = float(row.get("vct_wr_post") or _vct_wr_safe(row))
 
             # ── 카드용 짧은 배지 & 표본 신뢰도 ───────────────────────────────────
             # 우선순위 정렬된 최대 3개 배지로 홈 카드 정보 밀도 향상
@@ -681,6 +714,9 @@ class PatchPredictor:
                 _badges.append("너프 MISS")
             if _buff_miss and "buff" in verdict:
                 _badges.append("버프 MISS")
+            # 상승세 배지 — 직전 대회 대비 1.5× 이상 점프 + 픽 샘플 충분
+            if _trend_ratio >= 1.5 and _cur_picks >= 5 and _vct_pr_prev_val > 0:
+                _badges.append("대회 상승")
             if _vct_pr_display >= 25:
                 _badges.append("VCT 핵심")
             elif _vct_pr_display >= 15:
@@ -704,18 +740,56 @@ class PatchPredictor:
             else:
                 _conf = "low"
 
+            # ── 대회 타임라인 (display용) ─────────────────────────────────────
+            # feature_builder가 JSON 문자열로 저장 → 여기서 파싱해 리스트로 복원.
+            import json as _json_parse
+            _hist_raw = row.get("vct_event_history", None)
+            _event_history: list[dict] = []
+            if isinstance(_hist_raw, str) and _hist_raw.strip():
+                try:
+                    _parsed = _json_parse.loads(_hist_raw)
+                    if isinstance(_parsed, list):
+                        _event_history = _parsed
+                except Exception:
+                    _event_history = []
+            elif isinstance(_hist_raw, list):
+                _event_history = _hist_raw
+            # numpy/pandas 타입 → 순수 python (JSON 직렬화 안전)
+            _event_history_clean = []
+            for _e in _event_history:
+                if not isinstance(_e, dict):
+                    continue
+                _event_history_clean.append({
+                    "event":       str(_e.get("event", "")),
+                    "year":        int(_e.get("year", 0) or 0),
+                    "pr":          round(float(_e.get("pr", 0) or 0), 2),
+                    "wr":          round(float(_e.get("wr", 0) or 0), 2),
+                    "picks":       int(_e.get("picks", 0) or 0),
+                    "total_maps":  int(_e.get("total_maps", 0) or 0),
+                    "patch_after": (str(_e.get("patch_after")) if _e.get("patch_after") else None),
+                    "act_idx":     int(_e.get("act_idx", 0) or 0),
+                })
+
             results.append({
                 "agent":              agent_name,
                 "act":                cur_act_name,
                 "role":               AGENT_ROLE_KO.get(agent_name, "알 수 없음"),
                 "rank_pr":            round(float(row.get("rank_pr", 0) or 0) * 5, 1),
                 "vct_pr":             round(_vct_pr_display, 1),
+                "vct_pr_post":        round(float(_vct_pr_post_val) if _vct_pr_post_val is not None else 0.0, 1),
+                "vct_pr_current":     round(float(_vct_pr_cur_val) if _vct_pr_cur_val is not None else 0.0, 1),
+                "vct_pr_previous":    round(float(_vct_pr_prev_val), 1),
+                "vct_current_event":  _cur_event_name or None,
+                "vct_previous_event": _prev_event_name or None,
+                "vct_trend_ratio":    round(_trend_ratio, 2),
                 "rank_wr":            round(float(row.get("rank_wr_vs50", 0) or 0), 2),
-                "vct_wr":             round(float(row.get("vct_wr_post") or _vct_wr_safe(row)), 1),
+                "vct_wr":             round(_vct_wr_display, 1),
                 "vct_act":            _vct_act,
                 "vct_data_lag":       _vct_data_lag,
+                "vct_event_history":  _event_history_clean,
                 "last_patch_version": last_patch_ver,
                 "last_patch_act":     patch_act_name,
+                "last_patch_act_idx": patch_act_idx_final if patch_act_idx_final is not None else patch_act_idx,
                 "p_patch":            p_patch,
                 "p_buff":             p_buff,
                 "p_nerf":             p_nerf,

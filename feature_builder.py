@@ -142,6 +142,84 @@ def compute_vct_profile(vct_pre_avg):
     else:         return "pro_absent"
 
 
+# ── VCT event name normalization (리그 4개 → 대회 1개) ──────────────────────
+import re as _vct_re
+
+_VCT_LEAGUE_RE = _vct_re.compile(
+    r"^VCT (?:Americas|CN|EMEA|Pacific)\s+(Kickoff|Stage\s*\d+|League)\s+(\d{4})\b",
+    _vct_re.IGNORECASE,
+)
+
+def normalize_vct_event(name: str) -> str:
+    """`VCT Americas Stage 1 2026` → `Stage 1 2026`
+    국제대회(Masters/Champions/LOCK//IN)는 그대로 유지.
+    """
+    if not isinstance(name, str):
+        return str(name)
+    m = _VCT_LEAGUE_RE.match(name.strip())
+    if m:
+        return f"{m.group(1).strip()} {m.group(2)}"
+    return name.strip()
+
+
+def compute_vct_event_history(pre_vct: "pd.DataFrame", max_events: int = 8) -> list:
+    """대회(정규화 이벤트명) 단위로 리그 4개를 합산하여 타임라인 반환.
+
+    각 엔트리:
+        {
+            "event":        "Stage 1 2026",      # 정규화된 대회명
+            "year":         2026,
+            "pr":           12.4,                # picks-weighted across regions
+            "wr":           54.1,                # picks-weighted
+            "picks":        320,
+            "total_maps":   1780,
+            "patch_after":  "12.05" | None,
+            "event_order":  1234,                # chronological sort key (min event_id across regions)
+            "act_idx":      46,                  # min act_idx across regions (대회 시작 시점)
+        }
+
+    최신순이 아닌 **시간순(과거→최근)**으로 반환. 그래프의 X축 순서.
+    `max_events` = 최근 N개만 (차트 가독성 — 권장 8).
+    """
+    if pre_vct is None or pre_vct.empty:
+        return []
+    df = pre_vct[pre_vct["picks"] > 0].copy()
+    if df.empty:
+        return []
+
+    df["event_norm"] = df["event"].map(normalize_vct_event)
+    df["picks"] = df["picks"].astype(float)
+    df["total_maps"] = df["total_maps"].astype(float)
+
+    out: list[dict] = []
+    for (ev_norm, yr), grp in df.groupby(["event_norm", "year"], sort=False):
+        picks_sum = float(grp["picks"].sum())
+        maps_sum  = float(grp["total_maps"].sum())
+        if maps_sum <= 0 or picks_sum <= 0:
+            continue
+        pr = float((grp["pick_rate_pct"] * grp["total_maps"]).sum() / maps_sum)
+        wr = float((grp["win_rate_pct"]  * grp["picks"]).sum() / picks_sum)
+        _ord = int(grp["event_order"].min()) if "event_order" in grp.columns else int(grp.index.min())
+        _act = int(grp["act_idx"].min())
+        _pa_vals = grp["patch_after"].dropna().astype(str).unique().tolist() if "patch_after" in grp.columns else []
+        out.append({
+            "event": ev_norm,
+            "year": int(yr),
+            "pr": round(pr, 2),
+            "wr": round(wr, 2),
+            "picks": int(picks_sum),
+            "total_maps": int(maps_sum),
+            "patch_after": _pa_vals[0] if _pa_vals else None,
+            "event_order": _ord,
+            "act_idx": _act,
+        })
+
+    out.sort(key=lambda r: (r["event_order"], r["act_idx"]))
+    if max_events and len(out) > max_events:
+        out = out[-max_events:]
+    return out
+
+
 def build_skill_stat_features(agent: str, agent_skills: dict) -> dict:
     """agent_skills.json 기반 절대 강도 피처 (Phase 4)
 
@@ -379,6 +457,38 @@ def build_features(agent, act_idx, rank_df, vct_df, step1_df, map_dep_df=None,
 
     feat["vct_profile"]    = compute_vct_profile(feat.get("vct_pr_avg"))
     feat["vct_pr_peak_all"] = float(pre_vct["pick_rate_pct"].max()) if not pre_vct.empty else 0.0
+
+    # ── [표시용] 대회 단위 타임라인 + 현재/직전 대회 요약 ─────────────────────
+    # 리그 4개 합산. 모델 입력 아님, API response passthrough 용.
+    # CSV 왕복 안전을 위해 JSON 문자열로 직렬화 (predict_service에서 json.loads).
+    import json as _json
+    _hist = compute_vct_event_history(pre_vct, max_events=8)
+    feat["vct_event_history"] = _json.dumps(_hist, ensure_ascii=False)
+    if _hist:
+        _cur = _hist[-1]
+        feat["vct_pr_current_event"]  = float(_cur["pr"])
+        feat["vct_wr_current_event"]  = float(_cur["wr"])
+        feat["vct_current_event_name"] = f"{_cur['event']}"  # ex) "Stage 1 2026"
+        feat["vct_current_event_picks"] = int(_cur["picks"])
+        if len(_hist) >= 2:
+            _prev = _hist[-2]
+            feat["vct_pr_previous_event"] = float(_prev["pr"])
+            feat["vct_previous_event_name"] = f"{_prev['event']}"
+            # 직전 대회 대비 상승률 (0이 되지 않도록 floor)
+            _denom = max(float(_prev["pr"]), 0.5)
+            feat["vct_pr_trend_ratio"] = float(_cur["pr"]) / _denom
+        else:
+            feat["vct_pr_previous_event"]  = 0.0
+            feat["vct_previous_event_name"] = ""
+            feat["vct_pr_trend_ratio"] = 1.0
+    else:
+        feat["vct_pr_current_event"]   = 0.0
+        feat["vct_wr_current_event"]   = np.nan
+        feat["vct_current_event_name"] = ""
+        feat["vct_current_event_picks"] = 0
+        feat["vct_pr_previous_event"]  = 0.0
+        feat["vct_previous_event_name"] = ""
+        feat["vct_pr_trend_ratio"]     = 1.0
 
     recent_vct = pre_vct.tail(3)
     if len(recent_vct) >= 2:

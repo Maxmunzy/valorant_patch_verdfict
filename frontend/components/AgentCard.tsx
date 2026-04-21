@@ -24,6 +24,7 @@ const VERDICT_COLOR: Record<string, string> = {
 const BADGE_COLOR: Record<string, { border: string; fg: string; bg: string }> = {
   "VCT 핵심":     { border: "rgba(239,68,68,0.4)",   fg: "#FCA5A5", bg: "rgba(239,68,68,0.08)" },
   "VCT 주력":     { border: "rgba(239,68,68,0.3)",   fg: "#FCA5A5", bg: "rgba(239,68,68,0.05)" },
+  "대회 상승":    { border: "rgba(52,211,153,0.45)", fg: "#6EE7B7", bg: "rgba(52,211,153,0.08)" },
   "너프 MISS":    { border: "rgba(245,158,11,0.4)",  fg: "#FCD34D", bg: "rgba(245,158,11,0.08)" },
   "버프 MISS":    { border: "rgba(245,158,11,0.4)",  fg: "#FCD34D", bg: "rgba(245,158,11,0.08)" },
   "과버프 판정":  { border: "rgba(249,115,22,0.4)",  fg: "#FDBA74", bg: "rgba(249,115,22,0.08)" },
@@ -185,6 +186,17 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
                 <ConfDot level={a.sample_confidence} />
               </span>
             </div>
+            {a.vct_current_event && (
+              <div className="text-[9px] uppercase tracking-widest -mt-1" style={{ color: "rgba(100,116,139,0.75)" }}>
+                VCT @ {a.vct_current_event}
+                {a.vct_trend_ratio && a.vct_trend_ratio >= 1.5 && (
+                  <span className="ml-1.5" style={{ color: "#6EE7B7" }}>↑ {a.vct_trend_ratio.toFixed(1)}×</span>
+                )}
+                {a.vct_trend_ratio && a.vct_trend_ratio <= 0.67 && a.vct_pr_previous && a.vct_pr_previous >= 5 && (
+                  <span className="ml-1.5" style={{ color: "rgba(252,165,165,0.9)" }}>↓ {a.vct_trend_ratio.toFixed(2)}×</span>
+                )}
+              </div>
+            )}
 
             {/* 배지 (최대 3개) */}
             {a.badges && a.badges.length > 0 && (
