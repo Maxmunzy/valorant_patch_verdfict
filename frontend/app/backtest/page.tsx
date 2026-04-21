@@ -106,7 +106,7 @@ export default async function BacktestPage() {
           />
           <HeroStat
             label="검증 범위"
-            value={`${data.acts.length} 액트`}
+            value={`${data.acts.length} ACT`}
             sub={`${data.actRange.first} → ${data.actRange.last} · ${data.totalRows}건 예측`}
             accent="#7DD3FC"
           />
