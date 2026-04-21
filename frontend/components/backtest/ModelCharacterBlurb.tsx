@@ -45,30 +45,30 @@ export default function ModelCharacterBlurb({ data }: Props) {
   const sentences: { text: string; accent?: string }[] = [];
 
   sentences.push({
-    text: `가장 잘 맞추는 영역은 **${strongest.name}**입니다 — F1 ${strongest.f1.toFixed(2)}, 정밀도 ${Math.round(strongest.p * 100)}% / 재현율 ${Math.round(strongest.r * 100)}%.`,
+    text: `가장 자신 있게 맞히는 쪽은 **${strongest.name}**이에요 — F1 ${strongest.f1.toFixed(2)}, 정밀도 ${Math.round(strongest.p * 100)}% · 재현율 ${Math.round(strongest.r * 100)}%.`,
     accent: "#4ADE80",
   });
 
   if (nerfRecallLow) {
     sentences.push({
-      text: `**너프 탐지는 보수적**입니다 — 실제 너프의 ${Math.round(n.recall * 100)}%만 조기 포착하고 나머지 ${nerfMissedPct}%는 놓칩니다 (정밀도 ${Math.round(n.precision * 100)}%).`,
+      text: `**너프는 꽤 신중하게 집습니다** — 실제 너프 중 ${Math.round(n.recall * 100)}%만 미리 잡아내고 나머지 ${nerfMissedPct}%는 놓치는 편입니다 (정밀도 ${Math.round(n.precision * 100)}%).`,
       accent: "#FF4655",
     });
   } else {
     sentences.push({
-      text: `**${weakest.name}**이 가장 어려운 영역입니다 — F1 ${weakest.f1.toFixed(2)}, 정밀도 ${Math.round(weakest.p * 100)}% / 재현율 ${Math.round(weakest.r * 100)}%.`,
+      text: `가장 까다로운 영역은 **${weakest.name}**입니다 — F1 ${weakest.f1.toFixed(2)}, 정밀도 ${Math.round(weakest.p * 100)}% · 재현율 ${Math.round(weakest.r * 100)}%.`,
       accent: "#F59E0B",
     });
   }
 
   if (calibrated && highNerfRow) {
     sentences.push({
-      text: `다만 **확률이 높을수록 신뢰도도 높아집니다** — p_nerf ≥ 0.70 고확신 예측은 ${Math.round(highNerfRow.precision * 100)}% 적중 (n=${highNerfRow.n}).`,
+      text: `대신 **확률이 높게 찍힐수록 신뢰할 만합니다** — p_nerf 0.70 이상으로 찍은 예측은 ${Math.round(highNerfRow.precision * 100)}% 적중했어요 (n=${highNerfRow.n}).`,
       accent: "#7DD3FC",
     });
   } else {
     sentences.push({
-      text: `전체 방향성 적중률은 **${Math.round(o.hitRate3 * 100)}%**입니다 (Balanced Accuracy ${o.balancedAccuracy.toFixed(2)}).`,
+      text: `전체 방향 적중률은 **${Math.round(o.hitRate3 * 100)}%** 수준입니다 (Balanced Accuracy ${o.balancedAccuracy.toFixed(2)}).`,
       accent: "#7DD3FC",
     });
   }
@@ -96,7 +96,7 @@ export default function ModelCharacterBlurb({ data }: Props) {
           className="text-[11px] uppercase tracking-widest"
           style={{ color: "rgba(148,163,184,0.8)" }}
         >
-          숫자를 읽기 전 먼저 보는 성격 요약
+          숫자 보기 전에 먼저 읽는 모델 성격
         </span>
       </div>
 
@@ -108,7 +108,7 @@ export default function ModelCharacterBlurb({ data }: Props) {
               style={{ background: s.accent ?? "#94A3B8" }}
             />
             <p
-              className="text-[14px] sm:text-[15px] leading-relaxed"
+              className="text-[13px] sm:text-[14px] leading-relaxed"
               style={{ color: "rgba(226,232,240,0.95)" }}
               dangerouslySetInnerHTML={{
                 __html: s.text.replace(/\*\*(.*?)\*\*/g, '<strong style="color:#fff;font-weight:700">$1</strong>'),
@@ -122,8 +122,8 @@ export default function ModelCharacterBlurb({ data }: Props) {
         className="text-[11px] leading-snug pt-2"
         style={{ color: "rgba(148,163,184,0.7)", borderTop: "1px solid rgba(51,65,85,0.4)" }}
       >
-        <strong style={{ color: "#cbd5e1" }}>해석 가이드</strong> · 정밀도 = "너프라 한 것 중 실제 너프 비율" ·
-        재현율 = "실제 너프 중 미리 잡아낸 비율". 둘 다 100% 불가능하므로 트레이드오프.
+        <strong style={{ color: "#cbd5e1" }}>용어 풀이</strong> · <b>정밀도</b>는 "모델이 너프라고 찍은 것 중 실제 너프였던 비율",
+        <b>재현율</b>은 "실제 너프 중 모델이 미리 잡아낸 비율"입니다. 둘 다 100%로 올리는 건 불가능해서 균형 싸움이에요.
       </div>
     </div>
   );

@@ -62,18 +62,18 @@ export default async function BacktestPage() {
               className="text-[11px] font-valo tracking-[0.3em] mb-2"
               style={{ color: "rgba(148,163,184,0.75)" }}
             >
-              워크포워드 백테스트 · 과거 예측 검증
+              시간순 재현 백테스트 · 과거 예측 성적표
             </div>
-            <h1 className="font-valo text-5xl sm:text-6xl font-bold tracking-wide leading-[0.95] text-white">
-              과거 예측 <span style={{ color: "#4ADE80" }}>vs</span> 실제
+            <h1 className="font-valo text-4xl sm:text-5xl font-bold tracking-wide leading-[0.95] text-white">
+              모델은 과거에 <span style={{ color: "#4ADE80" }}>얼마나</span> 맞췄나
             </h1>
           </div>
         </div>
 
-        <p className="text-base leading-relaxed max-w-3xl pl-2" style={{ color: "rgba(203,213,225,0.9)" }}>
-          각 액트에 대해 <span className="font-bold text-white">그 시점까지의 데이터만</span> 사용해
-          모델을 재학습하고 해당 액트의 결과를 예측했습니다.
-          실전 서빙 전 모델이 실제로 내렸을 예측만 평가합니다.
+        <p className="text-[13px] leading-relaxed max-w-3xl pl-2" style={{ color: "rgba(203,213,225,0.9)" }}>
+          각 액트마다 <span className="font-bold text-white">그 시점까지 쌓인 데이터로만</span> 모델을
+          처음부터 다시 학습시킨 뒤 해당 액트를 예측하게 했습니다. 즉, 그때 실제로 모델을 돌렸다면
+          내렸을 예측만 평가에 포함됩니다. 미래 정보를 보고 과거를 맞히는 "치트"가 끼지 않아요.
         </p>
       </div>
 
@@ -89,25 +89,25 @@ export default async function BacktestPage() {
           className="text-[11px] sm:text-[12px] uppercase tracking-[0.3em] font-bold mb-5"
           style={{ color: "rgba(74,222,128,0.85)" }}
         >
-          한눈에 보기 · TL;DR
+          한 줄 요약 · TL;DR
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
           <HeroStat
-            label="방향성 적중률"
+            label="방향 적중률"
             value={`${Math.round(o.hitRate3 * 100)}%`}
-            sub={`${data.totalRows}건 중 3-class 적중`}
+            sub={`전체 ${data.totalRows}건 예측 중 너프/버프/안정 방향을 맞힌 비율`}
             accent="#4ADE80"
           />
           <HeroStat
-            label="NERF 고확신 정밀도"
+            label="확신 있는 너프의 적중률"
             value={`${Math.round((data.highConf.nerf.find((r) => Math.abs(r.threshold - 0.6) < 0.01)?.precision ?? 0) * 100)}%`}
-            sub={`p_nerf ≥ 0.60 예측의 실제 너프 비율`}
+            sub={`p_nerf 0.60 이상으로 찍은 예측 중 실제 너프로 이어진 비율`}
             accent="#FF4655"
           />
           <HeroStat
             label="검증 범위"
             value={`${data.acts.length} ACT`}
-            sub={`${data.actRange.first} → ${data.actRange.last} · ${data.totalRows}건 예측`}
+            sub={`${data.actRange.first} → ${data.actRange.last} · 총 ${data.totalRows}건 예측`}
             accent="#7DD3FC"
           />
         </div>
@@ -116,10 +116,10 @@ export default async function BacktestPage() {
           style={{ borderTop: "1px solid rgba(51,65,85,0.5)" }}
         >
           {[
-            `샘플: ${data.totalRows}`,
+            `예측 샘플 ${data.totalRows}건`,
             `기간: ${data.actRange.first} → ${data.actRange.last}`,
-            `폴드: ${data.acts.length} 액트`,
-            "검증: Walk-forward CV",
+            `${data.acts.length}개 액트 폴드`,
+            "방식: 시간순 재현 (Walk-forward)",
           ].map((t) => (
             <span
               key={t}
@@ -145,27 +145,27 @@ export default async function BacktestPage() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <MetricCard
-            label="방향성 적중률"
+            label="방향 적중률"
             value={`${Math.round(o.hitRate3 * 100)}%`}
-            hint={`n=${data.totalRows}`}
+            hint={`전체 ${data.totalRows}건 기준`}
             accent="#4ADE80"
           />
           <MetricCard
             label="Balanced Accuracy"
             value={o.balancedAccuracy.toFixed(3)}
-            hint="클래스 불균형 보정"
+            hint="클래스 불균형을 보정한 점수"
             accent="#A78BFA"
           />
           <MetricCard
-            label="5-class 적중률"
+            label="세부 적중률"
             value={`${Math.round(o.hitRate5 * 100)}%`}
-            hint="mild/strong 구분까지"
+            hint="약/강 세기까지 맞힌 비율"
             accent="#7DD3FC"
           />
           <MetricCard
-            label="Top-3/액트 NERF"
+            label="액트당 너프 TOP3"
             value={`${Math.round(data.topK.nerfPrecisionTop3PerAct * 100)}%`}
-            hint="각 액트 p_nerf 상위 3명 중 실제 너프 비율"
+            hint="각 액트 너프 확률 상위 3명 중 실제 너프 비율"
             accent="#FF4655"
           />
         </div>
@@ -206,19 +206,19 @@ export default async function BacktestPage() {
       {/* ── 요원별 적중 Top / Worst ──────────────────────────────────── */}
       {data.topAgents && (data.topAgents.hits.length > 0 || data.topAgents.misses.length > 0) && (
         <section className="space-y-5">
-          <SectionHeader en="요원별 요약" ko="잘 맞춘 · 자주 틀린" accent="#FBBF24" />
-          <p className="text-[14px] leading-relaxed max-w-2xl" style={{ color: "rgba(203,213,225,0.9)" }}>
-            같은 요원을 여러 액트에 걸쳐 예측했을 때의 적중률. 표본 3건 이상만 집계.
+          <SectionHeader en="요원별 성적" ko="잘 맞힌 요원 · 잘 못 맞힌 요원" accent="#FBBF24" />
+          <p className="text-[13px] leading-relaxed max-w-2xl" style={{ color: "rgba(203,213,225,0.9)" }}>
+            한 요원을 여러 액트에 걸쳐 예측해온 누적 적중률입니다. 3건 이상 예측된 요원만 집계했어요.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <TopAgentsCard
-              title="가장 잘 맞춘 요원 TOP 5"
+              title="가장 잘 맞힌 요원 TOP 5"
               rows={data.topAgents.hits}
               accent="#4ADE80"
               positive
             />
             <TopAgentsCard
-              title="자주 틀린 요원 TOP 5"
+              title="가장 자주 빗나간 요원 TOP 5"
               rows={data.topAgents.misses}
               accent="#FF4655"
               positive={false}
@@ -229,16 +229,16 @@ export default async function BacktestPage() {
 
       {/* ── Confusion Matrix ─────────────────────────────────────────── */}
       <section className="space-y-4">
-        <SectionHeader en="혼동 행렬" ko="예측 vs 실제" accent="#A78BFA" />
+        <SectionHeader en="혼동 행렬" ko="예측한 것 vs 실제 결과" accent="#A78BFA" />
         <ConfusionMatrix matrix={o.confusionMatrix} labels={o.confusionLabels} />
       </section>
 
       {/* ── 고확신 임계값 ────────────────────────────────────────────── */}
       <section className="space-y-5">
-        <SectionHeader en="확신도 검증" ko="임계값별 정밀도" accent="#7DD3FC" />
-        <p className="text-[14px] leading-relaxed max-w-2xl" style={{ color: "rgba(203,213,225,0.9)" }}>
-          확률이 높을수록 실제 너프/버프로 이어질 가능성이 커야 정상.
-          아래 곡선은 임계값 이상 예측한 샘플 중 실제로 방향이 맞은 비율입니다.
+        <SectionHeader en="확신도 검증" ko="확률이 높을 때 실제로도 맞는가" accent="#7DD3FC" />
+        <p className="text-[13px] leading-relaxed max-w-2xl" style={{ color: "rgba(203,213,225,0.9)" }}>
+          모델이 높은 확률로 찍을수록 실제 너프/버프가 일어날 비율도 같이 높아져야 정상입니다.
+          아래는 각 임계값 이상으로 예측한 샘플 가운데 실제 방향이 맞았던 비율이에요.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <ThresholdTable
@@ -257,10 +257,10 @@ export default async function BacktestPage() {
       {/* ── 스토리: 선행 적중 ────────────────────────────────────────── */}
       {data.stories.leadHits.length > 0 && (
         <section className="space-y-5">
-          <SectionHeader en="선행 예측" ko="한 액트 먼저 맞춘 케이스" accent="#4ADE80" />
-          <p className="text-[14px] leading-relaxed max-w-2xl" style={{ color: "rgba(203,213,225,0.9)" }}>
-            해당 액트에는 아직 너프 안 됐지만 모델이 먼저 경고를 올렸고,
-            실제로 <span className="font-bold text-white">바로 다음 액트에</span> 너프가 이어진 경우.
+          <SectionHeader en="선행 예측" ko="한 액트 먼저 짚어낸 케이스" accent="#4ADE80" />
+          <p className="text-[13px] leading-relaxed max-w-2xl" style={{ color: "rgba(203,213,225,0.9)" }}>
+            아직 너프가 내려오지 않았을 때 모델이 먼저 너프 신호를 올렸고,
+            실제로 <span className="font-bold text-white">바로 다음 액트</span>에서 너프가 확정된 경우입니다.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.stories.leadHits.map((s, i) => (
@@ -293,8 +293,8 @@ export default async function BacktestPage() {
                   </span>
                 </div>
                 <div className="text-[12px] leading-snug" style={{ color: "rgba(148,163,184,0.9)" }}>
-                  {s.predictedAt} 시점엔 stable. 그러나 모델은 너프 신호를 감지했고,
-                  {s.hitAt} 에 실제 너프 발생.
+                  {s.predictedAt} 당시엔 너프가 없는 안정 상태였지만 모델은 이미 너프 신호를 읽었고,
+                  한 액트 뒤 {s.hitAt}에서 실제 너프로 이어졌습니다.
                 </div>
               </div>
             ))}
@@ -306,25 +306,25 @@ export default async function BacktestPage() {
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <StoryBlock
           en="대표 적중"
-          ko="확신 있게 맞춘 케이스"
+          ko="자신 있게 질렀는데 맞은 예측"
           accent="#4ADE80"
           rows={data.stories.bigHits}
-          blurb="확신 있게 예측 → 실제로 방향 맞음."
+          blurb="모델이 강하게 확신했고 실제로도 그 방향으로 움직인 케이스예요."
         />
         <StoryBlock
           en="대표 오답"
-          ko="확신 있게 틀린 케이스"
+          ko="자신 있게 질렀는데 빗나간 예측"
           accent="#FF4655"
           rows={data.stories.bigMisses}
-          blurb="모델이 강하게 너프/버프라 했지만 실제로는 빗나간 케이스."
+          blurb="너프/버프라고 강하게 찍었지만 실제로는 반대로 흘러간 케이스입니다."
         />
       </section>
 
       {/* ── 액트별 적중률 추이 ───────────────────────────────────────── */}
       <section className="space-y-4">
-        <SectionHeader en="액트별 추이" ko="시간에 따른 적중률" accent="#FBBF24" />
-        <p className="text-[14px] leading-relaxed max-w-2xl" style={{ color: "rgba(203,213,225,0.9)" }}>
-          액트가 쌓이면서 학습 데이터가 많아집니다. 선 그래프는 시간에 따라 모델 성능이 안정화되는지 보여줍니다.
+        <SectionHeader en="액트별 추이" ko="액트가 지날수록 모델은 나아졌나" accent="#FBBF24" />
+        <p className="text-[13px] leading-relaxed max-w-2xl" style={{ color: "rgba(203,213,225,0.9)" }}>
+          액트가 늘수록 학습 데이터가 쌓입니다. 시간이 가면서 적중률이 안정권에 들어오는지 아래 그래프로 확인할 수 있어요.
         </p>
         <PerActLineChart perAct={data.perAct} />
         <PerActChart perAct={data.perAct} />
@@ -332,32 +332,34 @@ export default async function BacktestPage() {
 
       {/* ── 전체 예측 테이블 ─────────────────────────────────────────── */}
       <section className="space-y-4">
-        <SectionHeader en="전체 예측 목록" ko="453건 원본 데이터" accent="#CBD5E1" />
+        <SectionHeader en="전체 예측 목록" ko={`${data.totalRows}건 원본 기록`} accent="#CBD5E1" />
         <BacktestPredictionTable rows={data.predictions} acts={data.acts} />
       </section>
 
       {/* ── 메서돌로지 ────────────────────────────────────────────────── */}
       <section className="space-y-5">
-        <SectionHeader en="측정 방식" ko="방법론" accent="#94A3B8" />
+        <SectionHeader en="측정 방식" ko="어떻게 평가했나" accent="#94A3B8" />
         <div
-          className="p-6 text-[14px] leading-relaxed space-y-4"
+          className="p-6 text-[13px] leading-relaxed space-y-4"
           style={{ border: "1px solid rgba(51,65,85,0.6)", background: "rgba(13,18,32,0.5)", color: "rgba(226,232,240,0.92)" }}
         >
           <Bullet>
-            <strong>Walk-forward CV</strong> — 각 폴드에서 <code className="font-mono text-white">act_idx &lt; T</code> 데이터로만
-            모델을 학습한 뒤 <code className="font-mono text-white">act_idx == T</code> 를 예측.
-            미래 데이터가 과거 평가에 누출되지 않습니다.
+            <strong>시간순 재현 (Walk-forward)</strong> — 각 폴드에서
+            <code className="font-mono text-white mx-1">act_idx &lt; T</code>에 해당하는 과거 데이터로만 학습한 뒤
+            <code className="font-mono text-white mx-1">act_idx == T</code>를 예측합니다.
+            미래 정보가 과거 평가에 새어 들어가지 않는 구조예요.
           </Bullet>
           <Bullet>
-            <strong>2-Stage</strong> — Stage A: stable vs patched (XGBoost · train-only 언더샘플링),
-            Stage B: buff vs nerf (Logistic Regression). 결합해 5-class verdict 산출.
+            <strong>2단 구조</strong> — 1단(XGBoost)에서 "이 요원이 다음 패치에 조정될지 vs 안정될지"를 판별하고,
+            조정된다고 판단된 경우에만 2단(Logistic Regression)에서 "너프인지 버프인지"를 가립니다.
+            최종적으로 5단계 판정(강/약 너프 · 안정 · 강/약 버프)으로 합쳐져요.
           </Bullet>
           <Bullet>
-            <strong>레이블</strong> — 각 액트 이후 실제 너프/버프 이력에 따라 부여.
-            미니 패치 / rework / 핫픽스 포함.
+            <strong>정답 레이블</strong> — 각 액트 이후 실제로 있었던 너프/버프 이력을 기준으로 매겼습니다.
+            미니 패치, 리워크, 핫픽스까지 모두 반영했어요.
           </Bullet>
           <Bullet>
-            <strong>평가 대상</strong> — 레이블 확정된 과거 액트만 (현재 진행 중 V26A2 제외).
+            <strong>평가 범위</strong> — 결과가 확정된 과거 액트만 대상으로 했습니다 (현재 진행 중인 V26A2는 제외).
           </Bullet>
           <Bullet>
             <strong>생성 시각</strong>{" "}
@@ -392,7 +394,7 @@ function SectionHeader({
       >
         {en}
       </span>
-      <span className="font-valo font-bold text-2xl sm:text-3xl" style={{ color: accent }}>
+      <span className="font-valo font-bold text-xl sm:text-2xl" style={{ color: accent }}>
         {ko}
       </span>
     </div>
@@ -421,11 +423,11 @@ function MetricCard({
       <div className="text-[12px] uppercase tracking-[0.2em] mb-2" style={{ color: "rgba(148,163,184,0.85)" }}>
         {label}
       </div>
-      <div className="text-5xl font-num font-bold tabular-nums leading-none" style={{ color: accent }}>
+      <div className="text-4xl font-num font-bold tabular-nums leading-none" style={{ color: accent }}>
         {value}
       </div>
       {hint && (
-        <div className="text-[12px] mt-2" style={{ color: "rgba(148,163,184,0.75)" }}>
+        <div className="text-[11px] mt-2" style={{ color: "rgba(148,163,184,0.75)" }}>
           {hint}
         </div>
       )}
@@ -439,7 +441,7 @@ function Stat({ label, value }: { label: string; value: number }) {
       <div className="text-[11px] uppercase tracking-widest mb-1" style={{ color: "rgba(148,163,184,0.75)" }}>
         {label}
       </div>
-      <div className="text-2xl font-num font-bold tabular-nums" style={{ color: "#e2e8f0" }}>
+      <div className="text-xl font-num font-bold tabular-nums" style={{ color: "#e2e8f0" }}>
         {value.toFixed(2)}
       </div>
     </div>
@@ -454,7 +456,7 @@ function ConfusionMatrix({ matrix, labels }: { matrix: number[][]; labels: strin
       className="p-6 overflow-auto"
       style={{ border: "1px solid rgba(51,65,85,0.6)", background: "rgba(13,18,32,0.5)" }}
     >
-      <table className="text-[16px] font-num tabular-nums mx-auto">
+      <table className="text-[14px] font-num tabular-nums mx-auto">
         <thead>
           <tr>
             <th className="px-3 py-2"></th>
@@ -485,12 +487,12 @@ function ConfusionMatrix({ matrix, labels }: { matrix: number[][]; labels: strin
                 return (
                   <td
                     key={j}
-                    className="px-5 py-4 text-center font-bold text-2xl"
+                    className="px-5 py-3.5 text-center font-bold text-xl"
                     style={{
                       background: `rgba(${bgBase},${0.05 + intensity * 0.4})`,
                       color: isDiag ? "#4ADE80" : "#e2e8f0",
                       border: "1px solid rgba(30,41,59,0.6)",
-                      minWidth: "96px",
+                      minWidth: "88px",
                     }}
                   >
                     {v}
@@ -502,7 +504,7 @@ function ConfusionMatrix({ matrix, labels }: { matrix: number[][]; labels: strin
         </tbody>
       </table>
       <div className="text-[13px] text-center mt-4" style={{ color: "rgba(148,163,184,0.85)" }}>
-        대각선 = 정답. 초록색 짙을수록 좋음.
+        대각선 칸이 "정확히 맞힌 예측". 초록이 짙을수록 잘 맞혔다는 뜻이에요.
       </div>
     </div>
   );
@@ -588,7 +590,7 @@ function StoryBlock({
   return (
     <div className="space-y-4">
       <SectionHeader en={en} ko={ko} accent={accent} />
-      <p className="text-[14px] leading-relaxed max-w-lg" style={{ color: "rgba(203,213,225,0.9)" }}>
+      <p className="text-[13px] leading-relaxed max-w-lg" style={{ color: "rgba(203,213,225,0.9)" }}>
         {blurb}
       </p>
       <div className="space-y-3">
@@ -679,7 +681,7 @@ function PerActChart({
         );
       })}
       <div className="text-[12px] pt-3" style={{ color: "rgba(100,116,139,0.9)" }}>
-        얇은 세로선 = 전체 평균 ({Math.round(avg * 100)}%). · 5c = 5-class 세부 적중률
+        얇은 세로선은 전체 평균 ({Math.round(avg * 100)}%) 위치 · 5c는 약/강 세기까지 맞힌 세부 적중률이에요.
       </div>
     </div>
   );
@@ -716,11 +718,11 @@ function HeroStat({
       </div>
       <div
         className="font-num font-bold tabular-nums leading-none"
-        style={{ color: accent, fontSize: "clamp(48px, 9vw, 84px)" }}
+        style={{ color: accent, fontSize: "clamp(40px, 7vw, 64px)" }}
       >
         {value}
       </div>
-      <div className="text-[13px] leading-snug" style={{ color: "rgba(203,213,225,0.9)" }}>
+      <div className="text-[12px] leading-snug" style={{ color: "rgba(203,213,225,0.9)" }}>
         {sub}
       </div>
     </div>
@@ -843,11 +845,11 @@ function PerActLineChart({
       <div className="flex flex-wrap items-center gap-4 mb-3 text-[12px] font-mono">
         <span className="flex items-center gap-2">
           <span className="inline-block w-4 h-0.5" style={{ background: "#4ADE80" }} />
-          <span style={{ color: "#e2e8f0" }}>3-class 적중률</span>
+          <span style={{ color: "#e2e8f0" }}>방향 적중률 (너프/버프/안정)</span>
         </span>
         <span className="flex items-center gap-2">
           <span className="inline-block w-4 h-0.5" style={{ background: "#7DD3FC" }} />
-          <span style={{ color: "rgba(203,213,225,0.9)" }}>5-class 적중률</span>
+          <span style={{ color: "rgba(203,213,225,0.9)" }}>세부 적중률 (약/강까지)</span>
         </span>
         <span className="flex items-center gap-2">
           <span className="inline-block w-4 h-px border-t border-dashed" style={{ borderColor: "rgba(148,163,184,0.7)" }} />
