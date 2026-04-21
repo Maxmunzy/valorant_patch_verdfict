@@ -14,6 +14,7 @@ from __future__ import annotations
 import os
 import json
 import warnings
+from pathlib import Path
 warnings.filterwarnings("ignore")
 
 # .env 자동 로드 (ANTHROPIC_API_KEY 등)
@@ -89,6 +90,13 @@ CAT_COLS = [
 PIPELINE_PATH  = "step2_pipeline.pkl"
 DATA_PATH      = "step2_training_data.csv"
 EXPLANATION_CACHE_PATH = "explanation_cache.json"
+
+
+def _resolve_runtime_path(path_str: str) -> Path:
+    path = Path(path_str)
+    if path.is_absolute():
+        return path
+    return Path(__file__).resolve().parent / path
 
 
 # ─── 도메인 규칙 ──────────────────────────────────────────────────────────────
@@ -423,7 +431,16 @@ class PatchPredictor:
                  data_path: str = DATA_PATH,
                  cache_path: str = EXPLANATION_CACHE_PATH):
 
-        pipe = joblib.load(pipeline_path)
+        pipeline_file = _resolve_runtime_path(pipeline_path)
+        data_file = _resolve_runtime_path(data_path)
+        cache_file = _resolve_runtime_path(cache_path)
+
+        if not pipeline_file.exists():
+            raise FileNotFoundError(f"Required model artifact not found: {pipeline_file}")
+        if not data_file.exists():
+            raise FileNotFoundError(f"Required training data not found: {data_file}")
+
+        pipe = joblib.load(pipeline_file)
 
         # 2-Stage 파이프라인 (Stage A: stable vs patched / Stage B: buff vs nerf)
         self.model_a      = pipe["model_a"]
@@ -437,7 +454,7 @@ class PatchPredictor:
 
         # 설명 생성기 (explanation_service.py로 분리)
         from explanation_service import ExplanationGenerator
-        self._explainer = ExplanationGenerator(cache_path)
+        self._explainer = ExplanationGenerator(str(cache_file))
 
         # 패치노트에서 요원별 마지막 패치 버전 조회용 룩업 구성
         # (agent, act_name) → 마지막 패치 버전 문자열
@@ -445,7 +462,7 @@ class PatchPredictor:
         try:
             import re as _re
             from agent_data import PATCH_TO_ACT
-            _pn = pd.read_csv("patch_notes_classified.csv")
+            _pn = pd.read_csv(_resolve_runtime_path("patch_notes_classified.csv"))
             _pn["_act"] = _pn["patch"].astype(str).map(PATCH_TO_ACT)
             # 크로스패치 인트로 텍스트 감지용 정규식
             # 예: "Patch Notes 12.03 Modes updates, Gekko changes..." 이 12.06 행에 붙어있으면 노이즈
@@ -486,13 +503,13 @@ class PatchPredictor:
         self._patch_dates: dict[str, str] = {}
         try:
             import json as _json
-            with open("patch_dates.json", encoding="utf-8") as _f:
+            with open(_resolve_runtime_path("patch_dates.json"), encoding="utf-8") as _f:
                 self._patch_dates = _json.load(_f)
         except Exception:
             pass
 
         # 데이터 로드 및 전처리
-        raw_df = pd.read_csv(data_path)
+        raw_df = pd.read_csv(data_file)
         self._run_pipeline(raw_df)
 
     def _run_pipeline(self, raw_df: pd.DataFrame):
