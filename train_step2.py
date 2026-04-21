@@ -103,6 +103,12 @@ DROP_COLS_COMMON = [
     "map_dep_score", "effective_map_dep",
     "last_combined",
 
+    # Phase 5 — 대회 단위 타임라인 보조 컬럼 (문자열/중복)
+    "vct_event_history",           # JSON 문자열 — 모델 입력 불가
+    "vct_current_event_name",      # 문자열
+    "vct_previous_event_name",     # 문자열
+    "vct_pr_previous_event",       # trend_ratio 와 중복
+
     # 표시용 / 미래 누수 컬럼
     "vct_pr_post", "vct_wr_post",
     "rank_pr_t+1", "rank_wr_t+1",
