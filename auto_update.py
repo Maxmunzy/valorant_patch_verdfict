@@ -262,7 +262,7 @@ def pipeline(
             build_ok = True
 
         # ── 5. 모델 재학습 (저장된 HPO 재사용 → --fast) ─────────────────
-        log.info("\n[5/5] 모델 재학습 (--fast) + API 재로드...")
+        log.info("\n[5/5] 모델 재학습 (--fast) + 백테스트 + API 재로드...")
         if not dry_run and build_ok:
             train_ok = run_script("train_step2.py", ["--fast"], timeout=1800)
             if train_ok:
@@ -270,8 +270,15 @@ def pipeline(
                 clear_explanation_cache()
                 reload_api()
                 steps_done.append("API 재로드")
+
+                # 백테스트 → 공개 JSON 요약 갱신 (프론트 /backtest 페이지용)
+                bt_ok = run_script("backtest.py", timeout=600)
+                if bt_ok:
+                    sum_ok = run_script("build_backtest_summary.py", timeout=60)
+                    if sum_ok:
+                        steps_done.append("백테스트 요약")
         else:
-            log.info("  [DRY RUN] train_step2.py --fast + /reload")
+            log.info("  [DRY RUN] train_step2.py --fast + /reload + backtest")
     else:
         log.info("\n[4-5] 데이터 변경 없음 — 빌드/학습 건너뜀")
 

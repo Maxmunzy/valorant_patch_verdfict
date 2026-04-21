@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import PredBadge from "./PredBadge";
+import VctSparkline from "./VctSparkline";
 import { AgentPrediction } from "@/lib/api";
 import { agentPortrait } from "@/lib/agents";
 
@@ -186,14 +187,20 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
                 <ConfDot level={a.sample_confidence} />
               </span>
             </div>
-            {a.vct_current_event && (
-              <div className="text-[9px] uppercase tracking-widest -mt-1" style={{ color: "rgba(100,116,139,0.75)" }}>
-                VCT @ {a.vct_current_event}
-                {a.vct_trend_ratio && a.vct_trend_ratio >= 1.5 && (
-                  <span className="ml-1.5" style={{ color: "#6EE7B7" }}>↑ {a.vct_trend_ratio.toFixed(1)}×</span>
+            {(a.vct_current_event || (a.vct_event_history && a.vct_event_history.length >= 2)) && (
+              <div className="flex items-center gap-2 -mt-1">
+                {a.vct_event_history && a.vct_event_history.length >= 2 && (
+                  <VctSparkline
+                    events={a.vct_event_history}
+                    accentColor={accentColor}
+                    showTrend
+                    trendRatio={a.vct_trend_ratio ?? null}
+                  />
                 )}
-                {a.vct_trend_ratio && a.vct_trend_ratio <= 0.67 && a.vct_pr_previous && a.vct_pr_previous >= 5 && (
-                  <span className="ml-1.5" style={{ color: "rgba(252,165,165,0.9)" }}>↓ {a.vct_trend_ratio.toFixed(2)}×</span>
+                {a.vct_current_event && (
+                  <span className="text-[9px] uppercase tracking-widest truncate" style={{ color: "rgba(100,116,139,0.75)" }}>
+                    VCT @ {a.vct_current_event}
+                  </span>
                 )}
               </div>
             )}

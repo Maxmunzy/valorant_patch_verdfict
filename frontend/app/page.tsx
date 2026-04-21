@@ -3,7 +3,9 @@ import Link from "next/link";
 import AgentCard from "@/components/AgentCard";
 import AgentExplorer from "@/components/AgentExplorer";
 import TrustBlock from "@/components/TrustBlock";
+import ModelAccuracyBanner from "@/components/ModelAccuracyBanner";
 import { getAllPredictions, AgentPrediction } from "@/lib/api";
+import { getBacktestSummary } from "@/lib/backtest";
 import { agentPortrait } from "@/lib/agents";
 
 // 60초 ISR — 배포/데이터 변경 후 체감 반영 시간 단축
@@ -42,12 +44,11 @@ function SectionLabel({
 }
 
 export default async function Home() {
-  let agents: AgentPrediction[] = [];
-  try {
-    agents = await getAllPredictions();
-  } catch {
-    /* fallback empty */
-  }
+  // 예측 + 백테스트 요약을 병렬 로드 (요약 실패해도 페이지 자체는 렌더)
+  const [agents, backtest] = await Promise.all([
+    getAllPredictions().catch(() => [] as AgentPrediction[]),
+    getBacktestSummary().catch(() => null),
+  ]);
 
   // API 응답 순서 유지 (p_nerf/p_buff 내림차순)
   const nerfAll   = agents.filter((a) => a.verdict.includes("nerf"));
@@ -130,7 +131,10 @@ export default async function Home() {
         </div>
 
         {/* ── 데이터 출처 / 갱신 / 확률 의미 신뢰 블록 ───────── */}
-        <TrustBlock />
+        <TrustBlock backtest={backtest} />
+
+        {/* ── 백테스트 적중률 배너 (클릭 시 /backtest) ───────── */}
+        <ModelAccuracyBanner data={backtest} />
       </div>
 
       {/* ── NERF TOP 3 ──────────────────────────────── */}

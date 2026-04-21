@@ -10,11 +10,14 @@
 import { usePathname } from "next/navigation";
 
 const UPDATES: { date: string; note: string }[] = [
+  { date: "2026.04.21", note: "Walk-forward 백테스트 공개 · 카드 VCT 스파크라인 · 모델 적중률 배너" },
+  { date: "2026.04.20", note: "대회 단위 타임라인 (요원 상세) · 모델에 현재 대회 픽률 피처 추가" },
   { date: "2026.04.20", note: "홈 카드 배지 / 표본 신뢰도 Tier / 크로스패치 노이즈 필터" },
-  { date: "2026.04.20", note: "확률 해석 경고 · 홈 정보 밀도 축소 · 시뮬레이터 샘플 시나리오" },
-  { date: "2026.04.20", note: "AI 분석 라벨 용어 정돈 · stable 폴백 문구 개선" },
+  { date: "2026.04.20", note: "확률 해석 경고 · 시뮬레이터 샘플 시나리오" },
   { date: "2026.04.18", note: "커스텀 도메인 whosnxt.app 연결 · 프로덕션 배포" },
 ];
+
+const GITHUB_URL = "https://github.com/Maxmunzy/valorant_patch_verdict";
 
 export default function Disclaimer() {
   const pathname = usePathname();
@@ -35,6 +38,24 @@ export default function Disclaimer() {
             <span style={{ color: "rgba(148,163,184,0.7)" }}>UNOFFICIAL FAN PROJECT</span>
             <span>·</span>
             <span>NOT AFFILIATED WITH RIOT GAMES</span>
+            <span>·</span>
+            <a
+              href="/backtest"
+              className="transition-colors hover:text-white"
+              style={{ color: "rgba(74,222,128,0.8)" }}
+            >
+              BACKTEST
+            </a>
+            <span>·</span>
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-white"
+              style={{ color: "rgba(148,163,184,0.7)" }}
+            >
+              GITHUB
+            </a>
             <span>·</span>
             <a
               href="mailto:ashley920913@gmail.com"
@@ -131,6 +152,24 @@ export default function Disclaimer() {
           <span>UNOFFICIAL FAN PROJECT</span>
           <span>·</span>
           <span>NOT AFFILIATED WITH RIOT GAMES</span>
+          <span>·</span>
+          <a
+            href="/backtest"
+            className="transition-colors hover:text-white"
+            style={{ color: "rgba(74,222,128,0.85)" }}
+          >
+            BACKTEST
+          </a>
+          <span>·</span>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-slate-300"
+            style={{ color: "rgba(148,163,184,0.85)" }}
+          >
+            GITHUB
+          </a>
         </div>
       </div>
     </footer>
