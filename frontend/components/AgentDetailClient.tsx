@@ -352,7 +352,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
           {/* Main probability display */}
           <div>
             <div className="flex items-baseline gap-3 mb-1.5">
-              <span className="text-6xl font-valo font-black leading-none" style={{ color: accentColor }}>
+              <span className="text-6xl font-num font-black tracking-tight leading-none" style={{ color: accentColor }}>
                 {displayPct.toFixed(0)}%
               </span>
               <div className="space-y-0.5">

@@ -33,6 +33,9 @@ This file summarizes the non-README changes made in this pass so another agent c
   - `frontend/lib/headline.ts`
 - Added `typecheck` script to `frontend/package.json`.
 - Replaced the default template content in `frontend/README.md` with project-specific instructions.
+- Improved readability for user-facing typography:
+  - Agent names in multiple views were moved away from condensed display styling.
+  - The main percentage readout in `frontend/components/AgentDetailClient.tsx` now uses numeric styling for better legibility.
 
 ## Test and DX changes
 
@@ -62,5 +65,6 @@ This file summarizes the non-README changes made in this pass so another agent c
 - `frontend/lib/constants.ts`
 - `frontend/lib/headline.ts`
 - `frontend/package.json`
+- `frontend/components/AgentDetailClient.tsx`
 - `pytest.ini`
 - `CODEX.md`
