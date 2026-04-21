@@ -65,7 +65,7 @@ export default async function BacktestPage() {
               시간순 재현 백테스트 · 과거 예측 성적표
             </div>
             <h1 className="font-valo text-4xl sm:text-5xl font-bold tracking-wide leading-[0.95] text-white">
-              모델은 과거에 <span style={{ color: "#4ADE80" }}>얼마나</span> 맞췄나
+              예측 <span style={{ color: "#4ADE80" }}>정확도</span> 리포트
             </h1>
           </div>
         </div>
@@ -99,7 +99,7 @@ export default async function BacktestPage() {
             accent="#4ADE80"
           />
           <HeroStat
-            label="확신 있는 너프의 적중률"
+            label="강한 너프 신호 정밀도"
             value={`${Math.round((data.highConf.nerf.find((r) => Math.abs(r.threshold - 0.6) < 0.01)?.precision ?? 0) * 100)}%`}
             sub={`p_nerf 0.60 이상으로 찍은 예측 중 실제 너프로 이어진 비율`}
             accent="#FF4655"
@@ -306,23 +306,23 @@ export default async function BacktestPage() {
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <StoryBlock
           en="대표 적중"
-          ko="자신 있게 질렀는데 맞은 예측"
+          ko="높은 확률로 정확히 맞힌 예측"
           accent="#4ADE80"
           rows={data.stories.bigHits}
-          blurb="모델이 강하게 확신했고 실제로도 그 방향으로 움직인 케이스예요."
+          blurb="모델이 강한 확률로 너프/버프를 예측했고 실제로도 그 방향으로 이어진 케이스예요."
         />
         <StoryBlock
           en="대표 오답"
-          ko="자신 있게 질렀는데 빗나간 예측"
+          ko="높은 확률로 예측했지만 빗나간 케이스"
           accent="#FF4655"
           rows={data.stories.bigMisses}
-          blurb="너프/버프라고 강하게 찍었지만 실제로는 반대로 흘러간 케이스입니다."
+          blurb="모델이 강한 확률로 너프/버프를 예측했지만 실제는 반대로 흘러간 케이스입니다."
         />
       </section>
 
       {/* ── 액트별 적중률 추이 ───────────────────────────────────────── */}
       <section className="space-y-4">
-        <SectionHeader en="액트별 추이" ko="액트가 지날수록 모델은 나아졌나" accent="#FBBF24" />
+        <SectionHeader en="액트별 추이" ko="각 액트별 예측 적중률" accent="#FBBF24" />
         <p className="text-[13px] leading-relaxed max-w-2xl" style={{ color: "rgba(203,213,225,0.9)" }}>
           액트가 늘수록 학습 데이터가 쌓입니다. 시간이 가면서 적중률이 안정권에 들어오는지 아래 그래프로 확인할 수 있어요.
         </p>
@@ -338,7 +338,7 @@ export default async function BacktestPage() {
 
       {/* ── 메서돌로지 ────────────────────────────────────────────────── */}
       <section className="space-y-5">
-        <SectionHeader en="측정 방식" ko="어떻게 평가했나" accent="#94A3B8" />
+        <SectionHeader en="측정 방식" accent="#94A3B8" />
         <div
           className="p-6 text-[13px] leading-relaxed space-y-4"
           style={{ border: "1px solid rgba(51,65,85,0.6)", background: "rgba(13,18,32,0.5)", color: "rgba(226,232,240,0.92)" }}
@@ -382,21 +382,29 @@ function SectionHeader({
   accent,
 }: {
   en: string;
-  ko: string;
+  ko?: string;
   accent: string;
 }) {
   return (
     <div className="flex items-baseline gap-3 flex-wrap">
       <div style={{ width: "3px", height: "30px", background: accent }} />
-      <span
-        className="text-[12px] font-valo tracking-[0.25em]"
-        style={{ color: `${accent}CC` }}
-      >
-        {en}
-      </span>
-      <span className="font-valo font-bold text-xl sm:text-2xl" style={{ color: accent }}>
-        {ko}
-      </span>
+      {ko ? (
+        <>
+          <span
+            className="text-[12px] font-valo tracking-[0.25em]"
+            style={{ color: `${accent}CC` }}
+          >
+            {en}
+          </span>
+          <span className="font-valo font-bold text-xl sm:text-2xl" style={{ color: accent }}>
+            {ko}
+          </span>
+        </>
+      ) : (
+        <span className="font-valo font-bold text-xl sm:text-2xl tracking-wide" style={{ color: accent }}>
+          {en}
+        </span>
+      )}
     </div>
   );
 }
