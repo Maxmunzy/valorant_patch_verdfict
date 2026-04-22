@@ -255,6 +255,26 @@ valorant_patch_verdict/
   frontend/                # Next.js 프론트엔드 (시뮬레이터 포함)
 ```
 
+## 프론트엔드 페이지 구조
+
+편집자 톤 유지를 위해 홈을 의도적으로 얇게 만들고, 탐색이 필요한 부분은 별도 페이지로 분리했다.
+
+```
+/                    TL;DR 2연장 히어로 (Top 너프/버프 1명씩) + 수직 네비 3종
+├── /agents          Top 3 너프·버프 그리드 + 전체 로스터 Explorer
+├── /agent/[name]    요원 상세 — AI 분석, VCT 타임라인, 패치 이력
+├── /simulator       가상 패치 시뮬레이터 (임팩트 + AI 해설)
+├── /backtest        Walk-forward 백테스트 리포트
+└── /concepts/       시안 검토용 내부 페이지 (예: meta-forecast 스트립 5종)
+```
+
+- **홈**(`/`) — `TldrHero` 한 줄 요약 + `NavButton` 세 개(세로 스택). 각 버튼 우측에 요원 초상화를 `objectPosition`으로 크롭해 배경으로 깔고, 요원별 오프셋 오버라이드(`PORTRAIT_Y_OVERRIDE`)로 얼굴 위치를 개별 조정.
+- **로스터 분리** — 너프/버프 그리드 + `AgentExplorer`가 홈에서 빠져 `/agents`로 이동. 홈의 편집자 톤과 탐색 기능의 그리드 톤을 섞지 않는다.
+- **공통 Back 버튼** — `components/BackToHome.tsx` 하나로 통일(`메인으로` 라벨). 모든 하위 페이지에서 재사용.
+- **시안 시트**(`/concepts/meta-forecast`) — 라이브가 아닌 내부 리뷰용. "한 줄 메타 예보" 스트립을 5가지 방향(Split VS, Alert Ticker, Radar Signal, Terminal Readout, Threat Level)으로 동시 비교.
+
+---
+
 ## 실행 방법
 
 백엔드(FastAPI)와 프론트엔드(Next.js)는 별도 프로세스로 돌린다.

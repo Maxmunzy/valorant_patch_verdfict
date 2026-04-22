@@ -110,19 +110,19 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
     return (
       <Link href={href} className="group relative overflow-hidden block" style={{ border: `1px solid ${accentColor}35`, background: "#0d1220" }}>
         {portrait && (
-          <div className="absolute top-0 left-0 right-0 pointer-events-none" style={{ height: "220px", zIndex: 0 }}>
+          <div className="absolute top-0 left-0 right-0 pointer-events-none" style={{ height: "240px", zIndex: 0 }}>
             <Image
               src={portrait}
               alt={a.agent}
               fill
-              className="object-cover object-top opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+              className="object-cover object-top opacity-55 group-hover:opacity-75 transition-opacity duration-300"
               sizes="340px"
             />
             <div
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(to bottom, transparent 0%, #0d1220 75%), linear-gradient(to right, #0d1220 20%, transparent 60%)",
+                  "linear-gradient(to bottom, transparent 0%, rgba(13,18,32,0.2) 35%, #0d1220 90%), linear-gradient(to right, rgba(13,18,32,0.92) 0%, rgba(13,18,32,0.35) 45%, transparent 75%)",
               }}
             />
           </div>
@@ -222,8 +222,51 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
   }
 
   return (
-    <Link href={href} className="group block p-4 transition-colors" style={{ border: `1px solid ${accentColor}22`, background: "rgba(13,18,32,0.72)" }}>
-      <div className="flex items-start justify-between gap-3">
+    <Link
+      href={href}
+      className="group relative overflow-hidden block p-4 transition-colors"
+      style={{ border: `1px solid ${accentColor}22`, background: "#0d1220" }}
+    >
+      {/* 요원 초상화 (우측 50%, 뒤에 깔림) */}
+      {portrait && (
+        <div
+          className="absolute right-0 top-0 pointer-events-none"
+          style={{ width: "50%", height: "100%", zIndex: 0 }}
+        >
+          <Image
+            src={portrait}
+            alt={a.agent}
+            fill
+            className="object-cover object-top opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+            sizes="200px"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, #0d1220 0%, rgba(13,18,32,0.35) 40%, transparent 85%)",
+            }}
+          />
+        </div>
+      )}
+
+      {/* 상단 글로우 라인 */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+        style={{ zIndex: 5, background: `linear-gradient(90deg, ${accentColor}55, transparent)` }}
+      />
+
+      {/* 코너 브래킷 */}
+      <div
+        className="absolute top-1.5 left-1.5 w-2 h-2 pointer-events-none"
+        style={{ zIndex: 5, borderTop: `1px solid ${accentColor}45`, borderLeft: `1px solid ${accentColor}45` }}
+      />
+      <div
+        className="absolute top-1.5 right-1.5 w-2 h-2 pointer-events-none"
+        style={{ zIndex: 5, borderTop: `1px solid ${accentColor}25`, borderRight: `1px solid ${accentColor}25` }}
+      />
+
+      <div className="relative flex items-start justify-between gap-3" style={{ zIndex: 10 }}>
         <div>
           <div className="text-lg font-bold text-white">{a.agent}</div>
           <div className="text-[11px] uppercase tracking-wider" style={{ color: "rgba(148,163,184,0.75)" }}>
@@ -233,7 +276,7 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
         <PredBadge verdict={a.verdict} size="sm" />
       </div>
 
-      <div className="mt-3 flex items-end justify-between gap-3">
+      <div className="relative mt-3 flex items-end justify-between gap-3" style={{ zIndex: 10 }}>
         <div className="text-3xl font-black" style={{ color: accentColor }}>
           {displayPct.toFixed(0)}%
         </div>
@@ -243,7 +286,7 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
         </div>
       </div>
 
-      <div className="mt-3">
+      <div className="relative mt-3" style={{ zIndex: 10 }}>
         <GaugeBar value={displayPct} color={accentColor} />
       </div>
     </Link>

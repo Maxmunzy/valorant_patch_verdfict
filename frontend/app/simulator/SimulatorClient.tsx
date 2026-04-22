@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
   getAgentSkills,
   runSimulation,
@@ -14,6 +13,7 @@ import {
 } from "@/lib/api";
 import { agentIcon, AGENT_UUID } from "@/lib/agents";
 import { AGENT_ROLE_KO } from "@/lib/constants";
+import BackToHome from "@/components/BackToHome";
 
 const SLOT_COLOR: Record<string, string> = { C: "#66BB6A", Q: "#42A5F5", E: "#FFA726", X: "#EF5350" };
 const SLOT_LABEL: Record<string, string> = { C: "C", Q: "Q", E: "E · 시그니처", X: "X · 궁극기" };
@@ -355,9 +355,7 @@ export default function SimulatorClient({
     <div className="py-8 space-y-8">
       {/* ── 헤더 ─────────────────────────────────────── */}
       <div className="space-y-4">
-        <Link href="/" className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest hover:brightness-125 transition-colors" style={{ color: "#94A3B8" }}>
-          &larr; 메인으로
-        </Link>
+        <BackToHome />
         <div className="pl-4" style={{ borderLeft: "2px solid #A78BFA" }}>
           <div className="text-[9px] font-valo tracking-[0.25em] mb-0.5" style={{ color: "rgba(167,139,250,0.6)" }}>
             SIM // PATCH SIMULATOR

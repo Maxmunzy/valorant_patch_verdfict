@@ -1,5 +1,5 @@
-import Link from "next/link";
 import AgentCard from "@/components/AgentCard";
+import BackToHome from "@/components/BackToHome";
 import { getAllPredictions, AgentPrediction } from "@/lib/api";
 import { notFound } from "next/navigation";
 
@@ -64,13 +64,7 @@ export default async function CategoryPage({
     <div className="space-y-8 pt-8">
 
       {/* Back link */}
-      <Link
-        href="/"
-        className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest transition-colors"
-        style={{ color: "rgba(71,85,105,0.7)" }}
-      >
-        ← BACK TO OVERVIEW
-      </Link>
+      <BackToHome />
 
       {/* ── PAGE HEADER ──────────────────────────────── */}
       <div

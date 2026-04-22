@@ -267,6 +267,26 @@ valorant_patch_verdict/
 
 ---
 
+## Frontend Pages
+
+The home page is deliberately thin so the editorial tone stays intact; exploratory views live on their own routes.
+
+```
+/                    Twin TL;DR hero (top nerf + top buff) + vertical 3-nav
+├── /agents          Top 3 nerf/buff grids + full roster Explorer
+├── /agent/[name]    Agent detail — AI analysis, VCT timeline, patch history
+├── /simulator       Virtual patch simulator (impact + AI narrative)
+├── /backtest        Walk-forward backtest report
+└── /concepts/       Internal design-review pages (e.g. meta-forecast strip, 5 variants)
+```
+
+- **Home** (`/`) uses `TldrHero` for the one-line verdict and three vertically stacked `NavButton`s. Each button paints an agent portrait into the right 45% as a background image, cropped via `objectPosition`; per-agent Y offsets (`PORTRAIT_Y_OVERRIDE`) let us nudge specific characters (e.g. KAYO) independently.
+- **Roster split** — the nerf/buff grids and `AgentExplorer` moved out of the home into `/agents`, so the editorial tone on home stays separate from the exploratory grid tone.
+- **Shared back button** — `components/BackToHome.tsx` is used by every sub-page (label: "메인으로").
+- **Concept sheet** (`/concepts/meta-forecast`) is an internal review page, not linked from nav — it stacks five one-line meta-forecast variants (Split VS, Alert Ticker, Radar Signal, Terminal Readout, Threat Level) for side-by-side critique.
+
+---
+
 ## Run
 
 Backend (FastAPI) and frontend (Next.js) run as separate processes.

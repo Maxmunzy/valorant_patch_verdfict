@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import PredBadge from "./PredBadge";
 import VctTimeline from "./VctTimeline";
+import BackToHome from "./BackToHome";
 import { agentPortrait } from "@/lib/agents";
 import { SIGNAL_TYPE_ICON } from "@/lib/constants";
 import { buildShareHeadline } from "@/lib/headline";
@@ -231,15 +231,7 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
     >
       {/* Back */}
       <motion.div variants={fadeUp}>
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-xs uppercase tracking-widest transition-colors"
-          style={{ color: "#64748b" }}
-          onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#e2e8f0")}
-          onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#64748b")}
-        >
-          ← BACK TO OVERVIEW
-        </Link>
+        <BackToHome />
       </motion.div>
 
       {/* ── HEADER CARD ────────────────────────────────── */}
@@ -248,23 +240,31 @@ export default function AgentDetailClient({ data }: { data: AgentDetailData }) {
         className="relative overflow-hidden"
         style={{ border: `1px solid ${accentColor}30`, background: "#0d1220" }}
       >
-        {/* Portrait bg */}
+        {/* Portrait bg — 우측 배치 */}
         {portrait && (
-          <div className="absolute inset-0 pointer-events-none select-none">
+          <div
+            className="absolute top-0 bottom-0 right-0 pointer-events-none select-none"
+            style={{ width: "55%" }}
+          >
             <Image
               src={portrait}
               alt=""
               fill
-              className="object-cover object-top opacity-10"
-              sizes="672px"
+              className="object-cover opacity-55"
+              style={{ objectPosition: "center 22%" }}
+              sizes="500px"
+            />
+            {/* 왼쪽 → 오른쪽 페이드: 카드 내용 영역은 완전 불투명하게 보호 */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to right, rgba(13,18,32,0.95) 0%, rgba(13,18,32,0.45) 35%, rgba(13,18,32,0.1) 75%, transparent 100%)",
+              }}
             />
             <div
               className="absolute inset-0"
-              style={{ background: "linear-gradient(to right, #0d1220 50%, #0d122070 80%, transparent)" }}
-            />
-            <div
-              className="absolute inset-0"
-              style={{ background: "linear-gradient(to top, #0d1220 30%, transparent)" }}
+              style={{ background: "linear-gradient(to top, rgba(13,18,32,0.75) 0%, transparent 40%)" }}
             />
           </div>
         )}

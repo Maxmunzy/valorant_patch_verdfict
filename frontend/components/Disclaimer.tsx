@@ -27,6 +27,10 @@ export default function Disclaimer() {
             <span>·</span>
             <span>NOT AFFILIATED WITH RIOT GAMES</span>
             <span>·</span>
+            <a href="/agents" className="transition-colors hover:text-white" style={{ color: "rgba(255,70,85,0.8)" }}>
+              AGENTS
+            </a>
+            <span>·</span>
             <a href="/backtest" className="transition-colors hover:text-white" style={{ color: "rgba(74,222,128,0.8)" }}>
               BACKTEST
             </a>
@@ -96,6 +100,10 @@ export default function Disclaimer() {
           <span>UNOFFICIAL FAN PROJECT</span>
           <span>·</span>
           <span>NOT AFFILIATED WITH RIOT GAMES</span>
+          <span>·</span>
+          <a href="/agents" className="transition-colors hover:text-white" style={{ color: "rgba(255,70,85,0.85)" }}>
+            AGENTS
+          </a>
           <span>·</span>
           <a href="/backtest" className="transition-colors hover:text-white" style={{ color: "rgba(74,222,128,0.85)" }}>
             BACKTEST

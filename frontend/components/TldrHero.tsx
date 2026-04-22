@@ -73,13 +73,14 @@ function HeroCard({
             src={portrait}
             alt={agent.agent}
             fill
-            className="object-cover object-top opacity-35 group-hover:opacity-55 transition-opacity duration-300"
+            className="object-cover object-top opacity-55 group-hover:opacity-75 transition-opacity duration-300"
             sizes="400px"
           />
           <div
             className="absolute inset-0"
             style={{
-              background: "linear-gradient(to right, #0d1220 10%, rgba(13,18,32,0.85) 40%, transparent 85%)",
+              background:
+                "linear-gradient(to right, rgba(13,18,32,0.92) 0%, rgba(13,18,32,0.35) 45%, transparent 85%)",
             }}
           />
         </div>

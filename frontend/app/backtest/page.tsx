@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { getBacktestSummary } from "@/lib/backtest";
 import type { BacktestAgentRow } from "@/lib/backtest";
 import BacktestPredictionTable from "@/components/backtest/BacktestPredictionTable";
 import ModelCharacterBlurb from "@/components/backtest/ModelCharacterBlurb";
+import BackToHome from "@/components/BackToHome";
 
 // 백테스트 요약은 정적 JSON — 1시간마다 재검증
 export const revalidate = 3600;
@@ -27,9 +27,9 @@ export default async function BacktestPage() {
         <div className="text-sm" style={{ color: "rgba(148,163,184,0.8)" }}>
           백테스트 데이터를 불러오지 못했습니다.
         </div>
-        <Link href="/" className="inline-block mt-4 text-[11px] underline" style={{ color: "#A78BFA" }}>
-          ← 홈으로
-        </Link>
+        <div className="inline-block mt-4">
+          <BackToHome />
+        </div>
       </div>
     );
   }
@@ -40,13 +40,7 @@ export default async function BacktestPage() {
     <div className="py-10 space-y-10">
       {/* ── 헤더 ─────────────────────────────────────────────────────── */}
       <div className="space-y-5">
-        <Link
-          href="/"
-          className="inline-block text-[12px] uppercase tracking-widest transition-colors hover:text-white"
-          style={{ color: "rgba(148,163,184,0.8)" }}
-        >
-          ← 홈으로
-        </Link>
+        <BackToHome />
 
         <div className="flex items-start gap-4">
           <div

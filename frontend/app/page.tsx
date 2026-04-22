@@ -1,44 +1,21 @@
 import Link from "next/link";
-import AgentCard from "@/components/AgentCard";
-import AgentExplorer from "@/components/AgentExplorer";
+import Image from "next/image";
 import TrustBlock from "@/components/TrustBlock";
-import ModelAccuracyBanner from "@/components/ModelAccuracyBanner";
 import TldrHero from "@/components/TldrHero";
 import { getAllPredictions, AgentPrediction } from "@/lib/api";
 import { getBacktestSummary } from "@/lib/backtest";
+import { agentPortrait } from "@/lib/agents";
 
 export const revalidate = 60;
 
-function SectionLabel({
-  label,
-  labelEn,
-  accentColor,
-  count,
-}: {
-  label: string;
-  labelEn: string;
-  accentColor: string;
-  count: number;
-}) {
-  return (
-    <div className="flex items-center gap-3">
-      <div style={{ width: "2px", height: "28px", background: accentColor }} className="shrink-0" />
-      <div>
-        <div className="text-[9px] tracking-[0.25em]" style={{ color: `${accentColor}CC` }}>
-          {labelEn}
-        </div>
-        <div className="text-xl font-bold leading-tight" style={{ color: accentColor }}>
-          {label}
-        </div>
-      </div>
-      <span
-        className="text-[9px] font-bold px-1.5 py-0.5 uppercase tracking-wider ml-1"
-        style={{ color: accentColor, border: `1px solid ${accentColor}40`, background: `${accentColor}10` }}
-      >
-        TOP {count}
-      </span>
-    </div>
-  );
+// 요원별 초상화 크롭 위치 미세조정 — 기본값 22%
+// 공식 CDN 이미지마다 얼굴·몸통 위치가 조금씩 다르기 때문
+const PORTRAIT_Y_OVERRIDE: Record<string, string> = {
+  KAYO: "15%",
+};
+function portraitOffsetY(agent?: string | null): string {
+  const y = (agent && PORTRAIT_Y_OVERRIDE[agent]) ?? "22%";
+  return `center ${y}`;
 }
 
 export default async function Home() {
@@ -49,8 +26,7 @@ export default async function Home() {
 
   const nerfAll = agents.filter((agent) => agent.verdict.includes("nerf"));
   const buffAll = agents.filter((agent) => agent.verdict.includes("buff"));
-  const nerfTop3 = nerfAll.slice(0, 3);
-  const buffTop3 = buffAll.slice(0, 3);
+  const hit3 = backtest ? Math.round(backtest.overall.hitRate3 * 100) : null;
 
   return (
     <div className="min-h-[80vh] flex flex-col py-12 space-y-12">
@@ -100,59 +76,157 @@ export default async function Home() {
           ))}
         </div>
 
-        <div className="pl-6 pt-2">
-          <Link
-            href="/simulator"
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-black uppercase tracking-widest transition-all hover:brightness-125"
-            style={{
-              border: "1px solid rgba(79,195,247,0.45)",
-              color: "#4FC3F7",
-              background: "rgba(79,195,247,0.08)",
-            }}
-          >
-            <span style={{ fontSize: "16px" }}>&#9881;</span>
-            Patch Simulator
-            <span className="text-[9px] font-normal tracking-normal" style={{ color: "rgba(79,195,247,0.65)" }}>
-              가상 변경을 넣고 메타 변화를 확인
-            </span>
-          </Link>
-        </div>
-
         <TrustBlock backtest={backtest} />
-        <ModelAccuracyBanner data={backtest} />
       </div>
 
       <TldrHero topNerf={nerfAll[0] ?? null} topBuff={buffAll[0] ?? null} />
 
-      {nerfTop3.length > 0 && (
-        <section className="space-y-4">
-          <SectionLabel label="너프 우선순위" labelEn="NF // NERF TARGETS" accentColor="#FF4655" count={nerfTop3.length} />
-          <div className={`grid gap-3 items-start ${nerfTop3.length >= 3 ? "grid-cols-3" : nerfTop3.length === 2 ? "grid-cols-2" : "grid-cols-1"}`}>
-            {nerfTop3.map((agent, index) => (
-              <AgentCard key={agent.agent} agent={agent} size="lg" rank={index + 1} />
-            ))}
-          </div>
-        </section>
-      )}
+      {/* 통일된 CTA 3개 — TldrHero 바로 아래, 세로 스택 */}
+      <div className="space-y-3">
+        <NavButton
+          href="/agents"
+          tag="ROSTER // ALL"
+          title="다른 요원 보러가기"
+          sub={
+            agents.length > 0
+              ? `너프 후보 ${nerfAll.length}명 · 버프 후보 ${buffAll.length}명 · 총 ${agents.length}명 분석`
+              : "너프·버프 Top 3 + 전체 로스터"
+          }
+          color="#FF4655"
+          agentName={nerfAll[0]?.agent ?? null}
+        />
+        <NavButton
+          href="/simulator"
+          tag="TOOL // SIMULATE"
+          title="패치 시뮬레이터"
+          sub="가상 변경을 넣고 메타가 어떻게 움직이는지 확인"
+          color="#4FC3F7"
+          agentName={buffAll[0]?.agent ?? null}
+        />
+        <NavButton
+          href="/backtest"
+          tag="PROOF // BACKTEST"
+          title="백테스트 리포트"
+          sub={
+            hit3 !== null
+              ? `3-class 적중률 ${hit3}% · walk-forward 백테스트 상세`
+              : "과거 예측 vs 실제 · 모델 신뢰도 상세"
+          }
+          color="#4ADE80"
+          agentName={nerfAll[1]?.agent ?? buffAll[1]?.agent ?? nerfAll[0]?.agent ?? null}
+        />
+      </div>
+    </div>
+  );
+}
 
-      {buffTop3.length > 0 && (
-        <section className="space-y-4">
-          <SectionLabel label="버프 후보" labelEn="BF // BUFF CANDIDATES" accentColor="#4FC3F7" count={buffTop3.length} />
-          <div className={`grid gap-3 items-start ${buffTop3.length >= 3 ? "grid-cols-3" : buffTop3.length === 2 ? "grid-cols-2" : "grid-cols-1"}`}>
-            {buffTop3.map((agent, index) => (
-              <AgentCard key={agent.agent} agent={agent} size="lg" rank={index + 1} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {agents.length > 0 && <AgentExplorer agents={agents} />}
-
-      {agents.length > 0 && (
-        <div className="text-center text-[13px] uppercase tracking-widest" style={{ color: "rgb(255, 255, 255)" }}>
-          // {agents.length} agents analyzed // click a card for details //
+function NavButton({
+  href,
+  tag,
+  title,
+  sub,
+  color,
+  agentName,
+}: {
+  href: string;
+  tag: string;
+  title: string;
+  sub: string;
+  color: string;
+  agentName?: string | null;
+}) {
+  const portrait = agentName ? agentPortrait(agentName) : null;
+  return (
+    <Link
+      href={href}
+      className="group relative block overflow-hidden transition-all hover:brightness-110"
+      style={{
+        border: `1px solid ${color}40`,
+        background: `linear-gradient(90deg, ${color}12 0%, rgba(13,18,32,0.65) 55%, ${color}06 100%)`,
+      }}
+    >
+      {/* 요원 초상화 — 우측 배경 */}
+      {portrait && (
+        <div
+          className="absolute top-0 bottom-0 right-0 pointer-events-none"
+          style={{ width: "45%", zIndex: 0 }}
+        >
+          <Image
+            src={portrait}
+            alt=""
+            fill
+            className="object-cover opacity-30 group-hover:opacity-45 transition-opacity duration-300"
+            style={{ objectPosition: portraitOffsetY(agentName) }}
+            sizes="500px"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(13,18,32,0.95) 0%, rgba(13,18,32,0.5) 40%, rgba(13,18,32,0.15) 75%, transparent 100%)",
+            }}
+          />
         </div>
       )}
-    </div>
+
+      {/* corner brackets */}
+      <span
+        className="absolute top-0 left-0 w-3 h-3 pointer-events-none"
+        style={{ zIndex: 5, borderTop: `2px solid ${color}`, borderLeft: `2px solid ${color}` }}
+      />
+      <span
+        className="absolute top-0 right-0 w-3 h-3 pointer-events-none"
+        style={{ zIndex: 5, borderTop: `2px solid ${color}80`, borderRight: `2px solid ${color}80` }}
+      />
+      <span
+        className="absolute bottom-0 left-0 w-3 h-3 pointer-events-none"
+        style={{ zIndex: 5, borderBottom: `2px solid ${color}`, borderLeft: `2px solid ${color}` }}
+      />
+      <span
+        className="absolute bottom-0 right-0 w-3 h-3 pointer-events-none"
+        style={{ zIndex: 5, borderBottom: `2px solid ${color}80`, borderRight: `2px solid ${color}80` }}
+      />
+
+      <div className="relative flex items-center justify-between gap-4 px-5 sm:px-7 py-3.5 sm:py-4" style={{ zIndex: 10 }}>
+        <div className="flex items-center gap-4 sm:gap-5 min-w-0">
+          <span
+            className="hidden sm:block shrink-0"
+            style={{
+              width: "2px",
+              height: "32px",
+              background: `linear-gradient(to bottom, ${color}, ${color}30)`,
+            }}
+          />
+          <div className="min-w-0">
+            <div className="text-[9px] tracking-[0.35em] mb-1" style={{ color: `${color}cc` }}>
+              {tag}
+            </div>
+            <div className="text-xl sm:text-2xl font-black tracking-tight text-white leading-none">
+              {title}
+            </div>
+            <div
+              className="text-[11px] mt-1.5 tracking-wide truncate"
+              style={{ color: "rgba(148,163,184,0.85)" }}
+            >
+              {sub}
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+          <span
+            className="hidden sm:inline text-[10px] font-bold tracking-[0.3em]"
+            style={{ color: `${color}bf` }}
+          >
+            ENTER
+          </span>
+          <span
+            className="text-xl sm:text-3xl font-black leading-none transition-transform group-hover:translate-x-1"
+            style={{ color, textShadow: `0 0 14px ${color}66` }}
+          >
+            ▶
+          </span>
+        </div>
+      </div>
+    </Link>
   );
 }
