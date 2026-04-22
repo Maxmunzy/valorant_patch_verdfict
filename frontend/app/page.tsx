@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import TrustBlock from "@/components/TrustBlock";
 import TldrHero from "@/components/TldrHero";
+import RecentPatchHitCard from "@/components/RecentPatchHitCard";
+import VctLagBanner from "@/components/VctLagBanner";
 import { getAllPredictions, AgentPrediction } from "@/lib/api";
 import { getBacktestSummary } from "@/lib/backtest";
 import { agentPortrait } from "@/lib/agents";
@@ -77,6 +79,10 @@ export default async function Home() {
         </div>
 
         <TrustBlock backtest={backtest} />
+
+        <RecentPatchHitCard backtest={backtest} />
+
+        <VctLagBanner />
       </div>
 
       <TldrHero topNerf={nerfAll[0] ?? null} topBuff={buffAll[0] ?? null} />

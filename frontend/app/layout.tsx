@@ -2,9 +2,25 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Disclaimer from "@/components/Disclaimer";
 
+// 공개 도메인. OG/Twitter 이미지의 절대 URL 생성 기준점.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://whosnxt.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "PATCH VERDICT // Valorant",
   description: "랭크와 VCT 데이터를 바탕으로 다음 패치 압력을 예측하는 Valorant 분석 서비스",
+  openGraph: {
+    type: "website",
+    siteName: "WHOSNXT // PATCH VERDICT",
+    title: "PATCH VERDICT // Valorant",
+    description: "다음 패치에서 누가 너프/버프 받을지 데이터로 예측",
+    url: SITE_URL,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PATCH VERDICT // Valorant",
+    description: "다음 패치에서 누가 너프/버프 받을지 데이터로 예측",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

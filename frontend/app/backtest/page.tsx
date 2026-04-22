@@ -36,6 +36,19 @@ export default async function BacktestPage() {
 
   const o = data.overall;
 
+  // ─ baseline 계산 ────────────────────────────────────────────
+  // 랜덤 3-class = 33.3%.
+  // Majority = 가장 많은 클래스(거의 항상 stable)만 찍었을 때 적중률.
+  // "우리 모델이 그냥 'stable!'만 찍는 바보보다 얼마나 나은가" 를 정직하게 보여주기 위함.
+  const totalSupport = Object.values(o.classes).reduce((a, c) => a + c.support, 0) || 1;
+  const majorityClass = (Object.entries(o.classes) as [string, { support: number }][]).reduce(
+    (best, cur) => (cur[1].support > best[1].support ? cur : best),
+  );
+  const majorityPct = Math.round((majorityClass[1].support / totalSupport) * 100);
+  const hitPct = Math.round(o.hitRate3 * 100);
+  const liftVsRandom = hitPct - 33;
+  const liftVsMajority = hitPct - majorityPct;
+
   return (
     <div className="py-10 space-y-10">
       {/* ── 헤더 ─────────────────────────────────────────────────────── */}
@@ -88,9 +101,10 @@ export default async function BacktestPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
           <HeroStat
             label="방향 적중률"
-            value={`${Math.round(o.hitRate3 * 100)}%`}
+            value={`${hitPct}%`}
             sub={`전체 ${data.totalRows}건 예측 중 너프/버프/안정 방향을 맞힌 비율`}
             accent="#4ADE80"
+            baseline={`랜덤 33% 대비 +${liftVsRandom}pp · 항상 stable(${majorityPct}%) 대비 ${liftVsMajority >= 0 ? "+" : ""}${liftVsMajority}pp`}
           />
           <HeroStat
             label="강한 너프 신호 정밀도"
@@ -704,11 +718,13 @@ function HeroStat({
   value,
   sub,
   accent,
+  baseline,
 }: {
   label: string;
   value: string;
   sub: string;
   accent: string;
+  baseline?: string;
 }) {
   return (
     <div className="space-y-2">
@@ -727,6 +743,14 @@ function HeroStat({
       <div className="text-[12px] leading-snug" style={{ color: "rgba(203,213,225,0.9)" }}>
         {sub}
       </div>
+      {baseline && (
+        <div
+          className="text-[10.5px] leading-snug tracking-wide pt-1"
+          style={{ color: "rgba(148,163,184,0.7)", borderTop: "1px dashed rgba(71,85,105,0.5)" }}
+        >
+          {baseline}
+        </div>
+      )}
     </div>
   );
 }
