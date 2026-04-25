@@ -8,6 +8,8 @@ import VctSparkline from "./VctSparkline";
 import { AgentPrediction } from "@/lib/api";
 import { agentPortrait } from "@/lib/agents";
 import { buildShareHeadline } from "@/lib/headline";
+import type { Locale } from "@/lib/i18n/dict";
+import { tRole, tBadge } from "@/lib/i18n/dict";
 
 const VERDICT_COLOR: Record<string, string> = {
   mild_nerf: "#FB7185",
@@ -43,8 +45,18 @@ const CONF_COLOR: Record<string, { dot: string; label: string }> = {
   low: { dot: "#64748B", label: "LOW" },
 };
 
-function BadgeChip({ label, size = "md" }: { label: string; size?: "sm" | "md" }) {
-  const c = BADGE_COLOR[label] ?? BADGE_DEFAULT;
+function BadgeChip({
+  koLabel,
+  locale = "ko",
+  size = "md",
+}: {
+  koLabel: string;
+  locale?: Locale;
+  size?: "sm" | "md";
+}) {
+  // BADGE_COLOR 의 키는 한글 — API가 한글 뱃지를 주므로 색상은 koLabel 로 조회.
+  const c = BADGE_COLOR[koLabel] ?? BADGE_DEFAULT;
+  const display = tBadge(locale, koLabel);
   const pad = size === "sm" ? "px-1 py-px" : "px-1.5 py-0.5";
   const txt = size === "sm" ? "text-[8px]" : "text-[9px]";
   return (
@@ -52,7 +64,7 @@ function BadgeChip({ label, size = "md" }: { label: string; size?: "sm" | "md" }
       className={`${pad} ${txt} font-bold uppercase tracking-wider whitespace-nowrap`}
       style={{ border: `1px solid ${c.border}`, color: c.fg, background: c.bg }}
     >
-      {label}
+      {display}
     </span>
   );
 }
@@ -90,9 +102,10 @@ interface AgentCardProps {
   agent: AgentPrediction;
   size?: "sm" | "lg";
   rank?: number;
+  locale?: Locale;
 }
 
-export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProps) {
+export default function AgentCard({ agent: a, size = "sm", rank, locale = "ko" }: AgentCardProps) {
   const accentColor = VERDICT_COLOR[a.verdict] ?? "#64748B";
   const portrait = agentPortrait(a.agent);
   const isNerf = a.verdict.includes("nerf");
@@ -104,7 +117,10 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
     a.days_since_patch <= 14 &&
     (a.last_direction === "nerf" || a.last_direction === "buff");
 
+  // /en/agent/[name] 라우트가 아직 없으므로 모든 locale에서 KO detail 로 보낸다.
+  // /en/agent/[name] 추가 후 locale="en" 분기 다시 켜기.
   const href = `/agent/${encodeURIComponent(a.agent)}`;
+  const roleLabel = tRole(locale, a.role);
 
   if (size === "lg") {
     return (
@@ -155,7 +171,7 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
           <div className="flex justify-between items-start">
             <PredBadge verdict={a.verdict} size="sm" />
             <span className="text-xs uppercase tracking-widest" style={{ color: "rgba(148,163,184,0.75)" }}>
-              {a.role}
+              {roleLabel}
             </span>
           </div>
 
@@ -188,13 +204,13 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
             {a.badges && a.badges.length > 0 && (
               <div className="flex flex-wrap gap-1 pt-1">
                 {a.badges.map((badge) => (
-                  <BadgeChip key={badge} label={badge} size="md" />
+                  <BadgeChip key={badge} koLabel={badge} locale={locale} size="md" />
                 ))}
               </div>
             )}
 
             <div className="text-[11px] leading-snug pt-1.5 pr-1" style={{ color: "rgba(226,232,240,0.82)" }}>
-              {buildShareHeadline(a)}
+              {buildShareHeadline(a, locale)}
             </div>
 
             <div className="flex items-center gap-2.5 pt-1">
@@ -270,7 +286,7 @@ export default function AgentCard({ agent: a, size = "sm", rank }: AgentCardProp
         <div>
           <div className="text-lg font-bold text-white">{a.agent}</div>
           <div className="text-[11px] uppercase tracking-wider" style={{ color: "rgba(148,163,184,0.75)" }}>
-            {a.role}
+            {roleLabel}
           </div>
         </div>
         <PredBadge verdict={a.verdict} size="sm" />

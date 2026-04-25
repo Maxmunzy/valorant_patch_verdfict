@@ -24,7 +24,7 @@ export default async function BacktestEn() {
           Could not load backtest data.
         </div>
         <div className="inline-block mt-4">
-          <BackToHome />
+          <BackToHome locale="en" />
         </div>
       </div>
     );

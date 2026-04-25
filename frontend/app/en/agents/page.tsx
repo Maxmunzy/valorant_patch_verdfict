@@ -3,13 +3,13 @@ import { getDict } from "@/lib/i18n/dict";
 
 export const revalidate = 60;
 
-const t = getDict("ko").agentsPage;
+const t = getDict("en").agentsPage;
 
 export const metadata = {
   title: t.title,
   description: t.description,
 };
 
-export default function AgentsPage() {
-  return <AgentsContent locale="ko" />;
+export default function AgentsPageEn() {
+  return <AgentsContent locale="en" />;
 }

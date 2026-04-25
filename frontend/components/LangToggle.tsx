@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
  * - 영문 버전이 없는 경로(/agent/*, /simulator 등)는 안전하게 /en 루트로 폴백.
  */
 
-const EN_SUPPORTED = ["/", "/backtest"];
+const EN_SUPPORTED = ["/", "/backtest", "/agents"];
 
 export default function LangToggle() {
   const pathname = usePathname() || "/";
