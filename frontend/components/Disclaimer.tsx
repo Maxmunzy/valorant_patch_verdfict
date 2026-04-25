@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 
 const UPDATES: { date: string; note: string }[] = [
+  { date: "2026.04.25", note: "영문 페이지(/en)와 KO/EN 토글 추가, 12.06 라이브 반영해 VCT 시차 배너 제거" },
+  { date: "2026.04.22", note: "직전 패치 적중률 카드, walk-forward baseline 비교, 에이전트 OG 이미지 추가" },
   { date: "2026.04.21", note: "백테스트 요약 공개와 카드형 VCT 시각화 추가" },
   { date: "2026.04.20", note: "에이전트 상세 페이지와 설명 품질 개선" },
   { date: "2026.04.20", note: "시뮬레이터 흐름과 경고 문구 보강" },
