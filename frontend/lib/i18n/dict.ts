@@ -33,6 +33,14 @@ const dictKo = {
     "고점 에이전트": "고점 에이전트",
     "표본 부족": "표본 부족",
   } as Record<string, string>,
+  verdictLabel: {
+    stable: "안정",
+    mild_buff: "약한 버프",
+    strong_buff: "강한 버프",
+    mild_nerf: "약한 너프",
+    strong_nerf: "강한 너프",
+    rework: "리워크",
+  } as Record<string, string>,
   agentsPage: {
     title: "요원 분석 // PATCH VERDICT",
     description: "너프·버프 후보 Top 3과 전체 요원 탐색",
@@ -101,6 +109,158 @@ const dictKo = {
       },
     },
   },
+  backtestPage: {
+    title: "백테스트 리포트 // PATCH VERDICT",
+    description: "워크포워드 방식으로 검증한 모델 정확도",
+    loadFailed: "백테스트 데이터를 불러오지 못했습니다.",
+    headerKicker: "시간순 재현 백테스트 · 과거 예측 성적표",
+    headerTitleA: "예측",
+    headerTitleAccent: "정확도",
+    headerTitleB: "리포트",
+    headerIntro:
+      '각 액트마다 **그 시점까지 쌓인 데이터로만** 모델을 처음부터 다시 학습시킨 뒤 해당 액트를 예측하게 했습니다. 즉, 그때 실제로 모델을 돌렸다면 내렸을 예측만 평가에 포함됩니다. 미래 정보를 보고 과거를 맞히는 "치트"가 끼지 않아요.',
+    tldrLabel: "한 줄 요약 · TL;DR",
+    hero: {
+      hitDir: "방향 적중률",
+      hitDirSub: (n: number) => `전체 ${n}건 예측 중 너프/버프/안정 방향을 맞힌 비율`,
+      hitDirBaseline: (lift: number, majPct: number, vsMaj: number) =>
+        `랜덤 33% 대비 +${lift}pp · 항상 stable(${majPct}%) 대비 ${vsMaj >= 0 ? "+" : ""}${vsMaj}pp`,
+      strongNerf: "강한 너프 신호 정밀도",
+      strongNerfSub: "p_nerf 0.60 이상으로 찍은 예측 중 실제 너프로 이어진 비율",
+      coverage: "검증 범위",
+      coverageSub: (range: string, n: number) => `${range} · 총 ${n}건 예측`,
+    },
+    chipsTemplate: (n: number, range: string, acts: number) => [
+      `예측 샘플 ${n}건`,
+      `기간: ${range}`,
+      `${acts}개 액트 폴드`,
+      "방식: 시간순 재현 (Walk-forward)",
+    ],
+    sections: {
+      overall: { en: "전체 지표", ko: "클래스별 성능" },
+      topAgents: { en: "요원별 성적", ko: "잘 맞힌 요원 · 잘 못 맞힌 요원" },
+      confusion: { en: "혼동 행렬", ko: "예측한 것 vs 실제 결과" },
+      threshold: { en: "확신도 검증", ko: "확률이 높을 때 실제로도 맞는가" },
+      leadHits: { en: "선행 예측", ko: "한 액트 먼저 짚어낸 케이스" },
+      bigHits: { en: "대표 적중", ko: "높은 확률로 정확히 맞힌 예측" },
+      bigMisses: { en: "대표 오답", ko: "높은 확률로 예측했지만 빗나간 케이스" },
+      perAct: { en: "액트별 추이", ko: "각 액트별 예측 적중률" },
+      predictionTable: (n: number) => ({ en: "전체 예측 목록", ko: `${n}건 원본 기록` }),
+      methodology: { en: "측정 방식" },
+    },
+    blurbs: {
+      topAgents: "한 요원을 여러 액트에 걸쳐 예측해온 누적 적중률입니다. 3건 이상 예측된 요원만 집계했어요.",
+      threshold:
+        "모델이 높은 확률로 찍을수록 실제 너프/버프가 일어날 비율도 같이 높아져야 정상입니다. 아래는 각 임계값 이상으로 예측한 샘플 가운데 실제 방향이 맞았던 비율이에요.",
+      leadHits:
+        "아직 너프가 내려오지 않았을 때 모델이 먼저 너프 신호를 올렸고, 실제로 **바로 다음 액트**에서 너프가 확정된 경우입니다.",
+      leadHitNarrative: (predAct: string, hitAct: string) =>
+        `${predAct} 당시엔 너프가 없는 안정 상태였지만 모델은 이미 너프 신호를 읽었고, 한 액트 뒤 ${hitAct}에서 실제 너프로 이어졌습니다.`,
+      bigHits: "모델이 강한 확률로 너프/버프를 예측했고 실제로도 그 방향으로 이어진 케이스예요.",
+      bigMisses: "모델이 강한 확률로 너프/버프를 예측했지만 실제는 반대로 흘러간 케이스입니다.",
+      perAct:
+        "액트가 늘수록 학습 데이터가 쌓입니다. 시간이 가면서 적중률이 안정권에 들어오는지 아래 그래프로 확인할 수 있어요.",
+    },
+    metrics: {
+      hitDir: { label: "방향 적중률", hint: (n: number) => `전체 ${n}건 기준` },
+      balAcc: { label: "Balanced Accuracy", hint: "클래스 불균형을 보정한 점수" },
+      hit5: { label: "세부 적중률", hint: "약/강 세기까지 맞힌 비율" },
+      top3: { label: "액트당 너프 TOP3", hint: "각 액트 너프 확률 상위 3명 중 실제 너프 비율" },
+    },
+    confusion: {
+      colHeader: "예측 (predicted)",
+      rowPrefix: "실제",
+      caption: '대각선 칸이 "정확히 맞힌 예측". 초록이 짙을수록 잘 맞혔다는 뜻이에요.',
+    },
+    threshold: {
+      colThreshold: "임계값",
+      colSamples: "샘플",
+      colPrecision: "정밀도",
+      tableTitleNerf: "NERF 예측",
+      tableTitleBuff: "BUFF 예측",
+    },
+    perAct: {
+      legend3: "방향 적중률 (너프/버프/안정)",
+      legend5: "세부 적중률 (약/강까지)",
+      legendAvg: (avg: number) => `전체 평균 ${avg}%`,
+      footer: (avg: number) =>
+        `얇은 세로선은 전체 평균 (${avg}%) 위치 · 5c는 약/강 세기까지 맞힌 세부 적중률이에요.`,
+    },
+    story: {
+      predictedLabel: "예측",
+      truthLabel: "실제",
+      predictedAtLabel: "예측 시점",
+      hitAtLabel: "적중 시점",
+    },
+    methodology: {
+      walkforward: {
+        title: "시간순 재현 (Walk-forward)",
+        body: '각 폴드에서 `act_idx < T`에 해당하는 과거 데이터로만 학습한 뒤 `act_idx == T`를 예측합니다. 미래 정보가 과거 평가에 새어 들어가지 않는 구조예요.',
+      },
+      twoStage: {
+        title: "2단 구조",
+        body:
+          '1단(XGBoost)에서 "이 요원이 다음 패치에 조정될지 vs 안정될지"를 판별하고, 조정된다고 판단된 경우에만 2단(Logistic Regression)에서 "너프인지 버프인지"를 가립니다. 최종적으로 5단계 판정(강/약 너프 · 안정 · 강/약 버프)으로 합쳐져요.',
+      },
+      groundTruth: {
+        title: "정답 레이블",
+        body: "각 액트 이후 실제로 있었던 너프/버프 이력을 기준으로 매겼습니다. 미니 패치, 리워크, 핫픽스까지 모두 반영했어요.",
+      },
+      scope: {
+        title: "평가 범위",
+        body: "결과가 확정된 과거 액트만 대상으로 했습니다 (현재 진행 중인 V26A2는 제외).",
+      },
+      generated: "생성 시각",
+    },
+  },
+  modelBlurb: {
+    operatorTag: "운영자 해설",
+    subtitle: "숫자 보기 전에 먼저 읽는 모델 성격",
+    glossaryHeader: "용어 풀이",
+    glossaryBody:
+      '<b>정밀도</b>는 "모델이 너프라고 찍은 것 중 실제 너프였던 비율", <b>재현율</b>은 "실제 너프 중 모델이 미리 잡아낸 비율"입니다. 둘 다 100%로 올리는 건 불가능해서 균형 싸움이에요.',
+    classNames: {
+      stable: "안정 판정",
+      nerf: "너프 탐지",
+      buff: "버프 탐지",
+    },
+    sentences: {
+      strongest: (name: string, f1: string, p: number, r: number) =>
+        `가장 자신 있게 맞히는 쪽은 **${name}**이에요 — F1 ${f1}, 정밀도 ${p}% · 재현율 ${r}%.`,
+      nerfRecallLow: (recallPct: number, missedPct: number, precPct: number) =>
+        `**너프는 꽤 신중하게 집습니다** — 실제 너프 중 ${recallPct}%만 미리 잡아내고 나머지 ${missedPct}%는 놓치는 편입니다 (정밀도 ${precPct}%).`,
+      weakest: (name: string, f1: string, p: number, r: number) =>
+        `가장 까다로운 영역은 **${name}**입니다 — F1 ${f1}, 정밀도 ${p}% · 재현율 ${r}%.`,
+      calibrated: (precPct: number, n: number) =>
+        `대신 **확률이 높게 찍힐수록 신뢰할 만합니다** — p_nerf 0.70 이상으로 찍은 예측은 ${precPct}% 적중했어요 (n=${n}).`,
+      overallFallback: (hitPct: number, balAcc: string) =>
+        `전체 방향 적중률은 **${hitPct}%** 수준입니다 (Balanced Accuracy ${balAcc}).`,
+    },
+  },
+  predictionTable: {
+    agentSearchLabel: "요원 검색",
+    actLabel: "ACT",
+    predLabel: "예측",
+    hitLabel: "적중",
+    filterAll: "전체",
+    filterHit: "맞춤",
+    filterMiss: "틀림",
+    sortToggle: "p_nerf ↓",
+    resetFilter: "필터 초기화",
+    rowsLabel: "rows",
+    columns: {
+      act: "Act",
+      agent: "요원",
+      truth: "실제",
+      predicted: "예측",
+      hit: "적중",
+    },
+    emptyRows: "조건에 맞는 행이 없습니다. 필터를 조정해 보세요.",
+    expandLabel: (n: number) => `▼ 전체 ${n}개 보기`,
+    collapseLabel: (initial: number) => `▲ 접기 (상위 ${initial}개만 보기)`,
+    hitTooltip: "방향성 적중",
+    missTooltip: "오답",
+  },
 };
 
 type DictShape = typeof dictKo;
@@ -128,6 +288,14 @@ const dictEn: DictShape = {
     "장기 하락": "Long decline",
     "고점 에이전트": "Peak agent",
     "표본 부족": "Low sample",
+  },
+  verdictLabel: {
+    stable: "stable",
+    mild_buff: "mild buff",
+    strong_buff: "strong buff",
+    mild_nerf: "mild nerf",
+    strong_nerf: "strong nerf",
+    rework: "rework",
   },
   agentsPage: {
     title: "Agents // PATCH VERDICT",
@@ -196,6 +364,161 @@ const dictEn: DictShape = {
         desc: "Beyond numerical tuning — design changes likely needed.",
       },
     },
+  },
+  backtestPage: {
+    title: "Backtest report // PATCH VERDICT",
+    description: "Walk-forward validated model accuracy",
+    loadFailed: "Could not load backtest data.",
+    headerKicker: "WALK-FORWARD BACKTEST · HISTORICAL SCORECARD",
+    headerTitleA: "Prediction",
+    headerTitleAccent: "Accuracy",
+    headerTitleB: "Report",
+    headerIntro:
+      'For every act, the model is retrained **from scratch using only data available at that point**, then asked to predict that act. No future information leaks into past evaluation — only predictions the model could realistically have made in real time are scored.',
+    tldrLabel: "TL;DR",
+    hero: {
+      hitDir: "Direction hit rate",
+      hitDirSub: (n: number) => `Share of ${n} predictions where nerf/buff/stable direction was correct.`,
+      hitDirBaseline: (lift: number, majPct: number, vsMaj: number) =>
+        `Random baseline 33% · Always-stable baseline ${majPct}%. Lift: +${lift}pp / ${vsMaj >= 0 ? "+" : ""}${vsMaj}pp.`,
+      strongNerf: "High-conf nerf precision",
+      strongNerfSub: "Of predictions made at p_nerf ≥ 0.60, how many turned into actual nerfs.",
+      coverage: "Evaluation coverage",
+      coverageSub: (range: string, n: number) => `${range} · ${n} predictions total.`,
+    },
+    chipsTemplate: (n: number, range: string, acts: number) => [
+      `${n} prediction samples`,
+      `Range: ${range}`,
+      `${acts} act folds`,
+      "Method: walk-forward",
+    ],
+    sections: {
+      overall: { en: "Overall metrics", ko: "Per-class performance" },
+      topAgents: { en: "Per-agent scoreboard", ko: "Best hits · biggest misses" },
+      confusion: { en: "Confusion matrix", ko: "Predicted vs actual" },
+      threshold: { en: "Confidence calibration", ko: "Does higher probability mean higher hit rate?" },
+      leadHits: { en: "Lead predictions", ko: "Caught one act ahead of the patch" },
+      bigHits: { en: "Notable hits", ko: "High-confidence predictions that landed" },
+      bigMisses: { en: "Notable misses", ko: "High-confidence predictions that didn't" },
+      perAct: { en: "Per-act trend", ko: "Hit rate over time" },
+      predictionTable: (n: number) => ({ en: "All predictions", ko: `${n} raw rows` }),
+      methodology: { en: "Methodology" },
+    },
+    blurbs: {
+      topAgents:
+        "Cumulative hit rate per agent across all evaluated acts. Only agents with at least 3 predictions are listed.",
+      threshold:
+        "When the model fires a higher probability, the real-world hit rate should rise too. Each row: share of predictions at that threshold that matched reality.",
+      leadHits:
+        "The model raised a nerf signal before any nerf had landed, and the **next act** confirmed it.",
+      leadHitNarrative: (predAct: string, hitAct: string) =>
+        `At ${predAct} the agent was still untouched, but the model already saw the nerf coming — confirmed one act later at ${hitAct}.`,
+      bigHits: "Cases where the model fired a strong probability and reality went the same direction.",
+      bigMisses: "Cases where the model fired a strong probability and reality went the opposite way.",
+      perAct:
+        "As more acts accumulate, training data grows. The chart below checks whether hit rate stabilizes over time — a sanity check against early overfitting.",
+    },
+    metrics: {
+      hitDir: { label: "Direction hit rate", hint: (n: number) => `Across ${n} predictions.` },
+      balAcc: { label: "Balanced accuracy", hint: "Class-imbalance corrected." },
+      hit5: { label: "5-class hit rate", hint: "Mild/strong intensity also correct." },
+      top3: { label: "Top-3 nerf / act", hint: "Actual nerfs among top-3 nerf picks per act." },
+    },
+    confusion: {
+      colHeader: "Predicted",
+      rowPrefix: "Actual",
+      caption: "Diagonal cells = exact matches. Greener = better.",
+    },
+    threshold: {
+      colThreshold: "Threshold",
+      colSamples: "n",
+      colPrecision: "Precision",
+      tableTitleNerf: "Nerf predictions",
+      tableTitleBuff: "Buff predictions",
+    },
+    perAct: {
+      legend3: "Direction hit rate",
+      legend5: "5-class hit rate",
+      legendAvg: (avg: number) => `Avg ${avg}%`,
+      footer: (avg: number) =>
+        `Dashed line = overall average (${avg}%) · 5c = hit rate including mild/strong intensity.`,
+    },
+    story: {
+      predictedLabel: "predicted",
+      truthLabel: "actual",
+      predictedAtLabel: "predicted at",
+      hitAtLabel: "confirmed at",
+    },
+    methodology: {
+      walkforward: {
+        title: "Walk-forward",
+        body:
+          'Each fold trains on `act_idx < T` and predicts `act_idx == T`. Future information never leaks into past evaluation.',
+      },
+      twoStage: {
+        title: "Two-stage model",
+        body:
+          'Stage A (XGBoost) classifies *touched next patch vs. stable*. Stage B (Logistic Regression) splits touched into nerf vs. buff. Final output: 5 classes (strong/mild nerf · stable · mild/strong buff).',
+      },
+      groundTruth: {
+        title: "Ground truth",
+        body:
+          "Labels come from actual post-patch nerf/buff history, including mid-patch hotfixes and reworks.",
+      },
+      scope: {
+        title: "Evaluation scope",
+        body: "Only acts with confirmed patch outcomes are evaluated (current in-flight act V26A2 excluded).",
+      },
+      generated: "Generated at",
+    },
+  },
+  modelBlurb: {
+    operatorTag: "OPERATOR NOTE",
+    subtitle: "Read this before staring at the numbers.",
+    glossaryHeader: "Glossary",
+    glossaryBody:
+      '<b>Precision</b> = "of predictions the model called nerf, share that were actual nerfs". <b>Recall</b> = "of actual nerfs, share that the model caught in advance". You can\'t push both to 100% — it\'s a balancing act.',
+    classNames: {
+      stable: "Stable calls",
+      nerf: "Nerf detection",
+      buff: "Buff detection",
+    },
+    sentences: {
+      strongest: (name: string, f1: string, p: number, r: number) =>
+        `The model is most confident at **${name}** — F1 ${f1}, precision ${p}%, recall ${r}%.`,
+      nerfRecallLow: (recallPct: number, missedPct: number, precPct: number) =>
+        `**Nerf calls are conservative** — only ${recallPct}% of real nerfs are caught in advance, the other ${missedPct}% slip through (precision ${precPct}%).`,
+      weakest: (name: string, f1: string, p: number, r: number) =>
+        `The toughest area is **${name}** — F1 ${f1}, precision ${p}%, recall ${r}%.`,
+      calibrated: (precPct: number, n: number) =>
+        `**Confidence does carry signal** — predictions made at p_nerf ≥ 0.70 hit ${precPct}% of the time (n=${n}).`,
+      overallFallback: (hitPct: number, balAcc: string) =>
+        `Overall direction hit rate sits at **${hitPct}%** (balanced accuracy ${balAcc}).`,
+    },
+  },
+  predictionTable: {
+    agentSearchLabel: "Search agent",
+    actLabel: "ACT",
+    predLabel: "Predicted",
+    hitLabel: "Hit",
+    filterAll: "All",
+    filterHit: "Hit",
+    filterMiss: "Miss",
+    sortToggle: "p_nerf ↓",
+    resetFilter: "Reset",
+    rowsLabel: "rows",
+    columns: {
+      act: "Act",
+      agent: "Agent",
+      truth: "Actual",
+      predicted: "Predicted",
+      hit: "Hit",
+    },
+    emptyRows: "No rows match. Adjust the filter.",
+    expandLabel: (n: number) => `▼ Show all ${n}`,
+    collapseLabel: (initial: number) => `▲ Collapse (top ${initial} only)`,
+    hitTooltip: "Direction hit",
+    missTooltip: "Miss",
   },
 };
 
