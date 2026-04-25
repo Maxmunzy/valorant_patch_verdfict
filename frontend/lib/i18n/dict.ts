@@ -70,6 +70,37 @@ const dictKo = {
     },
     noMatches: "조건에 맞는 요원이 없습니다.",
   },
+  categoryPage: {
+    analysisSuffix: "// ANALYSIS",
+    agentsCount: "AGENTS",
+    noData: "— NO DATA —",
+    empty: "현재 이 카테고리에 해당하는 요원이 없습니다",
+    topPriority: "TOP PRIORITY",
+    remaining: "REMAINING",
+    hint: "// 카드 클릭 시 상세 분석 페이지로 이동 //",
+    categories: {
+      nerf: {
+        label: "너프 위험군",
+        labelEn: "NERF TARGETS",
+        desc: "과도한 성능으로 패치 조정이 예상되는 요원",
+      },
+      buff: {
+        label: "버프 기대군",
+        labelEn: "BUFF CANDIDATES",
+        desc: "성능이 낮거나 과너프 복구가 필요한 요원",
+      },
+      stable: {
+        label: "스테이블",
+        labelEn: "STABLE AGENTS",
+        desc: "현재 패치 신호가 없는 안정적인 요원",
+      },
+      rework: {
+        label: "리워크",
+        labelEn: "REWORK FLAGGED",
+        desc: "수치 조정 범위를 넘어 설계 변경이 필요한 요원",
+      },
+    },
+  },
 };
 
 type DictShape = typeof dictKo;
@@ -134,6 +165,37 @@ const dictEn: DictShape = {
       recent_patch: "Most recent balance change first",
     },
     noMatches: "No agents match the filter.",
+  },
+  categoryPage: {
+    analysisSuffix: "// ANALYSIS",
+    agentsCount: "AGENTS",
+    noData: "— NO DATA —",
+    empty: "No agents currently match this category.",
+    topPriority: "TOP PRIORITY",
+    remaining: "REMAINING",
+    hint: "// click a card to see full analysis //",
+    categories: {
+      nerf: {
+        label: "Nerf targets",
+        labelEn: "NERF TARGETS",
+        desc: "Agents performing too well — patch adjustments expected.",
+      },
+      buff: {
+        label: "Buff candidates",
+        labelEn: "BUFF CANDIDATES",
+        desc: "Underperforming agents or post-nerf recovery candidates.",
+      },
+      stable: {
+        label: "Stable",
+        labelEn: "STABLE AGENTS",
+        desc: "No patch signal — currently in a steady state.",
+      },
+      rework: {
+        label: "Rework flagged",
+        labelEn: "REWORK FLAGGED",
+        desc: "Beyond numerical tuning — design changes likely needed.",
+      },
+    },
   },
 };
 

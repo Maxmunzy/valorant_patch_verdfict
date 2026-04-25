@@ -7,10 +7,18 @@ import { usePathname } from "next/navigation";
  * 헤더용 언어 토글.
  * - 현재 경로가 /en 으로 시작하면 KO 링크는 /en 을 벗긴 경로로.
  * - 그 외에는 EN 링크는 /en + 현재 경로.
- * - 영문 버전이 없는 경로(/agent/*, /simulator 등)는 안전하게 /en 루트로 폴백.
+ * - 영문 버전이 없는 경로는 안전하게 /en 루트로 폴백.
  */
 
-const EN_SUPPORTED = ["/", "/backtest", "/agents"];
+// 정확히 일치해야 하는 정적 경로
+const EN_SUPPORTED_EXACT: string[] = ["/", "/backtest", "/agents"];
+// prefix 매칭 — dynamic 세그먼트가 있는 경로
+const EN_SUPPORTED_PREFIX: string[] = ["/category/"];
+
+function hasEnEquivalent(koPath: string): boolean {
+  if (EN_SUPPORTED_EXACT.includes(koPath)) return true;
+  return EN_SUPPORTED_PREFIX.some((p) => koPath.startsWith(p));
+}
 
 export default function LangToggle() {
   const pathname = usePathname() || "/";
@@ -25,7 +33,7 @@ export default function LangToggle() {
 
   // EN 경로 계산 — 지원되지 않는 경로면 /en 루트로
   const strippedForEn = isEn ? koPath : pathname;
-  const enPath = EN_SUPPORTED.includes(strippedForEn)
+  const enPath = hasEnEquivalent(strippedForEn)
     ? strippedForEn === "/"
       ? "/en"
       : `/en${strippedForEn}`
