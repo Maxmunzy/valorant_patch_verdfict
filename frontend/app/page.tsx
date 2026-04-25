@@ -1,6 +1,5 @@
 import TrustBlock from "@/components/TrustBlock";
 import TldrHero from "@/components/TldrHero";
-import RecentPatchHitCard from "@/components/RecentPatchHitCard";
 import NavButton from "@/components/NavButton";
 import { getAllPredictions, AgentPrediction } from "@/lib/api";
 import { getBacktestSummary } from "@/lib/backtest";
@@ -66,8 +65,6 @@ export default async function Home() {
         </div>
 
         <TrustBlock backtest={backtest} />
-
-        <RecentPatchHitCard backtest={backtest} />
       </div>
 
       <TldrHero topNerf={nerfAll[0] ?? null} topBuff={buffAll[0] ?? null} />
