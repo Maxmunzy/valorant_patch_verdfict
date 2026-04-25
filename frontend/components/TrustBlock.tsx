@@ -1,31 +1,60 @@
 import type { BacktestSummary } from "@/lib/backtest";
+import type { Locale } from "@/lib/headline";
 
-export default function TrustBlock({ backtest }: { backtest?: BacktestSummary | null }) {
+interface Props {
+  backtest?: BacktestSummary | null;
+  locale?: Locale;
+}
+
+export default function TrustBlock({ backtest, locale = "ko" }: Props) {
   const hit3 = backtest ? Math.round(backtest.overall.hitRate3 * 100) : null;
   const nActs = backtest?.acts.length ?? null;
   const nSamples = backtest?.totalRows ?? null;
 
-  const items: { label: string; value: string; hint?: string }[] = [
-    {
-      label: "DATA SOURCE",
-      value: "랭크 Diamond+ · VCT · 공식 패치노트",
-      hint: "랭크 통계와 대회 데이터를 함께 사용해 패치 압력을 추정합니다.",
-    },
-    {
-      label: "UPDATED",
-      value: "자동 갱신 파이프라인 운영",
-      hint: "패치, VCT, 학습 산출물 갱신 후 API를 다시 로드합니다.",
-    },
-    hit3 !== null
+  const t =
+    locale === "en"
       ? {
-          label: "MODEL ACCURACY",
-          value: `3-class 적중률 ${hit3}% (n=${nSamples})`,
-          hint: `walk-forward 백테스트 · ${nActs}개 act 기준`,
+          dataSource: "DATA SOURCE",
+          dataValue: "Diamond+ ranked · VCT · official patch notes",
+          dataHint: "Combines ranked meta and pro tournament data to estimate patch pressure.",
+          updated: "UPDATED",
+          updatedValue: "Auto-refresh pipeline",
+          updatedHint: "Re-runs on each patch: fresh ranked/VCT data → retrain → reload.",
+          accuracy: "MODEL ACCURACY",
+          accuracyValue: (v: number, n: number) => `3-class hit rate ${v}% (n=${n})`,
+          accuracyHint: (acts: number) => `walk-forward backtest · ${acts} acts evaluated`,
+          probability: "PROBABILITY",
+          probabilityValue: "Relative risk score",
+          probabilityHint: "Not absolute odds — a comparison of which agents are closer to being touched.",
         }
       : {
-          label: "PROBABILITY",
-          value: "확률 점수 기반 우선순위",
-          hint: "정답 보장이 아니라 다음 조정 가능성을 비교하는 용도입니다.",
+          dataSource: "DATA SOURCE",
+          dataValue: "랭크 Diamond+ · VCT · 공식 패치노트",
+          dataHint: "랭크 통계와 대회 데이터를 함께 사용해 패치 압력을 추정합니다.",
+          updated: "UPDATED",
+          updatedValue: "자동 갱신 파이프라인 운영",
+          updatedHint: "패치, VCT, 학습 산출물 갱신 후 API를 다시 로드합니다.",
+          accuracy: "MODEL ACCURACY",
+          accuracyValue: (v: number, n: number) => `3-class 적중률 ${v}% (n=${n})`,
+          accuracyHint: (acts: number) => `walk-forward 백테스트 · ${acts}개 act 기준`,
+          probability: "PROBABILITY",
+          probabilityValue: "확률 점수 기반 우선순위",
+          probabilityHint: "정답 보장이 아니라 다음 조정 가능성을 비교하는 용도입니다.",
+        };
+
+  const items: { label: string; value: string; hint?: string }[] = [
+    { label: t.dataSource, value: t.dataValue, hint: t.dataHint },
+    { label: t.updated, value: t.updatedValue, hint: t.updatedHint },
+    hit3 !== null
+      ? {
+          label: t.accuracy,
+          value: t.accuracyValue(hit3, nSamples ?? 0),
+          hint: t.accuracyHint(nActs ?? 0),
+        }
+      : {
+          label: t.probability,
+          value: t.probabilityValue,
+          hint: t.probabilityHint,
         },
   ];
 

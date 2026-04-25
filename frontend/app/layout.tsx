@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Disclaimer from "@/components/Disclaimer";
+import LangToggle from "@/components/LangToggle";
 
 // 공개 도메인. OG/Twitter 이미지의 절대 URL 생성 기준점.
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://whosnxt.app";
@@ -63,7 +64,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <LangToggle />
               <span className="text-[9px] uppercase tracking-widest text-slate-700 hidden sm:block">SYS:ACT</span>
               <span
                 className="text-[10px] font-bold text-slate-400 px-2 py-0.5"

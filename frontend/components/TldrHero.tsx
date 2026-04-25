@@ -2,15 +2,29 @@ import Link from "next/link";
 import Image from "next/image";
 import type { AgentPrediction } from "@/lib/api";
 import { agentPortrait } from "@/lib/agents";
-import { buildShareHeadline } from "@/lib/headline";
+import { buildShareHeadline, type Locale } from "@/lib/headline";
 
 interface Props {
   topNerf: AgentPrediction | null;
   topBuff: AgentPrediction | null;
+  locale?: Locale;
 }
 
-export default function TldrHero({ topNerf, topBuff }: Props) {
+export default function TldrHero({ topNerf, topBuff, locale = "ko" }: Props) {
   if (!topNerf && !topBuff) return null;
+
+  const t =
+    locale === "en"
+      ? {
+          kicker: "TL;DR // this act's key moves",
+          title: "Top-ranked patch candidates at a glance",
+          detail: "View full analysis",
+        }
+      : {
+          kicker: "TL;DR // 이번 액트 핵심",
+          title: "한눈에 보는 최상위 패치 후보",
+          detail: "상세 분석 보기",
+        };
 
   return (
     <section className="space-y-3">
@@ -25,15 +39,15 @@ export default function TldrHero({ topNerf, topBuff }: Props) {
         />
         <div>
           <div className="text-[10px] tracking-[0.3em]" style={{ color: "rgba(251,191,36,0.8)" }}>
-            TL;DR // 이번 액트 핵심
+            {t.kicker}
           </div>
-          <div className="text-base font-bold text-white leading-tight">한눈에 보는 최상위 패치 후보</div>
+          <div className="text-base font-bold text-white leading-tight">{t.title}</div>
         </div>
       </div>
 
       <div className={`grid gap-3 ${topNerf && topBuff ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"}`}>
-        {topNerf && <HeroCard agent={topNerf} rank="#1 NERF" accent="#FF4655" />}
-        {topBuff && <HeroCard agent={topBuff} rank="#1 BUFF" accent="#4FC3F7" />}
+        {topNerf && <HeroCard agent={topNerf} rank="#1 NERF" accent="#FF4655" locale={locale} detailLabel={t.detail} />}
+        {topBuff && <HeroCard agent={topBuff} rank="#1 BUFF" accent="#4FC3F7" locale={locale} detailLabel={t.detail} />}
       </div>
     </section>
   );
@@ -43,13 +57,17 @@ function HeroCard({
   agent,
   rank,
   accent,
+  locale,
+  detailLabel,
 }: {
   agent: AgentPrediction;
   rank: string;
   accent: string;
+  locale: Locale;
+  detailLabel: string;
 }) {
   const portrait = agentPortrait(agent.agent);
-  const headline = buildShareHeadline(agent);
+  const headline = buildShareHeadline(agent, locale);
   const pct = agent.verdict.includes("nerf")
     ? agent.p_nerf
     : agent.verdict.includes("buff")
@@ -124,7 +142,7 @@ function HeroCard({
           className="flex items-center justify-between text-[10px] uppercase tracking-widest pt-2"
           style={{ borderTop: `1px solid ${accent}22`, color: "rgba(148,163,184,0.85)" }}
         >
-          <span>상세 분석 보기</span>
+          <span>{detailLabel}</span>
           <span className="font-bold group-hover:translate-x-1 transition-transform" style={{ color: accent }}>
             &gt;
           </span>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { BacktestSummary } from "@/lib/backtest";
 import { AGENT_NAME_KO } from "@/lib/agents";
+import type { Locale } from "@/lib/headline";
 
 /**
  * 홈 최상단에 박는 소셜 프루프 카드.
@@ -12,9 +13,10 @@ import { AGENT_NAME_KO } from "@/lib/agents";
 
 interface Props {
   backtest: BacktestSummary | null;
+  locale?: Locale;
 }
 
-export default function RecentPatchHitCard({ backtest }: Props) {
+export default function RecentPatchHitCard({ backtest, locale = "ko" }: Props) {
   if (!backtest || !backtest.perAct.length) return null;
 
   const last = backtest.perAct[backtest.perAct.length - 1];
@@ -23,16 +25,42 @@ export default function RecentPatchHitCard({ backtest }: Props) {
   const notable = backtest.stories.bigHits
     .filter((row) => row.act === last.act && (row.kind === "nerf_hit" || row.kind === "buff_hit"))
     .slice(0, 3)
-    .map((row) => ({
-      agent: row.agent,
-      ko: AGENT_NAME_KO[row.agent] ?? row.agent,
-      direction: row.kind === "nerf_hit" ? "너프" : "버프",
-      color: row.kind === "nerf_hit" ? "#FF4655" : "#4FC3F7",
-    }));
+    .map((row) => {
+      const nameEn = row.agent;
+      const nameKo = AGENT_NAME_KO[row.agent] ?? row.agent;
+      return {
+        agent: row.agent,
+        display: locale === "en" ? nameEn : nameKo,
+        direction:
+          locale === "en"
+            ? row.kind === "nerf_hit"
+              ? "nerf hit"
+              : "buff hit"
+            : row.kind === "nerf_hit"
+              ? "너프 적중"
+              : "버프 적중",
+        color: row.kind === "nerf_hit" ? "#FF4655" : "#4FC3F7",
+      };
+    });
+
+  const t =
+    locale === "en"
+      ? {
+          badge: `LAST PATCH · ${last.act}`,
+          hitSuffix: `/ ${last.n} hits`,
+          report: "Backtest report",
+          href: "/en/backtest",
+        }
+      : {
+          badge: `LAST PATCH · ${last.act}`,
+          hitSuffix: `/ ${last.n} 적중`,
+          report: "백테스트 리포트",
+          href: "/backtest",
+        };
 
   return (
     <Link
-      href="/backtest"
+      href={t.href}
       className="group relative block overflow-hidden transition-all hover:brightness-110"
       style={{
         border: "1px solid rgba(74,222,128,0.45)",
@@ -75,7 +103,7 @@ export default function RecentPatchHitCard({ backtest }: Props) {
             className="text-[9px] font-bold tracking-[0.3em]"
             style={{ color: "#4ADE80" }}
           >
-            LAST PATCH · {last.act}
+            {t.badge}
           </span>
         </div>
 
@@ -86,7 +114,7 @@ export default function RecentPatchHitCard({ backtest }: Props) {
               {hitCount}
             </span>
             <span className="text-[13px] sm:text-[14px]" style={{ color: "rgba(148,163,184,0.8)" }}>
-              / {last.n} 적중
+              {t.hitSuffix}
             </span>
             <span
               className="text-[12px] sm:text-[13px] font-bold tabular-nums ml-1"
@@ -106,9 +134,9 @@ export default function RecentPatchHitCard({ backtest }: Props) {
                   <span key={item.agent} className="flex items-center gap-1 text-[11px] tracking-wide whitespace-nowrap">
                     {i > 0 && <span style={{ color: "rgba(148,163,184,0.35)" }}>·</span>}
                     <span className="font-bold" style={{ color: item.color }}>
-                      {item.ko}
+                      {item.display}
                     </span>
-                    <span style={{ color: "rgba(148,163,184,0.65)" }}>{item.direction} 적중</span>
+                    <span style={{ color: "rgba(148,163,184,0.65)" }}>{item.direction}</span>
                   </span>
                 ))}
               </div>
@@ -122,7 +150,7 @@ export default function RecentPatchHitCard({ backtest }: Props) {
             className="hidden sm:inline text-[10px] font-bold tracking-[0.3em]"
             style={{ color: "rgba(74,222,128,0.8)" }}
           >
-            백테스트 리포트
+            {t.report}
           </span>
           <span
             className="text-lg font-black transition-transform group-hover:translate-x-0.5"

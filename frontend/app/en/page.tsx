@@ -7,7 +7,25 @@ import { getBacktestSummary } from "@/lib/backtest";
 
 export const revalidate = 60;
 
-export default async function Home() {
+export const metadata = {
+  title: "WHO'S NEXT? // Valorant Patch Predictor",
+  description:
+    "ML-powered predictions for which Valorant agents get nerfed or buffed next patch. Walk-forward backtest, transparent methodology.",
+  openGraph: {
+    title: "WHO'S NEXT? // Valorant Patch Predictor",
+    description:
+      "ML predictions for which Valorant agents get nerfed or buffed next patch. Walk-forward backtest, transparent methodology.",
+    url: "/en",
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    title: "WHO'S NEXT? // Valorant Patch Predictor",
+    description:
+      "ML predictions for which Valorant agents get nerfed or buffed next patch.",
+  },
+};
+
+export default async function HomeEn() {
   const [agents, backtest] = await Promise.all([
     getAllPredictions().catch(() => [] as AgentPrediction[]),
     getBacktestSummary().catch(() => null),
@@ -41,7 +59,8 @@ export default async function Home() {
         </div>
 
         <p className="text-sm leading-relaxed max-w-none pl-2" style={{ color: "rgba(148,163,184,0.85)" }}>
-          랭크, VCT, 패치 이력을 함께 읽어서 다음 너프와 버프 가능성을 비교하는 데이터 프로젝트입니다.
+          An ML project that combines Diamond+ ranked data, VCT pick/win rates, and patch history to estimate which
+          agents are closest to being nerfed or buffed next patch.
         </p>
 
         <div className="flex flex-wrap gap-2 pl-6">
@@ -65,46 +84,49 @@ export default async function Home() {
           ))}
         </div>
 
-        <TrustBlock backtest={backtest} />
+        <TrustBlock backtest={backtest} locale="en" />
 
-        <RecentPatchHitCard backtest={backtest} />
+        <RecentPatchHitCard backtest={backtest} locale="en" />
       </div>
 
-      <TldrHero topNerf={nerfAll[0] ?? null} topBuff={buffAll[0] ?? null} />
+      <TldrHero topNerf={nerfAll[0] ?? null} topBuff={buffAll[0] ?? null} locale="en" />
 
-      {/* 통일된 CTA 3개 — TldrHero 바로 아래, 세로 스택 */}
+      {/* 3 unified CTAs — below TldrHero, vertical stack */}
       <div className="space-y-3">
         <NavButton
           href="/agents"
           tag="ROSTER // ALL"
-          title="다른 요원 보러가기"
+          title="Full roster"
           sub={
             agents.length > 0
-              ? `너프 후보 ${nerfAll.length}명 · 버프 후보 ${buffAll.length}명 · 총 ${agents.length}명 분석`
-              : "너프·버프 Top 3 + 전체 로스터"
+              ? `${nerfAll.length} nerf candidates · ${buffAll.length} buff candidates · ${agents.length} agents total`
+              : "Top 3 nerf/buff + full roster"
           }
           color="#FF4655"
           agentName={nerfAll[0]?.agent ?? null}
+          enterLabel="ENTER"
         />
         <NavButton
           href="/simulator"
           tag="TOOL // SIMULATE"
-          title="패치 시뮬레이터"
-          sub="가상 변경을 넣고 메타가 어떻게 움직이는지 확인"
+          title="Patch simulator"
+          sub="Inject hypothetical changes and watch the meta shift."
           color="#4FC3F7"
           agentName={buffAll[0]?.agent ?? null}
+          enterLabel="ENTER"
         />
         <NavButton
-          href="/backtest"
+          href="/en/backtest"
           tag="PROOF // BACKTEST"
-          title="백테스트 리포트"
+          title="Backtest report"
           sub={
             hit3 !== null
-              ? `3-class 적중률 ${hit3}% · walk-forward 백테스트 상세`
-              : "과거 예측 vs 실제 · 모델 신뢰도 상세"
+              ? `3-class hit rate ${hit3}% · walk-forward backtest details`
+              : "Past predictions vs. reality · model credibility"
           }
           color="#4ADE80"
           agentName={nerfAll[1]?.agent ?? buffAll[1]?.agent ?? nerfAll[0]?.agent ?? null}
+          enterLabel="ENTER"
         />
       </div>
     </div>
