@@ -261,6 +261,88 @@ const dictKo = {
     hitTooltip: "방향성 적중",
     missTooltip: "오답",
   },
+  simulator: {
+    metaTitle: "PATCH SIMULATOR // Valorant",
+    headerKicker: "SIM // PATCH SIMULATOR",
+    headerTitle: "패치 시뮬레이터",
+    headerSub: "요원의 스킬 수치를 변경하고 메타에 미치는 영향을 예측합니다",
+    loadingStream: "SIM DATA STREAM // 스킬 데이터 초기화 중...",
+    guide: {
+      tag: "GUIDE",
+      title: "처음이신가요? 3단계로 끝납니다",
+      step1Label: "요원 선택",
+      step1Hint: "아래에서 조정하고 싶은 요원 클릭",
+      step2Label: "수치 변경",
+      step2Hint: "C/Q/E/X 스킬 값을 원하는 대로 수정",
+      step3Label: "시뮬 실행",
+      step3Hint: "메타 변화 + AI 분석 결과 확인",
+      presetTitle: "⚡ 샘플 시나리오 · 클릭해서 바로 체험",
+    },
+    presets: [
+      {
+        title: "네온 궁극기 너프",
+        tag: "너프",
+        desc: "오버드라이브 연사 속도 20 → 15 (DPS 25% 감소)",
+      },
+      {
+        title: "케이오 Q 플래시 가격 인하",
+        tag: "버프",
+        desc: "플래시/드라이브 250 → 150크레딧 (라운드 경제 완화)",
+      },
+      {
+        title: "오멘 연막 지속시간 너프",
+        tag: "너프",
+        desc: "어둠의 장막 15s → 10s (VCT 고정픽 견제)",
+      },
+    ],
+    pickerLabel: "요원 선택",
+    changesHeader: (n: number) => `변경사항 (${n}개)`,
+    nerfTag: "너프",
+    buffTag: "버프",
+    runButton: "시뮬레이션 실행",
+    runningButton: "시뮬레이션 중...",
+    confirmButton: "확인",
+    editHint: "수정",
+    noStats: "수치 데이터 없음",
+    slotLabels: { C: "C", Q: "Q", E: "E · 시그니처", X: "X · 궁극기" },
+    units: {
+      seconds: "초",
+      meters: "m",
+      "meters/second": "m/s",
+      meter: "m",
+      "meter length": "m",
+      charges: "개",
+      creds: "크레딧",
+      ult_points: "포인트",
+    } as Record<string, string>,
+    results: {
+      title: "시뮬레이션 결과",
+      aiTag: "AI 분석",
+      aiGenerating: "분석 생성 중...",
+      aiUnavailable: "AI 분석을 불러올 수 없습니다",
+      directImpact: "직접 영향",
+      confidenceLabel: "신뢰도",
+      confHigh: "높음",
+      confMid: "보통",
+      confLow: "낮음",
+      similarPatches: "유사 패치 사례",
+      ripple: (n: number) => `리플 효과 (${n}명 영향)`,
+      ranking: "패치 후 전체 순위",
+    },
+    summary: {
+      stateLabel: (rankPr: string, rankWr: string, vctPr: number, verdict: string, pn: number, pb: number) =>
+        `현재 상태: 랭크 픽률 ${rankPr}%, 랭크 승률 ${rankWr}%, VCT 픽률 ${vctPr}%, 현재 판정 ${verdict}(너프${pn}%/버프${pb}%)`,
+      warnSampleLow: (vctPr: number, vctWr: number) =>
+        `⚠ VCT 픽률 ${vctPr}%로 표본 부족 — VCT 승률 ${vctWr}%는 신뢰 불가`,
+      warnDataLag: (lag: number) =>
+        `⚠ VCT 데이터 ${lag}액트 전 — 최근 VCT 경기에서 거의 안 쓰임`,
+      simResult: (prSign: string, pr: string, wrSign: string, wr: string) =>
+        `시뮬 결과: 예상 PR변화 ${prSign}${pr}%p, WR변화 ${wrSign}${wr}%p`,
+      verdictChange: (before: string, after: string, pn: number, pb: number) =>
+        `판정 변화: ${before} → ${after}(너프${pn}%/버프${pb}%)`,
+      ripplePrefix: "리플 효과",
+    },
+  },
 };
 
 type DictShape = typeof dictKo;
@@ -519,6 +601,88 @@ const dictEn: DictShape = {
     collapseLabel: (initial: number) => `▲ Collapse (top ${initial} only)`,
     hitTooltip: "Direction hit",
     missTooltip: "Miss",
+  },
+  simulator: {
+    metaTitle: "PATCH SIMULATOR // Valorant",
+    headerKicker: "SIM // PATCH SIMULATOR",
+    headerTitle: "Patch simulator",
+    headerSub: "Tweak an agent's ability stats and project the meta impact.",
+    loadingStream: "SIM DATA STREAM // initializing skill data...",
+    guide: {
+      tag: "GUIDE",
+      title: "First time? It only takes 3 steps.",
+      step1Label: "Pick an agent",
+      step1Hint: "Click the agent you want to adjust below.",
+      step2Label: "Edit a stat",
+      step2Hint: "Modify any C/Q/E/X stat value.",
+      step3Label: "Run sim",
+      step3Hint: "See the meta shift + AI commentary.",
+      presetTitle: "⚡ Sample scenarios · click to try one.",
+    },
+    presets: [
+      {
+        title: "Neon ult nerf",
+        tag: "Nerf",
+        desc: "Overdrive fire rate 20 → 15 (DPS −25%)",
+      },
+      {
+        title: "KAYO Q flash discount",
+        tag: "Buff",
+        desc: "Flash/drive 250 → 150 creds (round-economy ease)",
+      },
+      {
+        title: "Omen smoke duration nerf",
+        tag: "Nerf",
+        desc: "Dark Cover 15s → 10s (counter-VCT pick)",
+      },
+    ],
+    pickerLabel: "Pick an agent",
+    changesHeader: (n: number) => `Changes (${n})`,
+    nerfTag: "Nerf",
+    buffTag: "Buff",
+    runButton: "Run simulation",
+    runningButton: "Simulating...",
+    confirmButton: "OK",
+    editHint: "edit",
+    noStats: "No tunable stats.",
+    slotLabels: { C: "C", Q: "Q", E: "E · Signature", X: "X · Ultimate" },
+    units: {
+      seconds: "s",
+      meters: "m",
+      "meters/second": "m/s",
+      meter: "m",
+      "meter length": "m",
+      charges: "ct",
+      creds: "creds",
+      ult_points: "pts",
+    },
+    results: {
+      title: "Simulation result",
+      aiTag: "AI commentary",
+      aiGenerating: "Generating commentary...",
+      aiUnavailable: "AI commentary unavailable.",
+      directImpact: "Direct impact",
+      confidenceLabel: "Confidence",
+      confHigh: "high",
+      confMid: "med",
+      confLow: "low",
+      similarPatches: "Similar past patches",
+      ripple: (n: number) => `Ripple effects (${n} agents)`,
+      ranking: "Post-patch ranking",
+    },
+    summary: {
+      stateLabel: (rankPr: string, rankWr: string, vctPr: number, verdict: string, pn: number, pb: number) =>
+        `Current: rank PR ${rankPr}%, rank WR ${rankWr}%, VCT PR ${vctPr}%, verdict ${verdict} (nerf ${pn}% / buff ${pb}%)`,
+      warnSampleLow: (vctPr: number, vctWr: number) =>
+        `⚠ VCT PR ${vctPr}% is below the sample threshold — VCT WR ${vctWr}% is unreliable`,
+      warnDataLag: (lag: number) =>
+        `⚠ VCT data is ${lag} acts behind — barely picked in recent VCT play`,
+      simResult: (prSign: string, pr: string, wrSign: string, wr: string) =>
+        `Sim: projected PR change ${prSign}${pr}pp, WR change ${wrSign}${wr}pp`,
+      verdictChange: (before: string, after: string, pn: number, pb: number) =>
+        `Verdict: ${before} → ${after} (nerf ${pn}% / buff ${pb}%)`,
+      ripplePrefix: "Ripple",
+    },
   },
 };
 

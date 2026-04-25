@@ -14,9 +14,10 @@ import {
 import { agentIcon, AGENT_UUID } from "@/lib/agents";
 import { AGENT_ROLE_KO } from "@/lib/constants";
 import BackToHome from "@/components/BackToHome";
+import type { Locale } from "@/lib/i18n/dict";
+import { getDict, tRole } from "@/lib/i18n/dict";
 
 const SLOT_COLOR: Record<string, string> = { C: "#66BB6A", Q: "#42A5F5", E: "#FFA726", X: "#EF5350" };
-const SLOT_LABEL: Record<string, string> = { C: "C", Q: "Q", E: "E · 시그니처", X: "X · 궁극기" };
 
 const ROLE_ORDER = ["타격대", "척후대", "전략가", "감시자"];
 const ROLE_COLOR: Record<string, string> = { "타격대": "#FF4655", "척후대": "#4FC3F7", "전략가": "#66BB6A", "감시자": "#FFA726" };
@@ -186,10 +187,17 @@ const STAT_NAME_KO: Record<string, string> = {
   "Wall dimensions": "벽 크기",
 };
 
-const VERDICT_KO: Record<string, string> = {
-  strong_nerf: "강력 너프", mild_nerf: "소폭 너프",
-  strong_buff: "강력 버프", mild_buff: "소폭 버프",
-  stable: "안정",
+const VERDICT_LABELS: Record<Locale, Record<string, string>> = {
+  ko: {
+    strong_nerf: "강력 너프", mild_nerf: "소폭 너프",
+    strong_buff: "강력 버프", mild_buff: "소폭 버프",
+    stable: "안정",
+  },
+  en: {
+    strong_nerf: "strong nerf", mild_nerf: "mild nerf",
+    strong_buff: "strong buff", mild_buff: "mild buff",
+    stable: "stable",
+  },
 };
 
 function getSortedAgents(skills: AgentSkills | null): string[] {
@@ -215,52 +223,43 @@ interface PendingChange {
 
 // ─── 프리셋 ────────────────────────────────────────────────────────────────────
 // 대표적인 너프/버프 케이스를 원클릭으로 체험할 수 있게 미리 만들어둔 시나리오.
-// 모두 agent_skills.json의 실제 스탯 값을 기준으로 한다.
-const PRESETS: {
-  title: string;
-  tag: "너프" | "버프";
-  color: string;
-  desc: string;
-  changes: PendingChange[];
-}[] = [
+// 데이터는 고정, 라벨/태그/desc 는 dict 로부터 locale 별로.
+const PRESET_DATA: { changes: PendingChange[]; isNerf: boolean }[] = [
   {
-    title: "네온 궁극기 너프",
-    tag: "너프",
-    color: "#FF4655",
-    desc: "오버드라이브 연사 속도 20 → 15 (DPS 25% 감소)",
-    changes: [{
-      agent: "Neon", skill: "X", stat: "Fire rate", statLabel: "Fire rate",
-      old_value: 20, new_value: 15,
-    }],
+    isNerf: true,
+    changes: [{ agent: "Neon", skill: "X", stat: "Fire rate", statLabel: "Fire rate", old_value: 20, new_value: 15 }],
   },
   {
-    title: "케이오 Q 플래시 가격 인하",
-    tag: "버프",
-    color: "#4FC3F7",
-    desc: "플래시/드라이브 250 → 150크레딧 (라운드 경제 완화)",
-    changes: [{
-      agent: "KAYO", skill: "Q", stat: "creds", statLabel: "creds",
-      old_value: 250, new_value: 150,
-    }],
+    isNerf: false,
+    changes: [{ agent: "KAYO", skill: "Q", stat: "creds", statLabel: "creds", old_value: 250, new_value: 150 }],
   },
   {
-    title: "오멘 연막 지속시간 너프",
-    tag: "너프",
-    color: "#FF4655",
-    desc: "어둠의 장막 15s → 10s (VCT 고정픽 견제)",
-    changes: [{
-      agent: "Omen", skill: "E", stat: "Duration", statLabel: "Duration",
-      old_value: 15, new_value: 10,
-    }],
+    isNerf: true,
+    changes: [{ agent: "Omen", skill: "E", stat: "Duration", statLabel: "Duration", old_value: 15, new_value: 10 }],
   },
 ];
+
+function buildPresets(locale: Locale) {
+  const t = getDict(locale).simulator;
+  return PRESET_DATA.map((data, i) => ({
+    title: t.presets[i].title,
+    tag: t.presets[i].tag,
+    desc: t.presets[i].desc,
+    color: data.isNerf ? "#FF4655" : "#4FC3F7",
+    changes: data.changes,
+  }));
+}
 
 // ─── 메인 ──────────────────────────────────────────────────────────────────────
 export default function SimulatorClient({
   initialSkills = null,
+  locale = "ko",
 }: {
   initialSkills?: AgentSkills | null;
+  locale?: Locale;
 }) {
+  const t = getDict(locale).simulator;
+  const presets = buildPresets(locale);
   const [skills, setSkills] = useState<AgentSkills | null>(initialSkills);
   // 서버에서 미리 받아왔으면 로딩 불필요
   const [loading, setLoading] = useState(initialSkills === null);
@@ -305,7 +304,7 @@ export default function SimulatorClient({
 
       // AI 분석 비동기 요청
       setAnalyzingAI(true);
-      const summary = buildResultSummary(r);
+      const summary = buildResultSummary(r, locale);
       getSimAnalysis(payload, summary)
         .then(setAnalysis)
         .catch(() => setAnalysis(null))
@@ -345,7 +344,7 @@ export default function SimulatorClient({
         </div>
 
         <div className="text-center text-[10px] uppercase tracking-widest text-slate-600">
-          SIM DATA STREAM // 스킬 데이터 초기화 중...
+          {t.loadingStream}
         </div>
       </div>
     );
@@ -355,14 +354,16 @@ export default function SimulatorClient({
     <div className="py-8 space-y-8">
       {/* ── 헤더 ─────────────────────────────────────── */}
       <div className="space-y-4">
-        <BackToHome />
+        <BackToHome locale={locale} />
         <div className="pl-4" style={{ borderLeft: "2px solid #A78BFA" }}>
           <div className="text-[9px] font-valo tracking-[0.25em] mb-0.5" style={{ color: "rgba(167,139,250,0.6)" }}>
-            SIM // PATCH SIMULATOR
+            {t.headerKicker}
           </div>
-          <h1 className="font-valo text-3xl font-bold tracking-wide" style={{ color: "#A78BFA" }}>패치 시뮬레이터</h1>
+          <h1 className="font-valo text-3xl font-bold tracking-wide" style={{ color: "#A78BFA" }}>
+            {t.headerTitle}
+          </h1>
           <p className="text-sm mt-1" style={{ color: "#94A3B8" }}>
-            요원의 스킬 수치를 변경하고 메타에 미치는 영향을 예측합니다
+            {t.headerSub}
           </p>
         </div>
       </div>
@@ -380,17 +381,17 @@ export default function SimulatorClient({
             className="text-[9px] font-black px-1.5 py-px uppercase tracking-widest"
             style={{ color: "#A78BFA", border: "1px solid rgba(167,139,250,0.4)", background: "rgba(167,139,250,0.08)" }}
           >
-            GUIDE
+            {t.guide.tag}
           </span>
           <span className="text-xs uppercase tracking-widest" style={{ color: "rgba(167,139,250,0.75)" }}>
-            처음이신가요? 3단계로 끝납니다
+            {t.guide.title}
           </span>
         </div>
         <ol className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[12px]" style={{ color: "#cbd5e1" }}>
           {[
-            { n: "1", label: "요원 선택", hint: "아래에서 조정하고 싶은 요원 클릭" },
-            { n: "2", label: "수치 변경", hint: "C/Q/E/X 스킬 값을 원하는 대로 수정" },
-            { n: "3", label: "시뮬 실행", hint: "메타 변화 + AI 분석 결과 확인" },
+            { n: "1", label: t.guide.step1Label, hint: t.guide.step1Hint },
+            { n: "2", label: t.guide.step2Label, hint: t.guide.step2Hint },
+            { n: "3", label: t.guide.step3Label, hint: t.guide.step3Hint },
           ].map((s) => (
             <li
               key={s.n}
@@ -418,10 +419,10 @@ export default function SimulatorClient({
         {/* 프리셋: 원클릭 체험용 */}
         <div className="pt-2">
           <div className="text-[10px] uppercase tracking-widest mb-2" style={{ color: "rgba(167,139,250,0.6)" }}>
-            ⚡ 샘플 시나리오 · 클릭해서 바로 체험
+            {t.guide.presetTitle}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            {PRESETS.map((p) => (
+            {presets.map((p) => (
               <button
                 key={p.title}
                 type="button"
@@ -462,7 +463,7 @@ export default function SimulatorClient({
       <div className="space-y-5">
         <div className="text-[9px] uppercase tracking-widest flex items-center gap-2" style={{ color: "rgba(71,85,105,0.6)" }}>
           <div className="w-3 h-px" style={{ background: "#A78BFA" }} />
-          요원 선택
+          {t.pickerLabel}
         </div>
         {ROLE_ORDER.map((role) => {
           const roleColor = ROLE_COLOR[role] ?? "#64748B";
@@ -475,7 +476,9 @@ export default function SimulatorClient({
             <div key={role} className="space-y-2">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rotate-45" style={{ background: roleColor, boxShadow: `0 0 6px ${roleColor}55` }} />
-                <span className="text-xs font-valo font-bold tracking-widest" style={{ color: roleColor }}>{role}</span>
+                <span className="text-xs font-valo font-bold tracking-widest" style={{ color: roleColor }}>
+                  {tRole(locale, role)}
+                </span>
                 <div className="flex-1 h-px" style={{ background: `${roleColor}20` }} />
               </div>
               <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-3">
@@ -515,7 +518,14 @@ export default function SimulatorClient({
 
       {/* ── 스킬 에디터 ──────────────────────────────── */}
       {selectedAgent && skills && (
-        <SkillEditor agent={selectedAgent} agentSkills={skills[selectedAgent] ?? {}} roleKo={skills[selectedAgent]?._meta?.role_ko ?? AGENT_ROLE_KO[selectedAgent] ?? ""} changes={changes} onAddChange={addChange} />
+        <SkillEditor
+          agent={selectedAgent}
+          agentSkills={skills[selectedAgent] ?? {}}
+          roleKo={skills[selectedAgent]?._meta?.role_ko ?? AGENT_ROLE_KO[selectedAgent] ?? ""}
+          changes={changes}
+          onAddChange={addChange}
+          locale={locale}
+        />
       )}
 
       {/* ── 변경사항 목록 ────────────────────────────── */}
@@ -523,7 +533,7 @@ export default function SimulatorClient({
         <div className="space-y-3">
           <div className="text-[9px] uppercase tracking-widest flex items-center gap-2" style={{ color: "rgba(71,85,105,0.6)" }}>
             <div className="w-3 h-px" style={{ background: "#A78BFA" }} />
-            변경사항 ({changes.length}개)
+            {t.changesHeader(changes.length)}
           </div>
           <div className="space-y-1.5">
             {changes.map((c, i) => {
@@ -531,7 +541,7 @@ export default function SimulatorClient({
               const lowerIsBuff = ["cooldown", "cost", "cred", "windup", "deploy", "recharge", "equip", "unequip", "time", "delay", "channel", "arm"].some((k) => c.stat.toLowerCase().includes(k));
               const isNerf = lowerIsBuff ? diff > 0 : diff < 0;
               const color = isNerf ? "#FF4655" : "#4FC3F7";
-              const dirLabel = isNerf ? "너프" : "버프";
+              const dirLabel = isNerf ? t.nerfTag : t.buffTag;
               return (
                 <div key={`${c.agent}-${c.skill}-${c.stat}`} className="flex items-center gap-3 px-4 py-2.5 text-sm"
                   style={{ background: "rgba(13,18,32,0.6)", border: `1px solid ${color}30` }}>
@@ -556,19 +566,22 @@ export default function SimulatorClient({
               border: "1px solid rgba(167,139,250,0.4)", color: "#A78BFA",
               cursor: simulating ? "wait" : "pointer",
             }}>
-            {simulating ? "시뮬레이션 중..." : "시뮬레이션 실행"}
+            {simulating ? t.runningButton : t.runButton}
           </button>
         </div>
       )}
 
       {/* ── 결과 ─────────────────────────────────────── */}
-      {result && <SimulationResults result={result} analysis={analysis} analyzingAI={analyzingAI} />}
+      {result && (
+        <SimulationResults result={result} analysis={analysis} analyzingAI={analyzingAI} locale={locale} />
+      )}
     </div>
   );
 }
 
 // ─── 결과 요약 텍스트 생성 (AI 분석용) ─────────────────────────────────────────
-function buildResultSummary(r: SimResult): string {
+function buildResultSummary(r: SimResult, locale: Locale): string {
+  const sumT = getDict(locale).simulator.summary;
   const lines: string[] = [];
   for (const imp of r.impact) {
     const b = imp.before as Record<string, unknown>;
@@ -576,32 +589,55 @@ function buildResultSummary(r: SimResult): string {
     const vctWr = Number(b.vct_wr ?? 50);
     const vctLag = Number(b.vct_data_lag ?? 0);
 
-    // 표본 신뢰도 경고
     const warnings: string[] = [];
-    if (vctPr < 5) warnings.push(`⚠ VCT 픽률 ${vctPr}%로 표본 부족 — VCT 승률 ${vctWr}%는 신뢰 불가`);
-    if (vctLag >= 2) warnings.push(`⚠ VCT 데이터 ${vctLag}액트 전 — 최근 VCT 경기에서 거의 안 쓰임`);
+    if (vctPr < 5) warnings.push(sumT.warnSampleLow(vctPr, vctWr));
+    if (vctLag >= 2) warnings.push(sumT.warnDataLag(vctLag));
 
-    lines.push(`${imp.agent} 현재 상태: 랭크 픽률 ${b.rank_pr ?? "?"}%, 랭크 승률 ${b.rank_wr ?? "?"}%, VCT 픽률 ${vctPr}%, 현재 판정 ${imp.before.verdict}(너프${imp.before.p_nerf}%/버프${imp.before.p_buff}%)`);
+    lines.push(
+      `${imp.agent} ${sumT.stateLabel(
+        String(b.rank_pr ?? "?"),
+        String(b.rank_wr ?? "?"),
+        vctPr,
+        imp.before.verdict,
+        imp.before.p_nerf,
+        imp.before.p_buff,
+      )}`,
+    );
     warnings.forEach((w) => lines.push(`  ${w}`));
-    lines.push(`  시뮬 결과: 예상 PR변화 ${imp.applied_pr_delta >= 0 ? "+" : ""}${imp.applied_pr_delta.toFixed(2)}%p, WR변화 ${imp.applied_wr_delta >= 0 ? "+" : ""}${imp.applied_wr_delta.toFixed(2)}%p`);
-    lines.push(`  판정 변화: ${imp.before.verdict} → ${imp.after.verdict}(너프${imp.after.p_nerf}%/버프${imp.after.p_buff}%)`);
+    lines.push(
+      `  ${sumT.simResult(
+        imp.applied_pr_delta >= 0 ? "+" : "",
+        imp.applied_pr_delta.toFixed(2),
+        imp.applied_wr_delta >= 0 ? "+" : "",
+        imp.applied_wr_delta.toFixed(2),
+      )}`,
+    );
+    lines.push(
+      `  ${sumT.verdictChange(imp.before.verdict, imp.after.verdict, imp.after.p_nerf, imp.after.p_buff)}`,
+    );
   }
   if (r.ripple_effects.length > 0) {
-    lines.push(`리플 효과: ${r.ripple_effects.map((e) => `${e.agent}(${e.before_verdict}→${e.after_verdict})`).join(", ")}`);
+    lines.push(
+      `${sumT.ripplePrefix}: ${r.ripple_effects
+        .map((e) => `${e.agent}(${e.before_verdict}→${e.after_verdict})`)
+        .join(", ")}`,
+    );
   }
   return lines.join("\n");
 }
 
 // ─── 스킬 에디터 ────────────────────────────────────────────────────────────────
 function SkillEditor({
-  agent, agentSkills, roleKo, changes, onAddChange,
+  agent, agentSkills, roleKo, changes, onAddChange, locale,
 }: {
   agent: string;
   agentSkills: Record<string, SkillSlot>;
   roleKo: string;
   changes: PendingChange[];
   onAddChange: (agent: string, skill: string, stat: string, statLabel: string, oldVal: number, newVal: number) => void;
+  locale: Locale;
 }) {
+  const t = getDict(locale).simulator;
   const slots = ["C", "Q", "E", "X"].filter((s) => agentSkills[s]);
 
   return (
@@ -611,7 +647,7 @@ function SkillEditor({
         <div>
           <div className="text-2xl font-extrabold tracking-tight text-white">{agent}</div>
           <div className="text-xs uppercase tracking-widest" style={{ color: ROLE_COLOR[roleKo] ?? "#64748B" }}>
-            {roleKo}
+            {tRole(locale, roleKo)}
           </div>
         </div>
       </div>
@@ -625,13 +661,13 @@ function SkillEditor({
           const allStats: { name: string; value: number; unit: string }[] = [];
 
           if (skill.charges !== undefined && skill.charges !== null) {
-            allStats.push({ name: "charges", value: skill.charges, unit: "개" });
+            allStats.push({ name: "charges", value: skill.charges, unit: t.units.charges });
           }
           if (skill.creds !== undefined && skill.creds !== null && skill.creds > 0) {
-            allStats.push({ name: "creds", value: skill.creds, unit: "크레딧" });
+            allStats.push({ name: "creds", value: skill.creds, unit: t.units.creds });
           }
           if (slot === "X" && skill.ult_points !== undefined && skill.ult_points !== null) {
-            allStats.push({ name: "ult_points", value: skill.ult_points, unit: "포인트" });
+            allStats.push({ name: "ult_points", value: skill.ult_points, unit: t.units.ult_points });
           }
 
           for (const [statName, statVal] of Object.entries(skill.stats)) {
@@ -645,20 +681,22 @@ function SkillEditor({
               <div className="flex items-center gap-2.5">
                 <span className="text-xs font-black px-2 py-1 tracking-wider"
                   style={{ color, border: `1px solid ${color}50`, background: `${color}10` }}>
-                  {SLOT_LABEL[slot] ?? slot}
+                  {t.slotLabels[slot as keyof typeof t.slotLabels] ?? slot}
                 </span>
-                <span className="text-sm font-bold text-slate-300">{skill.name_ko ?? skill.name}</span>
+                <span className="text-sm font-bold text-slate-300">
+                  {locale === "en" ? skill.name : (skill.name_ko ?? skill.name)}
+                </span>
               </div>
 
               {allStats.length === 0 ? (
-                <div className="text-xs text-slate-700 italic">수치 데이터 없음</div>
+                <div className="text-xs text-slate-700 italic">{t.noStats}</div>
               ) : (
                 <div className="space-y-2">
                   {allStats.map((s) => {
                     const existing = changes.find((c) => c.agent === agent && c.skill === slot && c.stat === s.name);
                     return (
                       <StatRow key={s.name} agent={agent} skill={slot} statName={s.name} value={s.value} unit={s.unit}
-                        color={color} currentNew={existing?.new_value}
+                        color={color} currentNew={existing?.new_value} locale={locale}
                         onConfirm={(newVal) => onAddChange(agent, slot, s.name, s.name, s.value, newVal)} />
                     );
                   })}
@@ -674,11 +712,14 @@ function SkillEditor({
 
 // ─── StatRow ────────────────────────────────────────────────────────────────────
 function StatRow({
-  agent, skill, statName, value, unit, color, currentNew, onConfirm,
+  agent, skill, statName, value, unit, color, currentNew, onConfirm, locale,
 }: {
   agent: string; skill: string; statName: string; value: number; unit: string;
   color: string; currentNew?: number; onConfirm: (newVal: number) => void;
+  locale: Locale;
 }) {
+  void agent; void skill;
+  const t = getDict(locale).simulator;
   const [editing, setEditing] = useState(false);
   const [inputVal, setInputVal] = useState(String(currentNew ?? value));
 
@@ -690,18 +731,20 @@ function StatRow({
 
   const isModified = currentNew !== undefined && currentNew !== value;
   const rawUnit = unit.split(/[<(]/)[0].trim().slice(0, 20);
-  const UNIT_KO: Record<string, string> = {
-    seconds: "초", meters: "m", "meters/second": "m/s", meter: "m",
-    "meter length": "m",
-  };
-  // meter-length 계열 복합 단위 → "m" 로 축약
-  const displayUnit = rawUnit.includes("meter") ? "m" : (UNIT_KO[rawUnit] ?? rawUnit);
-  const isTimeStat = rawUnit === "seconds" || displayUnit === "초" || ["time", "duration", "windup", "delay", "channel"].some((k) => statName.toLowerCase().includes(k));
+  // 단위는 dict.simulator.units 에서 locale 별로 매핑. meter-length 계열은 "m" 로 축약.
+  const displayUnit = rawUnit.includes("meter") ? "m" : (t.units[rawUnit] ?? rawUnit);
+  const timeUnit = locale === "ko" ? "초" : "s";
+  const isTimeStat =
+    rawUnit === "seconds" ||
+    displayUnit === timeUnit ||
+    ["time", "duration", "windup", "delay", "channel"].some((k) => statName.toLowerCase().includes(k));
   const inputStep = isTimeStat ? "0.1" : "1";
+  // 한글 stat 매핑은 KO 일 때만 사용. EN 은 원본 영문 stat 명칭 그대로.
+  const displayStat = locale === "ko" ? (STAT_NAME_KO[statName] ?? statName) : statName;
 
   return (
     <div className="flex items-center gap-3 text-sm py-0.5">
-      <span className="text-slate-400 truncate flex-1 min-w-0" title={statName}>{STAT_NAME_KO[statName] ?? statName}</span>
+      <span className="text-slate-400 truncate flex-1 min-w-0" title={statName}>{displayStat}</span>
       {editing ? (
         <div className="flex items-center gap-2">
           <span className="text-slate-600 font-num">{value}</span>
@@ -709,21 +752,22 @@ function StatRow({
           <input type="number" step={inputStep} value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter") handleConfirm(); if (e.key === "Escape") setEditing(false); }}
-            autoFocus className="w-20 px-2 py-1 text-sm font-num text-right bg-transparent outline-none"
+            autoFocus aria-label={statName}
+            className="w-20 px-2 py-1 text-sm font-num text-right bg-transparent outline-none"
             style={{ border: `1px solid ${color}50`, color }} />
-          <button onClick={handleConfirm} className="text-xs px-2 py-1 font-bold" style={{ color, border: `1px solid ${color}40` }}>
-            확인
+          <button type="button" onClick={handleConfirm} className="text-xs px-2 py-1 font-bold" style={{ color, border: `1px solid ${color}40` }}>
+            {t.confirmButton}
           </button>
         </div>
       ) : (
-        <button onClick={() => { setInputVal(String(currentNew ?? value)); setEditing(true); }} className="flex items-center gap-1.5 group">
+        <button type="button" onClick={() => { setInputVal(String(currentNew ?? value)); setEditing(true); }} className="flex items-center gap-1.5 group">
           <span className="font-num font-bold text-sm" style={{ color: isModified ? color : "rgba(226,232,240,0.9)" }}>
             {isModified ? (
               <><span className="text-slate-600 line-through">{value}</span><span className="mx-1" style={{ color }}>&rarr;</span>{currentNew}</>
             ) : value}
           </span>
           {displayUnit && <span className="text-slate-600 text-xs">{displayUnit}</span>}
-          <span className="text-slate-700 group-hover:text-slate-400 transition-colors text-[10px] ml-1">수정</span>
+          <span className="text-slate-700 group-hover:text-slate-400 transition-colors text-[10px] ml-1">{t.editHint}</span>
         </button>
       )}
     </div>
@@ -731,37 +775,46 @@ function StatRow({
 }
 
 // ─── 결과 ────────────────────────────────────────────────────────────────────────
-function SimulationResults({ result, analysis, analyzingAI }: { result: SimResult; analysis: string | null; analyzingAI: boolean }) {
+function SimulationResults({
+  result, analysis, analyzingAI, locale,
+}: {
+  result: SimResult;
+  analysis: string | null;
+  analyzingAI: boolean;
+  locale: Locale;
+}) {
+  const t = getDict(locale).simulator;
+  const r = t.results;
   const changedAgents = new Set(result.changes.map((c) => c.agent));
 
   return (
     <div className="space-y-6">
       <div className="text-[9px] uppercase tracking-widest flex items-center gap-2" style={{ color: "rgba(71,85,105,0.6)" }}>
         <div className="w-3 h-px" style={{ background: "#A78BFA" }} />
-        시뮬레이션 결과
+        {r.title}
       </div>
 
       {/* AI 분석 */}
       <div className="p-5" style={{ background: "rgba(167,139,250,0.05)", border: "1px solid rgba(167,139,250,0.2)" }}>
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "#A78BFA" }}>AI 분석</span>
-          {analyzingAI && <span className="text-xs text-slate-600 animate-pulse">분석 생성 중...</span>}
+          <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "#A78BFA" }}>{r.aiTag}</span>
+          {analyzingAI && <span className="text-xs text-slate-600 animate-pulse">{r.aiGenerating}</span>}
         </div>
         {analysis ? (
           <p className="text-sm leading-relaxed" style={{ color: "rgba(203,213,225,0.9)" }}>{analysis}</p>
         ) : !analyzingAI ? (
-          <p className="text-sm text-slate-600 italic">AI 분석을 불러올 수 없습니다</p>
+          <p className="text-sm text-slate-600 italic">{r.aiUnavailable}</p>
         ) : null}
       </div>
 
       {/* 직접 영향 */}
       {result.impact.length > 0 && (
         <div className="space-y-3">
-          <div className="text-xs uppercase tracking-wider text-slate-500 font-bold">직접 영향</div>
+          <div className="text-xs uppercase tracking-wider text-slate-500 font-bold">{r.directImpact}</div>
           {result.impact.map((imp) => {
             const verdictChanged = imp.before.verdict !== imp.after.verdict;
             const confColor = imp.confidence === "high" ? "#66BB6A" : imp.confidence === "medium" ? "#FFA726" : "#FF4655";
-            const confLabel = imp.confidence === "high" ? "높음" : imp.confidence === "medium" ? "보통" : "낮음";
+            const confLabel = imp.confidence === "high" ? r.confHigh : imp.confidence === "medium" ? r.confMid : r.confLow;
             return (
               <div key={imp.agent} className="p-4 space-y-3" style={{ background: "rgba(13,18,32,0.6)", border: "1px solid rgba(167,139,250,0.2)" }}>
                 <div className="flex items-center gap-4">
@@ -770,7 +823,7 @@ function SimulationResults({ result, analysis, analyzingAI }: { result: SimResul
                     <div className="flex items-center gap-2">
                       <span className="text-base font-extrabold tracking-tight text-white">{imp.agent}</span>
                       <span className="text-[10px] font-bold px-1.5 py-0.5" style={{ color: confColor, border: `1px solid ${confColor}40` }}>
-                        신뢰도 {confLabel}
+                        {r.confidenceLabel} {confLabel}
                       </span>
                       <span className="text-[10px] text-slate-700">n={imp.n_samples}</span>
                     </div>
@@ -788,9 +841,9 @@ function SimulationResults({ result, analysis, analyzingAI }: { result: SimResul
                   </div>
                   <div className="text-right">
                     <div className="flex items-center gap-2 text-sm">
-                      <VerdictBadge verdict={imp.before.verdict} />
+                      <VerdictBadge verdict={imp.before.verdict} locale={locale} />
                       <span className="text-slate-600">&rarr;</span>
-                      <VerdictBadge verdict={imp.after.verdict} highlight={verdictChanged} />
+                      <VerdictBadge verdict={imp.after.verdict} highlight={verdictChanged} locale={locale} />
                     </div>
                     <div className="text-xs font-num text-slate-600 mt-1">
                       너프:{imp.before.p_nerf}&rarr;{imp.after.p_nerf}% 버프:{imp.before.p_buff}&rarr;{imp.after.p_buff}%
@@ -801,7 +854,7 @@ function SimulationResults({ result, analysis, analyzingAI }: { result: SimResul
                 {/* 유사 패치 사례 */}
                 {imp.similar_cases && imp.similar_cases.length > 0 && (
                   <div className="pt-3 border-t" style={{ borderColor: "rgba(30,41,59,0.6)" }}>
-                    <div className="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5">유사 패치 사례</div>
+                    <div className="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5">{r.similarPatches}</div>
                     <div className="space-y-1">
                       {imp.similar_cases.slice(0, 3).map((sc, i) => {
                         const tierColor = sc.match_tier === "exact" ? "#A78BFA" : sc.match_tier === "same_agent" ? "#66BB6A" : "#475569";
@@ -827,16 +880,16 @@ function SimulationResults({ result, analysis, analyzingAI }: { result: SimResul
       {result.ripple_effects.length > 0 && (
         <div className="space-y-2">
           <div className="text-xs uppercase tracking-wider text-slate-500 font-bold">
-            리플 효과 ({result.ripple_effects.length}명 영향)
+            {r.ripple(result.ripple_effects.length)}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {result.ripple_effects.map((r) => (
-              <div key={r.agent} className="flex items-center gap-3 px-4 py-2 text-sm"
+            {result.ripple_effects.map((row) => (
+              <div key={row.agent} className="flex items-center gap-3 px-4 py-2 text-sm"
                 style={{ background: "rgba(13,18,32,0.6)", border: "1px solid rgba(30,41,59,0.6)" }}>
-                <span className="font-bold text-white">{r.agent}</span>
-                <VerdictBadge verdict={r.before_verdict} />
+                <span className="font-bold text-white">{row.agent}</span>
+                <VerdictBadge verdict={row.before_verdict} locale={locale} />
                 <span className="text-slate-600">&rarr;</span>
-                <VerdictBadge verdict={r.after_verdict} highlight />
+                <VerdictBadge verdict={row.after_verdict} highlight locale={locale} />
               </div>
             ))}
           </div>
@@ -845,7 +898,7 @@ function SimulationResults({ result, analysis, analyzingAI }: { result: SimResul
 
       {/* 전체 순위 */}
       <div className="space-y-2">
-        <div className="text-xs uppercase tracking-wider text-slate-500 font-bold">패치 후 전체 순위</div>
+        <div className="text-xs uppercase tracking-wider text-slate-500 font-bold">{r.ranking}</div>
         <div className="space-y-0.5">
           {result.after_ranking.map((a, i) => {
             const before = result.before_ranking.find((b) => b.agent === a.agent);
@@ -866,7 +919,7 @@ function SimulationResults({ result, analysis, analyzingAI }: { result: SimResul
                   <div className="absolute left-0 top-0 h-full transition-all" style={{ width: `${Math.min(dominant, 100)}%`, background: barColor, opacity: 0.7 }} />
                 </div>
                 <span className="w-14 text-right font-num font-bold" style={{ color: barColor }}>{dominant.toFixed(1)}%</span>
-                <VerdictBadge verdict={a.verdict} highlight={!!verdictChanged} />
+                <VerdictBadge verdict={a.verdict} highlight={!!verdictChanged} locale={locale} />
               </div>
             );
           })}
@@ -877,11 +930,11 @@ function SimulationResults({ result, analysis, analyzingAI }: { result: SimResul
 }
 
 // ─── VerdictBadge ──────────────────────────────────────────────────────────────
-function VerdictBadge({ verdict, highlight }: { verdict: string; highlight?: boolean }) {
+function VerdictBadge({ verdict, highlight, locale = "ko" }: { verdict: string; highlight?: boolean; locale?: Locale }) {
   const isNerf = verdict.includes("nerf");
   const isBuff = verdict.includes("buff");
   const color = isNerf ? "#FF4655" : isBuff ? "#4FC3F7" : "#475569";
-  const label = VERDICT_KO[verdict] ?? verdict.slice(0, 7);
+  const label = VERDICT_LABELS[locale][verdict] ?? verdict.slice(0, 7);
 
   return (
     <span className="text-[10px] font-bold px-1.5 py-0.5 uppercase tracking-wider"

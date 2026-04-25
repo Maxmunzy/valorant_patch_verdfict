@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
  */
 
 // 정확히 일치해야 하는 정적 경로
-const EN_SUPPORTED_EXACT: string[] = ["/", "/backtest", "/agents"];
+const EN_SUPPORTED_EXACT: string[] = ["/", "/backtest", "/agents", "/simulator"];
 // prefix 매칭 — dynamic 세그먼트가 있는 경로
 const EN_SUPPORTED_PREFIX: string[] = ["/category/"];
 
