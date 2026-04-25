@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { AgentPrediction } from "@/lib/api";
 import { agentPortrait } from "@/lib/agents";
 import { buildShareHeadline, type Locale } from "@/lib/headline";
+import { tRole } from "@/lib/i18n/dict";
 
 interface Props {
   topNerf: AgentPrediction | null;
@@ -121,7 +122,7 @@ function HeroCard({
             {rank}
           </span>
           <span className="text-[10px] uppercase tracking-widest" style={{ color: "rgba(148,163,184,0.75)" }}>
-            {agent.role}
+            {tRole(locale, agent.role)}
           </span>
         </div>
 
